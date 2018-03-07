@@ -1,0 +1,39 @@
+﻿
+@using Grid.Infrastructure
+@using Grid.Infrastructure.Extensions
+
+<h2>Manage Contacts</h2>
+<crmcontacts></crmcontacts>
+
+<script type="text/html" id="crmcontacts-template">
+    <div class="col-md-12">
+        <crmcontactssearch></crmcontactssearch>
+    </div>
+    <br />
+     <div class="col-md-8">
+        <crmcontacts-list params="entity: 'crmcontact', enableFilter:true, manageList:true"></crmcontacts-list>
+    </div>
+    <div class="col-md-4" data-bind="visible:showQuickView">
+        <crmcontactsupdate params="entity: 'crmcontact'"></crmcontactsupdate>
+    </div>
+</script>
+<script type="text/html" id="crmcontactssearch-template">
+    <div class="col-sm-3">
+        <label>Account</label>
+        <dropdown-list params="entity: 'crmaccounts',selectedValue: account, caption: 'Choose Account'"></dropdown-list>
+    </div>
+  
+    <div class="col-sm-3">
+        <label></label>
+        <button class="btn btn-primary" style="margin-top:25px;" data-bind="click:filter">Filter</button>
+        <button class="btn btn-default" style="margin-top:25px;" data-bind="click:refresh">Reset</button>
+    </div>
+</script>
+
+@section Scripts{
+    <script>
+        $(function () {
+            ko.applyBindings();
+        });
+    </script>
+}

@@ -1,0 +1,25 @@
+﻿@model Grid.Features.HRMS.Entities.UserHobby
+
+<h2>Details UserHobby</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Hobby.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Hobby.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.User.EmployeeCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.User.EmployeeCode)
+        </dd>
+
+    </dl>
+</div>

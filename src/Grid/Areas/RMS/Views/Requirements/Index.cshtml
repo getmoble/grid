@@ -1,0 +1,125 @@
+﻿@using Grid.Infrastructure
+@using Grid.Infrastructure.Extensions
+@using PagedList.Mvc
+@model Grid.Features.RMS.ViewModels.RequirementSearchViewModel
+@using StringExtensions = Grid.Infrastructure.Extensions.StringExtensions
+
+<h2>Manage Requirements</h2>
+
+<div class="pull-right well-lg">
+@using (Html.BeginForm("Index", "Requirements", FormMethod.Get, new { @class = "form-inline", role = "form", id = "searchForm" }))
+{
+
+    <div class="form-group">
+        @Html.DropDownList("AssignedToUserId", null, htmlAttributes: new { @class = "form-control" }, optionLabel: "-- Select Assigned User --")
+    </div>
+    
+    <div class="form-group">
+        @Html.DropDownList("SourceId", null, htmlAttributes: new { @class = "form-control" }, optionLabel: "-- Select Source --")
+    </div>
+
+    <div class="form-group">
+        @Html.DropDownList("CategoryId", null, htmlAttributes: new { @class = "form-control" }, optionLabel: "-- Select Category --")
+    </div>
+
+    <div class="form-group">
+        @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control", placeholder = "Title" } })
+    </div>
+
+    <div class="form-group">
+        @Html.EnumDropDownListFor(model => model.Status, htmlAttributes: new { @class = "form-control" }, optionLabel: "-- Select Status --")
+    </div>
+
+    <div class="form-group" style="position: relative">
+        @Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { @class = "form-control", placeholder = "Start Date"} })
+    </div>
+
+    <div class="form-group" style="position: relative">
+        @Html.EditorFor(model => model.EndDate, new { htmlAttributes = new { @class = "form-control", placeholder = "End Date" } })
+    </div>
+
+    <div class="form-group">
+        <div class="btn-group pull-right" role="group">
+            <input type="button" value="Filter" class="btn btn-default" id="filterButton" />
+            <input type="button" value="Download" class="btn btn-default" id="downloadButton" />
+        </div>
+    </div>
+}
+</div>
+<table class="table table-hover">
+    <tr>
+        <th>
+            Title
+        </th>
+        <th>
+            Source
+        </th>
+        <th>
+            Category
+        </th>
+        <th>
+            Billing Type
+        </th>
+        <th>
+            Budget
+        </th>
+        <th>
+            Status
+        </th>
+        <th>
+            Posted On
+        </th>
+        <th>
+            Responded On
+        </th>
+    </tr>
+
+    @foreach (var item in Model.Requirements)
+    {
+        <tr>
+            <td>
+                @Html.ActionLink(item.Title, "Details", "Requirements", new {area = "RMS", id = item.Id}, null)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Source.Title)
+            </td>
+            <td>
+                @StringExtensions.Truncate(item.Category.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BillingType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Budget)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RequirementStatus)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PostedOn)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RespondedOn)
+            </td>
+        </tr>
+    }
+
+</table>
+@Html.GridAddButton(EntityType.Requirement)
+Page @(Model.Requirements.PageCount < Model.Requirements.PageNumber ? 0 : Model.Requirements.PageNumber) of @Model.Requirements.PageCount
+@Html.PagedListPager(Model.Requirements, page => Url.Action("Index", new { page, Model.AssignedToUserId, Model.SourceId, Model.CategoryId, Model.Title, Model.Status, Model.StartDate, Model.EndDate }))
+
+@section Scripts{
+    <script>
+        $("#filterButton").on("click", function (e) {
+            e.preventDefault();
+            $('#searchForm').attr('action', "/RMS/Requirements/Index").submit();
+        });
+
+        $("#downloadButton").on("click", function (e) {
+            e.preventDefault();
+            $('#searchForm').attr('action', "/RMS/Requirements/Download").submit();
+        });
+
+    </script>
+}

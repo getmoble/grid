@@ -1,0 +1,21 @@
+﻿@using Grid.Infrastructure
+@using Grid.Infrastructure.Extensions
+
+<h2>Manage Requirement Categories</h2>
+<requirementcategories></requirementcategories>
+
+<script type="text/html" id="requirementcategories-template">
+    <div class="col-md-8">
+        <requirementcategorieslist params="entity: 'requirementcategorie', enableFilter:true, manageList:true"></requirementcategorieslist>
+    </div>
+    <div class="col-md-4" data-bind="visible:showQuickView">
+        <requirementcategoriesupdate params="entity: 'requirementcategorie'"></requirementcategoriesupdate>
+    </div>
+</script>
+@section Scripts{
+    <script>
+        $(function () {
+            ko.applyBindings();
+        });
+    </script>
+}

@@ -1,0 +1,29 @@
+﻿
+@model IList<Grid.Areas.Templates.Models.UIField>
+
+<div id="list-template">
+    <table class="table table-responsive table-hover" data-bind="loadingWhen: isBusy">
+        <thead>
+            <tr>
+                @foreach (var field in Model)
+                {
+                    <th>@field.Title</th>
+                }
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody data-bind="foreach: data">
+            <tr>
+                @foreach (var field in Model)
+                {
+                    <td data-bind="@field.GetReadOnlyBinding(): @field.Name"></td>
+                }
+                <td>
+                    <input type="hidden" name="Id" data-bind="value: Id" />
+                    <a class="btn btn-primary" href="#" aria-label="EmployeeDetails" data-bind="click:$parent.employeeDetails"><i class="fa fa-info" aria-hidden="true"></i></a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+

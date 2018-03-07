@@ -1,0 +1,21 @@
+﻿
+@{
+    ViewBag.Title = "MyAssets";
+}
+
+<h2>My Assets</h2>
+
+<employeeasset params="employeeId:@ViewBag.employeeId"></employeeasset>
+<script type="text/html" id="employeeasset-template">
+    <div class="col-md-12">
+        <employeeassetlist params="entity: 'employeeassets', enableFilter:true, manageList:false,employeeId:employee"></employeeassetlist>
+    </div>
+</script>
+
+@section Scripts{
+    <script>
+        $(function () {
+            ko.applyBindings();
+        });
+    </script>
+}

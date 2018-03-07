@@ -1,0 +1,58 @@
+﻿@using Grid.Infrastructure
+@using Grid.Infrastructure.Extensions
+@model IEnumerable<Grid.Features.CRM.Entities.CRMPotential>
+
+<h2>Manage Potentials</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            Name
+        </th>
+        <th>
+            Category
+        </th>
+        <th>
+            Sales Stage
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ExpectedAmount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ExpectedCloseDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EnquiredOn)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreatedOn)
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.ActionLink(item.Contact.Person.Name, "Details", "CRMPotentials", new { area = "CRM", id = item.Id }, null)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Category.Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SalesStage.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ExpectedAmount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ExpectedCloseDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EnquiredOn)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreatedOn)
+        </td>
+    </tr>
+}
+</table>
+@Html.GridAddButton(EntityType.Potential)

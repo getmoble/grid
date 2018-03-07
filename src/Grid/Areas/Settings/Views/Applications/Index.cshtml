@@ -1,0 +1,46 @@
+﻿@model IEnumerable<Grid.Features.Settings.Entities.Application>
+<h2>Manage Vendors</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            Category
+        </th>
+        <th>
+            Title
+        </th>
+        <th>
+            Icon
+        </th>
+        <th>
+            Url
+        </th>
+        <th>
+            Created On
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Category)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Icon)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Url)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedOn)
+            </td>
+        </tr>
+    }
+
+</table>
+

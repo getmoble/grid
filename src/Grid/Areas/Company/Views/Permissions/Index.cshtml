@@ -1,0 +1,15 @@
+﻿@using Grid.Infrastructure
+@using Grid.Infrastructure.Extensions
+@model IEnumerable<Grid.Features.HRMS.Entities.Permission>
+
+<h2>Manage Permissions</h2>
+<permissionslist></permissionslist>
+@Html.GridAddButton(EntityType.Permission)
+
+@section Scripts{
+    <script>
+        $(function () {
+            ko.applyBindings();
+        });
+    </script>
+}

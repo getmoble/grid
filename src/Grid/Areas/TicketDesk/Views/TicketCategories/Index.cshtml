@@ -1,0 +1,22 @@
+﻿@using Grid.Infrastructure
+@using Grid.Infrastructure.Extensions
+
+<h2>Manage TicketCategories</h2>
+<ticketcategories></ticketcategories>
+
+<script type="text/html" id="ticketcategories-template">
+    <div class="col-md-8">
+        <ticketcategorieslist params="entity: 'ticketcategorie', enableFilter:true, manageList:true"></ticketcategorieslist>
+    </div>
+    <div class="col-md-4" data-bind="visible:showQuickView">
+        <ticketcategoriesupdate params="entity: 'ticketcategorie'"></ticketcategoriesupdate>
+    </div>
+</script>
+
+@section Scripts{
+    <script>
+        $(function () {
+            ko.applyBindings();
+        });
+    </script>
+}

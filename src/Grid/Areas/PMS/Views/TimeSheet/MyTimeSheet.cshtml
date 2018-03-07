@@ -1,0 +1,170 @@
+﻿<h2>My TimeSheet</h2>
+<div id='calendar'></div>
+<link href="~/Content/timesheet.css" rel="stylesheet" />
+<div class="modal fade higherWider" id="addTimeSheetModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-xlg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel" data-bind="text: title"></h4>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <p><b>Important:</b> Please make sure you break tasks into multiple items based on the Projects. Verify the total effort before you submit.</p>
+                    <form class="form-inline">
+                        <div class="form-group">
+                            <label for="date">Timesheet Date</label>
+                            <input type="text" data-bind="value: Date" class="form-control datePicker" placeholder="Date" id="timeSheetDate">
+                        </div>
+                        <a data-bind="click: addRow" class="btn btn-primary pull-right"><i class="fa fa-plus" aria-hidden="true"></i></a>
+                    </form>
+                </div>
+                <div class="container-fluid table-div" data-bind="foreach: Rows">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-6  col-md-4 cnt">
+                            <span>
+                                <select data-bind="options: $parent.Projects, value: ProjectId, optionsText: 'Title', optionsValue: 'Id'" class="form-control"></select>
+                            </span>
+                        </div>
+                        <div class="col-xs-12 col-sm-6  col-md-5 cnt">
+                            <span>
+                                <input  type="text" data-bind="value: TaskSummary, typeahead: $root.autoCompleteTasks" class="form-control" placeholder="Enter Task" />
+                            </span>
+                        </div>
+                        <div class="col-xs-12 col-sm-6  col-md-1 cnt">
+                            <span>
+                                <input type="text" data-bind="value: Effort" class="form-control" placeholder="Hours" />
+                            </span>
+                        </div>
+                        <div class="col-xs-12 col-sm-6  col-md-2 cnt">
+                            <span>
+                                <select data-bind="options: $parent.WorkTypes, value: WorkType, optionsText: 'Title', optionsValue: 'Id'" class="form-control"></select>
+                            </span>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-9 cnt">
+                            <span>
+                                <textarea data-bind="value: Comments" class="form-control" placeholder="Comments"></textarea>
+                            </span>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-3 cnt">
+                            <div class="btn-group" role="group">
+                                <a data-bind="click: $parent.removeRow" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                                <a data-bind="click: $parent.addRow" class="btn btn-primary"><i class="fa fa-plus" aria-hidden="true"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="container-fluid">
+                    <p>Enter Comments</p>
+                    <textarea data-bind="value: Comments" class="form-control"></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+
+                <button type="button" data-bind="ladda: isBusy, click: postSheet" class="btn btn-primary ladda-button" data-color="green" data-style="expand-left">Submit</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="editTimeSheetModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-xlg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel" data-bind="text: title"></h4>
+            </div>
+            <div class="modal-body">
+                <table class="table table-striped table-bordered table-list">
+                    <thead>
+                        <tr>
+                            <th>Project</th>
+                            <th>Task</th>
+                            <th>Effort</th>
+                            <th>Billable</th>
+                            <th>Comments</th>
+                        </tr>
+                    </thead>
+                    <tbody data-bind="foreach: Rows">
+                        <tr>
+                            <td>
+                                <select data-bind="options: $parent.Projects, value: ProjectId, optionsText: 'Title', optionsValue: 'Id'" class="form-control" disabled></select>
+                            </td>
+                            <td>
+                                <span data-bind="text: TaskSummary" style="min-width: 150px"></span>
+                            </td>
+                            <td>
+                                <span data-bind="text: Effort"></span>
+                            </td>
+                            <td>
+                                <select data-bind="options: $parent.WorkTypes, value: WorkType, optionsText: 'Title', optionsValue: 'Id'" class="form-control" disabled></select>
+                            </td>
+                            <td>
+                                <span data-bind="text: Comments" style="min-width: 150px"></span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p data-bind="text:Comments">
+
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <script src="~/App/MyTimeSheetViewModel.js"></script>
+    <script>
+        $(document).ready(function () {
+
+            var vm = new MyTimeSheetViewModel();
+            ko.applyBindings(vm);
+
+            $('#calendar').fullCalendar({
+                events: '/PMS/TimeSheet/GetAllSheets',
+                eventAfterRender: function (event, element, view) {
+                    var tooltip = event.description;
+                    $(element).attr("title", tooltip);
+                    $(element).tooltip({ container: "body", placement: "bottom" });
+
+                    if (event.state === 0) {
+                        element.css('background-color', '#ffa500');
+                    } else if (event.state === 1) {
+                        element.css('background-color', '#ff0000');
+                    } else if (event.state === 2) {
+                        element.css('background-color', '#008000');
+                    }
+                },
+                eventClick: function (calEvent, jsEvent, view) {
+                    vm.loadTimeSheet(calEvent.id);
+                },
+                dayClick: function (date, jsEvent, view) {
+                    if (date.isAfter(new Date())) {
+                        bootbox.alert("You cannot add TimeSheet for future dates");
+                    } else {
+                        var events = $('#calendar').fullCalendar('clientEvents');
+                        if (events.length > 0) {
+                            for (var i = 0; i < events.length; i++) {
+                                if (moment(date).isSame(moment(events[i].start))) {
+                                    vm.loadTimeSheet(events[i].id);
+                                    break;
+                                } else if (i == events.length - 1) {
+                                    vm.addTimeSheet(date.format("MM/DD/YYYY"));
+                                }
+                            }
+                        }
+                        else // First Time, Not Timesheet
+                        {
+                            vm.addTimeSheet(date.format("MM/DD/YYYY"));
+                        }
+                    }
+                }
+            });
+
+        });
+    </script>
+
+}
+
+
+
+

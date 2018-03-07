@@ -1,0 +1,14 @@
+﻿@using Grid.Infrastructure
+@using Grid.Infrastructure.Extensions
+
+<h2>Manage Job Openings</h2>
+<jobopeningslist></jobopeningslist>
+@Html.GridAddButton(EntityType.JobOpening)
+
+@section Scripts{
+    <script>
+        $(function () {
+            ko.applyBindings();
+        });
+    </script>
+}

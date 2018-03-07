@@ -1,0 +1,74 @@
+﻿@{
+    Layout = "~/Views/Shared/_RecruitPortalLayout.cshtml";
+}
+
+
+@model Grid.Features.Recruit.ViewModels.InterviewSearchViewModel
+
+<h2>My Interviews</h2>
+
+<div class="pull-right well-lg">
+    @using (Html.BeginForm("Interviews", "Portal", FormMethod.Get, new { @class = "form-inline", role = "form" }))
+    {
+        <div class="form-group">
+            @Html.EnumDropDownListFor(model => model.Status, htmlAttributes: new { @class = "form-control" }, optionLabel: "-- Select Status --")
+        </div>
+
+        <div class="form-group">
+            @Html.DropDownList("JobOpeningId", null, htmlAttributes: new { @class = "form-control" }, optionLabel: "-- Select Opening --")
+        </div>
+
+        <div class="form-group">
+            @Html.DropDownList("RoundId", null, htmlAttributes: new { @class = "form-control" }, optionLabel: "-- Select Round --")
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Filter" class="btn btn-default" />
+            </div>
+        </div>
+    }
+</div>
+<table class="table">
+    <tr>
+        <th>
+            Job Opening
+        </th>
+        <th>
+            Round
+        </th>
+        <th>
+            Scheduled On
+        </th>
+        <th>
+            Status
+        </th>
+        <th>
+            Created On
+        </th>
+    </tr>
+
+    @foreach (var item in Model.Interviews)
+    {
+        <tr>
+            <td>
+                @Html.ActionLink(item.JobOpening.Title, "OpeningDetails", "Portal", new { area = "Recruit", id = item.JobOpeningId }, null)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Round.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ScheduledOn)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedOn)
+            </td>
+        </tr>
+    }
+
+</table>
+
+

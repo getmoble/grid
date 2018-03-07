@@ -1,0 +1,66 @@
+﻿
+@using Grid.Infrastructure
+@using Grid.Infrastructure.Extensions
+
+<h2>Manage Lead Status</h2>
+<leadstatus></leadstatus>
+
+<script type="text/html" id="leadstatus-template">
+    <div class="col-md-8">
+        <leadstatus-list params="entity: 'crmleadstatu', enableFilter:true, manageList:true"></leadstatus-list>
+    </div>
+    <div class="col-md-4" data-bind="visible:showQuickView">
+        <leadstatusupdate params="entity: 'crmleadstatu'"></leadstatusupdate>
+    </div>
+</script>
+
+
+@section Scripts{
+    <script>
+        $(function () {
+            ko.applyBindings();
+        });
+    </script>
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@*@using Grid.Infrastructure
+@using Grid.Infrastructure.Extensions
+@model IEnumerable<Grid.Features.CRM.Entities.CRMLeadStatus>
+
+<h2>Manage Lead Status</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            Title
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreatedOn)
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.ActionLink(item.Name, "Details", "CRMLeadStatus", new { area = "CRM", id = item.Id }, null)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreatedOn)
+        </td>
+    </tr>
+}
+</table>
+@Html.GridAddButton(EntityType.LeadStatus)*@

@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{FB042C73-515F-47E2-A0EF-DFBEFA94FD26}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Grid.BLL</RootNamespace>
+    <AssemblyName>Grid.BLL</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="FluentDateTime, Version=1.13.0.0, Culture=neutral, PublicKeyToken=6ccbc613702e6c71, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentDateTime.1.13.0\Lib\NET35\FluentDateTime.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Grid.DAL\Grid.DAL.csproj">
+      <Project>{7928d231-d63f-450b-9669-9c51795c8eb1}</Project>
+      <Name>Grid.DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Grid.Features.Common\Grid.Features.Common.csproj">
+      <Project>{3876b303-ae18-4e9e-a359-e1e0f0f2c7cd}</Project>
+      <Name>Grid.Features.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Grid.Features.HRMS\Grid.Features.HRMS.csproj">
+      <Project>{375619dc-6f55-4fc2-bbf2-45a30e89fa73}</Project>
+      <Name>Grid.Features.HRMS</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Grid.Features.LMS\Grid.Features.LMS.csproj">
+      <Project>{43c09a22-fb14-442d-86e3-40a0f11d4849}</Project>
+      <Name>Grid.Features.LMS</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Grid.Features.Settings\Grid.Features.Settings.csproj">
+      <Project>{a4968df2-50d1-42a1-b53d-db4ea1963e0c}</Project>
+      <Name>Grid.Features.Settings</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Grid.Providers.Email\Grid.Providers.Email.csproj">
+      <Project>{7231dae9-c7a4-48cf-9e74-b98a8866662f}</Project>
+      <Name>Grid.Providers.Email</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Grid.Providers.Plugin\Grid.Providers.Plugin.csproj">
+      <Project>{c389a694-5afc-413e-b61e-768a0f7119a1}</Project>
+      <Name>Grid.Providers.Plugin</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Grid.ViewModels\Grid.ViewModels.csproj">
+      <Project>{02DA933B-9EB6-4692-B511-2C45818961E2}</Project>
+      <Name>Grid.ViewModels</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

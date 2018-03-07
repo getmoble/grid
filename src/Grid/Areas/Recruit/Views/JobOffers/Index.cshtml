@@ -1,0 +1,14 @@
+﻿@using Grid.Infrastructure
+@using Grid.Infrastructure.Extensions
+
+<h2>Manage Offers</h2>
+<offerslist></offerslist>
+@Html.GridAddButton(EntityType.Offer)
+
+@section Scripts{
+    <script>
+        $(function () {
+            ko.applyBindings();
+        });
+    </script>
+}

@@ -1,0 +1,80 @@
+﻿@model Grid.Areas.TMS.Models.MissedTimeSheetsSearchViewModel
+
+
+<h2>Manage Missed TimeSheets</h2>
+<div class="pull-right well-lg">
+    @using (Html.BeginForm("Index", "TimeSheetMiss", FormMethod.Get, new { @class = "form-inline", role = "form", id = "searchForm" }))
+    {
+
+        <div class="form-group">
+            @Html.DropDownList("SubmittedUserById", null, htmlAttributes: new { @class = "form-control" }, optionLabel: "Select Team Member")
+        </div>
+
+        <div class="form-group" style="position: relative">
+            @Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { @class = "form-control", placeholder = "Start Date" } })
+        </div>
+
+        <div class="form-group" style="position: relative">
+            @Html.EditorFor(model => model.EndDate, new { htmlAttributes = new { @class = "form-control", placeholder = "End Date" } })
+        </div>
+
+        @Html.HiddenFor(m => m.IsPostBack)
+
+        <div class="form-group">
+            <div class="btn-group pull-right" role="group">
+                <input type="button" value="Filter" class="btn btn-default" id="filterButton" />
+                <input type="button" value="Download" class="btn btn-default" id="downloadButton" />
+            </div>
+        </div>
+    }
+</div>
+<table class="table">
+    <tr>
+        <th>
+            Employee
+        </th>
+        <th>
+            Date
+        </th>
+        <th>
+            Filled On
+        </th>
+        <th>
+            Actions
+        </th>
+    </tr>
+
+    @foreach (var item in Model.MissedTimeSheets)
+    {
+        <tr>
+            <td>
+                @item.User.Person.Name
+            </td>
+            <td>
+                @item.Date
+            </td>
+            <td>
+                @item.FilledOn
+            </td>
+            <td>
+
+            </td>
+        </tr>
+    }
+
+</table>
+@section Scripts{
+    <script>
+            $("#filterButton").on("click", function (e) {
+                e.preventDefault();
+                $('#searchForm').attr('action', "/TMS/TimeSheetMiss/Index").submit();
+            });
+
+            $("#downloadButton").on("click", function (e) {
+                e.preventDefault();
+                $('#searchForm').attr('action', "/TMS/TimeSheetMiss" +
+                    "/Download").submit();
+            });
+    </script>
+}
+

@@ -1,0 +1,36 @@
+﻿@model Grid.Features.HRMS.Entities.UserHobby
+
+<h2>Edit UserHobby</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Id)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.UserId, "UserId", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("UserId", null, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.UserId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.HobbyId, "HobbyId", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("HobbyId", null, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.HobbyId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Update" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}

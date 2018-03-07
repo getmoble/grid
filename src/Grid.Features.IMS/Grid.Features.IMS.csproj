@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{B80468CF-5AB2-468B-ADE5-AD790790724A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Grid.Features.IMS</RootNamespace>
+    <AssemblyName>Grid.Features.IMS</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DAL\AssetAllocationRepository.cs" />
+    <Compile Include="DAL\AssetCategoryRepository.cs" />
+    <Compile Include="DAL\AssetDocumentRepository.cs" />
+    <Compile Include="DAL\AssetRepository.cs" />
+    <Compile Include="DAL\Interfaces\IAssetAllocationRepository.cs" />
+    <Compile Include="DAL\Interfaces\IAssetCategoryRepository.cs" />
+    <Compile Include="DAL\Interfaces\IAssetDocumentRepository.cs" />
+    <Compile Include="DAL\Interfaces\IAssetRepository.cs" />
+    <Compile Include="DAL\Interfaces\IVendorRepository.cs" />
+    <Compile Include="DAL\VendorRepository.cs" />
+    <Compile Include="Entities\Asset.cs" />
+    <Compile Include="Entities\AssetAllocation.cs" />
+    <Compile Include="Entities\AssetCategory.cs" />
+    <Compile Include="Entities\AssetDocument.cs" />
+    <Compile Include="Entities\Enums\AssetDocumentType.cs" />
+    <Compile Include="Entities\Enums\AssetState.cs" />
+    <Compile Include="Entities\Vendor.cs" />
+    <Compile Include="ViewModels\AssetDetailsViewModel.cs" />
+    <Compile Include="ViewModels\AssetDocumentViewModel.cs" />
+    <Compile Include="ViewModels\AssetSearchViewModel.cs" />
+    <Compile Include="ViewModels\VendorSearchViewModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\AssetService.cs" />
+    <Compile Include="Services\Interfaces\IAssetService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Grid.Clients.ITSync\Grid.Clients.ITSync.csproj">
+      <Project>{2C8BDC7A-58A2-409E-BE0A-929556398AB1}</Project>
+      <Name>Grid.Clients.ITSync</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Grid.Features.Common\Grid.Features.Common.csproj">
+      <Project>{3876B303-AE18-4E9E-A359-E1E0F0F2C7CD}</Project>
+      <Name>Grid.Features.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Grid.Features.HRMS\Grid.Features.HRMS.csproj">
+      <Project>{375619DC-6F55-4FC2-BBF2-45A30E89FA73}</Project>
+      <Name>Grid.Features.HRMS</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Grid.Features.Settings\Grid.Features.Settings.csproj">
+      <Project>{A4968DF2-50D1-42A1-B53D-DB4EA1963E0C}</Project>
+      <Name>Grid.Features.Settings</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Grid.Providers.Email\Grid.Providers.Email.csproj">
+      <Project>{7231DAE9-C7A4-48CF-9E74-B98A8866662F}</Project>
+      <Name>Grid.Providers.Email</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

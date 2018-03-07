@@ -1,0 +1,139 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<configuration>
+	<configSections>
+		<section name="entityFramework" type="System.Data.Entity.Internal.ConfigFile.EntityFrameworkSection, EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" requirePermission="false" />
+		<sectionGroup name="elmah">
+			<section name="security" requirePermission="false" type="Elmah.SecuritySectionHandler, Elmah" />
+			<section name="errorLog" requirePermission="false" type="Elmah.ErrorLogSectionHandler, Elmah" />
+			<section name="errorMail" requirePermission="false" type="Elmah.ErrorMailSectionHandler, Elmah" />
+			<section name="errorFilter" requirePermission="false" type="Elmah.ErrorFilterSectionHandler, Elmah" />
+		</sectionGroup>
+	</configSections>
+	<appSettings>
+		<add key="webpages:Version" value="3.0.0.0" />
+		<add key="webpages:Enabled" value="false" />
+		<add key="ClientValidationEnabled" value="true" />
+		<add key="UnobtrusiveJavaScriptEnabled" value="true" />
+		<add key="elmah.mvc.disableHandler" value="false" />
+		<add key="elmah.mvc.disableHandleErrorFilter" value="false" />
+		<add key="elmah.mvc.requiresAuthentication" value="false" />
+		<add key="elmah.mvc.IgnoreDefaultRoute" value="false" />
+		<add key="elmah.mvc.allowedRoles" value="*" />
+		<add key="elmah.mvc.allowedUsers" value="*" />
+		<add key="elmah.mvc.route" value="elmah" />
+		<add key="elmah.mvc.UserAuthCaseSensitive" value="true" />
+		<add key="aspnet:MaxJsonDeserializerMembers" value="150000" />
+	</appSettings>
+	<system.web>
+		<globalization culture="en-US"/>
+		<compilation debug="false" targetFramework="4.5.1"/>
+		<httpRuntime targetFramework="4.5" maxRequestLength="52428800"/>
+		<authentication mode="Forms">
+			<forms loginUrl="~/Account/SignIn" timeout="50" />
+		</authentication>
+		<sessionState timeout="60" />
+		<trust level="Full" />
+		<customErrors mode="Off" />
+		<httpModules>
+			<add name="ErrorLog" type="Elmah.ErrorLogModule, Elmah" />
+			<add name="ErrorMail" type="Elmah.ErrorMailModule, Elmah" />
+			<add name="ErrorFilter" type="Elmah.ErrorFilterModule, Elmah" />
+			<add name="ApplicationInsightsWebTracking" type="Microsoft.ApplicationInsights.Web.ApplicationInsightsHttpModule, Microsoft.AI.Web" />
+		</httpModules>
+	</system.web>
+	<connectionStrings>
+	</connectionStrings>
+	<runtime>
+		<assemblyBinding xmlns="urn:schemas-microsoft-com:asm.v1">
+			<dependentAssembly>
+				<assemblyIdentity name="System.Web.Helpers" publicKeyToken="31bf3856ad364e35" />
+				<bindingRedirect oldVersion="1.0.0.0-3.0.0.0" newVersion="3.0.0.0" />
+			</dependentAssembly>
+			<dependentAssembly>
+				<assemblyIdentity name="System.Web.WebPages" publicKeyToken="31bf3856ad364e35" />
+				<bindingRedirect oldVersion="0.0.0.0-3.0.0.0" newVersion="3.0.0.0" />
+			</dependentAssembly>
+			<dependentAssembly>
+				<assemblyIdentity name="System.Web.Mvc" publicKeyToken="31bf3856ad364e35" />
+				<bindingRedirect oldVersion="0.0.0.0-5.2.3.0" newVersion="5.2.3.0" />
+			</dependentAssembly>
+			<dependentAssembly>
+				<assemblyIdentity name="log4net" publicKeyToken="669e0ddf0bb1aa2a" culture="neutral" />
+				<bindingRedirect oldVersion="0.0.0.0-1.2.15.0" newVersion="1.2.15.0" />
+			</dependentAssembly>
+			<dependentAssembly>
+				<assemblyIdentity name="Microsoft.ApplicationInsights" publicKeyToken="31bf3856ad364e35" culture="neutral" />
+				<bindingRedirect oldVersion="0.0.0.0-2.2.0.0" newVersion="2.2.0.0" />
+			</dependentAssembly>
+			<dependentAssembly>
+				<assemblyIdentity name="WebGrease" publicKeyToken="31bf3856ad364e35" culture="neutral" />
+				<bindingRedirect oldVersion="0.0.0.0-1.5.2.14234" newVersion="1.5.2.14234" />
+			</dependentAssembly>
+			<dependentAssembly>
+				<assemblyIdentity name="Microsoft.Owin" publicKeyToken="31bf3856ad364e35" culture="neutral" />
+				<bindingRedirect oldVersion="0.0.0.0-3.0.1.0" newVersion="3.0.1.0" />
+			</dependentAssembly>
+			<dependentAssembly>
+				<assemblyIdentity name="Autofac" publicKeyToken="17863af14b0044da" culture="neutral" />
+				<bindingRedirect oldVersion="0.0.0.0-4.0.0.0" newVersion="4.0.0.0" />
+			</dependentAssembly>
+			<dependentAssembly>
+				<assemblyIdentity name="Autofac.Integration.Owin" publicKeyToken="17863af14b0044da" culture="neutral" />
+				<bindingRedirect oldVersion="0.0.0.0-4.0.0.0" newVersion="4.0.0.0" />
+			</dependentAssembly>
+			<dependentAssembly>
+				<assemblyIdentity name="Newtonsoft.Json" publicKeyToken="30ad4fe6b2a6aeed" culture="neutral" />
+				<bindingRedirect oldVersion="0.0.0.0-9.0.0.0" newVersion="9.0.0.0" />
+			</dependentAssembly>
+			<dependentAssembly>
+				<assemblyIdentity name="Microsoft.Data.Services.Client" publicKeyToken="31bf3856ad364e35" culture="neutral" />
+				<bindingRedirect oldVersion="0.0.0.0-5.7.0.0" newVersion="5.7.0.0" />
+			</dependentAssembly>
+			<dependentAssembly>
+				<assemblyIdentity name="Microsoft.Data.OData" publicKeyToken="31bf3856ad364e35" culture="neutral" />
+				<bindingRedirect oldVersion="0.0.0.0-5.7.0.0" newVersion="5.7.0.0" />
+			</dependentAssembly>
+			<dependentAssembly>
+				<assemblyIdentity name="Microsoft.Data.Edm" publicKeyToken="31bf3856ad364e35" culture="neutral" />
+				<bindingRedirect oldVersion="0.0.0.0-5.7.0.0" newVersion="5.7.0.0" />
+			</dependentAssembly>
+			<dependentAssembly>
+				<assemblyIdentity name="System.Web.Http" publicKeyToken="31bf3856ad364e35" />
+				<bindingRedirect oldVersion="0.0.0.0-5.2.0.0" newVersion="5.2.3.0" />
+			</dependentAssembly>
+		</assemblyBinding>
+	</runtime>
+	<entityFramework>
+		<defaultConnectionFactory type="System.Data.Entity.Infrastructure.SqlConnectionFactory, EntityFramework" />
+		<providers>
+			<provider invariantName="System.Data.SqlClient" type="System.Data.Entity.SqlServer.SqlProviderServices, EntityFramework.SqlServer" />
+		</providers>
+	</entityFramework>
+	<system.webServer>
+		<staticContent>
+			<remove fileExtension=".woff" />
+			<!-- In case IIS already has this mime type -->
+			<mimeMap fileExtension=".woff" mimeType="application/x-font-woff" />
+			<remove fileExtension=".woff2" />
+			<!-- In case IIS already has this mime type -->
+			<mimeMap fileExtension=".woff2" mimeType="application/x-font-woff2" />
+		</staticContent>
+		<security>
+			<requestFiltering>
+				<requestLimits maxAllowedContentLength="52428800" />
+			</requestFiltering>
+		</security>
+		<validation validateIntegratedModeConfiguration="false" />
+		<modules>
+			<add name="ErrorLog" type="Elmah.ErrorLogModule, Elmah" preCondition="managedHandler" />
+			<add name="ErrorMail" type="Elmah.ErrorMailModule, Elmah" preCondition="managedHandler" />
+			<add name="ErrorFilter" type="Elmah.ErrorFilterModule, Elmah" preCondition="managedHandler" />
+			<remove name="ApplicationInsightsWebTracking" />
+			<add name="ApplicationInsightsWebTracking" type="Microsoft.ApplicationInsights.Web.ApplicationInsightsHttpModule, Microsoft.AI.Web" preCondition="managedHandler" />
+		</modules>
+	</system.webServer>
+	<elmah>
+		<errorLog type="Elmah.SqlErrorLog, Elmah" connectionStringName="Grid" />
+		<security allowRemoteAccess="yes" />
+	</elmah>
+</configuration>

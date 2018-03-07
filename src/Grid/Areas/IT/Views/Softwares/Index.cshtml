@@ -1,0 +1,22 @@
+﻿@using Grid.Infrastructure
+@using Grid.Infrastructure.Extensions
+
+<h2>Manage Softwares</h2>
+<softwares></softwares>
+
+<script type="text/html" id="softwares-template">
+    <div class="col-md-8">
+        <softwareslist params="entity: 'software', enableFilter:true, manageList:true"></softwareslist>
+    </div>
+    <div class="col-md-4" data-bind="visible:showQuickView">
+        <softwareupdate params="entity: 'software'"></softwareupdate>
+    </div>
+</script>
+
+@section Scripts{
+    <script>
+        $(function () {
+            ko.applyBindings();
+        });
+    </script>
+}

@@ -1,0 +1,77 @@
+﻿@using Grid.UI.WebApp.Areas.Templates.Models
+@model Grid.UI.WebApp.Areas.Templates.Models.FormViewModel
+<h2>@Model.Title</h2>
+<div class="row" data-bind="loadingWhen: isBusy">
+    <div class="col-lg-8">
+        <form action="#" method="post" data-bind="submit: submitForm, with: selected">
+            @Html.AntiForgeryToken()
+            @foreach (var field in Model.Fields)
+            {
+                if (field.FieldType == UIFieldTypes.Text)
+                {
+                    <div class="form-group">
+                        <label>@field.Title</label>
+                        <input type="text" class="form-control" name="@field.Name" data-bind="value: @field.Name">
+                    </div>
+                }
+                else if (field.FieldType == UIFieldTypes.TextArea)
+                {
+                    <div class="form-group">
+                        <label>@field.Title</label>
+                        <textarea class="form-control" name="@field.Name" data-bind="value: @field.Name"></textarea>
+                    </div>
+                }
+                else if (field.FieldType == UIFieldTypes.HtmlEditor)
+                {
+                    <div class="form-group">
+                        <label>@field.Title</label>
+                        <textarea class="form-control" name="@field.Name" data-bind="htmlEditor: @field.Name"></textarea>
+                    </div>
+                }
+                if (field.FieldType == UIFieldTypes.Password)
+                {
+                    <div class="form-group">
+                        <label>@field.Title</label>
+                        <input type="password" class="form-control" name="@field.Name" data-bind="value: @field.Name">
+                    </div>
+                }
+                else if (field.FieldType == UIFieldTypes.DateTime)
+                {
+                    <div class="form-group">
+                        <label>@field.Title</label>
+                        <input type="text" class="form-control" name="@field.Name" data-bind="dateTimePicker: @field.Name">
+                    </div>
+                }
+                else if (field.FieldType == UIFieldTypes.DropDown)
+                {
+                    <div class="form-group">
+                        <label>@field.Title</label>
+                        @{
+                            var binding = "value:" + field.Name;
+                        }
+                        @Html.DropDownList(field.ViewBagKey, null, new { @class = "form-control", data_bind = binding })
+                    </div>
+                }
+                else if (field.FieldType == UIFieldTypes.MultiSelectDropDown)
+                {
+                    <div class="form-group">
+                        <label>@field.Title</label>
+                        @{
+                            var binding = "value:" + field.Name;
+                        }
+                        @Html.DropDownList(field.Name, (MultiSelectList)ViewData[field.ViewBagKey], new { @class = "form-control", multiple = "multiple", data_bind = binding })
+                    </div>
+                }
+                else if (field.FieldType == UIFieldTypes.CheckBox)
+                {
+                    <div class="form-group">
+                        <label>@field.Title</label>
+                        <input type="checkbox" name="@field.Name" data-bind="checked: @field.Name, value: @field.Name">
+                    </div>
+                    }
+                }
+            <input type="hidden" name="Id" data-bind="value: Id" />
+            <input type="submit" value="Submit" class="btn btn-primary" />
+        </form>
+    </div>
+</div>

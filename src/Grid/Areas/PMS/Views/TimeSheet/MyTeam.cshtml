@@ -1,0 +1,258 @@
+﻿@using Grid.Features.PMS.Entities.Enums
+@using Grid.Infrastructure
+@using Grid.Infrastructure.Extensions
+@model Grid.Features.PMS.ViewModels.TimeSheetSearchViewModel
+
+@*<div class="btn-group pull-right" role="group">
+        @Html.ActionLink("Missed TimeSheets", "TeamMissed", new { }, new { @class = "btn btn-primary" })
+        @Html.ActionLink("Mine", "Index", "TimeSheet", new {}, new {@class = "btn btn-primary"})
+    </div>*@
+
+
+<h2>Manage TimeSheets</h2>
+@*<div class="col-sm-2">
+        <label>Project</label>
+        <dropdown-list params="entity: 'activeproject',selectedValue: projectId, caption: 'Choose Project'"></dropdown-list>
+    </div>*@
+<div class="pull-right well-lg">
+    @using (Html.BeginForm("MyTeam", "TimeSheet", FormMethod.Get, new { @class = "form-inline", role = "form", id = "searchForm" }))
+    {
+
+        <div class="form-group">
+            @Html.DropDownList("SubmittedUserById", null, htmlAttributes: new { @class = "form-control" }, optionLabel: "Select Team Member")
+        </div>
+
+        <div class="form-group">
+            @Html.DropDownList("ProjectId", null, htmlAttributes: new { @class = "form-control" }, optionLabel: "Select Project")
+        </div>
+
+        <div class="form-group">
+            @Html.EnumDropDownListFor(model => model.State, htmlAttributes: new { @class = "form-control" }, optionLabel: "-- Select Status --")
+        </div>
+
+        <div class="form-group" style="position: relative">
+            @Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { @class = "form-control", placeholder = "Start Date" } })
+        </div>
+
+        <div class="form-group" style="position: relative">
+            @Html.EditorFor(model => model.EndDate, new { htmlAttributes = new { @class = "form-control", placeholder = "End Date" } })
+        </div>
+
+        <div class="form-group">
+            <select id="IsCalendarMode" name="IsCalendarMode" class="form-control">
+                <option value="false" selected>List</option>
+                <option value="true">Calendar</option>
+            </select>
+        </div>
+
+        @Html.HiddenFor(m => m.IsPostBack)
+
+        <div class="form-group">
+            <div class="btn-group pull-right" role="group">
+                <input type="button" value="Filter" class="btn btn-default" id="filterButton" />
+                <input type="button" value="Download" class="btn btn-default" id="downloadButton" />
+            </div>
+        </div>
+    }
+</div>
+<table class="table">
+    <tr>
+        <th>
+            Title
+        </th>
+        <th>
+            Submitted By
+        </th>
+        <th>
+            Date
+        </th>
+        <th>
+            Total Hours
+        </th>
+        <th>
+            Comments
+        </th>
+        <th>
+            Status
+        </th>
+        <th>
+
+        </th>
+    </tr>
+
+    @foreach (var item in Model.TimeSheets)
+    {
+        <tr>
+            <td>
+                @Html.ActionLink(item.Title, "Details", new { id = item.Id })
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedByUser.Person.Name)
+            </td>
+            <td>
+                @item.Date.ToShortDateString()
+            </td>
+            <td>
+                @string.Format("{0} hrs", item.TotalHours)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Comments)
+            </td>
+            <td>
+                <span class="@item.StateStyle">@item.State</span>
+            </td>
+            <td>
+                @if (item.OwnSheet && item.State != TimeSheetState.Approved)
+                {
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                }
+            </td>
+        </tr>
+    }
+
+</table>
+
+@*@Html.GridAddButton(EntityType.TimeSheet)*@
+
+@if (Model.TimeSheets.Any())
+{
+    <hr />
+    <div class="row">
+        <div class="col-lg-4">
+            <h2>Effort by Project</h2>
+            <div id="effortByProject"></div>
+        </div>
+        <div class="col-lg-4">
+            <h2>Effort by Billable</h2>
+            <div id="effortByBillable"></div>
+        </div>
+        @if (Model.ProjectId != null)
+        {
+            <div class="col-lg-4">
+                <h2>Billable Hours of Project</h2>
+                <div id="effortByProjectType"></div>
+            </div>
+        }
+
+    </div>
+    @section Scripts{
+        <script>
+            var projectUrl =
+                '/PMS/TimeSheet/EffortByProjectCSV?TeamMode=true&SubmittedUserById=@Model.SubmittedUserById&State=@Model.State&StartDate=@Model.StartDate&EndDate=@Model.EndDate';
+            var effortByProject = c3.generate({
+                bindto: '#effortByProject',
+                data: {
+                    url: encodeURI(projectUrl),
+                    type: 'pie'
+                },
+                legend: {
+                    show: false
+                },
+                pie: {
+                    label: {
+                        format: function (value, ratio, id) {
+                            return value;
+                        }
+                    }
+                }
+            });
+
+            var billableUrl =
+                '/PMS/TimeSheet/EffortByBillableCSV?TeamMode=true&SubmittedUserById=@Model.SubmittedUserById&State=@Model.State&StartDate=@Model.StartDate&EndDate=@Model.EndDate';
+            var effortByBillable = c3.generate({
+                bindto: '#effortByBillable',
+                data: {
+                    url: encodeURI(billableUrl),
+                    type: 'pie'
+                },
+                legend: {
+                    show: false
+                },
+                pie: {
+                    label: {
+                        format: function (value, ratio, id) {
+                            return value;
+                        }
+                    }
+                }
+            });
+
+            $("#ProjectId").change(function () {
+                var projectId = $("#ProjectId").val();
+                var billableProjectUrl =
+                 '/PMS/TimeSheet/EffortByBillableProjectsCSV?TeamMode=true&SubmittedUserById=@Model.SubmittedUserById&State=@Model.State&StartDate=@Model.StartDate&EndDate=@Model.EndDate&ProjectId=' + projectId;
+                var effortByProjectType = c3.generate({
+                    bindto: '#effortByProjectType',
+                    data: {
+                        url: encodeURI(billableProjectUrl),
+                        type: 'pie'
+                    },
+                    legend: {
+                        show: false
+                    },
+                    pie: {
+                        label: {
+                            format: function (value, ratio, id) {
+                                return value;
+                            }
+                        }
+                    }
+                });
+
+            });
+
+
+            var billableProjectUrl =
+             '/PMS/TimeSheet/EffortByBillableProjectsCSV?TeamMode=true&SubmittedUserById=@Model.SubmittedUserById&State=@Model.State&StartDate=@Model.StartDate&EndDate=@Model.EndDate&ProjectId=@Model.ProjectId';
+            var effortByProjectType = c3.generate({
+                bindto: '#effortByProjectType',
+                data: {
+                    url: encodeURI(billableProjectUrl),
+                    type: 'pie'
+                },
+                legend: {
+                    show: false
+                },
+                pie: {
+                    label: {
+                        format: function (value, ratio, id) {
+                            return value;
+                        }
+                    }
+                }
+            });
+
+
+
+            $("#filterButton").on("click", function (e) {
+                e.preventDefault();
+                $('#searchForm').attr('action', "/PMS/TimeSheet/MyTeam").submit();
+            });
+
+            $("#downloadButton").on("click", function (e) {
+                e.preventDefault();
+                $('#searchForm').attr('action', "/PMS/TimeSheet/Download").submit();
+            });
+
+        </script>
+    }
+}
+else
+{
+    @section Scripts{
+        <script>
+            $("#filterButton").on("click", function (e) {
+                e.preventDefault();
+                $('#searchForm').attr('action', "/PMS/TimeSheet/MyTeam").submit();
+            });
+
+            $("#downloadButton").on("click", function (e) {
+                e.preventDefault();
+                $('#searchForm').attr('action', "/PMS/TimeSheet/Download").submit();
+            });
+        </script>
+    }
+}
+
+
+

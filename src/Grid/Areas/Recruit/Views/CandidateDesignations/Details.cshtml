@@ -1,0 +1,26 @@
+﻿@model Grid.Features.Recruit.Entities.CandidateDesignation
+
+<div class="btn-group pull-right" role="group">
+    @Html.ActionLink("Edit", "Edit", "CandidateDesignations", new { id = Model.Id }, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Delete", "Delete", "CandidateDesignations", new { id = Model.Id }, new { @class = "btn btn-primary" })
+</div>
+
+<h2>@Model.Title</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedOn)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CreatedOn)
+        </dd>
+    </dl>
+</div>

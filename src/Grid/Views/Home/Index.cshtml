@@ -1,0 +1,32 @@
+﻿@model IEnumerable<Grid.Features.Settings.Entities.GridUpdate>
+
+<div class="container-fluid">
+    <div class="timeline gray-blue timeline-left">
+        @foreach (var update in Model)
+        {
+            <div class="timeline-block">
+                <div class="timeline-icon timeline-icon-hide-border">
+                    <i class="fa fa-rocket fa-lg"></i>
+                </div>
+                <div class="timeline-content">
+                    <p>@update.Description</p>
+                    <div class="timeline-date">@update.Date.ToShortDateString()</div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+@section Scripts{
+    <script>
+        $(function () {
+            $(document).on("click", ".fa-rocket", function () {
+                $(this).addClass('animated zoomOutUp');
+            });
+
+            $(document).on("click", ".timeline-block", function () {
+                $(this).addClass('animated zoomOutUp');
+            });
+        });
+        
+    </script>
+}

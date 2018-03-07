@@ -1,0 +1,70 @@
+﻿@model Grid.Features.LMS.ViewModels.LeaveSearchViewModel
+@using Grid.Infrastructure
+@using Grid.Infrastructure.Extensions
+
+<h2>Manage Leaves</h2>
+<leavehistory></leavehistory>
+
+<script type="text/html" id="leaves-template">
+    <div class="col-md-12">
+        <employeesearch></employeesearch>
+    </div>
+    <br />
+    <div class="col-md-9">
+        <leavehistory-list params="entity: 'leaves', enableFilter:true, manageList:false"></leavehistory-list>
+    </div>
+    <div class="col-md-3" data-bind="visible:showQuickView">
+        <leaveapplications params="entity: 'leaves'"></leaveapplications>
+    </div>
+</script>
+
+<script type="text/html" id="employeesearch-template">
+
+    <div class="col-sm-2">
+        <label>Me/Team</label>
+        <dropdown-list params="entity: 'teamtype',selectedValue: team"></dropdown-list>
+    </div>
+    <div class="col-sm-2">
+        <label>Applied By</label>
+        <dropdown-list params="entity: 'team',selectedValue: requestedForUserId, caption: 'Choose Employee'"></dropdown-list>
+    </div>
+    @*<div class="col-sm-2">
+            <label>Start Date</label>
+            <input type="text" class="form-control"  data-bind="dateTimePicker: startDate">
+        </div>*@
+    @*<div class="col-sm-2">
+            <label>End Date</label>
+            <input type="text" class="form-control" name="date" data-bind="dateTimePicker: date">
+        </div>*@
+    <div class="col-sm-2">
+        <label>Leave Type</label>
+        <dropdown-list params="entity: 'leavetype',selectedValue: leaveTypeId, caption: 'Choose Leave Type'"></dropdown-list>
+    </div>
+    <div class="col-sm-2">
+        <label>Duration</label>
+        <dropdown-list params="entity: 'duration',selectedValue: duration, caption: 'Choose Duration'"></dropdown-list>
+    </div>
+    <div class="col-sm-2">
+        <label>Status</label>
+        <dropdown-list params="entity: 'status',selectedValue: status, caption: 'Choose Status'"></dropdown-list>
+    </div>
+    @if (PermissionChecker.CheckPermission(ViewBag.Permissions as List<int>, 215))
+    {
+        <div class="col-sm-2">
+            <label>Manager</label>
+            <dropdown-list params="entity: 'employee',selectedValue: approverId, caption: 'Choose Manager'"></dropdown-list>
+        </div>
+    }
+    <div class="col-sm-2">
+        <button class="btn btn-primary" style="margin-top:23px;" data-bind="click:filter">Filter</button>
+        <button class="btn btn-default" style="margin-top:23px;" data-bind="click:refresh">Reset</button>
+    </div>
+</script>
+@section Scripts{
+    <script>
+        $(function () {
+            ko.applyBindings();
+        });
+    </script>
+
+}

@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{E7A84A59-D016-43AE-AEC3-D3186EB189DC}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Grid.Features.EmailService</RootNamespace>
+    <AssemblyName>Grid.Features.EmailService</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="EmailComposerService.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Grid.Features.Common\Grid.Features.Common.csproj">
+      <Project>{3876B303-AE18-4E9E-A359-E1E0F0F2C7CD}</Project>
+      <Name>Grid.Features.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Grid.Features.HRMS\Grid.Features.HRMS.csproj">
+      <Project>{375619DC-6F55-4FC2-BBF2-45A30E89FA73}</Project>
+      <Name>Grid.Features.HRMS</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Grid.Features.IMS\Grid.Features.IMS.csproj">
+      <Project>{B80468CF-5AB2-468B-ADE5-AD790790724A}</Project>
+      <Name>Grid.Features.IMS</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Grid.Features.LMS\Grid.Features.LMS.csproj">
+      <Project>{43C09A22-FB14-442D-86E3-40A0F11D4849}</Project>
+      <Name>Grid.Features.LMS</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Grid.Features.PMS\Grid.Features.PMS.csproj">
+      <Project>{EB9D0C9C-7123-4AF8-AF31-C8CA07CEED11}</Project>
+      <Name>Grid.Features.PMS</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Grid.Features.Recruit\Grid.Features.Recruit.csproj">
+      <Project>{41851AD7-83A8-41CB-8241-7C31CAD17EA5}</Project>
+      <Name>Grid.Features.Recruit</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Grid.Features.RMS\Grid.Features.RMS.csproj">
+      <Project>{67ED02F2-0982-4110-91E6-D69E1A6F73A9}</Project>
+      <Name>Grid.Features.RMS</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Grid.Features.Settings\Grid.Features.Settings.csproj">
+      <Project>{A4968DF2-50D1-42A1-B53D-DB4EA1963E0C}</Project>
+      <Name>Grid.Features.Settings</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Grid.Features.TicketDesk\Grid.Features.TicketDesk.csproj">
+      <Project>{D0F63BC4-7518-40A1-9607-AF5A9E4DA883}</Project>
+      <Name>Grid.Features.TicketDesk</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Grid.Providers.Email\Grid.Providers.Email.csproj">
+      <Project>{7231DAE9-C7A4-48CF-9E74-B98A8866662F}</Project>
+      <Name>Grid.Providers.Email</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

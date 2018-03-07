@@ -1,0 +1,52 @@
+﻿
+@{
+    ViewBag.Title = "EmployeesLeaveBalance";
+}
+
+<h3>Employees Leave Balance</h3>
+<br />
+
+<leavebalance></leavebalance>
+
+<script type="text/html" id="leavebalance-template">
+    <div class="col-md-12" style="margin-bottom:5px;">
+        <searchleavebalance></searchleavebalance>
+    </div>
+    <br />
+    <br />
+    <div class="col-md-8">
+        <leavebalancelist params="entity: 'leavebalance', enableFilter:true, manageList:true"></leavebalancelist>
+    </div>
+    <div class="col-md-4" data-bind="visible:showQuickView">
+        <leavebalanceupdate params="entity: 'leavebalance'"></leavebalanceupdate>
+    </div>
+</script>
+<script type="text/html" id="searchleavebalance-template">
+    <div class="col-sm-2">
+        <label>Employee</label>
+        <dropdown-list params="entity: 'employee',selectedValue: employeeId, caption: 'Choose Employee'"></dropdown-list>
+    </div>
+     <div class="col-sm-2">
+        <label>Department</label>
+        <dropdown-list params="entity: 'department',selectedValue: employeeDepartment, caption: 'Choose Department'"></dropdown-list>
+    </div>   
+    <div class="col-sm-2">
+        <button class="btn btn-primary" style="margin-top:23px;" data-bind="click:filter">Filter</button>
+        <button class="btn btn-default" style="margin-top:23px;" data-bind="click:refresh">Reset</button>
+    </div>
+</script>
+
+
+
+@section Scripts{
+    <script>
+        $(function () {
+            ko.applyBindings();
+        });
+    </script>
+}
+
+
+
+
+

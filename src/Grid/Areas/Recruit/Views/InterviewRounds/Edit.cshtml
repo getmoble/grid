@@ -1,0 +1,77 @@
+﻿@model Grid.Features.Recruit.Entities.InterviewRound
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>InterviewRound</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Id)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.JobOpeningId, "Job Opening", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("JobOpeningId", null, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.JobOpeningId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CandidateId, "Candidate", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("CandidateId", null, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.CandidateId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.RoundId, "Round", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("RoundId", null, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.RoundId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.InterviewerId, "Interviewer", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("InterviewerId", null, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.InterviewerId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ScheduledOn, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ScheduledOn, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ScheduledOn, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Comments, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Comments, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Comments, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Status, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EnumDropDownListFor(model => model.Status, htmlAttributes: new { @class = "form-control" }, optionLabel: "-- Select Billing Type --")
+                @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Update" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}

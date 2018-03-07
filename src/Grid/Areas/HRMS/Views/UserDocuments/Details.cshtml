@@ -1,0 +1,33 @@
+﻿@model Grid.Features.HRMS.Entities.UserDocument
+
+<h2>Details UserDocument</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.User.EmployeeCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.User.EmployeeCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DocumentType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DocumentType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DocumentPath)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DocumentPath)
+        </dd>
+
+    </dl>
+</div>

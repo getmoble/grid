@@ -1,0 +1,19 @@
+﻿<h2>Manage Leave Periods </h2>
+<leave-period></leave-period>
+
+<script type="text/html" id="leaveperiod-template">
+    <div class="col-md-8">
+        <leaveperiods-list params="entity: 'leaveTimePeriod', enableFilter:true, manageList:true"></leaveperiods-list>
+    </div>
+    <div class="col-md-4" data-bind="visible:showQuickView">
+        <leaveupdate params="entity: 'leaveTimePeriod'"></leaveupdate>
+    </div>
+</script>
+
+@section Scripts{
+    <script>
+        $(function () {
+            ko.applyBindings();
+        });
+    </script>
+}

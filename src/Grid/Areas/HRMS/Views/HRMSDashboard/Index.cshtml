@@ -1,0 +1,104 @@
+﻿@using Grid.Infrastructure
+
+@if (PermissionChecker.CheckPermission(ViewBag.Permissions as List<int>, 210))
+{
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-6">
+                <h2>Employees By Location</h2>
+                <div id="employeesByLocation"></div>
+            </div>
+            <div class="col-lg-6">
+                <h2>Employees By Department</h2>
+                <div id="employeesByDepartment"></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6">
+                <h2>Employees By Gender</h2>
+                <div id="employeesByGender"></div>
+            </div>
+            <div class="col-lg-6">
+                <h2>Employees By Status</h2>
+                <div id="employeesByStatus"></div>
+            </div>
+        </div>
+    </div>
+    @section Scripts{
+        <script>
+            var employeesByLocation = c3.generate({
+                bindto: '#employeesByLocation',
+                data: {
+                    url: '/HRMS/HRMSDashboard/EmployeesByLocationCSV',
+                    type: 'pie'
+                },
+                legend: {
+                    show: false
+                },
+                pie: {
+                    label: {
+                        format: function (value, ratio, id) {
+                            return value;
+                        }
+                    }
+                }
+            });
+
+            var employeesByDepartment = c3.generate({
+                bindto: '#employeesByDepartment',
+                data: {
+                    url: '/HRMS/HRMSDashboard/EmployeesByDepartmentCSV',
+                    type: 'pie'
+                },
+                legend: {
+                    show: false
+                },
+                pie: {
+                    label: {
+                        format: function (value, ratio, id) {
+                            return value;
+                        }
+                    }
+                }
+            });
+
+            var employeesByGender = c3.generate({
+                bindto: '#employeesByGender',
+                data: {
+                    url: '/HRMS/HRMSDashboard/EmployeesByGenderCSV',
+                    type: 'donut'
+                },
+                legend: {
+                    show: false
+                },
+                donut: {
+                    label: {
+                        format: function (value, ratio, id) {
+                            return value;
+                        }
+                    }
+                }
+            });
+            
+            var employeesByStatus = c3.generate({
+                bindto: '#employeesByStatus',
+                data: {
+                    url: '/HRMS/HRMSDashboard/EmployeesByStatusCSV',
+                    type: 'donut'
+                },
+                legend: {
+                    show: false
+                },
+                donut: {
+                    label: {
+                        format: function (value, ratio, id) {
+                            return value;
+                        }
+                    }
+                }
+            });
+        </script>
+
+}
+}
+

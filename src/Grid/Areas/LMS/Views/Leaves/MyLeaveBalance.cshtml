@@ -1,0 +1,23 @@
+﻿
+@{
+    ViewBag.Title = "MyLeaveBalance";
+}
+
+<h2>My Leave Balance</h2>
+
+<leaveentitlementslog params="employeeId:@ViewBag.employeeId"></leaveentitlementslog>
+<script type="text/html" id="leaveentitlementslog-template">
+    <div class="col-md-12">
+        <leaveentitlementloglist params="entity: 'entitlement', enableFilter:true, manageList:false,employeeId:employee"></leaveentitlementloglist>
+    </div>
+</script>
+
+
+@section Scripts{
+    <script>
+        $(function () {
+            ko.applyBindings();
+        });
+    </script>
+}
+

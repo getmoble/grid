@@ -1,0 +1,180 @@
+﻿@using Grid.Infrastructure
+@model Grid.Features.Recruit.ViewModels.InterviewRoundDetailsViewModel
+
+<div class="btn-group pull-right" role="group">
+    @if (PermissionChecker.CheckPermission(ViewBag.Permissions as List<int>, 500))
+    {
+        @Html.ActionLink("Edit", "Edit", "InterviewRounds", new { id = Model.Id }, new { @class = "btn btn-primary" })
+    }
+
+    @Html.ActionLink("Change Status", "ChangeStatus", "InterviewRounds", new { id = Model.Id }, new { @class = "btn btn-primary" })
+
+    @Html.ActionLink("Add Document", "Create", "InterviewRoundDocuments", new {interviewRoundId = Model.Id}, new {@class = "btn btn-primary"})
+
+    @if (PermissionChecker.CheckPermission(ViewBag.Permissions as List<int>, 500))
+    {
+        <a href="#" id="addInterviewButton" class="btn btn-primary" data-toggle="modal" data-target="#addInterview">Add Interview</a>
+    }
+
+    <a href="#" id="changeStatus" class="btn btn-primary" data-toggle="modal" data-target="#addNoteModal">Add Note</a>
+    @if (PermissionChecker.CheckPermission(ViewBag.Permissions as List<int>, 500))
+    {
+       @Html.ActionLink("Delete", "Delete", "InterviewRounds", new { id = Model.Id }, new { @class = "btn btn-primary" })
+    }
+</div>
+
+@{
+    var title = string.Format("{0}'s interview at {1}: {2}", Model.Candidate.Person.Name, Model.ScheduledOn, Model.Status);
+}
+<h3>
+    @title
+</h3>
+
+<div>
+    <hr />
+    <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active"><a href="#info" aria-controls="home" role="tab" data-toggle="tab">Info</a></li>
+        <li role="presentation"><a href="#documents" aria-controls="home" role="tab" data-toggle="tab">Documents</a></li>
+        <li role="presentation"><a href="#notes" aria-controls="home" role="tab" data-toggle="tab">Notes & Activity</a></li>
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="info">
+            <br />
+            <dl class="dl-horizontal">
+                <dt>
+                   Job Opening
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.JobOpening.Title)
+                </dd>
+                <dt>
+                    Interview Round
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Round.Title)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.ScheduledOn)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.ScheduledOn)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Comments)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Comments)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.CreatedOn)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.CreatedOn)
+                </dd>
+            </dl>
+        </div>
+        <div role="tabpanel" class="tab-pane" id="documents">
+            <br />
+            <table class="table">
+                <tr>
+                    <th>
+                        Document Type
+                    </th>
+                    <th>
+                        Name
+                    </th>
+                    <th>
+                        Created On
+                    </th>
+                    <th></th>
+                </tr>
+
+                @foreach (var item in Model.InterviewRoundDocuments)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DocumentType)
+                        </td>
+                        <td>
+                            <a href="@item.DocumentPath" target="_blank">@item.FileName</a>
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CreatedOn)
+                        </td>
+                        <td>
+                        </td>
+                    </tr>
+                }
+            </table>
+
+        </div>
+        <div role="tabpanel" class="tab-pane" id="notes">
+            <br />
+            <div class="timeline timeline-left gray-blue" data-bind="foreach: activities">
+                <!-- Main element container -->
+                <div class="timeline-block">
+                    <!-- Single block -->
+                    <div class="timeline-icon timeline-icon-hide-border">
+                        <i class="fa fa-clock-o fa-lg"></i>
+                    </div>
+                    <div class="timeline-content">
+                        <button type="button" class="btn btn-primary btn-delete pull-right" data-bind="click: $parent.removeActivity">
+                            <i class="fa fa-remove" title="Delete"></i>
+                        </button>
+                        <h4 data-bind="text: Title"></h4>
+                        <p data-bind="html: Comment"></p>
+                        <div class="timeline-date" data-bind="text: CreatedOn"></div> <!-- Date -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    .btn-delete {
+        width: 25px;
+        height: 25px;
+        padding: 2px 2px;
+        font-size: 13px;
+        line-height: 1.33;
+        border-radius: 25px;
+    }
+</style>
+<!-- Modal -->
+<div class="modal fade" id="addNoteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Add Activity</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <input type="text" id="newNoteTitle" class="form-control" value="Note" />
+                    </div>
+                    <div class="form-group">
+                        <textarea id="newNote" class="form-control htmlEditor"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-bind="click: addNewNote">Submit</button>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <script src="~/App/InterviewRoundDetailsViewModel.js"></script>
+    <script>
+        var vm = new InterviewRoundDetailsViewModel();
+        vm.init('@Model.Id');
+        ko.applyBindings(vm);
+    </script>
+}
+
+
+

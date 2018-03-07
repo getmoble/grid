@@ -1,0 +1,180 @@
+﻿@using Grid.Infrastructure.Extensions
+@model  Grid.Features.HRMS.ViewModels.UserViewModel
+
+<h2>@Model.Person.Name</h2>
+
+<div>
+    <hr/>
+    <div role="tabpanel" class="tab-pane active" id="info">
+        <br/>
+        <div class="row">
+            <div class="col-lg-3">
+                <userimage params='UserId: @Model.Id'></userimage>
+            </div>
+            <div class="col-lg-9">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h4>Awards</h4>
+                        @foreach (var award in Model.GroupedAwards)
+                        {
+                            if (award.Value > 1)
+                            {
+                                <span class="label label-success">@award.Key -@award.Value times</span>
+                            }
+                            else
+                            {
+                                <span class="label label-success">@award.Key</span>
+                            }
+                        }
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h4>Skills</h4>
+                        @foreach (var skill in Model.UserSkills)
+                        {
+                            <span class="label label-primary">@skill.Skill.Title</span>
+                        }
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h4>Technologies</h4>
+                        @foreach (var technology in Model.Technologies)
+                        {
+                            <span class="label label-primary">@technology.Title</span>
+                        }
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h4>Certifications</h4>
+                        @foreach (var certification in Model.UserCertifications)
+                        {
+                            <span class="label label-primary">@certification.Certification.Title</span>
+                        }
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h4>Hobbies</h4>
+                        @foreach (var hobby in Model.UserHobbies)
+                        {
+                            <span class="label label-primary">@hobby.Hobby.Title</span>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr/>
+        <div class="row">
+            <div class="col-lg-12">
+                <br/>
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.EmployeeCode)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.EmployeeCode)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Person.Gender)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Person.Gender)
+                    </dd>
+                    @if (Model.Person.DateOfBirth.HasValue)
+                    {
+                        <dt>
+                            Birthday
+                        </dt>
+                        <dd>
+                            @Model.Person.DateOfBirth.Value.ToString("MMMM") @Model.Person.DateOfBirth.Value.Day
+                        </dd>
+                    }
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Person.BloodGroup)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Person.BloodGroup)
+                    </dd>
+                    <dt>
+                        Location
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Location.Title)
+                    </dd>
+                    <dt>
+                        Seat No
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.SeatNo)
+                    </dd>
+                    <dt>
+                        Department
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Department.Title)
+                    </dd>
+                    <dt>
+                        Designation
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Designation.Title)
+                    </dd>
+                    <dt>
+                        Shift
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Shift.Title)
+                    </dd>
+                    <dt>
+                        Reporting Person
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.ReportingPerson.Person.Name)
+                    </dd>
+                    @if (Model.DateOfJoin.HasValue)
+                    {
+                        <dt>
+                            @Html.DisplayNameFor(model => model.DateOfJoin)
+                        </dt>
+
+                        <dd>
+                            @Model.DateOfJoin.Value.ToShortDateString()
+                        </dd>
+                    }
+                    <dt>
+                        Official Email
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.OfficialEmail)
+                    </dd>
+                    <dt>
+                        Official PhoneNo
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.OfficialPhoneNo)
+                    </dd>
+                    @if (Model.AccessRule.LastActivityDate.HasValue)
+                    {
+                        <dt>
+                            Last Activity
+                        </dt>
+                        <dd>
+                            @Model.AccessRule.LastActivityDate.Value.ToLocalDateTime()
+                        </dd>
+                    }
+                </dl>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        $(function () {
+            ko.applyBindings();
+        });
+    </script>
+}

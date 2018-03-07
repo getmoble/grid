@@ -1,0 +1,14 @@
+﻿@model IEnumerable<Grid.Features.Recruit.Entities.JobOpening>
+
+
+<h2>Job Openings</h2>
+
+<publicjobopeningslist></publicjobopeningslist>
+
+@section Scripts{
+    <script>
+        $(function () {
+            ko.applyBindings();
+        });
+    </script>
+}

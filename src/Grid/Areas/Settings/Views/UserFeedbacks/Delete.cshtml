@@ -1,0 +1,54 @@
+﻿@model Grid.Features.Feedback.Entities.UserFeedback
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete UserFeedback</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedByUser.EmployeeCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreatedByUser.EmployeeCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UpdatedByUser.EmployeeCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UpdatedByUser.EmployeeCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Content)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Content)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Screenshot)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Screenshot)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" />
+        </div>
+    }
+</div>

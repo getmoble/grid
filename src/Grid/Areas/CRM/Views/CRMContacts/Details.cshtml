@@ -1,0 +1,162 @@
+﻿@model Grid.Features.CRM.Entities.CRMContact
+
+<div class="btn-group pull-right" role="group">
+    @Html.ActionLink("Edit", "Edit", "CRMContacts", new { id = Model.Id }, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Delete", "Delete", "CRMContacts", new { id = Model.Id }, new { @class = "btn btn-primary" })
+</div>
+
+<h2>@Model.Person.Name</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Account
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ParentAccount.Title)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Person.FirstName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Person.FirstName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Person.LastName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Person.LastName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Person.Gender)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Person.Gender)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Person.Email)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Person.Email)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Person.SecondaryEmail)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Person.SecondaryEmail)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Person.PhoneNo)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Person.PhoneNo)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Person.OfficePhone)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Person.OfficePhone)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Person.Website)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Person.Website)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Person.Skype)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Person.Skype)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Person.Facebook)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Person.Facebook)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Person.Twitter)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Person.Twitter)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Person.GooglePlus)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Person.GooglePlus)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Person.LinkedIn)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Person.LinkedIn)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Person.Organization)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Person.Organization)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Person.Designation)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Person.Designation)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Person.City)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Person.City)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Person.Country)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Person.Country)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Person.Address)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Person.Address)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Person.CommunicationAddress)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Person.CommunicationAddress)
+        </dd>
+        @if (Model.Person.DateOfBirth.HasValue)
+        {
+            <dt>
+                @Html.DisplayNameFor(model => model.Person.DateOfBirth)
+            </dt>
+            <dd>
+                @Model.Person.DateOfBirth.Value.ToShortDateString()
+            </dd>
+        }
+        <dt>
+            @Html.DisplayNameFor(model => model.Expertise)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Expertise)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Comments)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Comments)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedOn)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CreatedOn)
+        </dd>
+
+    </dl>
+</div>

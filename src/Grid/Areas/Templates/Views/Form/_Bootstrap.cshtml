@@ -1,0 +1,93 @@
+﻿@using Grid.Areas.Templates.Models
+@model IList<UIField>
+
+
+<form action="#" method="post" data-bind="submit: submitForm" id="form-template">
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal" data-bind="with: selected">
+        @foreach (var field in Model)
+        {
+            if (field.FieldType == UIFieldTypes.Text)
+            {
+                <div class="form-group">
+                    <label class="control-label col-sm-2">@field.Title</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" name="@field.Name" data-bind="value: @field.Name">
+                    </div>
+                </div>
+            }
+            else if (field.FieldType == UIFieldTypes.TextArea)
+            {
+                <div class="form-group">
+                    <label class="control-label col-sm-2">@field.Title</label>
+                    <div class="col-sm-10">
+                        <textarea class="form-control" name="@field.Name" data-bind="value: @field.Name"></textarea>
+                    </div>
+                </div>
+            }
+            else if (field.FieldType == UIFieldTypes.HtmlEditor)
+            {
+                <div class="form-group">
+                    <label class="control-label col-sm-2">@field.Title</label>
+                    <div class="col-sm-10">
+                        <textarea class="form-control" name="@field.Name" data-bind="htmlEditor: @field.Name"></textarea>
+                    </div>
+                </div>
+            }
+            if (field.FieldType == UIFieldTypes.Password)
+            {
+                <div class="form-group">
+                    <label class="control-label col-sm-2">@field.Title</label>
+                    <div class="col-sm-10">
+                        <input type="password" class="form-control" name="@field.Name" data-bind="value: @field.Name">
+                    </div>
+                </div>
+            }
+            else if (field.FieldType == UIFieldTypes.DateTime)
+            {
+                <div class="form-group">
+                    <label class="control-label col-sm-2">@field.Title</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" name="@field.Name" data-bind="datepicker: @field.Name">
+                    </div>
+                </div>
+            }
+            else if (field.FieldType == UIFieldTypes.DropDown)
+            {
+                <div class="form-group">
+                    <label class="control-label col-sm-2">@field.Title</label>
+                    <div class="col-sm-10">
+                        @{
+                            var binding = "value:" + field.Name;
+                        }
+                        @Html.DropDownList(field.ViewBagKey, null, new { @class = "form-control", data_bind = binding })
+                    </div>
+                </div>
+                            }
+                            else if (field.FieldType == UIFieldTypes.MultiSelectDropDown)
+                            {
+                                <div class="form-group">
+                                    <label class="control-label col-sm-2">@field.Title</label>
+                                    <div class="col-sm-10">
+                                        @Html.DropDownList(field.Name, (MultiSelectList)ViewData[field.ViewBagKey], new { @class = "form-control selectit", multiple = "multiple", data_bind = field.Binding })
+                                    </div>
+                                </div>
+                            }
+                            else if (field.FieldType == UIFieldTypes.CheckBox)
+                            {
+                                <div class="form-group">
+                                    <label class="control-label col-sm-2">@field.Title</label>
+                                    <div class="col-sm-10">
+                                        <input type="checkbox" name="@field.Name" data-bind="checked: @field.Name, value: @field.Name">
+                                    </div>
+                                </div>
+                                }
+                            }
+        <input type="hidden" name="Id" data-bind="value: Id" />
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Submit" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+</form>

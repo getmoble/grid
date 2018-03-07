@@ -1,0 +1,23 @@
+﻿@using Grid.Infrastructure
+@using Grid.Infrastructure.Extensions
+@model IEnumerable<Grid.Features.HRMS.Entities.Technology>
+
+
+<h2>Manage Technologies</h2>
+<technology></technology>
+
+<script type="text/html" id="technologies-template">
+    <div class="col-md-8">
+        <technologieslist params="entity: 'technologie', enableFilter:true, manageList:true"></technologieslist>
+    </div>
+    <div class="col-md-4" data-bind="visible:showQuickView">
+        <technologiesupdate params="entity: 'technologie'"></technologiesupdate>
+    </div>
+</script>
+@section Scripts{
+    <script>
+        $(function () {
+            ko.applyBindings();
+        });
+    </script>
+}

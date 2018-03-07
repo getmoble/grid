@@ -1,0 +1,24 @@
+﻿
+@using Grid.Infrastructure
+@using Grid.Infrastructure.Extensions
+
+<h2>Manage Lead Sources</h2>
+<leadsource></leadsource>
+
+<script type="text/html" id="leadsource-template">
+    <div class="col-md-8">
+        <leadsource-list params="entity: 'crmleadsource', enableFilter:true, manageList:true"></leadsource-list>
+    </div>
+    <div class="col-md-4" data-bind="visible:showQuickView">
+        <leadsourceupdate params="entity: 'crmleadsource'"></leadsourceupdate>
+    </div>
+</script>
+
+
+@section Scripts{
+    <script>
+        $(function () {
+            ko.applyBindings();
+        });
+    </script>
+}

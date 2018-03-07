@@ -1,0 +1,35 @@
+﻿
+@{
+    ViewBag.Title = "TimesheetManage";
+}
+
+@using Grid.Infrastructure
+@using Grid.Infrastructure.Extensions
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-10">
+            <div class="metr">
+                <a href="/PMS/TimeSheet/MyTeam">
+                    <div class="metrostyle metrostylelarge yoometro">
+                        <span class="marT marR-180"><span class="text-white">Timesheets</span></span>
+                    </div>
+                </a>
+                @if (PermissionChecker.CheckPermission(ViewBag.Permissions as List<int>, 550))
+                {
+
+                    <a href="/TMS/TimeSheetLineItems">
+                        <div class="metrostyle metrostylelarge eenmetro">
+                            <span class="marT marR-120"><span class="text-white">Timesheet Entries</span></span>
+                        </div>
+                    </a>
+                    <a href="/TMS/TimeSheetMiss">
+                        <div class="metrostyle metrostylelarge boometro">
+                            <span class="marT marR-120"><span class="text-white">Missed Timesheets</span></span>
+                        </div>
+                    </a>
+                }
+            </div>
+        </div>
+    </div>
+</div>

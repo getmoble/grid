@@ -1,0 +1,115 @@
+﻿
+<div class="card" data-bind="template:{name:templateName}"></div>
+<script type="text/html" id="@ViewBag.Name-form-template">
+    <div class="marT-5 well">
+        <div data-bind="loadingWhen: isBusy">
+            <div class="form-horizontal " data-bind="with: selectedData">
+                <div class="row">
+                    <div class="clearfix"></div>
+                </div>
+                <br />
+                <div class="form-group">
+                    <label class="control-label col-sm-4">Sub Project Of</label>
+                    <div class="col-sm-8">
+                        <dropdown-list params="entity: 'project',selectedValue: parentId,caption: 'Choose Project'"></dropdown-list>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4">Client</label>
+                    <div class="col-sm-8">
+                        <dropdown-list params="entity: 'client',selectedValue: clientId,caption: 'Choose Client'"></dropdown-list>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4 ">Title</label>
+                    <div class="col-sm-8">
+
+                        <input type="text" class="form-control " name="Title" data-bind="value: title">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4">Description</label>
+                    <div class="col-sm-8">
+                        <textarea class="form-control" name="description" data-bind="value: description"></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4">Technologies</label>
+                    <div class="col-sm-8">
+                        <multiselectdropdown-list params="entity: 'technology',selectedValues: technologyIds,caption: 'Choose Technologies'"></multiselectdropdown-list>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4">Start Date</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" name="date" placeholder="Enter Start Date" data-bind="datepicker: startDate">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4">End Date</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" name="date" placeholder="Enter End Date" data-bind="datepicker: endDate">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4">Project Type</label>
+                    <div class="col-sm-8">
+                        <dropdown-list params="entity: 'projecttype',selectedValue: projectType,caption: 'Choose Type'"></dropdown-list>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4">Status</label>
+                    <div class="col-sm-8">
+                        <dropdown-list params="entity: 'projectstatus',selectedValue: status,caption: 'Choose Status'"></dropdown-list>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4">Is Public</label>
+                    <div class="col-md-8">
+                        <input type="checkbox" name="timesheet" id="checkbox" data-bind="checked: isPublic">
+                    </div>
+                </div>
+                <div class="form-group" data-bind="if:isVisible">
+                    <label class="control-label col-sm-4">Inherit Members</label>
+                    <div class="col-md-8">
+                        <input type="checkbox" name="timesheet" id="checkbox1" data-bind="checked: inheritMembers">
+                    </div>
+                </div>
+                <input type="hidden" name="id" data-bind="value: id" />
+                <div class="form-group">
+                    <div class="col-md-offset-4 col-md-8">
+                        <div data-bind="visible:$parent.mode()=='create'">
+                            <button type="button" class="btn btn-primary" data-bind="click:$parent.save,ladda:$parent.isBusy">Save</button>
+                        </div>
+                        <div data-bind="if:$parent.mode()=='edit'">
+                            <button type="button" class="btn btn-primary" data-bind="click:$parent.save,ladda:$parent.isBusy">Update</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+
+<script type="text/html" id="addmember-template">
+    <div class="col-md-12 well" style="padding:0px !important;" data-bind="if:showAddMember">
+        <manageprojectmember params="projectId:projectId"></manageprojectmember>
+    </div>
+</script>
+<script type="text/html" id="manageprojectmember-template">
+    <div class="col-md-12 well" style="padding:0px !important;">
+        <projectmemberslist params="entity: 'projectmember', enableFilter:true, manageList:true,projectId:project"></projectmemberslist>
+    </div>
+    <div class="col-md-12 well" style="padding:0px !important;" data-bind="visible:showQuickView">
+        <projectmembers params="entity: 'projectmember',projectId:project"></projectmembers>
+    </div>
+</script>
+
+
+@section Scripts{
+    <script>
+        $(function () {
+            ko.applyBindings();
+        });
+    </script>
+}

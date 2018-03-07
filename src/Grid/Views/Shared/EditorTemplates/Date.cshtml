@@ -1,0 +1,3 @@
+﻿@using System.Globalization
+@model DateTime?
+@Html.TextBox("", Model.HasValue ? Model.Value.ToString("MM/dd/yyyy", CultureInfo.InvariantCulture) : string.Empty, new { @class = "form-control datePicker", placeholder = "Enter Date"})

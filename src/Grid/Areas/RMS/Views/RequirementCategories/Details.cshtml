@@ -1,0 +1,22 @@
+﻿@model Grid.Features.RMS.Entities.RequirementCategory
+
+<div class="btn-group pull-right" role="group">
+    @Html.ActionLink("Edit", "Edit", "RequirementCategories", new { id = Model.Id }, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Delete", "Delete", "RequirementCategories", new { id = Model.Id }, new { @class = "btn btn-primary" })
+</div>
+
+<h2>@Model.Title</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedOn)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreatedOn)
+        </dd>
+
+    </dl>
+</div>

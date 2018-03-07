@@ -1,0 +1,209 @@
+﻿@using Grid.Areas.Templates.Models
+@model IList<UIField>
+
+<div class="card" data-bind="template:{name:templateName}"></div>
+
+<script type="text/html" id="@ViewBag.Name-form-template">
+    <form action="#" method="post">
+        <div data-bind="if:mode()=='create'||'edit'" class="well">
+            @Html.AntiForgeryToken()
+            <div data-bind="loadingWhen: isBusy">
+                <div class="form-horizontal" data-bind="with:selectedData">
+                    @foreach (var field in Model)
+            {
+                if (field.FieldType == UIFieldTypes.Text)
+                {
+                            <div class="form-group">
+                                <label class="control-label col-sm-4">@field.Title</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" name="@field.Name" data-bind="value: @field.Name">
+                                </div>
+                            </div>
+                        }
+                        else if (field.FieldType == UIFieldTypes.TextArea)
+                        {
+                            <div class="form-group">
+                                <label class="control-label col-sm-4">@field.Title</label>
+                                <div class="col-sm-8">
+                                    <textarea class="form-control" name="@field.Name" data-bind="value: @field.Name"></textarea>
+                                </div>
+                            </div>
+                        }
+                        else if (field.FieldType == UIFieldTypes.HtmlEditor)
+                        {
+                            <div class="form-group">
+                                <label class="control-label col-sm-4">@field.Title</label>
+                                <div class="col-sm-8">
+                                    <textarea class="form-control" id="@field.Name" name="@field.Name" data-bind="htmlEditor: @field.Name"></textarea>
+                                </div>
+                            </div>
+                        }
+                        if (field.FieldType == UIFieldTypes.Password)
+                        {
+                            <div class="form-group">
+                                <label class="control-label col-sm-4">@field.Title</label>
+                                <div class="col-sm-8">
+                                    <input type="password" class="form-control" name="@field.Name" data-bind="value: @field.Name">
+                                </div>
+                            </div>
+                        }
+                        else if (field.FieldType == UIFieldTypes.DateTime)
+                        {
+                            <div class="form-group">
+                                <label class="control-label col-sm-4">@field.Title</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" name="@field.Name" data-bind="datepicker: @field.Name">
+                                </div>
+                            </div>
+                        }
+                        else if (field.FieldType == UIFieldTypes.DropDown)
+                        {
+                            <div class="form-group">
+                                <label class="control-label col-sm-4">@field.Title</label>
+                                <div class="col-sm-8">
+                                    <dropdown-list params="entity: '@field.Name',selectedValue:@field.DropdownResult,caption: '@field.Caption'"></dropdown-list>
+                                </div>
+                            </div>
+                        }
+                        else if (field.FieldType == UIFieldTypes.MultiSelectDropDown)
+                        {
+                            <div class="form-group">
+                                <label class="control-label col-sm-4">@field.Title</label>
+                                <div class="col-sm-8">
+                                    <select id="@field.Name" class="form-control selectit" multiple="multiple" data-bind="@field.Binding"></select>
+                                </div>
+                            </div>
+                        }
+                        else if (field.FieldType == UIFieldTypes.CheckBox)
+                        {
+                            <div class="form-group">
+                                <label class="control-label col-sm-4">@field.Title</label>
+                                <div class="col-md-8">
+                                    <input type="checkbox" name="@field.Name" data-bind="checked: @field.Name, value: @field.Name">
+                                </div>
+                            </div>
+                        }
+                    }
+                    <input type="hidden" name="id" data-bind="value: id" />
+                    <div class="form-group">
+                        <div class="col-md-offset-4 col-md-8">
+                            <div data-bind="visible:$parent.mode()=='create'">
+                                <button type="button" class="btn btn-primary" data-bind="click:$parent.save,ladda:$parent.isBusy">Save</button>
+                            </div>
+                            <div data-bind="if:$parent.mode()=='edit'">
+                                <button type="button" class="btn btn-primary" data-bind="click:$parent.save,ladda:$parent.isBusy">Update</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</script>
+
+<script type="text/html" id="@ViewBag.Name-details-template">
+    @Html.AntiForgeryToken()
+    <div data-bind="loadingWhen: isBusy">
+        <div class="well">
+            <div class="form-horizontal" data-bind="with: selectedData">
+                @foreach (var field in Model)
+            {
+                if (field.FieldType == UIFieldTypes.Text)
+                {
+                        <div class="form-group">
+                            <label class="control-label col-sm-4">@field.Title</label>
+                            <div class="col-sm-8">
+                                <label name="@field.Name" data-bind="text: @field.Name"></label>
+                            </div>
+                        </div>
+                    }
+                    else if (field.FieldType == UIFieldTypes.TextArea)
+                    {
+                        <div class="form-group">
+                            <label class="control-label col-sm-4">@field.Title</label>
+                            <div class="col-sm-8">
+                                <label name="@field.Name" data-bind="text: @field.Name"></label>
+                            </div>
+                        </div>
+                    }
+                    else if (field.FieldType == UIFieldTypes.HtmlEditor)
+                    {
+                        <div class="form-group">
+                            <label class="control-label col-sm-4">@field.Title</label>
+                            <div class="col-sm-8">
+                                <label name="@field.Name" data-bind="text: @field.Name"></label>
+                            </div>
+                        </div>
+                    }
+                    if (field.FieldType == UIFieldTypes.Password)
+                    {
+                        <div class="form-group" data-bind="visible:isVisible">
+                            <label class="control-label col-sm-4">@field.Title</label>
+                            <div class="col-sm-8">
+                                <label name="@field.Name" data-bind="text: @field.Name"></label>
+                            </div>
+                        </div>
+                    }
+                    else if (field.FieldType == UIFieldTypes.DateTime)
+                    {
+                        <div class="form-group">
+                            <label class="control-label col-sm-4">@field.Title</label>
+                            <div class="col-sm-8">
+                                <label name="@field.Name" data-bind="dateString: @field.Name"></label>
+                            </div>
+                        </div>
+                    }
+                    else if (field.FieldType == UIFieldTypes.DropDown)
+                    {
+                        <div class="form-group">
+                            <label class="control-label col-sm-4">@field.Title</label>
+                            <div class="col-sm-8">
+                                <label name="@field.Name" data-bind="text: @field.DropdownDetailsBind"></label>
+                            </div>
+                        </div>
+                    }
+                    else if (field.FieldType == UIFieldTypes.MultiSelectDropDown)
+                    {
+                        <div class="form-group">
+                            <label class="control-label col-sm-4">@field.Title</label>
+                            <div class="col-sm-8">
+                                <select id="@field.Name" class="form-control selectit" multiple="multiple" data-bind="@field.Binding"></select>
+                            </div>
+                        </div>
+                    }
+                    else if (field.FieldType == UIFieldTypes.CheckBox)
+                    {
+                        <div class="form-group">
+                            <label class="control-label col-sm-4">@field.Title</label>
+                            <div class="col-sm-8">
+                                <input type="checkbox" name="@field.Name" data-bind="checked: @field.Name, value: @field.Name" disabled>
+                            </div>
+                        </div>
+                    }
+                }
+
+                <button class="btn-primary" data-toggle="collapse" data-target="#history">Allocation Histories</button>
+
+                <div id="history" class="collapse form-group">
+                    <allocationhistory params="assetId:id"></allocationhistory>
+                </div>
+              
+                <input type="hidden" name="id" data-bind="value: id" />               
+            </div>
+        </div>
+    </div>
+</script>
+
+<script type="text/html" id="allocationhistory-template">
+    <h5><b>Asset Allocation Histories</b></h5>
+    <div class="col-md-12">
+        <assetallocationhistorylist params="entity: 'assetallocationhistory', enableFilter:true, manageList:true,assetId:asset"></assetallocationhistorylist>
+    </div>    
+</script>
+@section Scripts{
+    <script>
+        $(function () {
+            ko.applyBindings();
+        });
+    </script>
+}

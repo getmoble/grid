@@ -1,0 +1,22 @@
+﻿@using Grid.Infrastructure
+@using Grid.Infrastructure.Extensions
+
+<h2>Manage Locations</h2>
+<locations></locations>
+
+<script type="text/html" id="locations-template">
+    <div class="col-md-8">
+        <locationslist params="entity: 'location', enableFilter:true, manageList:true"></locationslist>
+    </div>
+    <div class="col-md-4" data-bind="visible:showQuickView">
+        <locationsupdate params="entity: 'location'"></locationsupdate>
+    </div>
+</script>
+
+@section Scripts{
+    <script>
+        $(function () {
+            ko.applyBindings();
+        });
+    </script>
+}

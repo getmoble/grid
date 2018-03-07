@@ -1,0 +1,128 @@
+﻿@using Grid.Infrastructure
+@using Grid.Infrastructure.Extensions
+@using PagedList.Mvc
+@model Grid.Features.Recruit.ViewModels.CandidateSearchViewModel
+
+<h2>Manage Candidates</h2>
+
+<div class="pull-right well-lg">
+    @using (Html.BeginForm("Index", "Candidates", FormMethod.Get, new { @class = "form-inline", role = "form" }))
+    {
+
+        <div class="form-group">
+            @Html.EnumDropDownListFor(model => model.Source, htmlAttributes: new { @class = "form-control" }, optionLabel: "-- Select Source --")
+        </div>
+
+        <div class="form-group">
+            @Html.EnumDropDownListFor(model => model.Status, htmlAttributes: new { @class = "form-control" }, optionLabel: "-- Select Status --")
+        </div>
+
+        <div class="form-group">
+            @Html.DropDownList("CandidateDesignationId", null, htmlAttributes: new { @class = "form-control" }, optionLabel: "-- Select Designation --")
+        </div>
+
+        <div class="form-group">
+            @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control", placeholder = "First Name" } })
+        </div>
+
+        <div class="form-group">
+            @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control", placeholder = "Last Name" } })
+        </div>
+
+        <div class="form-group">
+            @Html.EditorFor(model => model.Organization, new { htmlAttributes = new { @class = "form-control", placeholder = "Organization" } })
+        </div>
+
+        <div class="form-group">
+            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", placeholder = "Email" } })
+        </div>
+
+    <div class="form-group">
+        @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "form-control", placeholder = "Phone" } })
+    </div>
+
+    <div class="form-group">
+        @Html.EditorFor(model => model.MinExperience, new { htmlAttributes = new { @class = "form-control", placeholder = "Minimum Experience" } })
+    </div>
+
+    <div class="form-group">
+        @Html.EditorFor(model => model.MaxExperience, new { htmlAttributes = new { @class = "form-control", placeholder = "Maximum Experience" } })
+    </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Filter" class="btn btn-default" />
+            </div>
+        </div>
+    }
+</div>
+<table class="table">
+    <tr>
+        <th>
+            Name
+        </th>
+        <th>
+            Code
+        </th>
+        <th>
+            Organization
+        </th>
+        <th>
+            Designation
+        </th>
+        <th>
+            Qualification
+        </th>
+        <th>
+            TotalExperience
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Source)
+        </th>
+        <th>
+            Recieved On
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Status)
+        </th>
+    </tr>
+
+    @foreach (var item in Model.Candidates)
+    {
+        <tr>
+            <td>
+                @Html.ActionLink(item.Person.Name, "Details", new {id = item.Id})
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Code)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Person.Organization)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Designation.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Qualification)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalExperience)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Source)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RecievedOn)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+        </tr>
+    }
+
+</table>
+
+@Html.GridAddButton(EntityType.Candidate)
+
+Page @(Model.Candidates.PageCount < Model.Candidates.PageNumber ? 0 : Model.Candidates.PageNumber) of @Model.Candidates.PageCount
+@Html.PagedListPager(Model.Candidates, page => Url.Action("Index", new { page, Model.Source, Model.Status, Model.FirstName, Model.LastName, Model.Gender, Model.Organization, Model.Designation, Model.Email, Model.Phone, Model.StartDate, Model.EndDate }))

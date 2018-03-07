@@ -1,0 +1,13 @@
+﻿@model Grid.Features.TicketDesk.ViewModels.EditTicketViewModel
+
+<h2>Edit Ticket</h2>
+
+<ticketupdate params="Id: @Model.Id"></ticketupdate>
+
+@section Scripts{
+    <script>
+        $(function () {
+            ko.applyBindings();
+        });
+    </script>
+}

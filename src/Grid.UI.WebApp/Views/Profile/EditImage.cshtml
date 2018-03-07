@@ -1,0 +1,27 @@
+﻿@model Grid.ViewModels.HRMS.EditImageViewModel
+@{
+    ViewBag.Title = "EditImage";
+}
+
+<h2>Edit Image</h2>
+<div class="row">
+    <div class="col-lg-6">
+        @using (Html.BeginForm("EditImage", "Profile", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(m => m.UserId)
+            <div class="row">
+                <div class="col-lg-12">
+                    <img src="@Model.PhotoPath" width="300"/>
+                    <br/>
+                    <br />
+                    <input type="file" name="Photo" id="Photo" />
+                    <br/>
+                    <input type="submit" value="Upload" class="btn btn-default" />
+                </div>
+            </div>
+        }
+    </div>
+</div>
+

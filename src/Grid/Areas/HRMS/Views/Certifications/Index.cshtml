@@ -1,0 +1,22 @@
+﻿@using Grid.Infrastructure
+@using Grid.Infrastructure.Extensions
+
+<h2>Manage Certifications</h2>
+<certifications></certifications>
+
+<script type="text/html" id="certifications-template">
+    <div class="col-md-8">
+        <certificationslist params="entity: 'certification', enableFilter:true, manageList:true"></certificationslist>
+    </div>
+    <div class="col-md-4" data-bind="visible:showQuickView">
+        <certificationsupdate params="entity: 'certification'"></certificationsupdate>
+    </div>
+</script>
+
+@section Scripts{
+    <script>
+        $(function () {
+            ko.applyBindings();
+        });
+    </script>
+}

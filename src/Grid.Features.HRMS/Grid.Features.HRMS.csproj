@@ -1,0 +1,236 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{375619DC-6F55-4FC2-BBF2-45A30E89FA73}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Grid.Features.HRMS</RootNamespace>
+    <AssemblyName>Grid.Features.HRMS</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DAL\AwardRepository.cs" />
+    <Compile Include="DAL\EmailTemplateRepository.cs" />
+    <Compile Include="DAL\EmployeeRepository.cs" />
+    <Compile Include="DAL\Interfaces\IAccessRuleRepository.cs" />
+    <Compile Include="DAL\Interfaces\IAwardRepository.cs" />
+    <Compile Include="DAL\Interfaces\ICertificationRepository.cs" />
+    <Compile Include="DAL\Interfaces\IDepartmentRepository.cs" />
+    <Compile Include="DAL\Interfaces\IDesignationRepository.cs" />
+    <Compile Include="DAL\Interfaces\IEmailTemplateRepository.cs" />
+    <Compile Include="DAL\Interfaces\IEmergencyContactRepository.cs" />
+    <Compile Include="DAL\Interfaces\IEmployeeDependentRepository.cs" />
+    <Compile Include="DAL\Interfaces\IEmployeeRepository.cs" />
+    <Compile Include="DAL\Interfaces\IHobbyRepository.cs" />
+    <Compile Include="DAL\Interfaces\ILinkedAccountRepository.cs" />
+    <Compile Include="DAL\Interfaces\ILocationRepository.cs" />
+    <Compile Include="DAL\Interfaces\IPermissionRepository.cs" />
+    <Compile Include="DAL\Interfaces\IPersonRepository.cs" />
+    <Compile Include="DAL\Interfaces\IRoleMemberRepository.cs" />
+    <Compile Include="DAL\Interfaces\IRolePermissionRepository.cs" />
+    <Compile Include="DAL\Interfaces\IRoleRepository.cs" />
+    <Compile Include="DAL\Interfaces\IShiftRepository.cs" />
+    <Compile Include="DAL\Interfaces\ISkillRepository.cs" />
+    <Compile Include="DAL\Interfaces\ITechnologyRepository.cs" />
+    <Compile Include="DAL\Interfaces\IUserActivityRepository.cs" />
+    <Compile Include="DAL\Interfaces\IUserAwardRepository.cs" />
+    <Compile Include="DAL\Interfaces\IUserCertificationRepository.cs" />
+    <Compile Include="DAL\Interfaces\IUserDocumentRepository.cs" />
+    <Compile Include="DAL\Interfaces\IUserHobbyRepository.cs" />
+    <Compile Include="DAL\Interfaces\IUserRepository.cs" />
+    <Compile Include="DAL\Interfaces\IUserSkillRepository.cs" />
+    <Compile Include="DAL\Interfaces\IUserTechnologyMapRepository.cs" />
+    <Compile Include="DAL\LocationRepository.cs" />
+    <Compile Include="DAL\PermissionRepository.cs" />
+    <Compile Include="DAL\RoleMemberRepository.cs" />
+    <Compile Include="DAL\RolePermissionRepository.cs" />
+    <Compile Include="DAL\RoleRepository.cs" />
+    <Compile Include="DAL\TechnologyRepository.cs" />
+    <Compile Include="Entities\AccessRule.cs" />
+    <Compile Include="Entities\Award.cs" />
+    <Compile Include="Entities\Certification.cs" />
+    <Compile Include="Entities\Department.cs" />
+    <Compile Include="Entities\Designation.cs" />
+    <Compile Include="Entities\EmailTemplate.cs" />
+    <Compile Include="Entities\EmergencyContact.cs" />
+    <Compile Include="Entities\Employee.cs" />
+    <Compile Include="Entities\EmployeeDependent.cs" />
+    <Compile Include="Entities\Enums\Band.cs" />
+    <Compile Include="Entities\Enums\BloodGroup.cs" />
+    <Compile Include="Entities\Enums\DependentType.cs" />
+    <Compile Include="Entities\Enums\EmployeeStatus.cs" />
+    <Compile Include="Entities\Enums\Gender.cs" />
+    <Compile Include="Entities\Enums\LinkedAccountType.cs" />
+    <Compile Include="Entities\Enums\MaritalStatus.cs" />
+    <Compile Include="Entities\Enums\PaymentMode.cs" />
+    <Compile Include="Entities\Enums\Relationship.cs" />
+    <Compile Include="Entities\Enums\UserDocumentType.cs" />
+    <Compile Include="Entities\Hobby.cs" />
+    <Compile Include="Entities\LinkedAccount.cs" />
+    <Compile Include="Entities\Location.cs" />
+    <Compile Include="Entities\Permission.cs" />
+    <Compile Include="Entities\Person.cs" />
+    <Compile Include="Entities\Role.cs" />
+    <Compile Include="Entities\RoleMember.cs" />
+    <Compile Include="Entities\RolePermission.cs" />
+    <Compile Include="Entities\Shift.cs" />
+    <Compile Include="Entities\Skill.cs" />
+    <Compile Include="Entities\Technology.cs" />
+    <Compile Include="Entities\User.cs" />
+    <Compile Include="Entities\UserActivity.cs" />
+    <Compile Include="Entities\UserAward.cs" />
+    <Compile Include="Entities\UserCertification.cs" />
+    <Compile Include="Entities\UserDocument.cs" />
+    <Compile Include="Entities\UserHobby.cs" />
+    <Compile Include="Entities\UserSkill.cs" />
+    <Compile Include="Entities\UserTechnologyMap.cs" />
+    <Compile Include="DAL\AccessRuleRepository.cs" />
+    <Compile Include="DAL\CertificationRepository.cs" />
+    <Compile Include="Models\DepartmentModel.cs" />
+    <Compile Include="Services\Interfaces\IEmailTemplateService.cs" />
+    <Compile Include="ViewModels\AddCertificationViewModel.cs" />
+    <Compile Include="ViewModels\AddSkillViewModel.cs" />
+    <Compile Include="ViewModels\CreateRoleViewModel.cs" />
+    <Compile Include="ViewModels\DesignationSearchViewModel.cs" />
+    <Compile Include="ViewModels\DesignationViewModel.cs" />
+    <Compile Include="ViewModels\EditImageViewModel.cs" />
+    <Compile Include="ViewModels\EditRoleViewModel.cs" />
+    <Compile Include="ViewModels\PermissionDetailsViewModel.cs" />
+    <Compile Include="ViewModels\ResetPasswordViewModel.cs" />
+    <Compile Include="ViewModels\RoleDetailsViewModel.cs" />
+    <Compile Include="ViewModels\UserDocumentViewModel.cs" />
+    <Compile Include="ViewModels\UserSearchViewModel.cs" />
+    <Compile Include="ViewModels\UserViewModel.cs" />
+    <Compile Include="ViewModels\User\EditUserViewModel.cs" />
+    <Compile Include="ViewModels\User\NewUserViewModel.cs" />
+    <Compile Include="DAL\DepartmentRepository.cs" />
+    <Compile Include="DAL\DesignationRepository.cs" />
+    <Compile Include="DAL\EmergencyContactRepository.cs" />
+    <Compile Include="DAL\EmployeeDependentRepository.cs" />
+    <Compile Include="DAL\HobbyRepository.cs" />
+    <Compile Include="DAL\LinkedAccountRepository.cs" />
+    <Compile Include="DAL\PersonRepository.cs" />
+    <Compile Include="DAL\ShiftRepository.cs" />
+    <Compile Include="DAL\SkillRepository.cs" />
+    <Compile Include="DAL\UserActivityRepository.cs" />
+    <Compile Include="DAL\UserAwardRepository.cs" />
+    <Compile Include="DAL\UserCertificationRepository.cs" />
+    <Compile Include="DAL\UserDocumentRepository.cs" />
+    <Compile Include="DAL\UserHobbyRepository.cs" />
+    <Compile Include="DAL\UserRepository.cs" />
+    <Compile Include="DAL\UserSkillRepository.cs" />
+    <Compile Include="DAL\UserTechnologyMapRepository.cs" />
+    <Compile Include="IHRMSDataContext.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\Interfaces\IUserService.cs" />
+    <Compile Include="Services\UserService.cs" />
+    <Compile Include="UserCreatedEntityBase.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Grid.Clients.ITSync\Grid.Clients.ITSync.csproj">
+      <Project>{2C8BDC7A-58A2-409E-BE0A-929556398AB1}</Project>
+      <Name>Grid.Clients.ITSync</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Grid.Features.Common\Grid.Features.Common.csproj">
+      <Project>{3876b303-ae18-4e9e-a359-e1e0f0f2c7cd}</Project>
+      <Name>Grid.Features.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Grid.Features.Settings\Grid.Features.Settings.csproj">
+      <Project>{A4968DF2-50D1-42A1-B53D-DB4EA1963E0C}</Project>
+      <Name>Grid.Features.Settings</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Grid.Providers.Email\Grid.Providers.Email.csproj">
+      <Project>{7231DAE9-C7A4-48CF-9E74-B98A8866662F}</Project>
+      <Name>Grid.Providers.Email</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

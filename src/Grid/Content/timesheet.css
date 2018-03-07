@@ -1,0 +1,40 @@
+﻿.table-div {
+    margin: 15px;
+}
+
+.table-div .hd {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    background-color: #2c3e50;
+    font-weight: bold;
+    color: #fff;
+}
+
+.table-div .cnt {
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+.table-div .row:nth-child(even) {
+    background: #ecf0f1;
+}
+
+.table-div .row:nth-child(odd) {
+    border: 1px solid #ecf0f1;
+}
+
+.bg-gray {
+    background: #ecf0f1;
+}
+
+.bdr-gray {
+    border: 1px solid #ecf0f1;
+}
+
+.btn-group {
+    width: 100% !important;
+}
+
+.cnt .btn {
+    width: 50% !important;
+}

@@ -1,0 +1,24 @@
+﻿
+@using Grid.Infrastructure
+@using Grid.Infrastructure.Extensions
+
+<h2>Manage Lead Categories</h2>
+<leadcategories></leadcategories>
+
+<script type="text/html" id="leadcategories-template">
+    <div class="col-md-8">
+        <leadcategories-list params="entity: 'crmleadcategorie', enableFilter:true, manageList:true"></leadcategories-list>
+    </div>
+    <div class="col-md-4" data-bind="visible:showQuickView">
+        <leadcategoriesupdate params="entity: 'crmleadcategorie'"></leadcategoriesupdate>
+    </div>
+</script>
+
+
+@section Scripts{
+    <script>
+        $(function () {
+            ko.applyBindings();
+        });
+    </script>
+}

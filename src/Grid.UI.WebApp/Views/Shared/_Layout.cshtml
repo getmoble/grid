@@ -1,0 +1,210 @@
+﻿@using Grid.Infrastructure
+@using Grid.Infrastructure.Extensions
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grid</title>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <link href="~/Content/style.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/fullcalendar.min.css" rel="stylesheet" />
+    <link href="~/Content/font-awesome.min.css" rel="stylesheet"/>
+    <link href="~/Content/summernote/summernote.css" rel="stylesheet">
+    <link href="~/Content/bootstrap-datetimepicker.min.css" rel="stylesheet">
+    <link href="~/Content/timeline.min.css" rel="stylesheet" />
+    @if (!Html.IsDebug())
+    {
+        <script src="~/Scripts/appInsights.js"></script>
+    }
+</head>
+<body>
+<!-- Static navbar -->
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#"><i class="fa fa-th" aria-hidden="true"></i> @ViewBag.ApplicationTitle</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Company <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#locations">Locations</a></li>
+                            <li><a class="dropdown-item" href="#permissionlist">Permissions</a></li>
+                            <li><a class="dropdown-item" href="#rolelist">Roles</a></li>
+                            <li><a class="dropdown-item" href="#technologylist">Technologies</a></li>
+                            <li><a class="dropdown-item" href="#emailtemplatelist">Email Templates</a></li>
+                            <li><a class="dropdown-item" href="#awardlist">Awards</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">HRMS <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#departmentlist">Departments</a></li>
+                            <li><a class="dropdown-item" href="#designationlist">Designations</a></li>
+                            <li><a class="dropdown-item" href="#shiftlist">Shifts</a></li>
+                            <li><a class="dropdown-item" href="#skilllist">Skills</a></li>
+                            <li><a class="dropdown-item" href="#hobbylist">Hobbies</a></li>
+                            <li><a class="dropdown-item" href="#certificationlist">Certifications</a></li>
+                            <li><a class="dropdown-item" href="#employeelist">Employees</a></li>
+                            <li><a class="dropdown-item" href="#">Dashboard</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Recruit <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#jobopeningslist">Job Openings</a></li>
+                            <li><a class="dropdown-item" href="#candidatedesignationslist">Designations</a></li>
+                            <li><a class="dropdown-item" href="#candidateslist">Candidates</a></li>
+                            <li><a class="dropdown-item" href="#">Dashboard</a></li>
+                            <li><a class="dropdown-item" href="#referalslist">Referals</a></li>
+                            <li><a class="dropdown-item" href="#roundslist">Rounds</a></li>
+                            <li><a class="dropdown-item" href="#interviewslist">Interviews</a></li>
+                            <li><a class="dropdown-item" href="#offerslist">Offers</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">LMS <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#holidaylist">Holidays</a></li>
+                            <li><a class="dropdown-item" href="#leaveperiodlist">Leave Periods</a></li>
+                            <li><a class="dropdown-item" href="#leavetypelist">Leave Types</a></li>
+                            <li><a class="dropdown-item" href="#leavelist">Leaves</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">TMS <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Timesheets</a></li>
+                            <li><a class="dropdown-item" href="#">Timesheet Entries</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">IMS <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#vendorlist">Vendors</a></li>
+                            <li><a class="dropdown-item" href="#assetcategorylist">Asset Categories</a></li>
+                            <li><a class="dropdown-item" href="#assetlist">Assets</a></li>
+                            <li><a class="dropdown-item" href="#imsdashboard">Dashboard</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">IT <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#softwarecategorylist">Software Categories</a></li>
+                            <li><a class="dropdown-item" href="#softwarelist">Softwares</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">CRM <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#technologylist">Technologies</a></li>
+                            <li><a class="dropdown-item" href="#leadsourcelist">Lead Sources</a></li>
+                            <li><a class="dropdown-item" href="#leadcategorylist">Lead Categories</a></li>
+                            <li><a class="dropdown-item" href="#leadstatuslist">Lead Status</a></li>
+                            <li><a class="dropdown-item" href="#leadlist">Leads</a></li>
+                            <li><a class="dropdown-item" href="#salesstagelist">Sales Stages</a></li>
+                            <li><a class="dropdown-item" href="#potentialcategorylist">Potential Categories</a></li>
+                            <li><a class="dropdown-item" href="#potentiallist">Potentials</a></li>
+                            <li><a class="dropdown-item" href="#crmaccountlist">Accounts</a></li>
+                            <li><a class="dropdown-item" href="#contactlist">Contacts</a></li>
+                            <li><a class="dropdown-item" href="#">Dashboard</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">RMS <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#requirementcategorylist">Requirements Categories</a></li>
+                            <li><a class="dropdown-item" href="#requirementlist">Requirements</a></li>
+                            <li><a class="dropdown-item" href="#">Dashboard</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">PMS <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#projectlist">Projects</a></li>
+                            <li><a class="dropdown-item" href="#tasklist">Tasks</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">KBS <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#articlecategorylist">Article Categories</a></li>
+                            <li><a class="dropdown-item" href="#articlelist">Articles</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Ticket Desk <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#ticketcategorylist">Ticket Categories</a></li>
+                            <li><a class="dropdown-item" href="#ticketsubcategorylist">Ticket Sub Categories</a></li>
+                            <li><a class="dropdown-item" href="#ticketslist">Tickets</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Settings <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Settings</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-rocket" aria-hidden="true"></i><span>Quick Access</span><span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Add Requirement</a></li>
+                            <li><a href="#">Add Lead</a></li>
+                            <li><a href="#">Add Candidate</a></li>
+                            <li><a href="#">Add Employee</a></li>
+                            <li><a href="#">Add Timesheet</a></li>
+                            <li><a href="#">Apply Leave</a></li>
+                            <li><a href="#">Raise Ticket</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">@ViewBag.Name <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Employee Directory</a></li>
+                            <li><a href="#">Job Openings Directory</a></li>
+                            <li><a href="#">Knowledge Base</a></li>
+                            <li class="nav-divider"></li>
+                            <li><a href="#">Change Password</a></li>
+                            <li><a href="#">My Profile</a></li>
+                            <li><a href="#">My TimeSheets</a></li>
+                            <li><a href="#">My Tickets</a></li>
+                            <li><a href="#">My Tasks</a></li>
+                            <li><a href="#">My Interviews</a></li>
+                            <li><a href="#">My Calendar</a></li>
+                            <li><a href="#">Sign Out</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-info-circle" aria-hidden="true"></i> Help <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="#" data-toggle="modal" data-target="#aboutModal">About</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+<div class="container-fluid">
+    @RenderBody()
+</div>
+    <script src="/App/require.config.js"></script>
+    <script data-main="app/startup" src="/Scripts/require.js"></script>
+</body>
+</html>

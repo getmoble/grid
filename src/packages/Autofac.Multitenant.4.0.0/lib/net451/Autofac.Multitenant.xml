@@ -1,0 +1,430 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Autofac.Multitenant</name>
+    </assembly>
+    <members>
+        <member name="T:Autofac.Multitenant.ConfigurationActionBuilder">
+            <summary>
+            Allows you to build up a set of configuration actions that can be used
+            all at once to configure a new <see cref="T:Autofac.ILifetimeScope"/>.
+            </summary>
+            <remarks>
+            <para>
+            Usually when you are building an <see cref="T:Autofac.ILifetimeScope"/>
+            and you wish to update the registrations in the new scope, you are
+            required to pass in a single lambda configuration action. Sometimes,
+            though, there is a need to perform some logic, or otherwise programmatically
+            register several things into the new lifetime across different calls or
+            in different locations in your application.
+            </para>
+            <para>
+            This builder allows you to collect a set of configuration actions and
+            use a final <see cref="M:Autofac.Multitenant.ConfigurationActionBuilder.Build"/>
+            method to create a single aggregate action that can be used to finally
+            create the lifetime scope.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:Autofac.Multitenant.ConfigurationActionBuilder.Build">
+            <summary>
+            Creates an aggregated action based on the list of actions contained
+            in the builder.
+            </summary>
+            <returns>
+            A <see cref="T:System.Action`1"/> that contains the aggregate set of
+            registered actions that have been added to this builder.
+            </returns>
+        </member>
+        <member name="T:Autofac.Multitenant.DefaultTenantId">
+            <summary>
+            Object type that represents a default tenant ID. Primarily used internally;
+            most applications will not use this type.
+            </summary>
+        </member>
+        <member name="M:Autofac.Multitenant.DefaultTenantId.ToString">
+            <summary>
+            Returns a <see cref="T:System.String"/> that represents this instance.
+            </summary>
+            <returns>
+            A <see cref="T:System.String"/> that represents this instance.
+            </returns>
+        </member>
+        <member name="T:Autofac.Multitenant.ITenantIdentificationStrategy">
+            <summary>
+            Defines a provider that determines the current tenant ID from
+            execution context.
+            </summary>
+        </member>
+        <member name="M:Autofac.Multitenant.ITenantIdentificationStrategy.TryIdentifyTenant(System.Object@)">
+            <summary>
+            Attempts to identify the tenant from the current execution context.
+            </summary>
+            <param name="tenantId">
+            The current tenant identifier.
+            </param>
+            <returns>
+            <see langword="true" /> if the tenant could be identified; <see langword="false" />
+            if not.
+            </returns>
+        </member>
+        <member name="T:Autofac.Multitenant.MultitenantContainer">
+            <summary>
+            <see cref="T:Autofac.IContainer"/> implementation that provides the ability
+            to register and resolve dependencies in a multitenant environment.
+            </summary>
+            <remarks>
+            <para>
+            This container implementation modifies the definition of the standard
+            container implementation by returning values that are tenant-specific.
+            For example, resolving a component via <see cref="M:Autofac.Multitenant.MultitenantContainer.ResolveComponent(Autofac.Core.IComponentRegistration,System.Collections.Generic.IEnumerable{Autofac.Core.Parameter})"/>
+            will yield a resolution of the dependency for the current tenant, not
+            from a global container/lifetime.
+            </para>
+            <para>
+            The "current tenant ID" is resolved from an implementation of
+            <see cref="T:Autofac.Multitenant.ITenantIdentificationStrategy"/>
+            that is passed into the container during construction.
+            </para>
+            <para>
+            Tenant lifetime scopes are immutable, so once they are retrieved,
+            configured, or an item is resolved, that tenant lifetime scope
+            cannot be updated or otherwise changed. This is important since
+            it means you need to configure your defaults and tenant overrides
+            early, in application startup.
+            </para>
+            <para>
+            If you do not configure a tenant lifetime scope for a tenant but resolve a
+            tenant-specific dependency for that tenant, the lifetime scope
+            will be implicitly created for you.
+            </para>
+            <para>
+            You may explicitly create and configure a tenant lifetime scope
+            using the <see cref="M:Autofac.Multitenant.MultitenantContainer.ConfigureTenant(System.Object,System.Action{Autofac.ContainerBuilder})"/>
+            method. If you need to perform some logic and build up the configuration
+            for a tenant, you can do that using a <see cref="T:Autofac.Multitenant.ConfigurationActionBuilder"/>.
+            </para>
+            </remarks>
+            <seealso cref="T:Autofac.Multitenant.ConfigurationActionBuilder"/>
+        </member>
+        <member name="F:Autofac.Multitenant.MultitenantContainer.TenantLifetimeScopeTag">
+            <summary>
+            Marker object-tag for the tenant-level lifetime scope.
+            </summary>
+        </member>
+        <member name="F:Autofac.Multitenant.MultitenantContainer._defaultTenantId">
+            <summary>
+            Marker object representing the default tenant ID.
+            </summary>
+        </member>
+        <member name="F:Autofac.Multitenant.MultitenantContainer._tenantLifetimeScopes">
+            <summary>
+            Dictionary containing the set of tenant-specific lifetime scopes. Key
+            is <see cref="T:System.Object"/>, value is <see cref="T:Autofac.ILifetimeScope"/>.
+            </summary>
+        </member>
+        <member name="F:Autofac.Multitenant.MultitenantContainer._tenantLifetimeScopeSyncRoot">
+            <summary>
+            Synchronization primitive for locking modifications and initializations
+            of tenant scopes.
+            </summary>
+        </member>
+        <member name="M:Autofac.Multitenant.MultitenantContainer.#ctor(Autofac.Multitenant.ITenantIdentificationStrategy,Autofac.IContainer)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Autofac.Multitenant.MultitenantContainer"/> class.
+            </summary>
+            <param name="tenantIdentificationStrategy">
+            The strategy to use for identifying the current tenant.
+            </param>
+            <param name="applicationContainer">
+            The application container from which tenant-specific lifetimes will
+            be created.
+            </param>
+            <exception cref="T:System.ArgumentNullException">
+            Thrown if <paramref name="tenantIdentificationStrategy" /> or
+            <paramref name="applicationContainer"/> is <see langword="null" />.
+            </exception>
+        </member>
+        <member name="E:Autofac.Multitenant.MultitenantContainer.ChildLifetimeScopeBeginning">
+            <summary>
+            Fired when a new scope based on the current scope is beginning.
+            </summary>
+        </member>
+        <member name="E:Autofac.Multitenant.MultitenantContainer.CurrentScopeEnding">
+            <summary>
+            Fired when this scope is ending.
+            </summary>
+        </member>
+        <member name="E:Autofac.Multitenant.MultitenantContainer.ResolveOperationBeginning">
+            <summary>
+            Fired when a resolve operation is beginning in this scope.
+            </summary>
+        </member>
+        <member name="P:Autofac.Multitenant.MultitenantContainer.ApplicationContainer">
+            <summary>
+            Gets the base application container.
+            </summary>
+            <value>
+            An <see cref="T:Autofac.IContainer"/> on which all tenant lifetime
+            scopes will be based.
+            </value>
+        </member>
+        <member name="P:Autofac.Multitenant.MultitenantContainer.ComponentRegistry">
+            <summary>
+            Gets the current tenant's registry that associates services with the
+            components that provide them.
+            </summary>
+            <value>
+            An <see cref="T:Autofac.Core.IComponentRegistry"/> based on the current
+            tenant context.
+            </value>
+        </member>
+        <member name="P:Autofac.Multitenant.MultitenantContainer.Disposer">
+            <summary>
+            Gets the disposer associated with the current tenant's <see cref="T:Autofac.ILifetimeScope"/>.
+            Component instances can be associated with it manually if required.
+            </summary>
+            <value>
+            An <see cref="T:Autofac.Core.IDisposer"/> used in cleaning up component
+            instances for the current tenant.
+            </value>
+            <remarks>
+            Typical usage does not require interaction with this member - it
+            is used when extending the container.
+            </remarks>
+        </member>
+        <member name="P:Autofac.Multitenant.MultitenantContainer.Tag">
+            <summary>
+            Gets the tag applied to the current tenant's <see cref="T:Autofac.ILifetimeScope"/>.
+            </summary>
+            <value>
+            An <see cref="T:System.Object"/> that identifies the current tenant's
+            lifetime scope.
+            </value>
+            <remarks>
+            Tags allow a level in the lifetime hierarchy to be identified.
+            In most applications, tags are not necessary.
+            </remarks>
+            <seealso cref="M:Autofac.Builder.IRegistrationBuilder{T, U, V}.InstancePerMatchingLifetimeScope(System.Object)"/>
+        </member>
+        <member name="P:Autofac.Multitenant.MultitenantContainer.TenantIdentificationStrategy">
+            <summary>
+            Gets the strategy used for identifying the current tenant.
+            </summary>
+            <value>
+            An <see cref="T:Autofac.Multitenant.ITenantIdentificationStrategy"/>
+            used to identify the current tenant from the execution context.
+            </value>
+        </member>
+        <member name="M:Autofac.Multitenant.MultitenantContainer.BeginLifetimeScope">
+            <summary>
+            Begin a new nested scope for the current tenant. Component instances created via the new scope
+            will be disposed along with it.
+            </summary>
+            <returns>A new lifetime scope.</returns>
+        </member>
+        <member name="M:Autofac.Multitenant.MultitenantContainer.BeginLifetimeScope(System.Object)">
+            <summary>
+            Begin a new nested scope for the current tenant. Component instances created via the new scope
+            will be disposed along with it.
+            </summary>
+            <param name="tag">The tag applied to the <see cref="T:Autofac.ILifetimeScope"/>.</param>
+            <returns>A new lifetime scope.</returns>
+        </member>
+        <member name="M:Autofac.Multitenant.MultitenantContainer.BeginLifetimeScope(System.Action{Autofac.ContainerBuilder})">
+            <summary>
+            Begin a new nested scope for the current tenant, with additional
+            components available to it. Component instances created via the new scope
+            will be disposed along with it.
+            </summary>
+            <param name="configurationAction">
+            Action on a <see cref="T:Autofac.ContainerBuilder"/>
+            that adds component registrations visible only in the new scope.
+            </param>
+            <returns>A new lifetime scope.</returns>
+            <remarks>
+            The components registered in the sub-scope will be treated as though they were
+            registered in the root scope, i.e., SingleInstance() components will live as long
+            as the root scope.
+            </remarks>
+        </member>
+        <member name="M:Autofac.Multitenant.MultitenantContainer.BeginLifetimeScope(System.Object,System.Action{Autofac.ContainerBuilder})">
+            <summary>
+            Begin a new nested scope for the current tenant, with additional
+            components available to it. Component instances created via the new scope
+            will be disposed along with it.
+            </summary>
+            <param name="tag">
+            The tag applied to the <see cref="T:Autofac.ILifetimeScope"/>.
+            </param>
+            <param name="configurationAction">
+            Action on a <see cref="T:Autofac.ContainerBuilder"/>
+            that adds component registrations visible only in the new scope.
+            </param>
+            <returns>A new lifetime scope.</returns>
+            <remarks>
+            The components registered in the sub-scope will be treated as though they were
+            registered in the root scope, i.e., SingleInstance() components will live as long
+            as the root scope.
+            </remarks>
+        </member>
+        <member name="M:Autofac.Multitenant.MultitenantContainer.ConfigureTenant(System.Object,System.Action{Autofac.ContainerBuilder})">
+            <summary>
+            Allows configuration of tenant-specific components. You may only call this
+            method one time per tenant.
+            </summary>
+            <param name="tenantId">
+            The ID of the tenant for which configuration is occurring. If this
+            value is <see langword="null" />, configuration occurs for the "default
+            tenant" - the tenant that is used when no tenant ID can be determined.
+            </param>
+            <param name="configuration">
+            An action that uses a <see cref="T:Autofac.ContainerBuilder"/> to set
+            up registrations for the tenant.
+            </param>
+            <remarks>
+            <para>
+            If you need to configure a tenant across multiple registration
+            calls, consider using a <see cref="T:Autofac.Multitenant.ConfigurationActionBuilder"/>
+            and configuring the tenant using the aggregate configuration
+            action it produces.
+            </para>
+            </remarks>
+            <exception cref="T:System.ArgumentNullException">
+            Thrown if <paramref name="configuration" /> is <see langword="null" />.
+            </exception>
+            <exception cref="T:System.InvalidOperationException">
+            Thrown if the tenant indicated by <paramref name="tenantId" />
+            has already been configured.
+            </exception>
+            <seealso cref="T:Autofac.Multitenant.ConfigurationActionBuilder"/>
+        </member>
+        <member name="M:Autofac.Multitenant.MultitenantContainer.GetCurrentTenantScope">
+            <summary>
+            Retrieves the lifetime scope for the current tenant based on execution
+            context.
+            </summary>
+            <remarks>
+            <para>
+            This method uses the <see cref="P:Autofac.Multitenant.MultitenantContainer.TenantIdentificationStrategy"/>
+            to retrieve the current tenant ID and then retrieves the scope
+            using <see cref="M:Autofac.Multitenant.MultitenantContainer.GetTenantScope(System.Object)"/>.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:Autofac.Multitenant.MultitenantContainer.GetTenantScope(System.Object)">
+            <summary>
+            Retrieves the lifetime scope for a specific tenant.
+            </summary>
+            <param name="tenantId">
+            The ID of the tenant for which the lifetime scope should be retrieved. If this
+            value is <see langword="null" />, the scope is returned for the "default
+            tenant" - the tenant that is used when no tenant ID can be determined.
+            </param>
+        </member>
+        <member name="M:Autofac.Multitenant.MultitenantContainer.ResolveComponent(Autofac.Core.IComponentRegistration,System.Collections.Generic.IEnumerable{Autofac.Core.Parameter})">
+            <summary>
+            Resolve an instance of the provided registration within the current tenant context.
+            </summary>
+            <param name="registration">The registration to resolve.</param>
+            <param name="parameters">Parameters for the instance.</param>
+            <returns>The component instance.</returns>
+            <exception cref="T:Autofac.Core.Registration.ComponentNotRegisteredException">
+            Thrown if an attempt is made to resolve a component that is not registered
+            for the current tenant.
+            </exception>
+            <exception cref="T:Autofac.Core.DependencyResolutionException">
+            Thrown if there is a problem resolving the registration. For example,
+            if the component registered requires another component be available
+            but that required component is not available, this exception will be thrown.
+            </exception>
+        </member>
+        <member name="M:Autofac.Multitenant.MultitenantContainer.Dispose(System.Boolean)">
+            <summary>
+            Releases unmanaged and - optionally - managed resources
+            </summary>
+            <param name="disposing">
+            <see langword="true" /> to release both managed and unmanaged resources;
+            <see langword="false" /> to release only unmanaged resources.
+            </param>
+        </member>
+        <member name="T:Autofac.Multitenant.RegistrationExtensions">
+            <summary>
+            Extends <see cref="T:Autofac.Builder.IRegistrationBuilder`3"/> with methods to support multitenancy.
+            </summary>
+        </member>
+        <member name="M:Autofac.Multitenant.RegistrationExtensions.InstancePerTenant``3(Autofac.Builder.IRegistrationBuilder{``0,``1,``2})">
+            <summary>
+            Share one instance of the component within the context of an individual tenant.
+            </summary>
+            <typeparam name="TLimit">Registration limit type.</typeparam>
+            <typeparam name="TActivatorData">Activator data type.</typeparam>
+            <typeparam name="TRegistrationStyle">Registration style type.</typeparam>
+            <param name="registration">Registration to set the lifetime scope on.</param>
+            <exception cref="T:System.ArgumentNullException">
+            Thrown if <paramref name="registration" /> is <see langword="null" />.
+            </exception>
+            <remarks>
+            <para>
+            This method is useful when there is a desire to register an individual
+            component at the root container level and have one instance of the
+            component created per tenant.
+            </para>
+            </remarks>
+        </member>
+        <member name="T:Autofac.Multitenant.TenantIdentificationStrategyExtensions">
+            <summary>
+            Extension methods for working with <see cref="T:Autofac.Multitenant.ITenantIdentificationStrategy"/>.
+            </summary>
+        </member>
+        <member name="M:Autofac.Multitenant.TenantIdentificationStrategyExtensions.IdentifyTenant``1(Autofac.Multitenant.ITenantIdentificationStrategy)">
+            <summary>
+            Gets a typed tenant ID from a strategy or the default value for the type
+            if identification fails.
+            </summary>
+            <typeparam name="T">The type of the tenant ID.</typeparam>
+            <param name="strategy">
+            The <see cref="T:Autofac.Multitenant.ITenantIdentificationStrategy"/> from which the tenant ID should be retrieved.
+            </param>
+            <returns>
+            If tenant identification succeeds, the ID from <paramref name="strategy" /> is converted to
+            <typeparamref name="T"/> and returned. If identification fails, the default value for
+            <typeparamref name="T"/> is returned.
+            </returns>
+            <exception cref="T:System.ArgumentNullException">
+            Thrown if <paramref name="strategy" /> is <see langword="null" />.
+            </exception>
+        </member>
+        <member name="T:Autofac.Multitenant.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:Autofac.Multitenant.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:Autofac.Multitenant.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:Autofac.Multitenant.Properties.Resources.ArgumentException_StringEmpty">
+            <summary>
+              Looks up a localized string similar to &apos;{0}&apos; may not be empty..
+            </summary>
+        </member>
+        <member name="P:Autofac.Multitenant.Properties.Resources.DefaultTenantId_ToString">
+            <summary>
+              Looks up a localized string similar to Default Tenant.
+            </summary>
+        </member>
+        <member name="P:Autofac.Multitenant.Properties.Resources.MultitenantContainer_TenantAlreadyConfigured">
+            <summary>
+              Looks up a localized string similar to The tenant with ID &apos;{0}&apos; has already been configured. It cannot be reconfigured..
+            </summary>
+        </member>
+    </members>
+</doc>

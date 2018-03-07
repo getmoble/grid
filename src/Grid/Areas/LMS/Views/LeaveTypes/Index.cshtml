@@ -1,0 +1,19 @@
+﻿<h2>Manage Leave Types</h2>
+<leavetypes></leavetypes>
+
+<script type="text/html" id="leavetypes-template">
+    <div class="col-md-9">
+        <leavetypes-list params="entity: 'leavetype', enableFilter:true, manageList:true"></leavetypes-list>
+    </div>
+    <div class="col-md-3" data-bind="visible:showQuickView">
+        <leavetypesupdate params="entity: 'leavetype'"></leavetypesupdate>
+    </div>
+</script>
+
+@section Scripts{
+    <script>
+        $(function () {
+            ko.applyBindings();
+        });
+    </script>
+}

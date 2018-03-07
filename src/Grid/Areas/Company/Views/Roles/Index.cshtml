@@ -1,0 +1,22 @@
+﻿@using Grid.Infrastructure
+@using Grid.Infrastructure.Extensions
+@model IEnumerable<Grid.Features.HRMS.Entities.Role>
+
+<h2>Manage Roles</h2>
+<role></role>
+
+<script type="text/html" id="roles-template">
+    <div class="col-md-8">
+        <roleslist params="entity: 'role', enableFilter:true, manageList:true"></roleslist>
+    </div>
+    <div class="col-md-4" data-bind="visible:showQuickView">
+        <rolesupdate params="entity: 'role'"></rolesupdate>
+    </div>
+</script>
+@section Scripts{
+    <script>
+        $(function () {
+            ko.applyBindings();
+        });
+    </script>
+}

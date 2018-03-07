@@ -1,0 +1,14 @@
+﻿@using Grid.Infrastructure
+@using Grid.Infrastructure.Extensions
+
+<h2>Manage Rounds</h2>
+<roundslist></roundslist>
+@Html.GridAddButton(EntityType.Round)
+
+@section Scripts{
+    <script>
+        $(function () {
+            ko.applyBindings();
+        });
+    </script>
+}

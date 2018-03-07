@@ -1,0 +1,126 @@
+﻿@using Grid.Areas.Templates.Models
+@model IList<UIField>
+
+<div class="card" data-bind="template:{name:templateName}"></div>
+<script type="text/html" id="@ViewBag.Name-form-template">
+    <div class="marT-5 well">
+        <div data-bind="loadingWhen: isBusy">
+            <div class="form-horizontal " data-bind="with: selectedData">
+                <div class="form-group">
+                    <label class="control-label col-sm-3">Employee</label>
+                    <div class="col-sm-9">
+                        <dropdown-list params="entity: 'employee',selectedValue: employeeId,caption: 'Choose Employee'"></dropdown-list>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-3">Leave Type</label>
+                    <div class="col-sm-9">
+                        <dropdown-list params="entity: 'leavetype',selectedValue: leaveTypeId,caption: 'Choose Leave Type'"></dropdown-list>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-3">Time Period</label>
+                    <div class="col-sm-9">
+                        <dropdown-list params="entity: 'leavetimeperiod',selectedValue: leaveTimePeriodId,caption: 'Choose Time Period'"></dropdown-list>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-3">Operation</label>
+                    <div class="col-sm-9">
+                        <dropdown-list params="entity: 'leaveoperation',selectedValue: operation,caption: 'Choose Operation'"></dropdown-list>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-3">Allocated Days</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" data-bind="value: allocation">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-3">Comments</label>
+                    <div class="col-sm-9">
+                        <textarea name="reason" class="form-control" data-bind="value: comments"></textarea>
+                    </div>
+                </div>
+                <input type="hidden" name="id" data-bind="value: id" />
+                <div class="form-group">
+                    <div class="col-md-offset-3 col-md-9">
+                        <div data-bind="visible:$parent.mode()=='create'">
+                            <button type="button" class="btn btn-primary" data-bind="click:$parent.save,ladda:$parent.isBusy">Save</button>
+                        </div>
+                        <div data-bind="if:$parent.mode()=='edit'">
+                            <button type="button" class="btn btn-primary" data-bind="click:$parent.save,ladda:$parent.isBusy">Update</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+
+<script type="text/html" id="@ViewBag.Name-details-template">
+    <div class="marT-5">
+        <div data-bind="loadingWhen: isBusy">
+            <div class="form-horizontal well" data-bind="with: selectedData">
+                <div class="form-group">
+                    <label class="control-label col-sm-3">Employee</label>
+                    <div class="col-sm-9">
+                        <label name="name" data-bind="text: employee"></label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-3">Leave Type</label>
+                    <div class="col-sm-9">
+                        <label name="leavetype" data-bind="text: leaveType"></label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-3">Time Period</label>
+                    <div class="col-sm-9">
+                        <label name="duration" data-bind="text: leaveTimePeriod"></label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-3">Operation</label>
+                    <div class="col-sm-9">
+                        <label name="duration" data-bind="text: operationType"></label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-3">Leave Count</label>
+                    <div class="col-sm-9">
+                        <label name="duration" data-bind="text: leaveCount"></label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-3">Previous Balance</label>
+                    <div class="col-sm-9">
+                        <label name="duration" data-bind="text: previousBalance"></label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-3">NewBalance</label>
+                    <div class="col-sm-9">
+                        <label name="duration" data-bind="text: newBalance"></label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-3">Comments</label>
+                    <div class="col-sm-9">
+                        <label name="reason" data-bind="text: comments"></label>
+                    </div>
+                </div>
+                <input type="hidden" name="id" data-bind="value: id" />
+            </div>
+        </div>
+    </div>
+</script>
+
+
+@section Scripts{
+    <script>
+        $(function () {
+            ko.applyBindings();
+        });
+    </script>
+}

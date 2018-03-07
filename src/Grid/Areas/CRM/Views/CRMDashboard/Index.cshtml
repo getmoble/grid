@@ -1,0 +1,86 @@
+﻿@using Grid.Infrastructure
+
+@if (PermissionChecker.CheckPermission(ViewBag.Permissions as List<int>, 220))
+{
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-6">
+                <h2>Leads By Status</h2>
+                <div id="leadsByStatus"></div>
+            </div>
+            <div class="col-lg-6">
+                <h2>Leads By Source</h2>
+                <div id="leadsBySource"></div>
+            </div>
+        </div>
+        <br/>
+        <div class="row">
+            <div class="col-lg-12">
+                <h2>Leads By Time</h2>
+                <div id="leadsByDate"></div>
+            </div>
+        </div>
+    </div>
+    @section Scripts{
+        <script>
+            var leadsByStatusChart = c3.generate({
+                bindto: '#leadsByStatus',
+                data: {
+                    url: '/CRM/CRMDashboard/LeadsByStatusCSV',
+                    type: 'pie'
+                },
+                legend: {
+                    show: false
+                },
+                pie: {
+                    label: {
+                        format: function (value, ratio, id) {
+                            return value;
+                        }
+                    }
+                }
+            });
+            
+            var leadsBySourceChart = c3.generate({
+                bindto: '#leadsBySource',
+                data: {
+                    url: '/CRM/CRMDashboard/LeadsBySourceCSV',
+                    type: 'pie'
+                },
+                legend: {
+                    show: false
+                },
+                pie: {
+                    label: {
+                        format: function (value, ratio, id) {
+                            return value;
+                        }
+                    }
+                }
+            });
+
+            var leadsByDateChart = c3.generate({
+                bindto: '#leadsByDate',
+                data: {
+                    x: 'x',
+                    xFormat: '%m/%d/%Y',
+                    url: '/CRM/CRMDashboard/LeadsByDateCSV',
+                    type: 'bar',
+                },
+                axis: {
+                    x: {
+                        type: 'timeseries',
+                        tick: {
+                            format: '%m/%d/%Y'
+                        }
+                    }
+                },
+                legend: {
+                    position: 'inset'
+                }
+            });
+        </script>
+       
+    }
+}
+

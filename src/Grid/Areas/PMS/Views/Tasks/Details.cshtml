@@ -1,0 +1,127 @@
+﻿@model  Grid.Features.PMS.ViewModels.TaskDetailsViewModel
+
+<div class="btn-group pull-right" role="group">
+    @Html.ActionLink("Change Status", "ChangeTaskStatus", "Tasks", new { id = Model.Id }, new { @class = "btn btn-primary" })
+    @if (ViewBag.CanManageTask)
+    {
+        @*@Html.ActionLink("Edit", "Edit", "Tasks", new { id = Model.Id }, new { @class = "btn btn-primary" })
+        @Html.ActionLink("Delete", "Delete", "Tasks", new { id = Model.Id }, new { @class = "btn btn-primary" })*@
+    }
+</div>
+
+<h2>@string.Format("{0}", Model.Title)</h2>
+
+<div>
+    <hr />
+
+    <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active"><a href="#info" aria-controls="home" role="tab" data-toggle="tab">Info</a></li>
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="info">
+            <dl class="dl-horizontal">
+                <dt>
+                    Assigned To
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Assignee.User.Person.Name)
+                </dd>
+                <dt>
+                    Created By
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.CreatedByUser.Person.Name)
+                </dd>
+                <dt>
+                    Project
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Project.Title)
+                </dd>
+
+                <dt>
+                    Title
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Title)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Description)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Description)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.ExpectedTime)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.ExpectedTime)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.TaskStatus)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.TaskStatus)
+                </dd>
+                 <dt>
+                   Billing
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.TaskBilling)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.StartDate)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.StartDate)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.DueDate)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.DueDate)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.CreatedOn)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.CreatedOn)
+                </dd>
+
+            </dl>
+            <br />
+            <div class="container-fluid">
+                <div class="timeline gray-blue timeline-left">
+                    @foreach (var activity in Model.TaskActivities)
+                    {
+                        <div class="timeline-block">
+                            <div class="timeline-icon timeline-icon-hide-border">
+                                <i class="fa fa-clock-o fa-lg"></i>
+                            </div>
+                            <div class="timeline-content">
+                                <p><b>@activity.Title</b></p>
+                                <p>@activity.Comment</p>
+                                <div class="timeline-date">@activity.CreatedOn.ToShortDateString()</div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

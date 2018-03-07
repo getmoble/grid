@@ -1,0 +1,13 @@
+﻿@model Grid.Features.KBS.Entities.Category
+
+<h2>Edit Category</h2>
+
+<categoryupdate params="Id: @Model.Id"></categoryupdate>
+
+@section Scripts{
+    <script>
+        $(function () {
+            ko.applyBindings();
+        });
+    </script>
+}

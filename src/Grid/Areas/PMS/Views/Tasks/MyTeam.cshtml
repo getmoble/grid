@@ -1,0 +1,103 @@
+﻿@using Grid.Infrastructure
+@using Grid.Infrastructure.Extensions
+@model  Grid.Features.PMS.ViewModels.TaskSearchViewModel
+
+
+<div class="btn-group pull-right" role="group">
+    @Html.ActionLink("Mine", "Index", "Tasks", new { area = "PMS", HideCompleted = true }, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Calendar", "Calendar", "Tasks", new {area = "PMS"}, new {@class = "btn btn-primary"})
+</div>
+
+<h2>My Team's Tasks</h2>
+
+<div class="pull-right well-lg">
+    @using (Html.BeginForm("Index", "Tasks", FormMethod.Get, new { @class = "form-inline", role = "form" }))
+    {
+        <div class="form-group">
+            @Html.DropDownList("AssignedToId", null, htmlAttributes: new { @class = "form-control" }, optionLabel: "-- Select User --")
+        </div>
+        <div class="form-group">
+            @Html.DropDownList("ProjectId", null, htmlAttributes: new { @class = "form-control" }, optionLabel: "-- Select Project --")
+        </div>
+        <div class="form-group">
+            @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control", placeholder ="Title" } })
+        </div>
+        <div class="form-group">
+            @Html.EnumDropDownListFor(model => model.Status, htmlAttributes: new {@class = "form-control"}, optionLabel: "-- Select Status --")
+        </div>
+        <div class="form-group">
+            @Html.EditorFor(model => model.HideCompleted) Hide Completed
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Filter" class="btn btn-default" />
+            </div>
+        </div>
+    }
+</div>
+<table class="table table-hover">
+    <tr>
+        <th>
+            Code
+        </th>
+        <th>
+            Title
+        </th>
+        <th>
+            Project
+        </th>
+        <th>
+            Priority
+        </th>
+        <th>
+            Start Date
+        </th>
+        <th>
+            Due On
+        </th>
+        <th>
+            Allocated Time
+        </th>
+        <th>
+            Assigned To
+        </th>
+        <th>
+            Status
+        </th>
+    </tr>
+
+    @foreach (var item in Model.Tasks)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Code)
+            </td>
+            <td>
+                @Html.ActionLink(item.Title, "Details", new {id = item.Id})
+            </td>
+            <td>
+                @Html.ActionLink(item.Project, "Details", "Projects", new { area = "PMS", id = item.ProjectId }, null)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Priority)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DueDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ExpectedTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AssignedTo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+        </tr>
+    }
+</table>
+
+@Html.GridAddButton(EntityType.Task)

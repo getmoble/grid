@@ -1,0 +1,71 @@
+﻿<style>
+    .btn-circle.btn-lg {
+        width: 50px;
+        height: 50px;
+        padding: 5px 8px;
+        font-size: 13px;
+        line-height: 1.33;
+        border-radius: 25px;
+        z-index: 99;
+    }
+
+    .fc-view {
+        z-index: 0 !important;
+    }
+
+    .feedback { position: fixed; }
+
+    .feedback textarea { height: 180px; }
+    .feedback .screenshot {position: relative;top: -24px;right: 10px;opacity: .6}
+    .feedback .screenshot:hover { opacity: 1 }
+    .feedback .reported p, .feedback .failed p { height: 180px }
+
+
+    .feedback.left {left: 5px;bottom: 5px}
+    .feedback.right {right: 5px;bottom: 5px}
+
+    .feedback .dropdown-menu {width: 320px;height: 350px;bottom: 50px;}
+    .feedback.left .dropdown-menu { left: 0px }
+    .feedback.right .dropdown-menu { right: 0px }
+</style>
+
+<div class="feedback right">
+    <div class="tooltips">
+        <div class="btn-group dropup">
+            <button type="button" class="btn btn-primary dropdown-toggle btn-circle btn-lg" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fa fa fa-comments fa-2x" title="Report Bug"></i>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-right dropdown-menu-form">
+                <li>
+                    <div class="report">
+                        <h2 class="text-center">Feedback</h2>
+                        <form method="post" action="@Url.Action("Create", "UserFeedbacks", new { area = "Settings" })">
+                            <div class="col-sm-12">
+                                <textarea id="comment" name="comment" class="form-control" placeholder="Please tell us what bug you have encountered or new feature you would require? Please provide as much detail as possible."></textarea>
+                                <input id="screenshot" name="screenshot" type="hidden" class="screen-uri">
+                                <span class="screenshot pull-right"><i class="fa fa-camera" title="Take Screenshot"></i></span>
+                            </div>
+                            <div class="col-sm-12 clearfix">
+                                <button class="btn btn-primary btn-block ">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="reported text-center collapse">
+                        <h2>Thank you!</h2>
+                        <p>Your submission has been received, we will review it shortly.</p>
+                        <div class="col-sm-12 clearfix">
+                            <button class="btn btn-success btn-block do-close">Close</button>
+                        </div>
+                    </div>
+                    <div class="failed text-center collapse">
+                        <h2>Oh no!</h2>
+                        <p>It looks like your submission was not sent.</p>
+                        <div class="col-sm-12 clearfix">
+                            <button class="btn btn-danger btn-block do-close">Close</button>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

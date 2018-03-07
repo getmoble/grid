@@ -1,0 +1,49 @@
+﻿@using Grid.Infrastructure.Extensions
+@model Grid.UI.WebApp.Areas.Templates.Models.ListViewModel
+<div class="container-fluid">
+    <h2>@Model.Title</h2>
+    <table class="table table-hover" data-bind="loadingWhen: isBusy">
+        <thead>
+        <tr>
+            <th>#</th>
+            @foreach (var field in Model.Fields)
+            {
+                <th>@field.Title</th>
+            }
+            @if (Model.ShowDetailsLink)
+            {
+                <th>Actions</th>
+            }
+            
+        </tr>
+        </thead>
+        <tbody data-bind="foreach: data">
+        <tr>
+            <td><span data-bind="text: $index() + 1"></span></td>
+            @foreach (var field in Model.Fields)
+            {
+                <td data-bind="@field.GetReadOnlyBinding(): @field.Name"></td>
+            }
+            <td>
+                @if (Model.ShowDetailsLink)
+                {
+                    <a class="btn btn-primary" href="#" aria-label="Details" data-bind="click:$parent.details"><i class="fa fa-info" aria-hidden="true"></i></a>
+                }
+                @if (Model.CanManage)
+                {
+                    <a class="btn btn-primary" href="#" aria-label="Edit" data-bind="click:$parent.edit"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                    <a class="btn btn-danger" href="#" aria-label="Delete" data-bind="click:$parent.delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                }
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+@if (Model.ShowCreateLink)
+{
+    @Html.GridAddButton(Model.CreateLink)
+}
+
+
+

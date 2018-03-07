@@ -1,0 +1,50 @@
+﻿
+@model IList<Grid.Areas.Templates.Models.UIField>
+<div class="card">
+    <div class="marT-5 well" style="padding:0px;">
+        <div class="form-horizontal">
+
+            @if (ViewBag.UserId == true || ViewBag.Role == true)
+            {
+                <div class="text-right" style="margin-right:5px;">
+                    <a class="btn btn-primary" style="margin-top:12px;" href="#" aria-label="Create" data-bind="click:create"><i class="fa fa-user-plus" aria-hidden="true"></i></a>
+                </div>
+            }
+            <div id="list-template">
+                <table class="table table-responsive table-hover" data-bind="loadingWhen: isBusy">
+                    <thead>
+                        <tr>
+                            @foreach (var field in Model)
+                            {
+                                <th>@field.Title</th>
+                            }
+                           @if (ViewBag.UserId == true || ViewBag.Role == true)
+                           {
+                                <th>Actions</th>
+                            }
+                        </tr>
+                    </thead>
+                    <tbody data-bind="foreach: data">
+                        <tr>
+                            @foreach (var field in Model)
+                            {
+                                <td class="col-md-3" data-bind="@field.GetReadOnlyBinding(): @field.Name"></td>
+                            }
+                            <td class="col-md-4">
+                                <input type="hidden" name="Id" data-bind="value: Id" />
+                                @if (ViewBag.UserId == true || ViewBag.Role == true)
+                                {
+                                    <a class="btn-sm btn-primary" href="#" aria-label="Details" data-bind="visible:$parent.manageList,click:$parent.details"><i class="fa fa-info" aria-hidden="true"></i></a>
+                                    <a class="btn-sm btn-primary" href="#" aria-label="Edit" data-bind="visible:$parent.manageList,click:$parent.edit"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                                    <a class="btn-sm btn-primary" href="#" aria-label="ChangeStatus" data-bind="visible:$parent.manageList,click:$parent.changeStatus"><i class="fa fa-check-square-o" aria-hidden="true"></i></a>
+                                    <a class="btn-sm btn-danger" href="#" aria-label="Delete" data-bind="visible:$parent.manageList,click:$parent.delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                                }
+                            </td>
+
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

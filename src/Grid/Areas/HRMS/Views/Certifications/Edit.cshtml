@@ -1,0 +1,13 @@
+﻿@model Grid.Features.HRMS.Entities.Certification
+
+<h2>Edit Certification</h2>
+
+<certificationupdate params="Id: @Model.Id"></certificationupdate>
+
+@section Scripts{
+    <script>
+        $(function () {
+            ko.applyBindings();
+        });
+    </script>
+}

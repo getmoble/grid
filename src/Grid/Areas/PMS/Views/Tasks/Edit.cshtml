@@ -1,0 +1,13 @@
+﻿@model  Grid.Features.PMS.ViewModels.EditTaskViewModel
+
+<h2>Edit Task</h2>
+
+<taskupdate params="Id: @Model.Id"></taskupdate>
+
+@section Scripts{
+    <script>
+        $(function () {
+            ko.applyBindings();
+        });
+    </script>
+}

@@ -1,0 +1,22 @@
+﻿@using Grid.Infrastructure
+@using Grid.Infrastructure.Extensions
+
+<h2>Manage Departments</h2>
+<departments></departments>
+
+<script type="text/html" id="departments-template">
+    <div class="col-md-8">
+        <departmentslist params="entity: 'department', enableFilter:true, manageList:true"></departmentslist>
+    </div>
+    <div class="col-md-4" data-bind="visible:showQuickView">
+        <departmentsupdate params="entity: 'department'"></departmentsupdate>
+    </div>
+</script>
+
+@section Scripts{
+    <script>
+        $(function () {
+            ko.applyBindings();
+        });
+    </script>
+}

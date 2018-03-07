@@ -1,0 +1,17 @@
+﻿
+@{
+    ViewBag.Title = "Sync";
+}
+
+<h2>Sync</h2>
+<p> Are you sure, you want to resync the Application list</p>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-actions no-color">
+        <input type="submit" value="Sync" class="btn btn-default" />
+    </div>
+}
+

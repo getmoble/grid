@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{611269A9-D4B8-4B02-8699-977CEFF9A1F1}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Grid.Features.IT</RootNamespace>
+    <AssemblyName>Grid.Features.IT</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DAL\Interfaces\ISoftwareCategoryRepository.cs" />
+    <Compile Include="DAL\Interfaces\ISoftwareRepository.cs" />
+    <Compile Include="DAL\Interfaces\ISystemSnapshotRepository.cs" />
+    <Compile Include="DAL\SoftwareCategoryRepository.cs" />
+    <Compile Include="DAL\SoftwareRepository.cs" />
+    <Compile Include="DAL\SystemSnapshotRepository.cs" />
+    <Compile Include="Entities\Enums\LicenceType.cs" />
+    <Compile Include="Entities\Enums\SoftwareStatus.cs" />
+    <Compile Include="Entities\Software.cs" />
+    <Compile Include="Entities\SoftwareCategory.cs" />
+    <Compile Include="Entities\SystemSnapshot.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Grid.Features.Common\Grid.Features.Common.csproj">
+      <Project>{3876B303-AE18-4E9E-A359-E1E0F0F2C7CD}</Project>
+      <Name>Grid.Features.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Grid.Features.HRMS\Grid.Features.HRMS.csproj">
+      <Project>{375619DC-6F55-4FC2-BBF2-45A30E89FA73}</Project>
+      <Name>Grid.Features.HRMS</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Grid.Features.IMS\Grid.Features.IMS.csproj">
+      <Project>{B80468CF-5AB2-468B-ADE5-AD790790724A}</Project>
+      <Name>Grid.Features.IMS</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Models\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

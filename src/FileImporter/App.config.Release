@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<configuration>
+	<configSections>
+		<section name="entityFramework" type="System.Data.Entity.Internal.ConfigFile.EntityFrameworkSection, EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" requirePermission="false" />
+	</configSections>
+	<startup>
+		<supportedRuntime version="v4.0" sku=".NETFramework,Version=v4.5" />
+	</startup>
+	<connectionStrings>
+		<add name="Grid" connectionString="Server=tcp:griddbserver.database.windows.net,1433;Data Source=griddbserver.database.windows.net;Initial Catalog=gridb;Persist Security Info=False;User ID=griddba;Password=pass@123;Pooling=False;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;" providerName="System.Data.SqlClient" />
+	</connectionStrings>
+	<entityFramework>
+		<defaultConnectionFactory type="System.Data.Entity.Infrastructure.SqlConnectionFactory, EntityFramework" />
+		<providers>
+			<provider invariantName="System.Data.SqlClient" type="System.Data.Entity.SqlServer.SqlProviderServices, EntityFramework.SqlServer" />
+		</providers>
+	</entityFramework>
+</configuration>

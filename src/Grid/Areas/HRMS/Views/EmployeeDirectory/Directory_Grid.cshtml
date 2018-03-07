@@ -1,0 +1,91 @@
+﻿@using PagedList.Mvc
+@model Grid.Features.HRMS.ViewModels.UserSearchViewModel
+
+<h2>Employee Directory</h2>
+
+<div class="pull-right well-lg">
+    @using (Html.BeginForm("Directory", "EmployeeDirectory", FormMethod.Get, new {@class = "form-inline", role = "form"}))
+    {
+
+        <div class="form-group">
+            @Html.EditorFor(model => model.Code, new {htmlAttributes = new {@class = "form-control", placeholder = "Employee Code"}})
+        </div>
+        <div class="form-group">
+            @Html.DropDownList("LocationId", null, htmlAttributes: new {@class = "form-control"}, optionLabel: "-- Select Location --")
+        </div>
+        <div class="form-group">
+            @Html.DropDownList("DepartmentId", null, htmlAttributes: new {@class = "form-control"}, optionLabel: "-- Select Department --")
+        </div>
+        <div class="form-group">
+            <div id="desgnDropDown">
+                @Html.DropDownList("DesignationId", null, htmlAttributes: new {@class = "form-control"}, optionLabel: "-- Select Designation --")
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.DropDownList("ShiftId", null, htmlAttributes: new {@class = "form-control"}, optionLabel: "-- Select Shift --")
+        </div>
+        <div class="form-group">
+            @Html.EnumDropDownListFor(model => model.Mode, new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Filter" class="btn btn-default"/>
+            </div>
+        </div>
+    }
+</div>
+<div class="clearfix"></div>
+<div class="container-fluid">
+    <div class="row">
+        @foreach (var employee in Model.Users)
+        {
+            <div class="col-lg-2">
+                <div class="thumbnail">
+                    <div style="height: 267px;overflow: hidden;">
+                        <a href="@Url.Action("UserProfile", "EmployeeDirectory", new {area = "HRMS", id = employee.Id})">
+                            @if (string.IsNullOrEmpty(employee.Person.PhotoPath))
+                            {
+                                <img src="/Content/images/placeholder.png" alt="@employee.Person.Name">
+                            }
+                            else
+                            {
+                                <img src="@employee.Person.PhotoPath" alt="@employee.Person.Name">
+                            }
+                        </a>
+                    </div>
+                    <div class="caption">
+                        <h4>@employee.Person.Name</h4>
+                        <h5>@employee.Location.Title</h5>
+                        <h5>@employee.Department.Title</h5>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+Page @(Model.Users.PageCount < Model.Users.PageNumber ? 0 : Model.Users.PageNumber) of @Model.Users.PageCount
+@Html.PagedListPager(Model.Users, page => Url.Action("Directory", new { page, Model.Code, Model.LocationId, Model.DepartmentId, Model.DesignationId, Model.ShiftId, Model.ShowExEmployees }))
+@section Scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#DepartmentId').change(function () {
+                $.ajax({
+                    type: "post",
+                    url: "/HRMS/Designations/GetDesignationsByDepartment/" + $('#DepartmentId').val(),
+                    datatype: "json",
+                    traditional: true,
+                    success: function (data) {
+                        var district = "<select name='DesignationId' id='DesignationId' class='form-control'>";
+                        district = district + '<option value="">--Select--</option>';
+                        for (var i = 0; i < data.length; i++) {
+                            district = district + '<option value=' + data[i].Id + '>' + data[i].Title + '</option>';
+                        }
+                        district = district + '</select>';
+                        $('#desgnDropDown').html(district);
+                    }
+                });
+            });
+        });
+    </script>
+}

@@ -1,0 +1,21 @@
+﻿@using Grid.Infrastructure
+@using Grid.Infrastructure.Extensions
+
+<h2>Manage Email Templates</h2>
+<emailtemplates></emailtemplates>
+
+<script type="text/html" id="emailtemplates-template">
+    <div class="col-md-8">
+        <emailtemplateslist params="entity: 'emailtemplate', enableFilter:true, manageList:true"></emailtemplateslist>
+    </div>
+    <div class="col-md-4" data-bind="visible:showQuickView">
+        <emailtemplatesupdate params="entity: 'emailtemplate'"></emailtemplatesupdate>
+    </div>
+</script>
+@section Scripts{
+    <script>
+        $(function () {
+            ko.applyBindings();
+        });
+    </script>
+}

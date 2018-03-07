@@ -1,0 +1,1528 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{234B9E3B-3663-4667-97D1-DE4196297498}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Grid</RootNamespace>
+    <AssemblyName>Grid</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <UseGlobalApplicationHostFile />
+    <ApplicationInsightsResourceId>/subscriptions/3862f3dd-5a06-42ba-b4d6-9aced342db58/resourcegroups/Default-Web-SoutheastAsia/providers/microsoft.insights/components/GridAppInsights</ApplicationInsightsResourceId>
+    <WebGreaseLibPath>..\packages\WebGrease.1.5.2\lib</WebGreaseLibPath>
+    <TargetFrameworkProfile />
+    <TypeScriptToolsVersion>1.8</TypeScriptToolsVersion>
+    <Use64BitIISExpress />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>3</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Antlr3.Runtime, Version=3.4.1.9004, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Autofac, Version=4.0.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.4.0.0\lib\net451\Autofac.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Autofac.Integration.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.Mvc5.4.0.0\lib\net451\Autofac.Integration.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Autofac.Integration.Mvc.Owin, Version=4.0.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.Mvc5.Owin.4.0.0\lib\net451\Autofac.Integration.Mvc.Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Autofac.Integration.Owin, Version=4.0.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.Owin.4.0.0\lib\net45\Autofac.Integration.Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Autofac.Integration.WebApi, Version=4.0.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.WebApi2.4.0.1\lib\net45\Autofac.Integration.WebApi.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Autofac.Multitenant, Version=4.0.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.Multitenant.4.0.0\lib\net451\Autofac.Multitenant.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="AutoMapper, Version=5.2.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.5.2.0\lib\net45\AutoMapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="BouncyCastle.Crypto, Version=1.7.4137.9688, Culture=neutral, PublicKeyToken=a4292a325f69b123, processorArchitecture=MSIL">
+      <HintPath>..\packages\BouncyCastle.1.7.0\lib\Net40-Client\BouncyCastle.Crypto.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Dropbox.Api">
+      <HintPath>..\packages\Dropbox.Api.3.5.0\lib\net45\Dropbox.Api.dll</HintPath>
+    </Reference>
+    <Reference Include="Elmah, Version=1.2.14706.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\elmah.corelibrary.1.2.2\lib\Elmah.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Elmah.Mvc, Version=2.1.2.1389, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Elmah.Mvc.2.1.2\lib\net40\Elmah.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="FluentDateTime, Version=1.13.0.0, Culture=neutral, PublicKeyToken=6ccbc613702e6c71, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentDateTime.1.13.0\Lib\NET35\FluentDateTime.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Google.Apis, Version=1.13.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Apis.1.13.0\lib\net45\Google.Apis.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Google.Apis.Auth, Version=1.13.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Apis.Auth.1.13.0\lib\net45\Google.Apis.Auth.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Google.Apis.Auth.Mvc4, Version=1.13.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Apis.Auth.Mvc.1.13.0\lib\net45\Google.Apis.Auth.Mvc4.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Google.Apis.Auth.PlatformServices, Version=1.13.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Apis.Auth.1.13.0\lib\net45\Google.Apis.Auth.PlatformServices.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Google.Apis.Core, Version=1.13.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Apis.Core.1.13.0\lib\net45\Google.Apis.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Google.Apis.Oauth2.v2, Version=1.13.0.454, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Apis.Oauth2.v2.1.13.0.454\lib\portable-net45+netcore45+wpa81+wp8\Google.Apis.Oauth2.v2.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Google.Apis.PlatformServices, Version=1.13.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Apis.1.13.0\lib\net45\Google.Apis.PlatformServices.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Hangfire.Core, Version=1.6.8.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Hangfire.Core.1.6.8\lib\net45\Hangfire.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Hangfire.SqlServer, Version=1.6.8.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Hangfire.SqlServer.1.6.8\lib\net45\Hangfire.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="log4net, Version=1.2.15.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.5\lib\net45-full\log4net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.Agent.Intercept, Version=1.2.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.1.2.1\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.DependencyCollector, Version=2.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.DependencyCollector.2.2.0-beta1\lib\net45\Microsoft.AI.DependencyCollector.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.PerfCounterCollector, Version=2.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.PerfCounterCollector.2.2.0-beta1\lib\net45\Microsoft.AI.PerfCounterCollector.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.ServerTelemetryChannel, Version=2.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.2.2.0-beta1\lib\net45\Microsoft.AI.ServerTelemetryChannel.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.Web, Version=2.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Web.2.2.0-beta1\lib\net45\Microsoft.AI.Web.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.WindowsServer, Version=2.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.2.2.0-beta1\lib\net45\Microsoft.AI.WindowsServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.ApplicationInsights, Version=2.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.2.2.0-beta1\lib\net45\Microsoft.ApplicationInsights.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.ApplicationInsights.Log4NetAppender, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Log4NetAppender.2.0.0\lib\net45\Microsoft.ApplicationInsights.Log4NetAppender.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.Core, Version=2.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.Core.2.2.0\lib\net45\Microsoft.AspNet.SignalR.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.SystemWeb, Version=2.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.SystemWeb.2.2.0\lib\net45\Microsoft.AspNet.SignalR.SystemWeb.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Owin, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.3.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.3.0.1\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.2.1.0\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="RazorEngine, Version=3.4.1.0, Culture=neutral, PublicKeyToken=9ee697374c7e744a, processorArchitecture=MSIL">
+      <HintPath>..\packages\RazorEngine.3.4.1\lib\net45\RazorEngine.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.Net" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.Extensions, Version=2.2.29.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Net.Http.Formatting.Extension.5.2.3.0\lib\System.Net.Http.Extensions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Net.Http.Primitives, Version=4.2.29.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Net.Http.Formatting.Extension.5.2.3.0\lib\System.Net.Http.Primitives.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Http">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.3\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="WebGrease, Version=1.5.2.14234, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Zlib.Portable, Version=1.11.0.0, Culture=neutral, PublicKeyToken=431cba815f6a8b5b, processorArchitecture=MSIL">
+      <HintPath>..\packages\Zlib.Portable.Signed.1.11.0\lib\portable-net4+sl5+wp8+win8+wpa81+MonoTouch+MonoAndroid\Zlib.Portable.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System.Web.Razor">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.3\lib\net45\System.Web.Webpages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages.Deployment">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.3\lib\net45\System.Web.Webpages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages.Razor">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.3\lib\net45\System.Web.Webpages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Helpers">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App\Component\AssetCategories\assetCategoryModel.js" />
+    <Content Include="App\Component\AssetCategories\assetCategoryFormComponent.js" />
+    <Content Include="App\Component\AssetCategories\assetCategoryListComponent.js" />
+    <Content Include="App\Component\AssetCategories\manageAssetCategoryComponent.js" />
+    <Content Include="App\Component\Assets\assetAllocationHistoryListComponent.js" />
+    <Content Include="App\Component\Assets\AssetModel.js" />
+    <Content Include="App\Component\Assets\assetSearchComponent.js" />
+    <Content Include="App\Component\Assets\assetsListComponent.js" />
+    <Content Include="App\Component\Assets\assetFormComponent.js" />
+    <Content Include="App\Component\Assets\ManageAssetAllocationHistoryComponent.js" />
+    <Content Include="App\Component\Assets\manageAssetsComponent.js" />
+    <Content Include="App\Component\Common\multiDropdownComponent.js" />
+    <Content Include="App\Component\CRMAccounts\crmAccountsFormComponent.js" />
+    <Content Include="App\Component\CRMAccounts\crmAccountsListComponent.js" />
+    <Content Include="App\Component\CRMAccounts\crmAccountsModel.js" />
+    <Content Include="App\Component\CRMAccounts\manageCRMAccountsComponent.js" />
+    <Content Include="App\Component\CRMContacts\crmContactsFormComponent.js" />
+    <Content Include="App\Component\CRMContacts\crmContactsListComponent.js" />
+    <Content Include="App\Component\CRMContacts\crmContactsModel.js" />
+    <Content Include="App\Component\CRMContacts\crmContactsSearchComponent.js" />
+    <Content Include="App\Component\CRMContacts\manageCRMContactsComponent.js" />
+    <Content Include="App\Component\CRMLeadCategories\leadCategoriesFormComponent.js" />
+    <Content Include="App\Component\CRMLeadCategories\leadCategoriesListComponent.js" />
+    <Content Include="App\Component\CRMLeadCategories\leadCategoriesModel.js" />
+    <Content Include="App\Component\CRMLeadCategories\manageLeadCategoriesComponent.js" />
+    <Content Include="App\Component\CRMLeadSources\leadSourceFormComponent.js" />
+    <Content Include="App\Component\CRMLeadSources\leadSourceListComponent.js" />
+    <Content Include="App\Component\CRMLeadSources\leadSourceModel.js" />
+    <Content Include="App\Component\CRMLeadSources\manageLeadSourceComponent.js" />
+    <Content Include="App\Component\CRMLeadStatus\leadStatusFormComponent.js" />
+    <Content Include="App\Component\CRMLeadStatus\leadStatusListComponent.js" />
+    <Content Include="App\Component\CRMLeadStatus\leadStatusModel.js" />
+    <Content Include="App\Component\CRMLeadStatus\manageleadStatusComponent.js" />
+    <Content Include="App\Component\CRMPotentialCategories\potentialCategoriesFormComponent.js" />
+    <Content Include="App\Component\CRMPotentialCategories\potentialCategoriesListComponent.js" />
+    <Content Include="App\Component\CRMPotentialCategories\potentialCategoriesModel.js" />
+    <Content Include="App\Component\CRMPotentialCategories\managePotentialCategoriesComponent.js" />
+    <Content Include="App\Component\CRMSalesStages\salesStagesFormComponent.js" />
+    <Content Include="App\Component\CRMSalesStages\salesStagesListComponent.js" />
+    <Content Include="App\Component\CRMSalesStages\salesStagesModel.js" />
+    <Content Include="App\Component\CRMSalesStages\manageSalesStagesComponent.js" />
+    <Content Include="App\Component\Dependent\dependentFormComponent.js" />
+    <Content Include="App\Component\Dependent\dependentListComponent.js" />
+    <Content Include="App\Component\Dependent\dependentModel.js" />
+    <Content Include="App\Component\Dependent\manageDependentComponent.js" />
+    <Content Include="App\Component\EmergencyContact\emergencyContactFormComponent.js" />
+    <Content Include="App\Component\EmergencyContact\emergencyContactListComponent.js" />
+    <Content Include="App\Component\EmergencyContact\emergencyContactModel.js" />
+    <Content Include="App\Component\EmergencyContact\manageEmergencyContactComponent.js" />
+    <Content Include="App\Component\EmployeeAssets\ManageEmployeeAssetComponent.js" />
+    <Content Include="App\Component\EmployeeAssets\EmployeeAssetListComponent.js" />
+    <Content Include="App\Component\EmployeesLeaveBalance\LeaveBalance.js" />
+    <Content Include="App\Component\EmployeesLeaveBalance\leaveBalanceFormComponent.js" />
+    <Content Include="App\Component\EmployeesLeaveBalance\leaveBalanceListComponent.js" />
+    <Content Include="App\Component\EmployeesLeaveBalance\leaveBalanceSearchComponent.js" />
+    <Content Include="App\Component\EmployeesLeaveBalance\manageLeaveBalanceComponent.js" />
+    <Content Include="App\Component\Employees\employeeFormComponent.js" />
+    <Content Include="App\Component\Employees\employeeListComponent.js" />
+    <Content Include="App\Component\Employees\employeeModel.js" />
+    <Content Include="App\Component\Employees\employeesSearchComponent.js" />
+    <Content Include="App\Component\Employees\manageEmployeeComponent.js" />
+    <Content Include="App\Component\Image\imageComponent.js" />
+    <Content Include="App\Component\Image\imageComponentModel.js" />
+    <Content Include="App\Component\LeaveEntitlementHistory\entitlementHistoryFormComponent.js" />
+    <Content Include="App\Component\LeaveEntitlementHistory\entitlementHistoryListComponent.js" />
+    <Content Include="App\Component\LeaveEntitlementHistory\entitlementHistoryModel.js" />
+    <Content Include="App\Component\LeaveEntitlementHistory\manageEntitlementHistoryComponent.js" />
+    <Content Include="App\Component\LeaveEntitlements\leaveEntilementsLog.js" />
+    <Content Include="App\Component\LeaveEntitlements\leaveEntitlementSearchComponent.js" />
+    <Content Include="App\Component\LeaveEntitlements\leaveEntitlementsFormComponent.js" />
+    <Content Include="App\Component\LeaveEntitlements\leaveEntitlementsListComponent.js" />
+    <Content Include="App\Component\LeaveEntitlements\leaveEntitlementsModel.js" />
+    <Content Include="App\Component\LeaveEntitlements\leaveEntitlementUpdateModel.js" />
+    <Content Include="App\Component\LeaveEntitlements\manageLeaveEntitlementsUpdateComponent.js" />
+    <Content Include="App\Component\LeaveEntitlements\leaveEntitlementsUpdateListComponent.js" />
+    <Content Include="App\Component\LeaveEntitlements\manageLeaveEntitlementsComponent.js" />
+    <Content Include="App\Component\Locations\LocationModel.js" />
+    <Content Include="App\Component\Locations\locationsFormComponent.js" />
+    <Content Include="App\Component\Locations\locationsListComponent.js" />
+    <Content Include="App\Component\Locations\locationsModel.js" />
+    <Content Include="App\Component\Locations\manageLocationsComponent.js" />
+    <Content Include="App\Component\ProjectMembers\manageProjectMembersComponent.js" />
+    <Content Include="App\Component\ProjectMembers\projectMemberFormComponent.js" />
+    <Content Include="App\Component\ProjectMembers\projectMemberModel.js" />
+    <Content Include="App\Component\ProjectMembers\projectsMemberListComponent.js" />
+    <Content Include="App\Component\Projects\manageProjectsComponent.js" />
+    <Content Include="App\Component\Projects\projectFormComponent.js" />
+    <Content Include="App\Component\Projects\ProjectModel.js" />
+    <Content Include="App\Component\Projects\graphComponent.js" />
+    <Content Include="App\Component\Projects\projectSearchComponent.js" />
+    <Content Include="App\Component\Projects\projectsListComponent.js" />
+    <Content Include="App\Component\Tasks\manageTasksComponent.js" />
+    <Content Include="App\Component\Tasks\taskFormComponent.js" />
+    <Content Include="App\Component\Tasks\taskModel.js" />
+    <Content Include="App\Component\Tasks\taskSearchComponent.js" />
+    <Content Include="App\Component\Tasks\tasksListComponent.js" />
+    <Content Include="App\Component\TicketCategories\manageTicketCategoriesComponent.js" />
+    <Content Include="App\Component\TicketCategories\ticketCategoryModel.js" />
+    <Content Include="App\Component\TicketCategories\ticketCategoriesFormComponent.js" />
+    <Content Include="App\Component\TicketCategories\ticketCategoriesListComponent.js" />
+    <Content Include="App\Component\TicketSubCategories\manageTicketSubCategoriesComponent.js" />
+    <Content Include="App\Component\TicketSubCategories\ticketSubCategoryModel.js" />
+    <Content Include="App\Component\TicketSubCategories\ticketSubCategoriesFormComponent.js" />
+    <Content Include="App\Component\TicketSubCategories\ticketSubCategoryListComponent.js" />
+    <Content Include="App\Component\RequirementCategories\manageRequirementCategoriesComponent.js" />
+    <Content Include="App\Component\RequirementCategories\requirementCategoryModel.js" />
+    <Content Include="App\Component\RequirementCategories\requirementCategoriesFormComponent.js" />
+    <Content Include="App\Component\RequirementCategories\requirementCategoriesListComponent.js" />
+    <Content Include="App\Component\SoftwareCategories\manageSoftwareCategoryComponent.js" />
+    <Content Include="App\Component\SoftwareCategories\softwareCategoryModel.js" />
+    <Content Include="App\Component\SoftwareCategories\softwareCategoryFormComponent.js" />
+    <Content Include="App\Component\SoftwareCategories\softwareCategoryListComponent.js" />
+    <Content Include="App\Component\Softwares\softwareModel.js" />
+    <Content Include="App\Component\Softwares\softwareFormComponent.js" />
+    <Content Include="App\Component\Softwares\softwaresListComponent.js" />
+    <Content Include="App\Component\Softwares\manageSoftwareComponent.js" />
+    <Content Include="App\Component\Awards\awardModel.js" />
+    <Content Include="App\Component\Awards\awardsFormComponent.js" />
+    <Content Include="App\Component\Awards\awardsListComponent.js" />
+    <Content Include="App\Component\Awards\manageAwardComponent.js" />
+    <Content Include="App\Component\Common\dropDownComponent.js" />
+    <Content Include="App\Component\Common\listDataModel.js" />
+    <Content Include="App\Component\Common\selectItemModel.js" />
+    <Content Include="App\Component\Hobbies\manageHobbiesComponent.js" />
+    <Content Include="App\Component\Hobbies\hobbiesModel.js" />
+    <Content Include="App\Component\Hobbies\hobbiesFormComponent.js" />
+    <Content Include="App\Component\Hobbies\hobbiesListComponent.js" />
+    <Content Include="App\Component\Shifts\manageShiftComponent.js" />
+    <Content Include="App\Component\Shifts\shiftModel.js" />
+    <Content Include="App\Component\Shifts\shiftsFormComponent.js" />
+    <Content Include="App\Component\Shifts\shiftsListComponent.js" />
+    <Content Include="App\Component\Certifications\manageCertificationComponent.js" />
+    <Content Include="App\Component\Certifications\certificationModel.js" />
+    <Content Include="App\Component\Certifications\certificationFormComponent.js" />
+    <Content Include="App\Component\Certifications\certificationListComponent.js" />
+    <Content Include="App\Component\Skills\skillsFormComponent.js" />
+    <Content Include="App\Component\Skills\skillsListComponent.js" />
+    <Content Include="App\Component\Skills\skillModel.js" />
+    <Content Include="App\Component\Skills\manageSkillComponent.js" />
+    <Content Include="App\Component\Departments\departmentFormComponent.js" />
+    <Content Include="App\Component\Departments\departmentListComponent.js" />
+    <Content Include="App\Component\Departments\departmentModel.js" />
+    <Content Include="App\Component\Departments\manageDepartmentComponent.js" />
+    <Content Include="App\Component\Designations\designationFormComponent.js" />
+    <Content Include="App\Component\Designations\designationListComponent.js" />
+    <Content Include="App\Component\Designations\designationModel.js" />
+    <Content Include="App\Component\Designations\designationSearchComponent.js" />
+    <Content Include="App\Component\Designations\manageDesignationComponent.js" />
+    <Content Include="App\Component\EmailTemplates\emailTemplateFormComponent.js" />
+    <Content Include="App\Component\EmailTemplates\emailTemplateListComponent.js" />
+    <Content Include="App\Component\EmailTemplates\emailTemplateModel.js" />
+    <Content Include="App\Component\EmailTemplates\manageEmailTemplateComponent.js" />
+    <Content Include="App\Component\Roles\manageRoleComponent.js" />
+    <Content Include="App\Component\Roles\roleFormComponent.js" />
+    <Content Include="App\Component\Roles\roleListComponent.js" />
+    <Content Include="App\Component\Roles\roleModel.js" />
+    <Content Include="App\Component\Technologies\manageTechnologyComponent.js" />
+    <Content Include="App\Component\Technologies\technologiesListComponent.js" />
+    <Content Include="App\Component\Technologies\technologyFormComponent.js" />
+    <Content Include="App\Component\Technologies\technologyModel.js" />
+    <Content Include="App\Component\Vendor\vendorFormComponent.js" />
+    <Content Include="App\Component\Vendor\vendorListComponent.js" />
+    <Content Include="App\Component\Vendor\vendorModel.js" />
+    <Content Include="App\Component\Vendor\vendorSearchComponent.js" />
+    <Content Include="App\Component\Vendor\manageVendorComponent.js" />
+    <Content Include="App\Component\Holiday\holidayListComponent.js" />
+    <Content Include="App\Component\Holiday\holidayModel.js" />
+    <Content Include="App\Component\Holiday\holidaySearchComponent.js" />
+    <Content Include="App\Component\LeaveHistory\employeeSearchComponent.js" />
+    <Content Include="App\Component\LeaveHistory\leaveHistoryFormComponent.js" />
+    <Content Include="App\Component\LeaveHistory\leaveHistoryListComponent.js" />
+    <Content Include="App\Component\LeaveHistory\leaveHistoryModel.js" />
+    <Content Include="App\Component\LeaveHistory\manageLeaveHistoryComponent.js" />
+    <Content Include="App\Component\LeavePeriods\leavePeriodFormComponent.js" />
+    <Content Include="App\Component\LeavePeriods\leavePeriodsListComponent.js" />
+    <Content Include="App\Component\LeavePeriods\leaveTimePeriodModel.js" />
+    <Content Include="App\Component\LeavePeriods\manageLeavePeriodComponent.js" />
+    <Content Include="App\Component\LeaveTypes\leaveTypeFormComponent.js" />
+    <Content Include="App\Component\LeaveTypes\leaveTypeModel.js" />
+    <Content Include="App\Component\LeaveTypes\leaveTypesListComponent.js" />
+    <Content Include="App\Component\LeaveTypes\manageLeaveTypesComponent.js" />
+    <Content Include="App\Shared\messages.js" />
+    <Content Include="App\Shared\rapid.js" />
+    <Content Include="App\Shared\urls.js" />
+    <Content Include="App\Component\Holiday\holidayFormComponent.js" />
+    <Content Include="App\Component\Holiday\manageHolidayComponent.js" />
+    <Content Include="App\GridComponents.js" />
+    <Content Include="App\SocialStreamViewModel.js" />
+    <Content Include="App\InterviewRoundDetailsViewModel.js" />
+    <Content Include="App\CandidateDetailsViewModel.js" />
+    <Content Include="App\EstimateBuilderViewModel.js" />
+    <Content Include="App\ProjectDetailsViewModel.js" />
+    <Content Include="App\TicketDetailsViewModel.js" />
+    <Content Include="App\CRMPotentialDetailsViewModel.js" />
+    <Content Include="App\CRMLeadDetailsViewModel.js" />
+    <Content Include="App\DashboardViewModel.js" />
+    <Content Include="App\ProfileViewModel.js" />
+    <Content Include="App\RequirementDetailsViewModel.js" />
+    <Content Include="App\Framework.js" />
+    <Content Include="App\MyTimeSheetViewModel.js" />
+    <Content Include="App\TimeSheetDetails.js" />
+    <Content Include="App\UserDetailsViewModel.js" />
+    <Content Include="Content\animate.css" />
+    <Content Include="Content\animate.min.css" />
+    <Content Include="Content\background1.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\bootstrap-datepicker.min.css" />
+    <Content Include="Content\bootstrap-datetimepicker.css" />
+    <Content Include="Content\bootstrap-datetimepicker.min.css" />
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.flatly.min.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\bootstrap.paper.min.css" />
+    <Content Include="Content\bootstrap.theme.min.css" />
+    <Content Include="Content\bootstrap.yeti.min.css" />
+    <Content Include="Content\c3.min.css" />
+    <Content Include="Content\errorpage.css" />
+    <Content Include="Content\font-awesome.css" />
+    <Content Include="Content\font-awesome.min.css" />
+    <Content Include="Content\fullcalendar.min.css" />
+    <Content Include="Content\images\placeholder.jpg" />
+    <Content Include="Content\images\placeholder.png" />
+    <Content Include="Content\jquery-te-1.4.0.css" />
+    <Content Include="Content\jquery-te.png" />
+    <Content Include="Content\ladda-themeless.min.css" />
+    <Content Include="Content\login.css" />
+    <Content Include="Content\PagedList.css" />
+    <Content Include="Content\pnotify.custom.min.css" />
+    <Content Include="Content\selectize.bootstrap3.css" />
+    <Content Include="Content\selectize.css" />
+    <Content Include="Content\Site.css" />
+    <Content Include="Content\socialstream.css" />
+    <Content Include="Content\style.css" />
+    <Content Include="Content\summernote\lang\summernote-ar-AR.js" />
+    <Content Include="Content\summernote\lang\summernote-bg-BG.js" />
+    <Content Include="Content\summernote\lang\summernote-ca-ES.js" />
+    <Content Include="Content\summernote\lang\summernote-cs-CZ.js" />
+    <Content Include="Content\summernote\lang\summernote-da-DK.js" />
+    <Content Include="Content\summernote\lang\summernote-de-DE.js" />
+    <Content Include="Content\summernote\lang\summernote-es-ES.js" />
+    <Content Include="Content\summernote\lang\summernote-es-EU.js" />
+    <Content Include="Content\summernote\lang\summernote-fa-IR.js" />
+    <Content Include="Content\summernote\lang\summernote-fi-FI.js" />
+    <Content Include="Content\summernote\lang\summernote-fr-FR.js" />
+    <Content Include="Content\summernote\lang\summernote-he-IL.js" />
+    <Content Include="Content\summernote\lang\summernote-hu-HU.js" />
+    <Content Include="Content\summernote\lang\summernote-id-ID.js" />
+    <Content Include="Content\summernote\lang\summernote-it-IT.js" />
+    <Content Include="Content\summernote\lang\summernote-ja-JP.js" />
+    <Content Include="Content\summernote\lang\summernote-ko-KR.js" />
+    <Content Include="Content\summernote\lang\summernote-lt-LT.js" />
+    <Content Include="Content\summernote\lang\summernote-nb-NO.js" />
+    <Content Include="Content\summernote\lang\summernote-nl-NL.js" />
+    <Content Include="Content\summernote\lang\summernote-pl-PL.js" />
+    <Content Include="Content\summernote\lang\summernote-pt-BR.js" />
+    <Content Include="Content\summernote\lang\summernote-pt-PT.js" />
+    <Content Include="Content\summernote\lang\summernote-ro-RO.js" />
+    <Content Include="Content\summernote\lang\summernote-ru-RU.js" />
+    <Content Include="Content\summernote\lang\summernote-sk-SK.js" />
+    <Content Include="Content\summernote\lang\summernote-sl-SI.js" />
+    <Content Include="Content\summernote\lang\summernote-sr-RS-Latin.js" />
+    <Content Include="Content\summernote\lang\summernote-sr-RS.js" />
+    <Content Include="Content\summernote\lang\summernote-sv-SE.js" />
+    <Content Include="Content\summernote\lang\summernote-th-TH.js" />
+    <Content Include="Content\summernote\lang\summernote-tr-TR.js" />
+    <Content Include="Content\summernote\lang\summernote-uk-UA.js" />
+    <Content Include="Content\summernote\lang\summernote-vi-VN.js" />
+    <Content Include="Content\summernote\lang\summernote-zh-CN.js" />
+    <Content Include="Content\summernote\lang\summernote-zh-TW.js" />
+    <Content Include="Content\summernote\plugin\hello\summernote-ext-hello.js" />
+    <Content Include="Content\summernote\plugin\specialchars\summernote-ext-specialchars.js" />
+    <Content Include="Content\summernote\summernote.css" />
+    <Content Include="Content\summernote\summernote.js" />
+    <Content Include="Content\summernote\summernote.min.js" />
+    <Content Include="Content\timeline.min.css" />
+    <Content Include="Content\timesheet.css" />
+    <Content Include="Content\typeaheadjs.css" />
+    <Content Include="fonts\fontawesome-webfont.svg" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Global.asax" />
+    <Content Include="Scripts\ai.0.15.0-build58334.js" />
+    <Content Include="Scripts\ai.0.15.0-build58334.min.js" />
+    <Content Include="Scripts\analytics.js" />
+    <Content Include="Scripts\appInsights.js" />
+    <Content Include="Scripts\bloodhound.js" />
+    <Content Include="Scripts\bootbox.js" />
+    <Content Include="Scripts\bootbox.min.js" />
+    <Content Include="Scripts\bootstrap-datepicker.min.js" />
+    <Content Include="Scripts\bootstrap-datetimepicker.js" />
+    <Content Include="Scripts\bootstrap-datetimepicker.min.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\bootstrap3-typeahead.min.js" />
+    <Content Include="Scripts\c3.min.js" />
+    <Content Include="Scripts\d3.v3.min.js" />
+    <Content Include="Scripts\fullcalendar.min.js" />
+    <Content Include="client_secret.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\HRMS\Views\UserDocuments\Create.cshtml" />
+    <Content Include="Areas\HRMS\Views\UserDocuments\Delete.cshtml" />
+    <Content Include="Areas\HRMS\Views\UserDocuments\Details.cshtml" />
+    <Content Include="Areas\HRMS\Views\UserDocuments\Edit.cshtml" />
+    <Content Include="Areas\HRMS\Views\UserDocuments\Index.cshtml" />
+    <Content Include="Areas\IMS\Views\AssetDocuments\Create.cshtml" />
+    <Content Include="Areas\IMS\Views\AssetDocuments\Delete.cshtml" />
+    <Content Include="Areas\IMS\Views\AssetDocuments\Details.cshtml" />
+    <Content Include="Areas\IMS\Views\AssetDocuments\Edit.cshtml" />
+    <Content Include="Areas\IMS\Views\AssetDocuments\Index.cshtml" />
+    <Content Include="Areas\RMS\Views\RequirementDocuments\Create.cshtml" />
+    <Content Include="Areas\RMS\Views\RequirementDocuments\Delete.cshtml" />
+    <Content Include="Areas\RMS\Views\RequirementDocuments\Details.cshtml" />
+    <Content Include="Areas\RMS\Views\RequirementDocuments\Edit.cshtml" />
+    <Content Include="Areas\RMS\Views\RequirementDocuments\Index.cshtml" />
+    <Content Include="Areas\Recruit\KBS\Views\Articles\Manage.cshtml" />
+    <Content Include="Areas\Settings\Views\UserFeedbacks\Create.cshtml" />
+    <Content Include="Areas\Settings\Views\UserFeedbacks\Delete.cshtml" />
+    <Content Include="Areas\Settings\Views\UserFeedbacks\Details.cshtml" />
+    <Content Include="Areas\Settings\Views\UserFeedbacks\Edit.cshtml" />
+    <Content Include="Areas\Settings\Views\UserFeedbacks\Index.cshtml" />
+    <Content Include="Areas\TMS\Views\TimeSheetLineItems\Create.cshtml" />
+    <Content Include="Areas\TMS\Views\TimeSheetLineItems\Delete.cshtml" />
+    <Content Include="Areas\TMS\Views\TimeSheetLineItems\Details.cshtml" />
+    <Content Include="Areas\TMS\Views\TimeSheetLineItems\Edit.cshtml" />
+    <Content Include="Areas\TMS\Views\TimeSheetLineItems\Index.cshtml" />
+    <Content Include="ApplicationInsights.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\HRMS\Views\UserTokens\Create.cshtml" />
+    <Content Include="Areas\HRMS\Views\UserTokens\Delete.cshtml" />
+    <Content Include="Areas\Recruit\Views\CandidateDocuments\Create.cshtml" />
+    <Content Include="Areas\Recruit\Views\CandidateDocuments\Delete.cshtml" />
+    <Content Include="Areas\Recruit\Views\CandidateDocuments\Details.cshtml" />
+    <Content Include="Areas\Recruit\Views\CandidateDocuments\Edit.cshtml" />
+    <Content Include="Areas\Recruit\Views\CandidateDocuments\Index.cshtml" />
+    <Content Include="Areas\HRMS\Views\Hobbies\Index.cshtml" />
+    <Content Include="Areas\HRMS\Views\UserHobbies\Create.cshtml" />
+    <Content Include="Areas\HRMS\Views\UserHobbies\Delete.cshtml" />
+    <Content Include="Areas\HRMS\Views\UserHobbies\Details.cshtml" />
+    <Content Include="Areas\HRMS\Views\UserHobbies\Edit.cshtml" />
+    <Content Include="Areas\HRMS\Views\UserHobbies\Index.cshtml" />
+    <Content Include="Areas\Recruit\Views\CandidateDesignations\Create.cshtml" />
+    <Content Include="Areas\Recruit\Views\CandidateDesignations\Details.cshtml" />
+    <Content Include="Areas\Recruit\Views\CandidateDesignations\Edit.cshtml" />
+    <Content Include="Areas\Recruit\Views\CandidateDesignations\Index.cshtml" />
+    <Content Include="Areas\HRMS\Views\UserAwards\Create.cshtml" />
+    <Content Include="Areas\HRMS\Views\UserAwards\Delete.cshtml" />
+    <Content Include="Areas\HRMS\Views\EmployeeDirectory\Directory.cshtml" />
+    <Content Include="Areas\HRMS\Views\EmployeeDirectory\UserProfile.cshtml" />
+    <Content Include="Areas\Recruit\Views\JobOpenings\Openings.cshtml" />
+    <Content Include="Areas\Recruit\Views\JobOpenings\OpeningDetails.cshtml" />
+    <Content Include="Areas\LMS\Views\Leaves\MyHistory.cshtml" />
+    <Content Include="Areas\Recruit\KBS\Views\ArticleAttachments\Create.cshtml" />
+    <Content Include="Areas\Recruit\KBS\Views\ArticleAttachments\Delete.cshtml" />
+    <Content Include="Areas\Recruit\KBS\Views\ArticleAttachments\Details.cshtml" />
+    <Content Include="Areas\Recruit\KBS\Views\ArticleAttachments\Edit.cshtml" />
+    <Content Include="Areas\Recruit\KBS\Views\ArticleAttachments\Index.cshtml" />
+    <Content Include="Areas\HRMS\Views\Users\EditImage.cshtml" />
+    <Content Include="Areas\PMS\Views\Projects\CreateTask.cshtml" />
+    <Content Include="Areas\PMS\Views\Projects\EditTask.cshtml" />
+    <Content Include="Areas\PMS\Views\Projects\ChangeTaskStatus.cshtml" />
+    <Content Include="Areas\PMS\Views\Projects\TaskDetails.cshtml" />
+    <Content Include="Areas\PMS\Views\Tasks\MyTeam.cshtml" />
+    <Content Include="Areas\PMS\Views\Tasks\ChangeTaskStatus.cshtml" />
+    <Content Include="Areas\PMS\Views\TimeSheet\MyTeamCalendar.cshtml" />
+    <Content Include="Areas\TicketDesk\Views\web.config" />
+    <Content Include="Areas\TicketDesk\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\TicketDesk\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\TicketDesk\Views\TicketCategories\Index.cshtml" />
+    <Content Include="Areas\TicketDesk\Views\Tickets\Create.cshtml" />
+    <Content Include="Areas\TicketDesk\Views\Tickets\Delete.cshtml" />
+    <Content Include="Areas\TicketDesk\Views\Tickets\Details.cshtml" />
+    <Content Include="Areas\TicketDesk\Views\Tickets\Edit.cshtml" />
+    <Content Include="Areas\TicketDesk\Views\Tickets\Index.cshtml" />
+    <Content Include="Areas\TicketDesk\Views\TicketSubCategories\Index.cshtml" />
+    <Content Include="Areas\TicketDesk\Views\Tickets\ChangeStatus.cshtml" />
+    <Content Include="Areas\Accounting\Views\web.config" />
+    <Content Include="Areas\Company\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Company\Views\Awards\Index.cshtml" />
+    <Content Include="Areas\Company\Views\EmailTemplates\Index.cshtml" />
+    <Content Include="Areas\Company\Views\Locations\Index.cshtml" />
+    <Content Include="Areas\Company\Views\Permissions\Create.cshtml" />
+    <Content Include="Areas\Company\Views\Permissions\Details.cshtml" />
+    <Content Include="Areas\Company\Views\Permissions\Edit.cshtml" />
+    <Content Include="Areas\Company\Views\Permissions\Index.cshtml" />
+    <Content Include="Areas\Company\Views\Roles\Create.cshtml" />
+    <Content Include="Areas\Company\Views\Roles\Details.cshtml" />
+    <Content Include="Areas\Company\Views\Roles\Edit.cshtml" />
+    <Content Include="Areas\Company\Views\Roles\Index.cshtml" />
+    <Content Include="Areas\Company\Views\Technologies\Index.cshtml" />
+    <Content Include="Areas\Company\Views\web.config" />
+    <Content Include="CodeTemplates\Scaffolders\Repo.For\Repo.For.ps1" />
+    <Content Include="CodeTemplates\Scaffolders\Repo.For\IRepository.cs.t4" />
+    <Content Include="CodeTemplates\Scaffolders\Repo.For\Repository.cs.t4" />
+    <Content Include="Areas\PMS\Views\Projects\Settings.cshtml" />
+    <Content Include="Areas\HRMS\Views\EmployeeDirectory\Directory_Grid.cshtml" />
+    <Content Include="Areas\PMS\Views\Estimate\Index.cshtml" />
+    <Content Include="Content\summernote\font\summernote.eot" />
+    <Content Include="Content\summernote\font\summernote.ttf" />
+    <Content Include="Content\summernote\font\summernote.woff" />
+    <Content Include="Areas\PMS\Views\TimeSheet\Missed.cshtml" />
+    <Content Include="Areas\PMS\Views\TimeSheet\TeamMissed.cshtml" />
+    <Content Include="Areas\Recruit\Views\InterviewRounds\MyInterviews.cshtml" />
+    <Content Include="Areas\Recruit\Views\InterviewRoundDocuments\Create.cshtml" />
+    <Content Include="Areas\Recruit\Views\InterviewRoundDocuments\Delete.cshtml" />
+    <Content Include="Areas\Recruit\Views\InterviewRoundDocuments\Details.cshtml" />
+    <Content Include="Areas\Recruit\Views\InterviewRoundDocuments\Index.cshtml" />
+    <Content Include="Areas\Recruit\Views\InterviewRounds\ChangeStatus.cshtml" />
+    <Content Include="Areas\Settings\Views\Applications\Index.cshtml" />
+    <Content Include="Areas\Settings\Views\Applications\Sync.cshtml" />
+    <Content Include="Areas\TicketDesk\Views\Tickets\MyTickets.cshtml" />
+    <Content Include="Areas\DMS\Views\web.config" />
+    <Content Include="Areas\DMS\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\DMS\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\DMS\Views\Manage\Index.cshtml" />
+    <Content Include="Areas\Recruit\Views\Portal\Profile.cshtml" />
+    <Content Include="Areas\Recruit\Views\Portal\Index.cshtml" />
+    <Content Include="Areas\Recruit\Views\Portal\SignIn.cshtml" />
+    <Content Include="Areas\Recruit\Views\Portal\JobOpenings.cshtml" />
+    <Content Include="Areas\Recruit\Views\Portal\Interviews.cshtml" />
+    <Content Include="Areas\Recruit\Views\Portal\EditProfile.cshtml" />
+    <Content Include="Areas\Recruit\Views\Portal\OpeningDetails.cshtml" />
+    <Content Include="Areas\Templates\Views\web.config" />
+    <Content Include="Areas\Templates\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Templates\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Templates\Views\List\_Table.cshtml" />
+    <Content Include="Areas\Templates\Views\Form\_Bootstrap.cshtml" />
+    <Content Include="Areas\Templates\Views\Shared\_FormTemplate.cshtml" />
+    <Content Include="Areas\TMS\Views\TimeSheetMiss\Index.cshtml" />
+    <Content Include="Areas\Templates\Views\Shared\_LeavesTemplate.cshtml" />
+    <Content Include="Areas\LMS\Views\Leaves\Index.cshtml" />
+    <Content Include="Areas\Templates\Views\List\_ListTemplate.cshtml" />
+    <Content Include="App.config" />
+    <Content Include="Areas\HRMS\Views\Employees\Index.cshtml" />
+    <Content Include="Areas\Templates\Views\Shared\_EmployeesTemplate.cshtml" />
+    <Content Include="Areas\Templates\Views\List\_EmployeeListTemplate.cshtml" />
+    <Content Include="Areas\Templates\Views\Shared\_singleImageComponent.cshtml" />
+    <Content Include="Areas\Templates\Views\Shared\_LeaveEntitlementsTemplate.cshtml" />
+    <Content Include="Areas\Templates\Views\List\_EmployeeDirectoryTemplate.cshtml" />
+    <Content Include="Areas\Templates\Views\List\_LeaveEntitlementsListTemplate.cshtml" />
+    <Content Include="Areas\Templates\Views\List\_LeaveListTemplate.cshtml" />
+    <Content Include="Areas\Templates\Views\List\_AssetListTemplate.cshtml" />
+    <Content Include="Areas\Templates\Views\Shared\_AssetTemplate.cshtml" />
+    <Content Include="Areas\PMS\Views\Project\Index.cshtml" />
+    <Content Include="Areas\Templates\Views\Form\_ProjectTemplate.cshtml" />
+    <Content Include="Areas\Templates\Views\List\_ProjectListTemplate.cshtml" />
+    <Content Include="Areas\Templates\Views\List\_ProjectMembersListTemplate.cshtml" />
+    <Content Include="Areas\Templates\Views\Form\_ProjectMemberTemplate.cshtml" />
+    <Content Include="Areas\Templates\Views\List\_TaskListTemplate.cshtml" />
+    <Content Include="Areas\Templates\Views\List\_EntitlementhistoryListTemplate.cshtml" />
+    <Content Include="Areas\Templates\Views\Form\_TaskTemplate.cshtml" />
+    <Content Include="Areas\TMS\Views\TimeSheets\TimesheetManage.cshtml" />
+    <Content Include="Areas\IMS\Views\Assets\MyAssets.cshtml" />
+    <Content Include="Areas\LMS\Views\Leaves\MyLeaveBalance.cshtml" />
+    <Content Include="Areas\LMS\Views\Leaves\EmployeesLeaveBalance.cshtml" />
+    <Content Include="Areas\Templates\Views\List\_HolidayListTemplate.cshtml" />
+    <Content Include="Areas\Templates\Views\List\_LeaveEntitlementsHistoryListTemplate.cshtml" />
+    <Content Include="Areas\Templates\Views\Form\_LeaveBalanceDetailsTemplate.cshtml" />
+    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\jquery-1.10.2.js" />
+    <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <Content Include="Scripts\jquery-1.10.2.min.map" />
+    <None Include="Scripts\jquery-1.11.3.intellisense.js" />
+    <Content Include="Scripts\html2canvas.min.js" />
+    <Content Include="Scripts\jquery-1.11.3.js" />
+    <Content Include="Scripts\jquery-1.11.3.min.js" />
+    <Content Include="Scripts\jquery-2.2.1.js" />
+    <Content Include="Scripts\jquery-2.2.1.min.js" />
+    <Content Include="Scripts\jquery-2.2.1.min.map" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\bootstrap-theme.min.css.map" />
+    <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="CodeTemplates\MvcControllerWithContext\Controller.cs.t4" />
+    <Content Include="CodeTemplates\MvcView\Create.cs.t4" />
+    <Content Include="CodeTemplates\MvcView\Delete.cs.t4" />
+    <Content Include="CodeTemplates\MvcView\Details.cs.t4" />
+    <Content Include="CodeTemplates\MvcView\Edit.cs.t4" />
+    <Content Include="CodeTemplates\MvcView\Empty.cs.t4" />
+    <Content Include="CodeTemplates\MvcView\Imports.include.t4" />
+    <Content Include="CodeTemplates\MvcView\List.cs.t4" />
+    <Content Include="CodeTemplates\MvcView\ModelMetadataFunctions.cs.include.t4" />
+    <Content Include="Areas\CRM\Views\web.config" />
+    <Content Include="Areas\CRM\Views\_ViewStart.cshtml" />
+    <Content Include="copyifnewer.bat">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\PMS\Views\web.config" />
+    <Content Include="Areas\PMS\Views\ProjectBillings\Create.cshtml" />
+    <Content Include="Areas\PMS\Views\ProjectBillings\Delete.cshtml" />
+    <Content Include="Areas\PMS\Views\ProjectBillings\Details.cshtml" />
+    <Content Include="Areas\PMS\Views\ProjectBillings\Index.cshtml" />
+    <Content Include="Areas\PMS\Views\ProjectDocuments\Create.cshtml" />
+    <Content Include="Areas\PMS\Views\ProjectDocuments\Delete.cshtml" />
+    <Content Include="Areas\PMS\Views\ProjectDocuments\Edit.cshtml" />
+    <Content Include="Areas\PMS\Views\ProjectMembers\Create.cshtml" />
+    <Content Include="Areas\PMS\Views\ProjectMembers\Delete.cshtml" />
+    <Content Include="Areas\PMS\Views\ProjectMembers\Edit.cshtml" />
+    <Content Include="Areas\PMS\Views\ProjectMileStones\Create.cshtml" />
+    <Content Include="Areas\PMS\Views\ProjectMileStones\Delete.cshtml" />
+    <Content Include="Areas\PMS\Views\ProjectMileStones\Details.cshtml" />
+    <Content Include="Areas\PMS\Views\ProjectMileStones\Edit.cshtml" />
+    <Content Include="Areas\PMS\Views\Projects\Create.cshtml" />
+    <Content Include="Areas\PMS\Views\Projects\Delete.cshtml" />
+    <Content Include="Areas\PMS\Views\Projects\Details.cshtml" />
+    <Content Include="Areas\PMS\Views\Projects\Edit.cshtml" />
+    <Content Include="Areas\PMS\Views\Projects\Index.cshtml" />
+    <Content Include="Areas\PMS\Views\Tasks\Calendar.cshtml" />
+    <Content Include="Areas\PMS\Views\Tasks\Create.cshtml" />
+    <Content Include="Areas\PMS\Views\Tasks\Delete.cshtml" />
+    <Content Include="Areas\PMS\Views\Tasks\Details.cshtml" />
+    <Content Include="Areas\PMS\Views\Tasks\Edit.cshtml" />
+    <Content Include="Areas\PMS\Views\Tasks\Index.cshtml" />
+    <Content Include="Areas\PMS\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\CRM\Views\CRMLeadSources\Create.cshtml" />
+    <Content Include="Areas\CRM\Views\CRMLeadSources\Delete.cshtml" />
+    <Content Include="Areas\CRM\Views\CRMLeadSources\Details.cshtml" />
+    <Content Include="Areas\CRM\Views\CRMLeadSources\Edit.cshtml" />
+    <Content Include="Areas\CRM\Views\CRMLeadSources\Index.cshtml" />
+    <Content Include="Areas\CRM\Views\CRMLeadStatus\Create.cshtml" />
+    <Content Include="Areas\CRM\Views\CRMLeadStatus\Delete.cshtml" />
+    <Content Include="Areas\CRM\Views\CRMLeadStatus\Details.cshtml" />
+    <Content Include="Areas\CRM\Views\CRMLeadStatus\Edit.cshtml" />
+    <Content Include="Areas\CRM\Views\CRMLeadStatus\Index.cshtml" />
+    <Content Include="Areas\CRM\Views\CRMLeads\Create.cshtml" />
+    <Content Include="Areas\CRM\Views\CRMLeads\Delete.cshtml" />
+    <Content Include="Areas\CRM\Views\CRMLeads\Details.cshtml" />
+    <Content Include="Areas\CRM\Views\CRMLeads\Edit.cshtml" />
+    <Content Include="Areas\CRM\Views\CRMLeads\Index.cshtml" />
+    <Content Include="Areas\CRM\Views\CRMSalesStages\Create.cshtml" />
+    <Content Include="Areas\CRM\Views\CRMSalesStages\Delete.cshtml" />
+    <Content Include="Areas\CRM\Views\CRMSalesStages\Details.cshtml" />
+    <Content Include="Areas\CRM\Views\CRMSalesStages\Edit.cshtml" />
+    <Content Include="Areas\CRM\Views\CRMSalesStages\Index.cshtml" />
+    <Content Include="Areas\CRM\Views\CRMAccounts\Create.cshtml" />
+    <Content Include="Areas\CRM\Views\CRMAccounts\Details.cshtml" />
+    <Content Include="Areas\CRM\Views\CRMAccounts\Edit.cshtml" />
+    <Content Include="Areas\CRM\Views\CRMAccounts\Index.cshtml" />
+    <Content Include="Areas\CRM\Views\CRMContacts\Create.cshtml" />
+    <Content Include="Areas\CRM\Views\CRMContacts\Delete.cshtml" />
+    <Content Include="Areas\CRM\Views\CRMContacts\Details.cshtml" />
+    <Content Include="Areas\CRM\Views\CRMContacts\Edit.cshtml" />
+    <Content Include="Areas\CRM\Views\CRMContacts\Index.cshtml" />
+    <Content Include="Areas\CRM\Views\CRMPotentials\Create.cshtml" />
+    <Content Include="Areas\CRM\Views\CRMPotentials\Delete.cshtml" />
+    <Content Include="Areas\CRM\Views\CRMPotentials\Details.cshtml" />
+    <Content Include="Areas\CRM\Views\CRMPotentials\Edit.cshtml" />
+    <Content Include="Areas\CRM\Views\CRMPotentials\Index.cshtml" />
+    <Content Include="Areas\HRMS\Views\web.config" />
+    <Content Include="Areas\RMS\Views\web.config" />
+    <Content Include="Areas\RMS\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Payroll\Views\web.config" />
+    <Content Include="Areas\HRMS\Views\Departments\Index.cshtml" />
+    <Content Include="Areas\HRMS\Views\Designations\Index.cshtml" />
+    <Content Include="Areas\HRMS\Views\Shifts\Index.cshtml" />
+    <Content Include="Areas\Payroll\Views\EmployeeSalaries\Create.cshtml" />
+    <Content Include="Areas\Payroll\Views\EmployeeSalaries\Delete.cshtml" />
+    <Content Include="Areas\Payroll\Views\EmployeeSalaries\Details.cshtml" />
+    <Content Include="Areas\Payroll\Views\EmployeeSalaries\Edit.cshtml" />
+    <Content Include="Areas\Payroll\Views\EmployeeSalaries\Index.cshtml" />
+    <Content Include="Areas\Payroll\Views\SalaryComponents\Create.cshtml" />
+    <Content Include="Areas\Payroll\Views\SalaryComponents\Delete.cshtml" />
+    <Content Include="Areas\Payroll\Views\SalaryComponents\Details.cshtml" />
+    <Content Include="Areas\Payroll\Views\SalaryComponents\Edit.cshtml" />
+    <Content Include="Areas\Payroll\Views\SalaryComponents\Index.cshtml" />
+    <Content Include="Areas\HRMS\Views\Users\Create.cshtml" />
+    <Content Include="Areas\HRMS\Views\Users\Delete.cshtml" />
+    <Content Include="Areas\HRMS\Views\Users\Details.cshtml" />
+    <Content Include="Areas\HRMS\Views\Users\Edit.cshtml" />
+    <Content Include="Areas\HRMS\Views\Users\Index.cshtml" />
+    <Content Include="Areas\IT\Views\web.config" />
+    <Content Include="Areas\IT\Views\SoftwareCategories\Index.cshtml" />
+    <Content Include="Areas\IT\Views\Softwares\Index.cshtml" />
+    <Content Include="Areas\IMS\Views\web.config" />
+    <Content Include="Areas\IMS\Views\AssetCategories\Index.cshtml" />
+    <Content Include="Areas\IMS\Views\Vendors\Index.cshtml" />
+    <Content Include="Areas\IMS\Views\Assets\Create.cshtml" />
+    <Content Include="Areas\IMS\Views\Assets\Delete.cshtml" />
+    <Content Include="Areas\IMS\Views\Assets\Details.cshtml" />
+    <Content Include="Areas\IMS\Views\Assets\Edit.cshtml" />
+    <Content Include="Areas\IMS\Views\Assets\Index.cshtml" />
+    <Content Include="Areas\CRM\Views\CRMLeadCategories\Create.cshtml" />
+    <Content Include="Areas\CRM\Views\CRMLeadCategories\Delete.cshtml" />
+    <Content Include="Areas\CRM\Views\CRMLeadCategories\Details.cshtml" />
+    <Content Include="Areas\CRM\Views\CRMLeadCategories\Edit.cshtml" />
+    <Content Include="Areas\CRM\Views\CRMLeadCategories\Index.cshtml" />
+    <Content Include="Areas\CRM\Views\CRMPotentialCategories\Create.cshtml" />
+    <Content Include="Areas\CRM\Views\CRMPotentialCategories\Delete.cshtml" />
+    <Content Include="Areas\CRM\Views\CRMPotentialCategories\Details.cshtml" />
+    <Content Include="Areas\CRM\Views\CRMPotentialCategories\Edit.cshtml" />
+    <Content Include="Areas\CRM\Views\CRMPotentialCategories\Index.cshtml" />
+    <Content Include="Areas\CRM\Views\CRMPotentials\Convert.cshtml" />
+    <Content Include="Areas\HRMS\Views\Certifications\Create.cshtml" />
+    <Content Include="Areas\HRMS\Views\Certifications\Details.cshtml" />
+    <Content Include="Areas\HRMS\Views\Certifications\Edit.cshtml" />
+    <Content Include="Areas\HRMS\Views\Certifications\Index.cshtml" />
+    <Content Include="Areas\HRMS\Views\Skills\Index.cshtml" />
+    <Content Include="Areas\HRMS\Views\UserCertifications\Delete.cshtml" />
+    <Content Include="Areas\HRMS\Views\UserSkills\Delete.cshtml" />
+    <Content Include="Areas\LMS\Views\web.config" />
+    <Content Include="Areas\LMS\Views\Holiday\Index.cshtml" />
+    <Content Include="Areas\LMS\Views\LeaveTypes\Index.cshtml" />
+    <Content Include="Areas\CRM\Views\CRMDashboard\Index.cshtml" />
+    <Content Include="Areas\RMS\Views\RMSDashboard\Index.cshtml" />
+    <Content Include="Areas\HRMS\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Settings\Views\web.config" />
+    <Content Include="Areas\Settings\Views\Settings\Index.cshtml" />
+    <Content Include="Areas\PMS\Views\TimeSheet\MyTimeSheet.cshtml" />
+    <Content Include="Areas\IMS\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\LMS\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\IT\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\HRMS\Views\Users\Chart.cshtml" />
+    <Content Include="Areas\Recruit\Views\web.config" />
+    <Content Include="Areas\Recruit\Views\InterviewRounds\Create.cshtml" />
+    <Content Include="Areas\Recruit\Views\InterviewRounds\Delete.cshtml" />
+    <Content Include="Areas\Recruit\Views\InterviewRounds\Details.cshtml" />
+    <Content Include="Areas\Recruit\Views\InterviewRounds\Edit.cshtml" />
+    <Content Include="Areas\Recruit\Views\InterviewRounds\Index.cshtml" />
+    <Content Include="Areas\Recruit\Views\JobOffers\Create.cshtml" />
+    <Content Include="Areas\Recruit\Views\JobOffers\Details.cshtml" />
+    <Content Include="Areas\Recruit\Views\JobOffers\Edit.cshtml" />
+    <Content Include="Areas\Recruit\Views\JobOffers\Index.cshtml" />
+    <Content Include="Areas\Recruit\Views\JobOpenings\Create.cshtml" />
+    <Content Include="Areas\Recruit\Views\JobOpenings\Details.cshtml" />
+    <Content Include="Areas\Recruit\Views\JobOpenings\Edit.cshtml" />
+    <Content Include="Areas\Recruit\Views\JobOpenings\Index.cshtml" />
+    <Content Include="Areas\Recruit\Views\Rounds\Create.cshtml" />
+    <Content Include="Areas\Recruit\Views\Rounds\Details.cshtml" />
+    <Content Include="Areas\Recruit\Views\Rounds\Edit.cshtml" />
+    <Content Include="Areas\Recruit\Views\Rounds\Index.cshtml" />
+    <Content Include="Areas\Recruit\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\PMS\Views\TimeSheet\Index.cshtml" />
+    <Content Include="Areas\PMS\Views\TimeSheet\Details.cshtml" />
+    <Content Include="Areas\Recruit\Views\Candidates\Create.cshtml" />
+    <Content Include="Areas\Recruit\Views\Candidates\Delete.cshtml" />
+    <Content Include="Areas\Recruit\Views\Candidates\Details.cshtml" />
+    <Content Include="Areas\Recruit\Views\Candidates\Edit.cshtml" />
+    <Content Include="Areas\Recruit\Views\Candidates\Index.cshtml" />
+    <Content Include="Areas\Recruit\Views\Referals\Create.cshtml" />
+    <Content Include="Areas\Recruit\Views\Referals\Delete.cshtml" />
+    <Content Include="Areas\Recruit\Views\Referals\Details.cshtml" />
+    <Content Include="Areas\Recruit\Views\Referals\Edit.cshtml" />
+    <Content Include="Areas\Recruit\Views\Referals\Index.cshtml" />
+    <Content Include="Areas\HRMS\Views\HRMSDashboard\Index.cshtml" />
+    <Content Include="Areas\IMS\Views\IMSDashboard\Index.cshtml" />
+    <Content Include="Areas\PMS\Views\TimeSheet\Delete.cshtml" />
+    <Content Include="Areas\Calendar\Views\web.config" />
+    <Content Include="Areas\Calendar\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Calendar\Views\MyCalendar\Index.cshtml" />
+    <Content Include="Areas\HRMS\Views\Users\ResetPassword.cshtml" />
+    <Content Include="Areas\Scheduler\Views\web.config" />
+    <Content Include="Areas\LMS\Views\LeavePeriods\Index.cshtml" />
+    <Content Include="Areas\LMS\Views\LeaveEntitlements\Index.cshtml" />
+    <Content Include="Areas\LMS\Views\Leaves\Manage.cshtml" />
+    <Content Include="Areas\PMS\Views\TimeSheet\MyTeam.cshtml" />
+    <Content Include="Areas\Attendance\Views\web.config" />
+    <Content Include="Areas\Attendance\Views\_ViewStart.cshtml" />
+    <Content Include="fonts\fontawesome-webfont.woff2" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.eot" />
+    <Content Include="fonts\FontAwesome.otf" />
+    <Content Include="Areas\Recruit\KBS\Views\web.config" />
+    <Content Include="Areas\Recruit\KBS\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Recruit\KBS\Views\Keywords\Create.cshtml" />
+    <Content Include="Areas\Recruit\KBS\Views\Keywords\Delete.cshtml" />
+    <Content Include="Areas\Recruit\KBS\Views\Keywords\Details.cshtml" />
+    <Content Include="Areas\Recruit\KBS\Views\Keywords\Edit.cshtml" />
+    <Content Include="Areas\Recruit\KBS\Views\Keywords\Index.cshtml" />
+    <Content Include="Areas\Recruit\KBS\Views\Categories\Create.cshtml" />
+    <Content Include="Areas\Recruit\KBS\Views\Categories\Details.cshtml" />
+    <Content Include="Areas\Recruit\KBS\Views\Categories\Edit.cshtml" />
+    <Content Include="Areas\Recruit\KBS\Views\Categories\Index.cshtml" />
+    <Content Include="Areas\Recruit\KBS\Views\Articles\Create.cshtml" />
+    <Content Include="Areas\Recruit\KBS\Views\Articles\Delete.cshtml" />
+    <Content Include="Areas\Recruit\KBS\Views\Articles\Details.cshtml" />
+    <Content Include="Areas\Recruit\KBS\Views\Articles\Edit.cshtml" />
+    <Content Include="Areas\Recruit\KBS\Views\Articles\Index.cshtml" />
+    <Content Include="Areas\TMS\Views\web.config" />
+    <Content Include="Areas\TMS\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\TMS\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\TMS\Views\TimeSheets\Create.cshtml" />
+    <Content Include="Areas\TMS\Views\TimeSheets\Delete.cshtml" />
+    <Content Include="Areas\TMS\Views\TimeSheets\Details.cshtml" />
+    <Content Include="Areas\TMS\Views\TimeSheets\Edit.cshtml" />
+    <Content Include="Areas\TMS\Views\TimeSheets\Index.cshtml" />
+    <Content Include="Areas\PMS\Views\Projects\Tree.cshtml" />
+    <Content Include="Areas\Recruit\Views\CandidatesDashboard\Index.cshtml" />
+    <Content Include="Areas\Settings\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Settings\Views\GridUpdates\Create.cshtml" />
+    <Content Include="Areas\Settings\Views\GridUpdates\Delete.cshtml" />
+    <Content Include="Areas\Settings\Views\GridUpdates\Details.cshtml" />
+    <Content Include="Areas\Settings\Views\GridUpdates\Edit.cshtml" />
+    <Content Include="Areas\Settings\Views\GridUpdates\Index.cshtml" />
+    <Content Include="Scripts\jquery-1.11.3.min.map" />
+    <None Include="Scripts\jquery-3.0.0.intellisense.js" />
+    <Content Include="Scripts\jquery-3.0.0.js" />
+    <Content Include="Scripts\jquery-3.0.0.min.js" />
+    <Content Include="Scripts\jquery-3.0.0.slim.js" />
+    <Content Include="Scripts\jquery-3.0.0.slim.min.js" />
+    <Content Include="Scripts\jquery-3.0.0.slim.min.map" />
+    <Content Include="Scripts\jquery-3.0.0.min.map" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery-te-1.4.0.min.js" />
+    <Content Include="Scripts\jquery.signalR-2.2.0.js" />
+    <Content Include="Scripts\jquery.signalR-2.2.0.min.js" />
+    <Content Include="Scripts\jquery.timeago.min.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\JSLINQ.js" />
+    <Content Include="Scripts\knockout-3.4.0.debug.js" />
+    <Content Include="Scripts\knockout-3.4.0.js" />
+    <Content Include="Scripts\knockout.mapping-latest.js" />
+    <Content Include="Scripts\knockout.validation.config.js" />
+    <Content Include="Scripts\knockout.validation.min.js" />
+    <Content Include="Scripts\ladda.min.js" />
+    <Content Include="Scripts\livestamp.js" />
+    <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\moment-with-locales.js" />
+    <Content Include="Scripts\moment-with-locales.min.js" />
+    <Content Include="Scripts\moment.js" />
+    <Content Include="Scripts\moment.min.js" />
+    <Content Include="Scripts\pnotify.custom.min.js" />
+    <Content Include="Scripts\require.js" />
+    <Content Include="Scripts\selectize.min.js" />
+    <Content Include="Scripts\spin.min.js" />
+    <Content Include="Scripts\typeahead.bundle.min.js" />
+    <Content Include="Scripts\userFeedback.js" />
+    <Content Include="Uploads\ReadMe.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Areas\RMS\Views\RequirementCategories\Create.cshtml" />
+    <Content Include="Areas\RMS\Views\RequirementCategories\Details.cshtml" />
+    <Content Include="Areas\RMS\Views\RequirementCategories\Edit.cshtml" />
+    <Content Include="Areas\RMS\Views\RequirementCategories\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Areas\Accounting\AccountingApplication.cs" />
+    <Compile Include="Areas\Accounting\AccountingAreaRegistration.cs" />
+    <Compile Include="Areas\Attendance\AttendanceAreaRegistration.cs" />
+    <Compile Include="Areas\Calendar\CalendarAreaRegistration.cs" />
+    <Compile Include="Areas\Calendar\Controllers\MyCalendarController.cs" />
+    <Compile Include="Areas\Company\CompanyApplication.cs" />
+    <Compile Include="Areas\Company\CompanyAreaRegistration.cs" />
+    <Compile Include="Areas\Company\CompanyBaseController.cs" />
+    <Compile Include="Areas\Company\Controllers\AwardsController.cs" />
+    <Compile Include="Areas\Company\Controllers\EmailTemplatesController.cs" />
+    <Compile Include="Areas\Company\Controllers\LocationsController.cs" />
+    <Compile Include="Areas\Company\Controllers\PermissionsController.cs" />
+    <Compile Include="Areas\Company\Controllers\RolesController.cs" />
+    <Compile Include="Areas\Company\Controllers\TechnologiesController.cs" />
+    <Compile Include="Areas\CRM\CRMApplication.cs" />
+    <Compile Include="Areas\CRM\CRMBaseController.cs" />
+    <Compile Include="Areas\DMS\Controllers\ManageController.cs" />
+    <Compile Include="Areas\DMS\DMSAreaRegistration.cs" />
+    <Compile Include="Areas\HRMS\Controllers\DepartmentsController.cs" />
+    <Compile Include="Areas\HRMS\Controllers\DesignationsController.cs" />
+    <Compile Include="Areas\HRMS\Controllers\EmployeeDirectoryController.cs" />
+    <Compile Include="Areas\HRMS\Controllers\EmployeesController.cs" />
+    <Compile Include="Areas\HRMS\Controllers\HobbiesController.cs" />
+    <Compile Include="Areas\HRMS\Controllers\HRMSDashboardController.cs" />
+    <Compile Include="Areas\HRMS\Controllers\ShiftsController.cs" />
+    <Compile Include="Areas\HRMS\Controllers\UserAwardsController.cs" />
+    <Compile Include="Areas\HRMS\Controllers\UserDocumentsController.cs" />
+    <Compile Include="Areas\HRMS\Controllers\UserHobbiesController.cs" />
+    <Compile Include="Areas\HRMS\Controllers\UserTokensController.cs" />
+    <Compile Include="Areas\CRM\Controllers\CRMAccountsController.cs" />
+    <Compile Include="Areas\CRM\Controllers\CRMContactsController.cs" />
+    <Compile Include="Areas\CRM\Controllers\CRMDashboardController.cs" />
+    <Compile Include="Areas\CRM\Controllers\CRMLeadCategoriesController.cs" />
+    <Compile Include="Areas\CRM\Controllers\CRMLeadsController.cs" />
+    <Compile Include="Areas\CRM\Controllers\CRMLeadSourcesController.cs" />
+    <Compile Include="Areas\CRM\Controllers\CRMLeadStatusController.cs" />
+    <Compile Include="Areas\CRM\Controllers\CRMPotentialCategoriesController.cs" />
+    <Compile Include="Areas\CRM\Controllers\CRMPotentialsController.cs" />
+    <Compile Include="Areas\CRM\Controllers\CRMSalesStagesController.cs" />
+    <Compile Include="Areas\CRM\CRMAreaRegistration.cs" />
+    <Compile Include="Areas\HRMS\Controllers\CertificationsController.cs" />
+    <Compile Include="Areas\HRMS\Controllers\SkillsController.cs" />
+    <Compile Include="Areas\HRMS\Controllers\UserCertificationsController.cs" />
+    <Compile Include="Areas\HRMS\Controllers\UsersController.cs" />
+    <Compile Include="Areas\HRMS\Controllers\UserSkillsController.cs" />
+    <Compile Include="Areas\HRMS\HRMSApplication.cs" />
+    <Compile Include="Areas\HRMS\HRMSAreaRegistration.cs" />
+    <Compile Include="Areas\IMS\Controllers\AssetCategoriesController.cs" />
+    <Compile Include="Areas\IMS\Controllers\AssetDocumentsController.cs" />
+    <Compile Include="Areas\IMS\Controllers\AssetsController.cs" />
+    <Compile Include="Areas\IMS\Controllers\IMSDashboardController.cs" />
+    <Compile Include="Areas\IMS\Controllers\VendorsController.cs" />
+    <Compile Include="Areas\IMS\IMSAreaRegistration.cs" />
+    <Compile Include="Areas\IMS\InventoryBaseController.cs" />
+    <Compile Include="Areas\IT\Controllers\SoftwareCategoriesController.cs" />
+    <Compile Include="Areas\IT\Controllers\SoftwaresController.cs" />
+    <Compile Include="Areas\IT\ITAreaRegistration.cs" />
+    <Compile Include="Areas\Recruit\KBS\Controllers\ArticleAttachmentsController.cs" />
+    <Compile Include="Areas\Recruit\KBS\Controllers\ArticlesController.cs" />
+    <Compile Include="Areas\Recruit\KBS\Controllers\CategoriesController.cs" />
+    <Compile Include="Areas\Recruit\KBS\Controllers\KeywordsController.cs" />
+    <Compile Include="Areas\Recruit\KBS\KBSAreaRegistration.cs" />
+    <Compile Include="Areas\Recruit\KBS\KnowledgeBaseController.cs" />
+    <Compile Include="Areas\LMS\Controllers\HolidayController.cs" />
+    <Compile Include="Areas\LMS\Controllers\LeaveEntitlementsController.cs" />
+    <Compile Include="Areas\LMS\Controllers\LeavesController.cs" />
+    <Compile Include="Areas\LMS\Controllers\LeavePeriodsController.cs" />
+    <Compile Include="Areas\LMS\Controllers\LeaveTypesController.cs" />
+    <Compile Include="Areas\LMS\LeaveBaseController.cs" />
+    <Compile Include="Areas\LMS\LMSAreaRegistration.cs" />
+    <Compile Include="Areas\LMS\Models\CheckLeaveBalanceViewModel.cs" />
+    <Compile Include="Areas\LMS\Models\LeaveBalanceResultViewModel.cs" />
+    <Compile Include="Areas\LMS\Models\LeaveListFilter.cs" />
+    <Compile Include="Areas\Payroll\Controllers\EmployeeSalariesController.cs" />
+    <Compile Include="Areas\Payroll\Controllers\SalaryComponentsController.cs" />
+    <Compile Include="Areas\Payroll\PayrollAreaRegistration.cs" />
+    <Compile Include="Areas\PMS\Controllers\EstimateController.cs" />
+    <Compile Include="Areas\PMS\Controllers\ProjectBillingsController.cs" />
+    <Compile Include="Areas\PMS\Controllers\ProjectController.cs" />
+    <Compile Include="Areas\PMS\Controllers\ProjectDocumentsController.cs" />
+    <Compile Include="Areas\PMS\Controllers\ProjectMembersController.cs" />
+    <Compile Include="Areas\PMS\Controllers\ProjectMileStonesController.cs" />
+    <Compile Include="Areas\PMS\Controllers\ProjectsController.cs" />
+    <Compile Include="Areas\PMS\Controllers\TasksController.cs" />
+    <Compile Include="Areas\PMS\Controllers\TimeSheetController.cs" />
+    <Compile Include="Areas\PMS\Models\EstimateLineItemModel.cs" />
+    <Compile Include="Areas\PMS\Models\EstimateModel.cs" />
+    <Compile Include="Areas\PMS\Models\TimeSheetLineItemModel.cs" />
+    <Compile Include="Areas\PMS\Models\TimeSheetModel.cs" />
+    <Compile Include="Areas\PMS\PMSAreaRegistration.cs" />
+    <Compile Include="Areas\PMS\ProjectsBaseController.cs" />
+    <Compile Include="Areas\Recruit\CandidateAuthAttribute.cs" />
+    <Compile Include="Areas\Recruit\Controllers\CandidateDesignationsController.cs" />
+    <Compile Include="Areas\Recruit\Controllers\CandidateDocumentsController.cs" />
+    <Compile Include="Areas\Recruit\Controllers\CandidatesController.cs" />
+    <Compile Include="Areas\Recruit\Controllers\CandidatesDashboardController.cs" />
+    <Compile Include="Areas\Recruit\Controllers\InterviewRoundDocumentsController.cs" />
+    <Compile Include="Areas\Recruit\Controllers\InterviewRoundsController.cs" />
+    <Compile Include="Areas\Recruit\Controllers\JobOffersController.cs" />
+    <Compile Include="Areas\Recruit\Controllers\JobOpeningsController.cs" />
+    <Compile Include="Areas\Recruit\Controllers\PortalController.cs" />
+    <Compile Include="Areas\Recruit\Controllers\ReferalsController.cs" />
+    <Compile Include="Areas\Recruit\Controllers\RoundsController.cs" />
+    <Compile Include="Areas\Recruit\RecruitAreaRegistration.cs" />
+    <Compile Include="Areas\Recruit\RecruitBaseController.cs" />
+    <Compile Include="Areas\Recruit\ViewModels\CandidateSignInViewModel.cs" />
+    <Compile Include="Areas\RMS\Controllers\RequirementDocumentsController.cs" />
+    <Compile Include="Areas\RMS\Controllers\RMSDashboardController.cs" />
+    <Compile Include="Areas\RMS\RMSAreaRegistration.cs" />
+    <Compile Include="Areas\Scheduler\Controllers\EventReminderController.cs" />
+    <Compile Include="Areas\Scheduler\Controllers\AutoApproverController.cs" />
+    <Compile Include="Areas\Scheduler\Controllers\ExpiredTasksController.cs" />
+    <Compile Include="Areas\Scheduler\Controllers\ExpiredTicketsController.cs" />
+    <Compile Include="Areas\Scheduler\Controllers\InterviewReminderController.cs" />
+    <Compile Include="Areas\Scheduler\Controllers\TimeSheetReminderController.cs" />
+    <Compile Include="Areas\Scheduler\SchedulerAreaRegistration.cs" />
+    <Compile Include="Areas\Settings\Controllers\ApplicationsController.cs" />
+    <Compile Include="Areas\Settings\Controllers\GridUpdatesController.cs" />
+    <Compile Include="Areas\Settings\Controllers\SettingsController.cs" />
+    <Compile Include="Areas\Settings\Controllers\UserFeedbacksController.cs" />
+    <Compile Include="Areas\Settings\SettingsAreaRegistration.cs" />
+    <Compile Include="Areas\Templates\Controllers\FormController.cs" />
+    <Compile Include="Areas\Templates\Controllers\ListController.cs" />
+    <Compile Include="Areas\Templates\Models\UIField.cs" />
+    <Compile Include="Areas\Templates\TemplatesAreaRegistration.cs" />
+    <Compile Include="Areas\TicketDesk\Controllers\TicketCategoriesController.cs" />
+    <Compile Include="Areas\TicketDesk\Controllers\TicketsController.cs" />
+    <Compile Include="Areas\TicketDesk\Controllers\TicketSubCategoriesController.cs" />
+    <Compile Include="Areas\TicketDesk\TicketDeskAreaRegistration.cs" />
+    <Compile Include="Areas\TicketDesk\TicketDeskBaseController.cs" />
+    <Compile Include="Areas\TMS\Controllers\TimeSheetLineItemsController.cs" />
+    <Compile Include="Areas\TMS\Controllers\TimeSheetMissController.cs" />
+    <Compile Include="Areas\TMS\Controllers\TimeSheetsController.cs" />
+    <Compile Include="Areas\TMS\Models\MissedTimeSheetsSearchViewModel.cs" />
+    <Compile Include="Areas\TMS\TimeSheetBaseController.cs" />
+    <Compile Include="Areas\TMS\TMSAreaRegistration.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\MigrateController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Areas\RMS\Controllers\RequirementCategoriesController.cs" />
+    <Compile Include="Areas\RMS\Controllers\RequirementsController.cs" />
+    <Compile Include="Controllers\ProfileController.cs" />
+    <Compile Include="Controllers\ScheduledJobsController.cs" />
+    <Compile Include="DbContextFactory.cs" />
+    <Compile Include="Filters\MultiSelectListAttribute.cs" />
+    <Compile Include="Filters\SelectListAttribute.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="GridSignalRUserIdProvider.cs" />
+    <Compile Include="HangfireAuthorizationFilter.cs" />
+    <Compile Include="Hubs\INotificationService.cs" />
+    <Compile Include="Hubs\NotificationHub.cs" />
+    <Compile Include="Hubs\NotificationService.cs" />
+    <Compile Include="IDbContextFactory.cs" />
+    <Compile Include="Models\AutoCompleteEntry.cs" />
+    <Compile Include="Models\ErrorModel.cs" />
+    <Compile Include="Models\JobInfoModel.cs" />
+    <Compile Include="Models\RemoteValidationResult.cs" />
+    <Compile Include="Models\SelectItem.cs" />
+    <Compile Include="Models\TimeSheetCalenderEvent.cs" />
+    <Compile Include="MultiTenantDataContextFactory.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Startup.cs" />
+    <Compile Include="UnitOfWork.cs" />
+    <Compile Include="ViewModels\ChangePasswordViewModel.cs" />
+    <Compile Include="ViewModels\GoogleSignViewModel.cs" />
+    <Compile Include="ViewModels\ScheduledJobViewModel.cs" />
+    <Compile Include="WebClientHelper.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\web.config" />
+    <Content Include="packages.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\RMS\Views\RequirementSources\Create.cshtml" />
+    <Content Include="Areas\RMS\Views\RequirementSources\Delete.cshtml" />
+    <Content Include="Areas\RMS\Views\RequirementSources\Details.cshtml" />
+    <Content Include="Areas\RMS\Views\RequirementSources\Edit.cshtml" />
+    <Content Include="Areas\RMS\Views\RequirementSources\Index.cshtml" />
+    <Content Include="Views\Account\SignIn.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\DateTime.cshtml" />
+    <Content Include="Views\Shared\_LoginLayout.cshtml" />
+    <Content Include="Areas\RMS\Views\Requirements\Create.cshtml" />
+    <Content Include="Areas\RMS\Views\Requirements\Delete.cshtml" />
+    <Content Include="Areas\RMS\Views\Requirements\Details.cshtml" />
+    <Content Include="Areas\RMS\Views\Requirements\Edit.cshtml" />
+    <Content Include="Areas\RMS\Views\Requirements\Index.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\tinymce_full_compressed.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\tinymce_full.cshtml" />
+    <Content Include="Web.config.Debug">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.config.Release">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Views\Error\NotAuthorized.cshtml" />
+    <Content Include="Views\Profile\ChangePassword.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Date.cshtml" />
+    <Content Include="Views\Profile\Edit.cshtml" />
+    <Content Include="Views\Profile\Index.cshtml" />
+    <Content Include="Views\Emails\Web.config" />
+    <Content Include="Views\Profile\DeleteMySkill.cshtml" />
+    <Content Include="Views\Profile\DeleteMyCertification.cshtml" />
+    <Content Include="Views\Shared\_UserFeedback.cshtml" />
+    <Content Include="Service References\Application Insights\ConnectedService.json" />
+    <Content Include="Views\Profile\EditImage.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\PhoneNumber.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\Email.cshtml" />
+    <Content Include="Views\Error\Oops.cshtml" />
+    <Content Include="Views\Home\Stream.cshtml" />
+    <Content Include="Views\Error\NotFound.cshtml" />
+    <Content Include="Views\Shared\_RecruitPortalLoginLayout.cshtml" />
+    <Content Include="Views\Shared\_RecruitPortalLayout.cshtml" />
+    <Content Include="Views\ScheduledJobs\Create.cshtml" />
+    <Content Include="Views\ScheduledJobs\Delete.cshtml" />
+    <Content Include="Views\ScheduledJobs\Details.cshtml" />
+    <Content Include="Views\ScheduledJobs\Index.cshtml" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Areas\Accounting\Views\Shared\" />
+    <Folder Include="Areas\Attendance\Views\Presence\" />
+    <Folder Include="Areas\Attendance\Views\Shared\" />
+    <Folder Include="Areas\Company\Views\Shared\" />
+    <Folder Include="Areas\CRM\Views\Dashboard\" />
+    <Folder Include="Areas\CRM\Views\Shared\" />
+    <Folder Include="Areas\DMS\Models\" />
+    <Folder Include="Areas\HRMS\Views\Shared\" />
+    <Folder Include="Areas\IMS\Views\Shared\" />
+    <Folder Include="Areas\IT\Views\Shared\" />
+    <Folder Include="Areas\IT\Views\Sync\" />
+    <Folder Include="Areas\LMS\Views\Shared\" />
+    <Folder Include="Areas\Payroll\Views\Shared\" />
+    <Folder Include="Areas\PMS\Views\ProjectMember\" />
+    <Folder Include="Areas\PMS\Views\Shared\" />
+    <Folder Include="Areas\Recruit\Views\Shared\" />
+    <Folder Include="Areas\RMS\Views\Shared\" />
+    <Folder Include="Areas\Scheduler\Views\Shared\" />
+    <Folder Include="Areas\Scheduler\Views\Ticket\" />
+    <Folder Include="Areas\Scheduler\Views\TimeSheetReminder\" />
+    <Folder Include="Scripts\tinymce\langs\" />
+    <Folder Include="Scripts\tinymce\plugins\advhr\css\" />
+    <Folder Include="Scripts\tinymce\plugins\advhr\js\" />
+    <Folder Include="Scripts\tinymce\plugins\advhr\langs\" />
+    <Folder Include="Scripts\tinymce\plugins\advimage\css\" />
+    <Folder Include="Scripts\tinymce\plugins\advimage\img\" />
+    <Folder Include="Scripts\tinymce\plugins\advimage\js\" />
+    <Folder Include="Scripts\tinymce\plugins\advimage\langs\" />
+    <Folder Include="Scripts\tinymce\plugins\advlink\css\" />
+    <Folder Include="Scripts\tinymce\plugins\advlink\js\" />
+    <Folder Include="Scripts\tinymce\plugins\advlink\langs\" />
+    <Folder Include="Scripts\tinymce\plugins\advlist\" />
+    <Folder Include="Scripts\tinymce\plugins\autolink\" />
+    <Folder Include="Scripts\tinymce\plugins\autoresize\" />
+    <Folder Include="Scripts\tinymce\plugins\autosave\langs\" />
+    <Folder Include="Scripts\tinymce\plugins\bbcode\" />
+    <Folder Include="Scripts\tinymce\plugins\contextmenu\" />
+    <Folder Include="Scripts\tinymce\plugins\directionality\" />
+    <Folder Include="Scripts\tinymce\plugins\emotions\img\" />
+    <Folder Include="Scripts\tinymce\plugins\emotions\js\" />
+    <Folder Include="Scripts\tinymce\plugins\emotions\langs\" />
+    <Folder Include="Scripts\tinymce\plugins\example\img\" />
+    <Folder Include="Scripts\tinymce\plugins\example\js\" />
+    <Folder Include="Scripts\tinymce\plugins\example\langs\" />
+    <Folder Include="Scripts\tinymce\plugins\example_dependency\" />
+    <Folder Include="Scripts\tinymce\plugins\fullpage\css\" />
+    <Folder Include="Scripts\tinymce\plugins\fullpage\js\" />
+    <Folder Include="Scripts\tinymce\plugins\fullpage\langs\" />
+    <Folder Include="Scripts\tinymce\plugins\fullscreen\" />
+    <Folder Include="Scripts\tinymce\plugins\iespell\" />
+    <Folder Include="Scripts\tinymce\plugins\inlinepopups\skins\clearlooks2\img\" />
+    <Folder Include="Scripts\tinymce\plugins\insertdatetime\" />
+    <Folder Include="Scripts\tinymce\plugins\layer\" />
+    <Folder Include="Scripts\tinymce\plugins\legacyoutput\" />
+    <Folder Include="Scripts\tinymce\plugins\lists\" />
+    <Folder Include="Scripts\tinymce\plugins\media\css\" />
+    <Folder Include="Scripts\tinymce\plugins\media\js\" />
+    <Folder Include="Scripts\tinymce\plugins\media\langs\" />
+    <Folder Include="Scripts\tinymce\plugins\nonbreaking\" />
+    <Folder Include="Scripts\tinymce\plugins\noneditable\" />
+    <Folder Include="Scripts\tinymce\plugins\pagebreak\" />
+    <Folder Include="Scripts\tinymce\plugins\paste\js\" />
+    <Folder Include="Scripts\tinymce\plugins\paste\langs\" />
+    <Folder Include="Scripts\tinymce\plugins\preview\jscripts\" />
+    <Folder Include="Scripts\tinymce\plugins\print\" />
+    <Folder Include="Scripts\tinymce\plugins\save\" />
+    <Folder Include="Scripts\tinymce\plugins\searchreplace\css\" />
+    <Folder Include="Scripts\tinymce\plugins\searchreplace\js\" />
+    <Folder Include="Scripts\tinymce\plugins\searchreplace\langs\" />
+    <Folder Include="Scripts\tinymce\plugins\spellchecker\css\" />
+    <Folder Include="Scripts\tinymce\plugins\spellchecker\img\" />
+    <Folder Include="Scripts\tinymce\plugins\style\css\" />
+    <Folder Include="Scripts\tinymce\plugins\style\js\" />
+    <Folder Include="Scripts\tinymce\plugins\style\langs\" />
+    <Folder Include="Scripts\tinymce\plugins\tabfocus\" />
+    <Folder Include="Scripts\tinymce\plugins\table\css\" />
+    <Folder Include="Scripts\tinymce\plugins\table\js\" />
+    <Folder Include="Scripts\tinymce\plugins\table\langs\" />
+    <Folder Include="Scripts\tinymce\plugins\template\css\" />
+    <Folder Include="Scripts\tinymce\plugins\template\js\" />
+    <Folder Include="Scripts\tinymce\plugins\template\langs\" />
+    <Folder Include="Scripts\tinymce\plugins\visualchars\" />
+    <Folder Include="Scripts\tinymce\plugins\wordcount\" />
+    <Folder Include="Scripts\tinymce\plugins\xhtmlxtras\css\" />
+    <Folder Include="Scripts\tinymce\plugins\xhtmlxtras\js\" />
+    <Folder Include="Scripts\tinymce\plugins\xhtmlxtras\langs\" />
+    <Folder Include="Scripts\tinymce\themes\advanced\img\" />
+    <Folder Include="Scripts\tinymce\themes\advanced\js\" />
+    <Folder Include="Scripts\tinymce\themes\advanced\langs\" />
+    <Folder Include="Scripts\tinymce\themes\advanced\skins\default\img\" />
+    <Folder Include="Scripts\tinymce\themes\advanced\skins\highcontrast\" />
+    <Folder Include="Scripts\tinymce\themes\advanced\skins\o2k7\img\" />
+    <Folder Include="Scripts\tinymce\themes\simple\img\" />
+    <Folder Include="Scripts\tinymce\themes\simple\langs\" />
+    <Folder Include="Scripts\tinymce\themes\simple\skins\default\" />
+    <Folder Include="Scripts\tinymce\themes\simple\skins\o2k7\img\" />
+    <Folder Include="Scripts\tinymce\utils\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Grid.Api\Grid.Api.csproj">
+      <Project>{12177f99-c094-4d73-a7a3-ef70636b65b9}</Project>
+      <Name>Grid.Api</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Grid.Clients.ITSync\Grid.Clients.ITSync.csproj">
+      <Project>{2c8bdc7a-58a2-409e-be0a-929556398ab1}</Project>
+      <Name>Grid.Clients.ITSync</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Grid.Data\Grid.Data.csproj">
+      <Project>{0CBD413E-F3FF-4AA8-8755-C4A25C05804D}</Project>
+      <Name>Grid.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Grid.Features.Attendance\Grid.Features.Attendance.csproj">
+      <Project>{AAD8B7ED-2E25-44AF-8AB6-72051131C49F}</Project>
+      <Name>Grid.Features.Attendance</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Grid.Features.Auth\Grid.Features.Auth.csproj">
+      <Project>{CCAF882A-A8E0-4B5F-8C7F-D5ADC11823B7}</Project>
+      <Name>Grid.Features.Auth</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Grid.Features.Common\Grid.Features.Common.csproj">
+      <Project>{3876b303-ae18-4e9e-a359-e1e0f0f2c7cd}</Project>
+      <Name>Grid.Features.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Grid.Features.CRM\Grid.Features.CRM.csproj">
+      <Project>{9CCC5E8C-603D-4D0A-B3D2-C7097241CB1E}</Project>
+      <Name>Grid.Features.CRM</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Grid.Features.EmailService\Grid.Features.EmailService.csproj">
+      <Project>{E7A84A59-D016-43AE-AEC3-D3186EB189DC}</Project>
+      <Name>Grid.Features.EmailService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Grid.Features.Feedback\Grid.Features.Feedback.csproj">
+      <Project>{6C169D91-8777-4FBF-BD51-402A90975764}</Project>
+      <Name>Grid.Features.Feedback</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Grid.Features.HRMS\Grid.Features.HRMS.csproj">
+      <Project>{375619dc-6f55-4fc2-bbf2-45a30e89fa73}</Project>
+      <Name>Grid.Features.HRMS</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Grid.Features.IMS\Grid.Features.IMS.csproj">
+      <Project>{B80468CF-5AB2-468B-ADE5-AD790790724A}</Project>
+      <Name>Grid.Features.IMS</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Grid.Features.IT\Grid.Features.IT.csproj">
+      <Project>{611269A9-D4B8-4B02-8699-977CEFF9A1F1}</Project>
+      <Name>Grid.Features.IT</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Grid.Features.KBS\Grid.Features.KBS.csproj">
+      <Project>{4C56F8C3-9E06-482D-823F-B1FB7D910C47}</Project>
+      <Name>Grid.Features.KBS</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Grid.Features.LMS\Grid.Features.LMS.csproj">
+      <Project>{43c09a22-fb14-442d-86e3-40a0f11d4849}</Project>
+      <Name>Grid.Features.LMS</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Grid.Features.Payroll\Grid.Features.Payroll.csproj">
+      <Project>{7CC9899D-729D-49C6-BC3C-C9B4911FF812}</Project>
+      <Name>Grid.Features.Payroll</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Grid.Features.PMS\Grid.Features.PMS.csproj">
+      <Project>{EB9D0C9C-7123-4AF8-AF31-C8CA07CEED11}</Project>
+      <Name>Grid.Features.PMS</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Grid.Features.Recruit\Grid.Features.Recruit.csproj">
+      <Project>{41851AD7-83A8-41CB-8241-7C31CAD17EA5}</Project>
+      <Name>Grid.Features.Recruit</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Grid.Features.RMS\Grid.Features.RMS.csproj">
+      <Project>{67ED02F2-0982-4110-91E6-D69E1A6F73A9}</Project>
+      <Name>Grid.Features.RMS</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Grid.Features.Settings\Grid.Features.Settings.csproj">
+      <Project>{a4968df2-50d1-42a1-b53d-db4ea1963e0c}</Project>
+      <Name>Grid.Features.Settings</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Grid.Features.Social\Grid.Features.Social.csproj">
+      <Project>{9DD6550F-2FA6-494E-B886-9584241C357F}</Project>
+      <Name>Grid.Features.Social</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Grid.Features.TicketDesk\Grid.Features.TicketDesk.csproj">
+      <Project>{D0F63BC4-7518-40A1-9607-AF5A9E4DA883}</Project>
+      <Name>Grid.Features.TicketDesk</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Grid.Generic.Api\Grid.Generic.Api.csproj">
+      <Project>{99dcedae-0047-4b34-ab3f-4bc69a2ba3f4}</Project>
+      <Name>Grid.Generic.Api</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Grid.Infrastructure\Grid.Infrastructure.csproj">
+      <Project>{bef9f095-7a92-4577-bfd5-b31c85191d6b}</Project>
+      <Name>Grid.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Grid.Providers.Blob\Grid.Providers.Blob.csproj">
+      <Project>{C1AEA0BA-C8EE-4CFD-9BA4-377C58AE2154}</Project>
+      <Name>Grid.Providers.Blob</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Grid.Providers.Email\Grid.Providers.Email.csproj">
+      <Project>{7231DAE9-C7A4-48CF-9E74-B98A8866662F}</Project>
+      <Name>Grid.Providers.Email</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Grid.Providers.Plugin\Grid.Providers.Plugin.csproj">
+      <Project>{c389a694-5afc-413e-b61e-768a0f7119a1}</Project>
+      <Name>Grid.Providers.Plugin</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Grid.Providers.Slack\Grid.Providers.Slack.csproj">
+      <Project>{9912097B-4DF9-4549-BDE8-88EBB3E07CD8}</Project>
+      <Name>Grid.Providers.Slack</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Grid.Providers.Social\Grid.Providers.Social.csproj">
+      <Project>{B117C99B-FF8E-4BB1-93F2-080A8FFA1906}</Project>
+      <Name>Grid.Providers.Social</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>43729</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:43729/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <PropertyGroup>
+    <PreBuildEvent>"$(ProjectDir)copyifnewer.bat" "$(ProjectDir)web.config.$(ConfigurationName)" "$(ProjectDir)web.config"</PreBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

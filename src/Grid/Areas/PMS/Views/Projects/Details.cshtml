@@ -1,0 +1,718 @@
+﻿@using Grid.Infrastructure.Extensions
+@model  Grid.Features.PMS.ViewModels.ProjectViewModel
+<div class="row">
+    <div class="col-lg-9">
+        <h2>@Model.Title</h2>
+        <br />
+    </div>
+    @if (ViewBag.webUser == true)
+    {
+        <div class="col-lg-3">
+            @Html.DropDownList("AllProject", null, new { @class = "form-control projectSelector" })
+        </div>
+    } 
+    @if (ViewBag.webUser != true)
+    {
+    <div class="col-lg-3">
+        @Html.DropDownList("MyProjectsId", null, new { @class = "form-control projectSelector" })
+    </div>
+    }
+    </div>
+    <div class="btn-group pull-right" role="group">
+        @*@if (ViewBag.HasPMAccess)
+            {
+                @Html.ActionLink("Edit", "Edit", "Projects", new { id = Model.Id }, new { @class = "btn btn-primary" })
+            }*@
+
+        <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#addNoteModal">Add Activity</a>
+
+        @if (Model.Settings.NeedBilling && ViewBag.HasBillingAccess)
+        {
+            @Html.ActionLink("Add Billing", "Create", "ProjectBillings", new { area = "PMS", projectId = Model.Id }, new { @class = "btn btn-primary" })
+        }
+
+        @if (Model.Settings.NeedMileStones && ViewBag.HasPMAccess)
+        {
+            @Html.ActionLink("Add MileStone", "Create", "ProjectMileStones", new { area = "PMS", projectId = Model.Id }, new { @class = "btn btn-primary" })
+        }
+
+        @if (Model.Settings.NeedDocuments)
+        {
+            @Html.ActionLink("Add Document", "Create", "ProjectDocuments", new { area = "PMS", projectId = Model.Id }, new { @class = "btn btn-primary" })
+        }
+
+        @*@if (ViewBag.HasPMAccess)
+            {
+                @Html.ActionLink("Add Member", "Create", "ProjectMembers", new { area = "PMS", projectId = Model.Id }, new { @class = "btn btn-primary" })
+            }*@
+
+        @if (Model.Settings.NeedTasks)
+        {
+            @Html.ActionLink("Add Task", "CreateTask", "Projects", new { area = "PMS", projectId = Model.Id }, new { @class = "btn btn-primary" })
+        }
+
+        @if (ViewBag.HasPMAccess)
+        {
+            @Html.ActionLink("Settings", "Settings", "Projects", new { area = "PMS", projectId = Model.Id }, new { @class = "btn btn-primary" })
+        }
+
+        @*@Html.ActionLink("Delete", "Delete", "Projects", new { id = Model.Id }, new { @class = "btn btn-primary" })*@
+    </div>
+
+
+
+    <div class="clearfix"></div>
+    <style>
+        .btn-delete {
+            width: 25px;
+            height: 25px;
+            padding: 2px 2px;
+            font-size: 13px;
+            line-height: 1.33;
+            border-radius: 25px;
+        }
+    </style>
+    <div>
+        <hr />
+        <ul class="nav nav-tabs" role="tablist">
+            @if (Model.Settings.NeedCalendar)
+            {
+                <li role="presentation" class="active"><a href="#pcalendar" aria-controls="messages" role="tab" data-toggle="tab">Calendar</a></li>
+                <li role="presentation"><a href="#info" aria-controls="home" role="tab" data-toggle="tab">Info</a></li>
+            }
+            else
+            {
+                <li role="presentation" class="active"><a href="#info" aria-controls="home" role="tab" data-toggle="tab">Info</a></li>
+            }
+
+            <li role="presentation"><a href="#activity" aria-controls="home" role="tab" data-toggle="tab">Activity & Notes</a></li>
+
+            @if (Model.Settings.NeedBilling && ViewBag.HasBillingAccess)
+            {
+                <li role="presentation"><a href="#billing" aria-controls="home" role="tab" data-toggle="tab">Billing</a></li>
+            }
+
+            <li role="presentation"><a href="#effort" aria-controls="home" role="tab" data-toggle="tab">Effort</a></li>
+
+            @if (Model.Settings.NeedMileStones)
+            {
+                <li role="presentation"><a href="#milestones" aria-controls="profile" role="tab" data-toggle="tab">MileStones</a></li>
+            }
+
+            @if (Model.Settings.NeedDocuments)
+            {
+                <li role="presentation"><a href="#documents" aria-controls="profile" role="tab" data-toggle="tab">Documents</a></li>
+            }
+
+            <li role="presentation"><a href="#members" aria-controls="profile" role="tab" data-toggle="tab">Members</a></li>
+
+            @if (Model.Settings.NeedTasks)
+            {
+                <li role="presentation"><a href="#tasks" aria-controls="settings" role="tab" data-toggle="tab">Tasks</a></li>
+            }
+
+        </ul>
+
+        <!-- Tab panes -->
+        <div class="tab-content">
+            @if (Model.Settings.NeedCalendar)
+            {
+                <div role="tabpanel" class="tab-pane active" id="pcalendar">
+                    <br />
+                    <div id='calendar'></div>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="info">
+                    <br />
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <dl class="dl-horizontal">
+                                <dt>
+                                    Client
+                                </dt>
+                                <dd>
+                                    @Html.DisplayNameFor(model => model.Client.Person.Name)
+                                </dd>
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.Description)
+                                </dt>
+                                <dd>
+                                    @Html.DisplayFor(model => model.Description)
+                                </dd>
+                                @if (Model.StartDate.HasValue)
+                                {
+                                    <dt>
+                                        @Html.DisplayNameFor(model => model.StartDate)
+                                    </dt>
+                                    <dd>
+                                        @Model.StartDate.Value.ToShortDateString()
+                                    </dd>
+                                }
+                                @if (Model.EndDate.HasValue)
+                                {
+                                    <dt>
+                                        @Html.DisplayNameFor(model => model.EndDate)
+                                    </dt>
+                                    <dd>
+                                        @Model.EndDate.Value.ToShortDateString()
+                                    </dd>
+                                }
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.Status)
+                                </dt>
+                                <dd>
+                                    @Html.DisplayFor(model => model.Status)
+                                </dd>
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.ProjectType)
+                                </dt>
+                                <dd>
+                                    @Html.DisplayFor(model => model.ProjectType)
+                                </dd>
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.CreatedOn)
+                                </dt>
+                                <dd>
+                                    @Html.DisplayFor(model => model.CreatedOn)
+                                </dd>
+                            </dl>
+                        </div>
+                        <div class="col-lg-6">
+                            <h4>Technologies</h4>
+                            @foreach (var technology in Model.Technologies)
+                {
+                                <span class="label label-primary">@technology.Title</span>
+                            }
+                        </div>
+                    </div>
+
+                </div>
+            }
+            else
+            {
+                <div role="tabpanel" class="tab-pane active" id="info">
+                    <br />
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <dl class="dl-horizontal">
+                                <dt>
+                                    Client
+                                </dt>
+                                <dd>
+                                    @Html.DisplayFor(model => model.Client.Person.Name)
+                                </dd>
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.Description)
+                                </dt>
+                                <dd>
+                                    @Html.DisplayFor(model => model.Description)
+                                </dd>
+                                @if (Model.StartDate.HasValue)
+                                {
+                                    <dt>
+                                        @Html.DisplayNameFor(model => model.StartDate)
+                                    </dt>
+                                    <dd>
+                                        @Model.StartDate.Value.ToShortDateString()
+                                    </dd>
+                                }
+                                @if (Model.EndDate.HasValue)
+                                {
+                                    <dt>
+                                        @Html.DisplayNameFor(model => model.EndDate)
+                                    </dt>
+                                    <dd>
+                                        @Model.EndDate.Value.ToShortDateString()
+                                    </dd>
+                                }
+                                @*<dt>
+                                    @Html.DisplayNameFor(model => model.ProjectType)
+                                </dt>
+                                <dd>
+                                    @Html.DisplayFor(model => model.ProjectType)
+                                </dd>*@
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.Status)
+                                </dt>
+                                <dd>
+                                    @Html.DisplayFor(model => model.Status)
+                                </dd>
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.CreatedOn)
+                                </dt>
+                                <dd>
+                                    @Model.CreatedOn.ToShortDateString()
+                                </dd>
+                            </dl>
+                        </div>
+                        <div class="col-lg-6">
+                            <h4>Technologies</h4>
+                            @foreach (var technology in Model.Technologies)
+                {
+                                <span class="label label-primary">@technology.Title</span>
+                            }
+                        </div>
+                    </div>
+
+                </div>
+            }
+
+            <div role="tabpanel" class="tab-pane" id="activity">
+                <br />
+                <div class="timeline timeline-left gray-blue" data-bind="foreach: activities">
+                    <!-- Main element container -->
+                    <div class="timeline-block">
+                        <!-- Single block -->
+                        <div class="timeline-icon timeline-icon-hide-border">
+                            <i class="fa fa-clock-o fa-lg"></i>
+                        </div>
+                        <div class="timeline-content">
+                            <button type="button" class="btn btn-primary btn-delete pull-right" data-bind="click: $parent.removeActivity">
+                                <i class="fa fa-remove" title="Delete"></i>
+                            </button>
+                            <h3 data-bind="text: Title"></h3>
+                            <p data-bind="html: Comment"></p>
+                            <div class="timeline-date" data-bind="text: CreatedOn"></div> <!-- Date -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div role="tabpanel" class="tab-pane" id="effort">
+                @if (Model.Contributions.Any())
+                {
+                    <table class="table">
+                        <tr>
+                            <th>
+                                Name
+                            </th>
+                            <th>
+                                Effort
+                            </th>
+                            <th></th>
+                        </tr>
+
+                        @foreach (var item in Model.Contributions)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Name)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Effort) hours
+                                </td>
+                                <td></td>
+                            </tr>
+                        }
+
+                        <tr><td></td><td><b>Total Effort: </b> @Model.Contributions.Sum(c => c.Effort) hours</td><td></td></tr>
+                    </table>
+                }
+                <div class="row">
+                    @*<div class="form-group">
+                            <div class="col-sm-2">
+                                <label>Start Date</label>
+                                <input type="text" class="form-control" name="date" data-bind="dateTimePicker: startDate" placeholder="Enter Start Date">
+                            </div>
+                            <div class="col-sm-2">
+                                <label>End Date</label>
+                                <input type="text" class="form-control" name="date" data-bind="dateTimePicker: endDate" placeholder="Enter End Date">
+                            </div>
+                        </div>*@
+                    <div class="col-lg-12">
+                        <h2>Effort By Time</h2>
+                        <graph params="Id: @Model.Id"></graph>
+                        @*<graph params="Id: @Model.Id,Start:startDate,End:endDate"></graph>*@
+                    </div>
+                </div>
+            </div>
+
+            @if (Model.Settings.NeedBilling && ViewBag.HasBillingAccess)
+            {
+                <div role="tabpanel" class="tab-pane" id="billing">
+                    <br />
+                    <dl class="dl-horizontal">
+                        <dt>
+                            Billing Type
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Billing)
+                        </dd>
+
+                        <dt>
+                            Expected Billing
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.ExpectedBillingAmount)
+                        </dd>
+                        <dt>
+                            Actual Billing
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.ActualBillingAmount)
+                        </dd>
+                    </dl>
+                    <table class="table">
+                        <tr>
+                            <th>
+                                Bill Date
+                            </th>
+                            <th>
+                                Amount
+                            </th>
+                            <th>
+                                Charged On
+                            </th>
+                            <th></th>
+                        </tr>
+
+                        @foreach (var item in Model.ProjectBillings)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.BillingDate)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Amount)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.CreatedOn)
+                                </td>
+                                <td>
+                                    @Html.ActionLink("Details", "Details", "ProjectBillings", new { id = item.Id, area = "PMS" }, null) |
+                                    @Html.ActionLink("Delete", "Delete", "ProjectBillings", new { id = item.Id, area = "PMS" }, null)
+                                </td>
+                            </tr>
+                        }
+
+                    </table>
+                </div>
+            }
+            @if (Model.Settings.NeedMileStones)
+            {
+                <div role="tabpanel" class="tab-pane" id="milestones">
+                    @if (Model.ProjectMileStonesStones.Any())
+                    {
+                        <table class="table">
+                            <tr>
+                                <th>
+                                    Target Date
+                                </th>
+                                <th>
+                                    Title
+                                </th>
+                                <th>
+                                    Status
+                                </th>
+                                <th>
+                                    Added On
+                                </th>
+                                <th></th>
+                            </tr>
+
+                            @foreach (var item in Model.ProjectMileStonesStones)
+                            {
+                                <tr>
+                                    <td>
+                                        @item.TargetDate.ToShortDateString()
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Title)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Status)
+                                    </td>
+                                    <td>
+                                        @item.CreatedOn.ToShortDateString()
+                                    </td>
+                                    <td>
+                                        @if (ViewBag.HasPMAccess)
+                                        {
+                                            @Html.ActionLink("Edit", "Edit", "ProjectMileStones", new { id = item.Id, area = "PMS" }, null)
+                                            @:|
+                                            @Html.ActionLink("Delete", "Delete", "ProjectMileStones", new { id = item.Id, area = "PMS" }, null)
+                                        }
+                                    </td>
+                                </tr>
+                            }
+                        </table>
+                    }
+                </div>
+            }
+
+            @if (Model.Settings.NeedDocuments)
+            {
+                <div role="tabpanel" class="tab-pane" id="documents">
+                    @if (Model.ProjectDocuments.Any())
+                    {
+                        <br />
+                        <table class="table">
+                            <tr>
+                                <th>
+                                    Document Type
+                                </th>
+                                <th>
+                                    Name
+                                </th>
+                                <th>
+                                    Created On
+                                </th>
+                                <th></th>
+                            </tr>
+
+                            @foreach (var item in Model.ProjectDocuments)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.DocumentType)
+                                    </td>
+                                    <td>
+                                        <a href="@item.DocumentPath" target="_blank">@item.FileName</a>
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.CreatedOn)
+                                    </td>
+                                    <td>
+                                        @Html.ActionLink("Delete", "Delete", "ProjectDocuments", new { area = "PMS", id = item.Id }, null)
+                                    </td>
+                                </tr>
+                            }
+                        </table>
+                    }
+                </div>
+            }
+
+            <div role="tabpanel" class="tab-pane" id="members">
+                @if (Model.ProjectMembers.Any())
+                {
+                    <table class="table">
+                        <tr>
+                            <th>
+                                Name
+                            </th>
+                            <th>
+                                Role
+                            </th>
+                            <th>
+                                Added On
+                            </th>
+                            @*@if (ViewBag.HasPMAccess)
+                                {
+                                    <th></th>
+                                }*@
+                        </tr>
+                        @foreach (var item in Model.ProjectMembers)
+                        {
+                            <tr>
+                                <td>
+                                    @*@Html.ActionLink(item.MemberEmployee.User.Person.Name, "UserProfile", "EmployeeDirectory", new { area = "HRMS", id = item.MemberEmployee.Id }, null)*@
+                                    @Html.DisplayFor(modelItem => item.MemberEmployee.User.Person.Name)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Role)
+                                </td>
+                                <td>
+                                    @item.CreatedOn.ToShortDateString()
+                                </td>
+                                @*@if (ViewBag.HasPMAccess)
+                                    {
+                                        <td>
+                                            @Html.ActionLink("Edit", "Edit", "ProjectMembers", new {id = item.Id, area = "PMS"}, null) |
+                                            @Html.ActionLink("Delete", "Delete", "ProjectMembers", new {id = item.Id, area = "PMS"}, null)
+                                        </td>
+                                    }*@
+
+                            </tr>
+                        }
+
+                    </table>
+                }
+            </div>
+            @if (Model.Settings.NeedTasks)
+            {
+                <div role="tabpanel" class="tab-pane" id="tasks">
+                    <table class="table">
+                        <tr>
+                            <th>
+                                Code
+                            </th>
+                            <th>
+                                Title
+                            </th>
+                            <th>
+                                Priority
+                            </th>
+
+                            <th>
+                                Start Date
+                            </th>
+                            <th>
+                                Due Date
+                            </th>
+                            <th>
+                                Allocated Time
+                            </th>
+                            <th>
+                                Status
+                            </th>
+                            <th></th>
+                        </tr>
+
+                        @foreach (var item in Model.Tasks)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Code)
+                                </td>
+                                <td>
+                                    @{
+                                        var title = @item.Title.Truncate(80);
+                                    }
+
+                                    @Html.ActionLink(title, "Details", "Tasks", new { area = "PMS", id = item.Id }, null)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Priority)
+                                </td>
+                                <td>
+                                    @if (item.StartDate.HasValue)
+                                    {
+                                        @item.StartDate.Value.ToShortDateString()
+                                    }
+                                    else
+                                    {
+                                        <span>No Start Date</span>
+                                    }
+                                </td>
+                                <td>
+                                    @if (item.DueDate.HasValue)
+                                    {
+                                        @item.DueDate.Value.ToShortDateString()
+                                    }
+                                    else
+                                    {
+                                        <span>No Due Date</span>
+                                    }
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ExpectedTime)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.TaskStatus)
+                                </td>
+                                <td>
+                                    @if (ViewBag.HasPMAccess)
+                                    {
+                                        @Html.ActionLink("Edit", "EditTask", "Projects", new { id = item.Id, area = "PMS" }, null)
+                                        @:|
+                        }
+                                    @Html.ActionLink("Change Status", "ChangeTaskStatus", "Projects", new { id = item.Id, area = "PMS" }, null)
+                                </td>
+                            </tr>
+                                        }
+
+                    </table>
+                </div>
+                                        }
+        </div>
+    </div>
+    <div class="modal fade" id="addNoteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Add Activity</h4>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <input type="text" id="newNoteTitle" class="form-control" value="Note" />
+                        </div>
+                        <div class="form-group">
+                            <textarea id="newNote" class="form-control htmlEditor"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bind="click: addNewNote">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    @section Scripts{
+        <script>
+            $(document)
+                .ready(function () {
+
+                    $("#MyProjectsId")
+                        .change(function () {
+                            var end = this.value;
+                            window.location.href = "/PMS/Projects/Details/" + end;
+                        });
+
+                    $('#calendar')
+                        .fullCalendar({
+                            eventClick: function (calEvent, jsEvent, view) {
+
+                            },
+                            dayClick: function (date, jsEvent, view) {
+                            },
+
+                            eventSources:
+                            [
+                                {
+                                    url: '/PMS/Projects/MileStones/@Model.Id',
+                                    color: 'violet',
+                                    textColor: 'white'
+                                },
+                                {
+                                    url: '/PMS/Projects/Tasks/@Model.Id',
+                                    color: 'green',
+                                    textColor: 'white'
+                                },
+                                //{
+                                //    url: '/LMS/Holidays/Holidays',
+                                //    color: 'orange',
+                                //    textColor: 'white'
+                                //},
+                                {
+                                    url: '/PMS/Projects/Leaves/@Model.Id',
+                                    color: 'red',
+                                    textColor: 'white'
+                                }
+                            ]
+                        });
+
+                    @*var effortByDate = c3.generate({
+                    bindto: '#effortByDate',
+                    data:{
+                        x: 'x',
+                        xFormat: '%m/%d/%Y',
+                        url: '/PMS/Projects/EffortByDateCSV?projectId=@Model.Id',
+                        type: 'area',
+                    },
+                    axis: {
+                        x: {
+                            type: 'timeseries',
+                            tick: {
+                                format: '%m/%d/%Y'
+                            }
+                        }
+                    },
+                    legend: {
+                        position: 'inset'
+                    }
+                });*@
+                });
+        </script>
+
+        <script src="~/App/ProjectDetailsViewModel.js"></script>
+        <script src="~/Scripts/moment.min.js"></script>
+        <script>
+            var vm = new ProjectDetailsViewModel();
+            vm.init('@Model.Id');
+            ko.applyBindings(vm);
+        </script>
+    }

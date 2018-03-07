@@ -1,0 +1,104 @@
+﻿@model Grid.Features.Recruit.Entities.Candidate
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete Candidate</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <hr/>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Person.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Person.FirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Source)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Source)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Qualification)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Qualification)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TotalExperience)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TotalExperience)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ResumePath)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ResumePath)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PhotoPath)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PhotoPath)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Comments)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Comments)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CurrentCTC)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CurrentCTC)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ExpectedCTC)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ExpectedCTC)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default"/>
+        </div>
+    }
+</div>

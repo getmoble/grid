@@ -1,0 +1,50 @@
+﻿@model Grid.Features.PMS.Entities.TimeSheetLineItem
+
+<h2>Timesheet Entry Details</h2>
+
+<hr />
+<dl class="dl-horizontal">
+    <dt>
+        Project
+    </dt>
+    <dd>
+        @Html.DisplayFor(model => model.Project.Title)
+    </dd>
+    <dt>
+        Task Summary
+    </dt>
+    <dd>
+        @Html.DisplayFor(model => model.TaskSummary)
+    </dd>
+    <dt>
+        @Html.DisplayNameFor(model => model.Effort)
+    </dt>
+    <dd>
+        @Html.DisplayFor(model => model.Effort)
+    </dd>
+    <dt>
+        @Html.DisplayNameFor(model => model.Comments)
+    </dt>
+    <dd>
+        @Html.DisplayFor(model => model.Comments)
+    </dd>
+    <dt>
+        @Html.DisplayNameFor(model => model.WorkType)
+    </dt>
+    <dd>
+        @Html.DisplayFor(model => model.WorkType)
+    </dd>
+    <dt>
+        Date
+    </dt>
+    <dd>
+        @Model.TimeSheet.Date.ToShortDateString()
+    </dd>
+    <dt>
+        Submitted By
+    </dt>
+    <dd>
+        @Model.TimeSheet.CreatedByUser.Person.Name
+    </dd>
+</dl>
+

@@ -1,0 +1,168 @@
+﻿@model  Grid.Features.PMS.ViewModels.EstimateSearchViewModel
+
+<div class="btn-group pull-right" role="group">
+    <a href="#" data-bind="click:createEstimate" class="btn btn-primary">Create</a>
+</div>
+<h2>Estimate Builder</h2>
+<div class="modal fade higherWider" id="createEstimateModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-xlg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel" data-bind="text: pageTitle"></h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <p>Title</p>
+                        <input type="text" data-bind="value: title" class="form-control" placeholder="Enter Title" />
+                    </div>
+                </div>
+                <form class="form-inline">
+                    <a data-bind="click: addRow" class="btn btn-primary pull-right"><i class="fa fa-plus" aria-hidden="true"></i></a>
+                </form>
+                <br/>
+                <table class="table table-striped table-bordered table-list">
+                    <thead>
+                    <tr>
+                        <th>Module</th>
+                        <th>Task</th>
+                        <th>Effort</th>
+                        <th>Type</th>
+                        <th>Comments</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody data-bind="foreach: Rows">
+                    <tr>
+                        <td>
+                            <input type="text" data-bind="value: Module" class="form-control" placeholder="Enter Module"/>
+                        </td>
+                        <td>
+                            <input type="text" data-bind="value: Task" class="form-control" placeholder="Enter Task"/>
+                        </td>
+                        <td>
+                            <input type="text" data-bind="value: Effort" class="form-control" placeholder="Hours"/>
+                        </td>
+                        <td>
+                            <select data-bind="options: $parent.WorkTypes, value: WorkType, optionsText: 'Title', optionsValue: 'Id'" class="form-control"></select>
+                        </td>
+                        <td>
+                            <input type="text" data-bind="value: Comment" class="form-control" placeholder="Enter Comments"/>
+                        </td>
+                        <td>
+                            <div class="btn-group" role="group">
+                                <a data-bind="click: $parent.removeRow" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                                <a data-bind="click: $parent.addRow" class="btn btn-primary"><i class="fa fa-plus" aria-hidden="true"></i></a>
+                            </div>
+
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <br/>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <p>Enter Comments</p>
+                        <textarea data-bind="value: Comments" class="form-control"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" data-bind="ladda: isBusy, click: postSheet" class="btn btn-primary ladda-button" data-color="green" data-style="expand-left">Submit</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="editEstimateModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-xlg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel" data-bind="text: pageTitle"></h4>
+            </div>
+            <div class="modal-body">
+                <table class="table table-striped table-bordered table-list">
+                    <thead>
+                    <tr>
+                        <th>Project</th>
+                        <th>Task</th>
+                        <th>Effort</th>
+                        <th>Billable</th>
+                        <th>Comments</th>
+                    </tr>
+                    </thead>
+                    <tbody data-bind="foreach: Rows">
+                    <tr>
+                        <td>
+                            <span data-bind="text: Module" style="min-width: 150px"></span>
+                        </td>
+                        <td>
+                            <span data-bind="text: Task" style="min-width: 150px"></span>
+                        </td>
+                        <td>
+                            <span data-bind="text: Effort"></span>
+                        </td>
+                        <td>
+                            <select data-bind="options: $parent.WorkTypes, value: WorkType, optionsText: 'Title', optionsValue: 'Id'" class="form-control" disabled></select>
+                        </td>
+                        <td>
+                            <span data-bind="text: Comment" style="min-width: 150px"></span>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <p data-bind="text:Comments">
+
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<table class="table">
+    <tr>
+        <th>
+            Title
+        </th>
+        <th>
+            Last Updated On
+        </th>
+        <th>
+            Actions
+        </th>
+    </tr>
+
+    @foreach (var item in Model.Estimates)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedOn)
+            </td>
+            <td>
+                <a href="#" data-id="@item.Id" class="updateEstimate">Update</a>
+                <a href="#" data-id="@item.Id" class="viewEstimate">View</a>
+            </td>
+        </tr>
+    }
+</table>
+
+@section Scripts{
+    <script src="~/App/EstimateBuilderViewModel.js"></script>
+    <script>
+        $(document).ready(function () {
+            var vm = new EstimateBuilderViewModel();
+            ko.applyBindings(vm);
+
+            $(".estimate").click(function () {
+                // Holds the iD of the clicked element
+                var estimateId = $(this).attr('data-id');
+                vm.loadEstimate(estimateId);
+            });
+        });
+    </script>
+}
+

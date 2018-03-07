@@ -1,0 +1,677 @@
+﻿@using Grid.Infrastructure
+@using Grid.Infrastructure.Extensions
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grid</title>
+    <link href="~/Content/bootstrap.flatly.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/style.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/bootstrap-datetimepicker.min.css" rel="stylesheet" /> 
+    <link href="~/Content/bootstrap-datepicker.min.css" rel="stylesheet" /> 
+    <link href="~/Content/c3.min.css" rel="stylesheet" />
+    <link href="~/Content/jquery-te-1.4.0.css" rel="stylesheet" />
+    <link href="~/Content/fullcalendar.min.css" rel="stylesheet" />
+    <link href="~/Content/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/Content/timeline.min.css" rel="stylesheet" />
+    <link href="~/Content/selectize.css" rel="stylesheet" />
+    <link href="~/Content/selectize.bootstrap3.css" rel="stylesheet" />
+    <link href="~/Content/ladda-themeless.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/Content/animate.min.css">
+    <link rel="stylesheet" href="~/Content/pnotify.custom.min.css">
+    <link rel="stylesheet" href="~/Content/typeaheadjs.css">
+    <link rel="stylesheet" href="~/Content/summernote/summernote.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    @if (!Html.IsDebug())
+    {
+        <script src="~/Scripts/appInsights.js"></script>
+    }
+</head>
+<body>
+    <!-- Static navbar -->
+    <nav class="navbar navbar-default navbar-static-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/"><i class="fa fa-th" aria-hidden="true"></i> @ViewBag.ApplicationTitle</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    @if (PermissionChecker.CheckPermission(ViewBag.Permissions as List<int>, 200))
+                    {
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Company<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li>@Html.ActionLink("Locations", "Index", "Locations", new { area = "Company" }, null)</li>
+                                @*<li>@Html.ActionLink("Permissions", "Index", "Permissions", new { area = "Company" }, null)</li>*@
+                                <li>@Html.ActionLink("Roles", "Index", "Roles", new { area = "Company" }, null)</li>
+                                <li>@Html.ActionLink("Technologies", "Index", "Technologies", new { area = "Company" }, null)</li>
+                                <li>@Html.ActionLink("Email Templates", "Index", "EmailTemplates", new { area = "Company" }, null)</li>
+                                <li>@Html.ActionLink("Awards", "Index", "Awards", new { area = "Company" }, null)</li>
+                            </ul>
+                        </li>
+                    }
+
+                    @if (PermissionChecker.CheckPermission(ViewBag.Permissions as List<int>, 210))
+                    {
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">HRMS<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li>@Html.ActionLink("Departments", "Index", "Departments", new { area = "HRMS" }, null)</li>
+                                <li>@Html.ActionLink("Designations", "Index", "Designations", new { area = "HRMS" }, null)</li>
+                                <li>@Html.ActionLink("Shifts", "Index", "Shifts", new { area = "HRMS" }, null)</li>
+                                <li>@Html.ActionLink("Skills", "Index", "Skills", new { area = "HRMS" }, null)</li>
+                                <li>@Html.ActionLink("Hobbies", "Index", "Hobbies", new { area = "HRMS" }, null)</li>
+                                <li>@Html.ActionLink("Certifications", "Index", "Certifications", new { area = "HRMS" }, null)</li>
+                                @*<li>@Html.ActionLink("Employees", "Index", "Users", new { area = "HRMS" }, null)</li>*@
+                                <li>@Html.ActionLink("Employees", "Index", "Employees", new { area = "HRMS" }, null)</li>
+                                <li>@Html.ActionLink("Dashboard", "Index", "HRMSDashboard", new { area = "HRMS" }, null)</li>
+                            </ul>
+                        </li>
+                    }
+                    @*<li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Employee Directory<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li>@Html.ActionLink("Employee Directory", "Index", "Employees", new { area = "HRMS" }, null)</li>
+                            </ul>
+                        </li>*@
+
+                    @if (PermissionChecker.CheckPermission(ViewBag.Permissions as List<int>, 500))
+                    {
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Recruit<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li>@Html.ActionLink("Job Openings", "Index", "JobOpenings", new { area = "Recruit" }, null)</li>
+                                <li>@Html.ActionLink("Designations", "Index", "CandidateDesignations", new { area = "Recruit" }, null)</li>
+                                <li>@Html.ActionLink("Candidates", "Index", "Candidates", new { area = "Recruit" }, null)</li>
+                                <li>@Html.ActionLink("Candidates Dashboard", "Index", "CandidatesDashboard", new { area = "Recruit" }, null)</li>
+                                <li>@Html.ActionLink("Referals", "Index", "Referals", new { area = "Recruit" }, null)</li>
+                                <li>@Html.ActionLink("Rounds", "Index", "Rounds", new { area = "Recruit" }, null)</li>
+                                <li>@Html.ActionLink("Interviews", "Index", "InterviewRounds", new { area = "Recruit" }, null)</li>
+                                <li>@Html.ActionLink("Offers", "Index", "JobOffers", new { area = "Recruit" }, null)</li>
+                            </ul>
+                        </li>
+                    }
+
+                    @*@if (PermissionChecker.CheckPermission(ViewBag.Permissions as List<int>, 215))
+                        {*@
+                    <li class=""><a href="/LMS/Leaves/">LMS</a></li>
+
+                    @*}*@
+
+                    @if (PermissionChecker.CheckPermission(ViewBag.Permissions as List<int>, 230))
+                    {
+                        @*<li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Attendance <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                </ul>
+                            </li>*@
+                    }
+                    <li class=""><a href="/TMS/TimeSheets/TimesheetManage/">TMS</a></li>
+                    @*@if (PermissionChecker.CheckPermission(ViewBag.Permissions as List<int>, 550))
+                    {
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">TMS <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li>@Html.ActionLink("Timesheets", "Index", "TimeSheets", new { area = "TMS" }, null)</li>
+                                <li>@Html.ActionLink("Timesheet Entries", "Index", "TimeSheetLineItems", new { area = "TMS" }, null)</li>
+                                <li>@Html.ActionLink("Missed Timesheets", "Index", "TimeSheetMiss", new { area = "TMS" }, null)</li>
+                            </ul>
+                        </li>
+                    }*@
+
+                    <li class=""><a href="/IMS/Assets/Create/">IMS</a></li>
+
+                    @*@if (PermissionChecker.CheckPermission(ViewBag.Permissions as List<int>, 250))
+                    {
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">IMS<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li>@Html.ActionLink("Vendors", "Index", "Vendors", new { area = "IMS" }, null)</li>
+                                <li>@Html.ActionLink("Asset Categories", "Index", "AssetCategories", new { area = "IMS" }, null)</li>
+                                <li>@Html.ActionLink("Assets", "Index", "Assets", new { area = "IMS" }, null)</li>
+                                <li>@Html.ActionLink("Dashboard", "Index", "IMSDashboard", new { area = "IMS" }, null)</li>
+                            </ul>
+                        </li>
+                    }*@
+
+
+                    @if (PermissionChecker.CheckPermission(ViewBag.Permissions as List<int>, 230))
+                    {
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">IT<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li>@Html.ActionLink("Software Categories", "Index", "SoftwareCategories", new { area = "IT" }, null)</li>
+                                <li>@Html.ActionLink("Softwares", "Index", "Softwares", new { area = "IT" }, null)</li>
+                            </ul>
+                        </li>
+                    }
+
+
+                    @if (PermissionChecker.CheckPermission(ViewBag.Permissions as List<int>, 220))
+                    {
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">CRM<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li>@Html.ActionLink("Technologies", "Index", "Technologies", new { area = "Company" }, null)</li>
+                                @if (PermissionChecker.CheckPermission(ViewBag.Permissions as List<int>, 222))
+                {
+                                    <li>@Html.ActionLink("Lead Sources", "Index", "CRMLeadSources", new { area = "CRM" }, null)</li>
+                                    <li>@Html.ActionLink("Lead Status", "Index", "CRMLeadStatus", new { area = "CRM" }, null)</li>
+                                    <li>@Html.ActionLink("Lead Categories", "Index", "CRMLeadCategories", new { area = "CRM" }, null)</li>
+                                }
+
+                                <li>@Html.ActionLink("Leads", "Index", "CRMLeads", new { area = "CRM" }, null)</li>
+
+                                @if (PermissionChecker.CheckPermission(ViewBag.Permissions as List<int>, 222))
+                {
+                                    <li>@Html.ActionLink("Sales Stages", "Index", "CRMSalesStages", new { area = "CRM" }, null)</li>
+                                    <li>@Html.ActionLink("Potential Categories", "Index", "CRMPotentialCategories", new { area = "CRM" }, null)</li>
+                                }
+
+                                <li>@Html.ActionLink("Potentials", "Index", "CRMPotentials", new { area = "CRM" }, null)</li>
+                                <li>@Html.ActionLink("Accounts", "Index", "CRMAccounts", new { area = "CRM" }, null)</li>
+                                <li>@Html.ActionLink("Contacts", "Index", "CRMContacts", new { area = "CRM" }, null)</li>
+                                <li>@Html.ActionLink("Dashboard", "Index", "CRMDashboard", new { area = "CRM" }, null)</li>
+                            </ul>
+                        </li>
+                    }
+
+                    @if (PermissionChecker.CheckPermission(ViewBag.Permissions as List<int>, 225))
+                    {
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Requirements <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li>@Html.ActionLink("Requirement Categories", "Index", "RequirementCategories", new { area = "RMS" }, null)</li>
+                                <li>@Html.ActionLink("Requirements", "Index", "Requirements", new { area = "RMS" }, null)</li>
+                                <li>@Html.ActionLink("Dashboard", "Index", "RMSDashboard", new { area = "RMS" }, null)</li>
+                            </ul>
+                        </li>
+                    }
+
+                    <li class=""><a href="/PMS/Projects/">PMS</a></li>
+                    @*<li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">PMS<span class="caret"></span></a>
+                        <ul class="dropdown-menu">*@
+                            @*<li>@Html.ActionLink("Estimates", "Index", "Estimate", new { area = "PMS" }, null)</li>*@
+                            @*<li>@Html.ActionLink("Projects", "Index", "Projects", new { area = "PMS" }, null)</li>*@
+                            @*<li>@Html.ActionLink("Projects", "Index", "Project", new { area = "PMS" }, null)</li>
+                            <li>@Html.ActionLink("Tasks", "Index", "Tasks", new { area = "PMS" }, null)</li>
+                        </ul>
+                    </li>*@
+
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">KBS<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            @if (PermissionChecker.CheckPermission(ViewBag.Permissions as List<int>, 700))
+            {
+                                <li>@Html.ActionLink("Categories", "Index", "Categories", new { area = "KBS" }, null)</li>
+                            }
+
+                            <li>@Html.ActionLink("Manage Articles", "Manage", "Articles", new { area = "KBS" }, null)</li>
+                        </ul>
+                    </li>
+
+                    @if (PermissionChecker.CheckPermission(ViewBag.Permissions as List<int>, 1100))
+                    {
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Ticket Desk <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li>@Html.ActionLink("Ticket Categories", "Index", "TicketCategories", new { area = "TicketDesk" }, null)</li>
+                                <li>@Html.ActionLink("Ticket Sub Categories", "Index", "TicketSubCategories", new { area = "TicketDesk" }, null)</li>
+                                <li>@Html.ActionLink("Tickets", "Index", "Tickets", new { area = "TicketDesk", HideCompleted = true }, null)</li>
+                            </ul>
+                        </li>
+                    }
+
+                    @if (PermissionChecker.CheckPermission(ViewBag.Permissions as List<int>, 909))
+                    {
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Settings<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li>@Html.ActionLink("Settings", "Index", "Settings", new { area = "Settings" }, null)</li>
+                                <li>@Html.ActionLink("Scheduled Jobs", "Index", "ScheduledJobs", new { area = "" }, null)</li>
+                            </ul>
+                        </li>
+                    }
+
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-rocket" aria-hidden="true"></i><span>Quick Access</span><span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            @if (PermissionChecker.CheckPermission(ViewBag.Permissions as List<int>, 225))
+            {
+                                <li>@Html.ActionLink("Add Requirement", "Create", "Requirements", new { area = "RMS" }, null)</li>
+                            }
+                            @if (PermissionChecker.CheckPermission(ViewBag.Permissions as List<int>, 220))
+            {
+                                <li>@Html.ActionLink("Add Lead", "Create", "CRMLeads", new { area = "CRM" }, null)</li>
+                            }
+                            @if (PermissionChecker.CheckPermission(ViewBag.Permissions as List<int>, 210))
+            {
+                                <li>@Html.ActionLink("Add Candidate", "Create", "Candidates", new { area = "Recruit" }, null)</li>
+                                <li>@Html.ActionLink("Add Employee", "Create", "Users", new { area = "HRMS" }, null)</li>
+                            }
+                            @if (PermissionChecker.CheckPermission(ViewBag.Permissions as List<int>, 300))
+            {
+                                <li>@Html.ActionLink("Add TimeSheet", "MyTimeSheet", "TimeSheet", new { area = "PMS" }, null)</li>
+                                @*<li>@Html.ActionLink("Apply Leave", "Create", "Leaves", new { area = "LMS" }, null)</li>*@
+                                <li>@Html.ActionLink("Raise Ticket", "Create", "Tickets", new { area = "TicketDesk" }, null)</li>
+                            }
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">@ViewBag.Name <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            @*<li>@Html.ActionLink("Employee Directory", "Directory", "EmployeeDirectory", new { area = "HRMS" }, null)</li>*@
+                            <li>@Html.ActionLink("Job Openings", "Openings", "JobOpenings", new { area = "Recruit" }, null)</li>
+                            <li>@Html.ActionLink("Knowledge Base", "Index", "Articles", new { area = "KBS" }, null)</li>
+                            <li class="nav-divider"></li>
+                            <li>@Html.ActionLink("Change Password", "ChangePassword", "Profile", new { area = "" }, null)</li>
+                            <li>@Html.ActionLink("My Profile", "Index", "Profile", new { area = "" }, null)</li>
+                            @if (PermissionChecker.CheckPermission(ViewBag.Permissions as List<int>, 300))
+            {
+                                <li>@Html.ActionLink("My TimeSheets", "MyTeam", "TimeSheet", new { area = "PMS" }, null)</li>
+                                @*<li>@Html.ActionLink("My Leaves", "MyLeaves", "Leaves", new { area = "LMS" }, null)</li>*@
+                                <li>@Html.ActionLink("My Tickets", "MyTickets", "Tickets", new { area = "TicketDesk", HideCompleted = true }, null)</li>
+                                <li>@Html.ActionLink("My Tasks", "Index", "Tasks", new { area = "PMS", HideCompleted = true }, null)</li>
+                                <li>@Html.ActionLink("My Interviews", "MyInterviews", "InterviewRounds", new { area = "Recruit", Status = 0 }, null)</li>
+                            }
+                            <li>@Html.ActionLink("My Calendar", "Index", "MyCalendar", new { area = "Calendar" }, null)</li>
+                            <li class="nav-divider"></li>
+                            <li><a href="#" data-toggle="modal" data-target="#aboutModal">About</a></li>
+                            @*<li><a href="#" id="markPresence">Mark My Presence</a></li>*@
+                            <li>@Html.ActionLink("Sign Out", "SignOut", "Account", new { area = "" }, null)</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div><!--/.nav-collapse -->
+        </div><!--/.container-fluid -->
+    </nav>
+    <div class="container-fluid">
+        @RenderBody()
+    </div>
+
+    <script type="text/html" id="list-template">
+        <div class="text-right">
+            <button class="btn btn-primary" data-bind="click:create"> Create</button>
+        </div>
+        <div data-bind="if:hasData">
+
+            <div class="" style="display: inline-table;" data-bind="if:enableFilter">
+                <div class="input-field col s12">
+                    <input id="search" class="validate lvhs-input" autofocus="autofocus" data-bind="textInput:filter" kl_virtual_keyboard_secure_input="on" type="text">
+                    <label class="" for="search">Find...</label>
+                </div>
+            </div>
+            <table class="table table-responsive table-hover" data-bind="loadingWhen: isBusy">
+                <thead class="text-center">
+                    <tr>
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th>Created On</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody data-bind="foreach: filteredData">
+                    <tr>
+                        <td><span data-bind="text:name"></span></td>
+                        <td><span data-bind="text:description"></span></td>
+                        <td><span data-bind="dateString:createdOn"></span></td>
+                        <td>
+                            <div>
+                                <a class="btn btn-primary" href="#" aria-label="Details" data-bind="click:$parent.details"><i class="fa fa-info" aria-hidden="true"></i></a>
+                                <a class="btn btn-primary" href="#" aria-label="Edit" data-bind="visible:$parent.manageList,click:$parent.edit"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                                <a class="btn btn-danger" href="#" aria-label="Delete" data-bind="visible:$parent.manageList,click:$parent.delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-lg-12">
+            <div data-bind="ifnot:hasData">
+                <div class="card" data-bind="ifnot:hasData">
+                    <div class="alert alert-warning text-center">
+                        <div data-bind="ifnot:hasData"><div class="alert alert-warning text-center">Looks like we don't have any tests so far.</div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </script>
+
+    <script type="text/html" id="dropdown-template">
+        <label data-bind="text:labelName"></label>
+        <select data-bind="options: data,optionsText: 'name',optionsValue: 'id',value: selectedId, optionsCaption: caption" class="form-control"></select>
+    </script>
+    <script type="text/html" id="multiselectdropdown-template">
+        <label data-bind="text:labelName"></label>
+        <select class="form-control selectit selectized" data-bind="options:data, selectedOptions: selectedIds, optionsText:'Name',optionsValue:'Id'" multiple="multiple"></select>
+        <label class='active' data-bind='text:labelName'></label>
+    </script>
+    @*@Html.Partial("_UserFeedback")*@
+
+    <script src="~/Scripts/jquery-2.2.1.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Scripts/jquery-te-1.4.0.min.js"></script>
+    <script src="~/Scripts/knockout-3.4.0.js"></script>
+    <script src="~/Scripts/knockout.mapping-latest.js"></script>
+    <script src="~/Scripts/knockout.validation.min.js"></script>
+    <script src="~/Scripts/knockout.validation.config.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/typeahead.bundle.min.js"></script>
+    <script src="~/Scripts/bootbox.min.js"></script>
+    <script src="~/Scripts/moment.min.js"></script>
+    <script src="~/Scripts/jquery.timeago.min.js"></script>
+    <script src="~/Scripts/livestamp.js"></script>
+    <script src="~/Scripts/bootstrap-datetimepicker.min.js"></script>
+    <script src="~/Scripts/bootstrap-datepicker.min.js"></script>
+    <script src="//d3js.org/d3.v3.min.js" charset="utf-8"></script>
+    <script src="~/Scripts/c3.min.js"></script>
+    <script src="~/App/Framework.js"></script>
+    <script src="~/Scripts/fullcalendar.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script src="~/Scripts/selectize.min.js"></script>
+    <script src="~/Scripts/spin.min.js"></script>
+    <script src="~/Scripts/ladda.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+    <script src="~/Scripts/jquery.signalR-2.2.0.min.js"></script>
+    <script src="~/signalr/hubs"></script>
+    <script src="~/Scripts/pnotify.custom.min.js"></script>
+    <script src="~/Scripts/JSLINQ.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/amplifyjs/1.1.2/amplify.js"> </script>
+    <script src="~/Content/summernote/summernote.min.js"></script>
+    <script src="~/App/Shared/urls.js"></script>
+    <script src="~/App/Shared/rapid.js"></script>
+    <script src="~/App/Shared/messages.js"></script>
+    <script src="~/App/Component/Common/selectItemModel.js"></script>
+    <script src="~/App/Component/Common/listDataModel.js"></script>
+    <script src="~/App/Component/Holiday/holidayModel.js"></script>
+    <script src="~/App/Component/LeaveHistory/leaveHistoryModel.js"></script>
+    <script src="~/App/Component/Holiday/holidaySearchComponent.js"></script>
+    <script src="~/App/Component/LeaveHistory/employeeSearchComponent.js"></script>
+    <script src="~/App/Component/Common/dropDownComponent.js"></script>
+    <script src="~/App/Component/Common/multiDropdownComponent.js"></script>
+    <script src="~/App/Component/Holiday/holidayListComponent.js"></script>
+    <script src="~/App/Component/LeavePeriods/leavePeriodsListComponent.js"></script>
+    <script src="~/App/Component/LeaveTypes/leaveTypesListComponent.js"></script>
+    <script src="~/App/Component/LeaveHistory/leaveHistoryListComponent.js"></script>
+    <script src="~/App/Component/LeavePeriods/manageLeavePeriodComponent.js"></script>
+    <script src="~/App/Component/Holiday/holidayFormComponent.js"></script>
+    <script src="~/App/Component/Holiday/manageHolidayComponent.js"></script>
+    <script src="~/App/Component/LeavePeriods/leaveTimePeriodModel.js"></script>
+    <script src="~/App/Component/LeavePeriods/leavePeriodFormComponent.js"></script>
+    <script src="~/App/Component/LeaveTypes/leaveTypeModel.js"></script>
+    <script src="~/App/Component/LeaveTypes/leaveTypeFormComponent.js"></script>
+    <script src="~/App/Component/LeaveTypes/manageLeaveTypesComponent.js"></script>
+    <script src="~/App/Component/LeaveHistory/leaveHistoryFormComponent.js"></script>
+    <script src="~/App/Component/LeaveHistory/manageLeaveHistoryComponent.js"></script>
+    <script src="~/App/Component/Vendor/manageVendorComponent.js"></script>
+    <script src="~/App/Component/Vendor/vendorFormComponent.js"></script>
+    <script src="~/App/Component/Vendor/vendorListComponent.js"></script>
+    <script src="~/App/Component/Vendor/vendorModel.js"></script>
+    <script src="~/App/Component/Vendor/vendorSearchComponent.js"></script>
+    <script src="~/App/Component/Designations/designationListComponent.js"></script>
+    <script src="~/App/Component/Designations/manageDesignationComponent.js"></script>
+    <script src="~/App/Component/Departments/departmentListComponent.js"></script>
+    <script src="~/App/Component/Departments/manageDepartmentComponent.js"></script>
+    <script src="~/App/Component/Designations/designationModel.js"></script>
+    <script src="~/App/Component/Designations/designationSearchComponent.js"></script>
+    <script src="~/App/Component/Designations/designationFormComponent.js"></script>
+    <script src="~/App/Component/Departments/departmentModel.js"></script>
+    <script src="~/App/Component/Departments/departmentFormComponent.js"></script>
+    <script src="~/App/Component/Awards/awardsListComponent.js"></script>
+    <script src="~/App/Component/Awards/manageAwardComponent.js"></script>
+    <script src="~/App/Component/Awards/awardModel.js"></script>
+    <script src="~/App/Component/Awards/awardsFormComponent.js"></script>
+    <script src="~/App/Component/Roles/roleListComponent.js"></script>
+    <script src="~/App/Component/Roles/manageRoleComponent.js"></script>
+    <script src="~/App/Component/Roles/roleModel.js"></script>
+    <script src="~/App/Component/Roles/roleFormComponent.js"></script>
+    <script src="~/App/Component/Technologies/technologiesListComponent.js"></script>
+    <script src="~/App/Component/Technologies/technologyFormComponent.js"></script>
+    <script src="~/App/Component/Technologies/technologyModel.js"></script>
+    <script src="~/App/Component/Technologies/manageTechnologyComponent.js"></script>
+    <script src="~/App/Component/EmailTemplates/emailTemplateListComponent.js"></script>
+    <script src="~/App/Component/EmailTemplates/emailTemplateModel.js"></script>
+    <script src="~/App/Component/EmailTemplates/manageEmailTemplateComponent.js"></script>
+    <script src="~/App/Component/EmailTemplates/emailTemplateFormComponent.js"></script>
+    <script src="~/App/Component/Skills/skillsListComponent.js"></script>
+    <script src="~/App/Component/Skills/skillsFormComponent.js"></script>
+    <script src="~/App/Component/Skills/skillModel.js"></script>
+    <script src="~/App/Component/Skills/manageSkillComponent.js"></script>
+    <script src="~/App/Component/Hobbies/hobbiesFormComponent.js"></script>
+    <script src="~/App/Component/Hobbies/hobbiesListComponent.js"></script>
+    <script src="~/App/Component/Hobbies/hobbiesModel.js"></script>
+    <script src="~/App/Component/Hobbies/manageHobbiesComponent.js"></script>
+    <script src="~/App/Component/Shifts/manageShiftComponent.js"></script>
+    <script src="~/App/Component/Shifts/shiftModel.js"></script>
+    <script src="~/App/Component/Shifts/shiftsFormComponent.js"></script>
+    <script src="~/App/Component/Shifts/shiftsListComponent.js"></script>
+    <script src="~/App/Component/Certifications/certificationFormComponent.js"></script>
+    <script src="~/App/Component/Certifications/certificationListComponent.js"></script>
+    <script src="~/App/Component/Certifications/certificationModel.js"></script>
+    <script src="~/App/Component/Certifications/manageCertificationComponent.js"></script>
+    <script src="~/App/Component/AssetCategories/assetCategoryFormComponent.js"></script>
+    <script src="~/App/Component/AssetCategories/assetCategoryModel.js"></script>
+    <script src="~/App/Component/AssetCategories/assetCategoryListComponent.js"></script>
+    <script src="~/App/Component/AssetCategories/manageAssetCategoryComponent.js"></script>
+    <script src="~/App/Component/Softwares/manageSoftwareComponent.js"></script>
+    <script src="~/App/Component/Softwares/softwareFormComponent.js"></script>
+    <script src="~/App/Component/Softwares/softwareModel.js"></script>
+    <script src="~/App/Component/Softwares/softwaresListComponent.js"></script>
+    <script src="~/App/Component/SoftwareCategories/manageSoftwareCategoryComponent.js"></script>
+    <script src="~/App/Component/SoftwareCategories/softwareCategoryFormComponent.js"></script>
+    <script src="~/App/Component/SoftwareCategories/softwareCategoryListComponent.js"></script>
+    <script src="~/App/Component/SoftwareCategories/softwareCategoryModel.js"></script>
+    <script src="~/App/Component/TicketSubCategories/manageTicketSubCategoriesComponent.js"></script>
+    <script src="~/App/Component/TicketSubCategories/ticketSubCategoriesFormComponent.js"></script>
+    <script src="~/App/Component/TicketSubCategories/ticketSubCategoryListComponent.js"></script>
+    <script src="~/App/Component/TicketSubCategories/ticketSubCategoryModel.js"></script>
+    <script src="~/App/Component/TicketCategories/manageTicketCategoriesComponent.js"></script>
+    <script src="~/App/Component/TicketCategories/ticketCategoriesFormComponent.js"></script>
+    <script src="~/App/Component/TicketCategories/ticketCategoriesListComponent.js"></script>
+    <script src="~/App/Component/TicketCategories/ticketCategoryModel.js"></script>
+    <script src="~/App/Component/RequirementCategories/manageRequirementCategoriesComponent.js"></script>
+    <script src="~/App/Component/RequirementCategories/requirementCategoriesFormComponent.js"></script>
+    <script src="~/App/Component/RequirementCategories/requirementCategoriesListComponent.js"></script>
+    <script src="~/App/Component/RequirementCategories/requirementCategoryModel.js"></script>
+    <script src="~/App/Component/Locations/manageLocationsComponent.js"></script>
+    <script src="~/App/Component/Locations/locationsListComponent.js"></script>
+    <script src="~/App/Component/Locations/locationsFormComponent.js"></script>
+    <script src="~/App/Component/Locations/locationsModel.js"></script>
+    <script src="~/App/Component/Assets/manageAssetsComponent.js"></script>
+    <script src="~/App/Component/Assets/assetsListComponent.js"></script>
+    <script src="~/App/Component/Assets/assetFormComponent.js"></script>
+    <script src="~/App/Component/Assets/AssetModel.js"></script>
+    <script src="~/App/Component/Assets/assetSearchComponent.js"></script>
+    <script src="~/App/Component/Employees/manageEmployeeComponent.js"></script>
+    <script src="~/App/Component/Employees/employeeListComponent.js"></script>
+    <script src="~/App/Component/Employees/employeeFormComponent.js"></script>
+    <script src="~/App/Component/Employees/employeesSearchComponent.js"></script>
+    <script src="~/App/Component/Employees/employeeModel.js"></script>
+    <script src="~/App/Component/Dependent/manageDependentComponent.js"></script>
+    <script src="~/App/Component/Dependent/dependentListComponent.js"></script>
+    <script src="~/App/Component/Dependent/dependentFormComponent.js"></script>
+    <script src="~/App/Component/Dependent/dependentModel.js"></script>
+    <script src="~/App/Component/EmergencyContact/manageEmergencyContactComponent.js"></script>
+    <script src="~/App/Component/EmergencyContact/emergencyContactListComponent.js"></script>
+    <script src="~/App/Component/EmergencyContact/emergencyContactFormComponent.js"></script>
+    <script src="~/App/Component/EmergencyContact/emergencyContactModel.js"></script>
+    <script src="~/App/Component/Image/imageComponent.js"></script>
+    <script src="~/App/Component/Image/imageComponentModel.js"></script>
+    <script src="~/App/Component/LeaveEntitlements/leaveEntitlementsFormComponent.js"></script>
+    <script src="~/App/Component/LeaveEntitlements/leaveEntitlementsListComponent.js"></script>
+    <script src="~/App/Component/LeaveEntitlements/manageLeaveEntitlementsComponent.js"></script>
+    <script src="~/App/Component/LeaveEntitlements/leaveEntitlementUpdateModel.js"></script>
+    <script src="~/App/Component/LeaveEntitlements/leaveEntitlementsUpdateListComponent.js"></script>
+    <script src="~/App/Component/LeaveEntitlements/leaveEntilementsLog.js"></script>
+    <script src="~/App/Component/LeaveEntitlements/manageLeaveEntitlementsUpdateComponent.js"></script>
+    <script src="~/App/Component/LeaveEntitlements/leaveEntitlementUpdateModel.js"></script>
+    <script src="~/App/Component/LeaveEntitlements/leaveEntitlementsModel.js"></script>
+    <script src="~/App/Component/EmployeeAssets/ManageEmployeeAssetComponent.js"></script>
+    <script src="~/App/Component/EmployeeAssets/EmployeeAssetListComponent.js"></script>
+    <script src="~/App/Component/Projects/manageProjectsComponent.js"></script>
+    <script src="~/App/Component/Projects/projectsListComponent.js"></script>
+    <script src="~/App/Component/Projects/projectFormComponent.js"></script>
+    <script src="~/App/Component/Projects/ProjectModel.js"></script>
+    <script src="~/App/Component/Projects/projectSearchComponent.js"></script>
+    <script src="~/App/Component/ProjectMembers/manageProjectMembersComponent.js"></script>
+    <script src="~/App/Component/ProjectMembers/projectsMemberListComponent.js"></script> 
+    <script src="~/App/Component/ProjectMembers/projectMemberFormComponent.js"></script>
+    <script src="~/App/Component/ProjectMembers/projectMemberModel.js"></script>
+    <script src="~/App/GridComponents.js"></script>
+    <script src="~/App/Component/Projects/graphComponent.js"></script>
+    <script src="~/App/Component/Assets/ManageAssetAllocationHistoryComponent.js"></script>
+    <script src="~/App/Component/Assets/assetAllocationHistoryListComponent.js"></script>
+    <script src="~/App/Component/Tasks/manageTasksComponent.js"></script>
+    <script src="~/App/Component/Tasks/tasksListComponent.js"></script>
+    <script src="~/App/Component/Tasks/taskModel.js"></script>
+    <script src="~/App/Component/Tasks/taskFormComponent.js"></script>
+    <script src="~/App/Component/LeaveEntitlementHistory/manageEntitlementHistoryComponent.js"></script>
+    <script src="~/App/Component/LeaveEntitlementHistory/entitlementHistoryListComponent.js"></script>
+    <script src="~/App/Component/LeaveEntitlementHistory/entitlementHistoryModel.js"></script>
+    <script src="~/App/Component/LeaveEntitlementHistory/entitlementHistoryFormComponent.js"></script>
+    <script src="~/App/Component/LeaveEntitlements/leaveEntitlementSearchComponent.js"></script>
+    <script src="~/App/Component/Tasks/taskSearchComponent.js"></script>
+    <script src="~/App/Component/EmployeesLeaveBalance/manageLeaveBalanceComponent.js"></script>
+    <script src="~/App/Component/EmployeesLeaveBalance/leaveBalanceSearchComponent.js"></script>
+    <script src="~/App/Component/EmployeesLeaveBalance/leaveBalanceListComponent.js"></script>
+    <script src="~/App/Component/EmployeesLeaveBalance/LeaveBalance.js"></script>
+    <script src="~/App/Component/EmployeesLeaveBalance/leaveBalanceFormComponent.js"></script>
+    <script src="~/App/Component/CRMLeadSources/manageLeadSourceComponent.js"></script>
+    <script src="~/App/Component/CRMLeadSources/leadSourceListComponent.js"></script>
+    <script src="~/App/Component/CRMLeadSources/leadSourceModel.js"></script>
+    <script src="~/App/Component/CRMLeadSources/leadSourceFormComponent.js"></script>
+    <script src="~/App/Component/CRMLeadStatus/manageleadStatusComponent.js"></script>
+    <script src="~/App/Component/CRMLeadStatus/leadStatusListComponent.js"></script>
+    <script src="~/App/Component/CRMLeadStatus/leadStatusModel.js"></script>
+    <script src="~/App/Component/CRMLeadStatus/leadStatusFormComponent.js"></script>
+    <script src="~/App/Component/CRMLeadCategories/manageLeadCategoriesComponent.js"></script>
+    <script src="~/App/Component/CRMLeadCategories/leadCategoriesListComponent.js"></script>
+    <script src="~/App/Component/CRMLeadCategories/leadCategoriesModel.js"></script>
+    <script src="~/App/Component/CRMLeadCategories/leadCategoriesFormComponent.js"></script>
+    <script src="~/App/Component/CRMPotentialCategories/managePotentialCategoriesComponent.js"></script>
+    <script src="~/App/Component/CRMPotentialCategories/potentialCategoriesListComponent.js"></script>
+    <script src="~/App/Component/CRMPotentialCategories/potentialCategoriesModel.js"></script>
+    <script src="~/App/Component/CRMPotentialCategories/potentialCategoriesFormComponent.js"></script>
+    <script src="~/App/Component/CRMSalesStages/manageSalesStagesComponent.js"></script>
+    <script src="~/App/Component/CRMSalesStages/salesStagesListComponent.js"></script>
+    <script src="~/App/Component/CRMSalesStages/salesStagesModel.js"></script>
+    <script src="~/App/Component/CRMSalesStages/salesStagesFormComponent.js"></script>
+    <script src="~/App/Component/CRMAccounts/manageCRMAccountsComponent.js"></script>
+    <script src="~/App/Component/CRMAccounts/crmAccountsListComponent.js"></script>
+    <script src="~/App/Component/CRMAccounts/crmAccountsModel.js"></script>
+    <script src="~/App/Component/CRMAccounts/crmAccountsFormComponent.js"></script>
+    <script src="~/App/Component/CRMContacts/manageCRMContactsComponent.js"></script>
+    <script src="~/App/Component/CRMContacts/crmContactsListComponent.js"></script>
+    <script src="~/App/Component/CRMContacts/crmContactsModel.js"></script>
+    <script src="~/App/Component/CRMContacts/crmContactsSearchComponent.js"></script>
+    <script src="~/App/Component/CRMContacts/crmContactsFormComponent.js"></script>
+
+
+
+
+     <script>
+            $(function () {
+
+                $('.dateTimePicker').datetimepicker({ format: 'MM/DD/YYYY HH:mm:ss' });
+                $('.datePicker').datetimepicker({ format: 'MM/DD/YYYY' });
+
+                //$(".htmlEditor").jqte();
+                $(".htmlEditor").summernote({
+                    toolbar: [
+                      // [groupName, [list of button]]
+                      ['style', ['bold', 'italic', 'underline']],
+                      ['fontsize', ['fontsize']],
+                      ['color', ['color']],
+                      ['para', ['ul', 'ol', 'paragraph']],
+                      ['insert', ['hr', 'table', 'link', 'picture']],
+                      ['tool', ['fullscreen', 'codeview']]
+                    ]
+                });
+                //CKEDITOR.replaceClass = 'htmlEditor';
+                //for (var i in CKEDITOR.instances) {
+                //    CKEDITOR.instances.textAreaClientId.on('blur', function () {
+                //        CKEDITOR.instances.textAreaClientId.updateElement();
+                //    });
+                //}
+
+                $('[data-toggle="tooltip"]').tooltip();
+
+                $('.selectit').selectize();
+            });
+        </script>
+
+
+
+
+    <script>
+        $(function () {
+
+            //PNotify.prototype.options.styling = "bootstrap3";
+            PNotify.prototype.options.styling = "fontawesome";
+
+            // Reference the auto-generated proxy for the hub.
+            var chat = $.connection.notificationHub;
+
+            // Create a function that the hub can call back to display messages.
+            chat.client.addNewMessageToPage = function (name, message) {
+                if (Notification.permission !== "granted")
+                    Notification.requestPermission();
+
+                new PNotify({
+                    title: name,
+                    text: message,
+                    type: 'info',
+                    cornerclass: 'ui-pnotify-sharp',
+                    desktop: {
+                        desktop: true
+                    }
+                });
+            };
+
+            // Start the connection.
+            $.connection.hub.start()
+                .done(function () {
+
+                });
+        });
+    </script>
+    @RenderSection("Scripts", false)
+    @if (!Html.IsDebug())
+    {
+        <script src="~/Scripts/analytics.js"></script>
+    }
+    <div class="modal fade" id="aboutModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">About</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Grid</p>
+                    <p>Version 1.3</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+</body>
+</html>

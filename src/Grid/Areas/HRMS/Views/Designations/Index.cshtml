@@ -1,0 +1,41 @@
+﻿@using Grid.Infrastructure
+@using Grid.Infrastructure.Extensions
+@model Grid.Features.HRMS.ViewModels.DesignationSearchViewModel
+
+<h2>Manage Designations</h2>
+<designations></designations>
+
+<script type="text/html" id="designations-template">
+    <div class="col-md-12">
+        <designationsearch></designationsearch>
+    </div>
+    <br />
+    <div class="col-md-8">
+        <designationslist params="entity: 'designation', enableFilter:true, manageList:true"></designationslist>
+    </div>
+    <div class="col-md-4" data-bind="visible:showQuickView">
+        <designationsupdate params="entity: 'designation'"></designationsupdate>
+    </div>
+</script>
+<script type="text/html" id="designationsearch-template">
+    <div class="col-sm-2">
+        <label>Department</label>
+        <dropdown-list params="entity: 'department',selectedValue: departmentId, caption: 'Choose Department'"></dropdown-list>
+    </div>
+    <div class="col-sm-2">
+        <label>Band</label>
+        <dropdown-list params="entity: 'band',selectedValue: band, caption: 'Choose Band'"></dropdown-list>
+    </div>
+    <div class="col-sm-2">
+        <button class="btn btn-primary" style="margin-top:23px;" data-bind="click:filter">Filter</button>
+        <button class="btn btn-default" style="margin-top:23px;" data-bind="click:refresh">Reset</button>
+    </div>
+</script>
+
+@section Scripts{
+    <script>
+        $(function () {
+            ko.applyBindings();
+        });
+    </script>
+}

@@ -1,0 +1,115 @@
+﻿@model Grid.Features.PMS.ViewModels.TimeSheetEntrySearchViewModel
+@using PagedList.Mvc;
+@using StringExtensions = Grid.Infrastructure.Extensions.StringExtensions
+
+<h2>Manage TimeSheet Entries</h2>
+
+
+<div class="pull-right well-lg">
+    @using (Html.BeginForm("Index", "TimeSheetLineItems", FormMethod.Get, new { @class = "form-inline", role = "form", id = "searchForm" }))
+    {
+        <div class="form-group">
+            @Html.DropDownList("ProjectId", (MultiSelectList)ViewBag.ProjectId, htmlAttributes: new { @class = "form-control", multiple = "multiple" }, optionLabel: "-- Select Project --")
+        </div>
+        <div class="form-group">
+            @Html.DropDownList("UserId", (MultiSelectList)ViewBag.UserId, htmlAttributes: new { @class = "form-control", multiple = "multiple" }, optionLabel: "-- Select Employee --")
+        </div>
+        <div class="form-group">
+            <select class="form-control" id="WorkType" name="WorkType">
+                <option selected="selected" value="">-- Select Work Type --</option>
+                <option value="1">Billable</option>
+                <option value="2">Non Billable</option>
+            </select>
+        </div>
+        <div class="form-group" style="position: relative">
+            @Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { @class = "form-control", placeholder = "Start Date" } })
+        </div>
+        <div class="form-group" style="position: relative">
+            @Html.EditorFor(model => model.EndDate, new { htmlAttributes = new { @class = "form-control", placeholder = "End Date" } })
+        </div>
+        <div class="form-group">
+            @Html.EnumDropDownListFor(model => model.State, htmlAttributes: new { @class = "form-control" }, optionLabel: "-- Select State --")
+        </div>
+        <div class="form-group">
+            <div class="btn-group pull-right" role="group">
+                <input type="button" value="Filter" class="btn btn-default" id="filterButton" />
+                <input type="button" value="Download" class="btn btn-default" id="downloadButton" />
+            </div>
+        </div>
+    }
+</div>
+
+<table class="table">
+    <tr>
+        <th>
+            Employee
+        </th>
+        <th>
+            Project
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.WorkType)
+        </th>
+        <th>
+            Task Summary
+        </th>
+        <th>
+            Date
+        </th>
+        <th>
+            Effort
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.TimeSheetLineItems)
+    {
+        <tr>
+            <td>
+                @Html.ActionLink(item.TimeSheet.CreatedByUser.Person.Name, "Details", "Users", new {area = "HRMS", id = item.TimeSheet.CreatedByUserId}, null)
+            </td>
+            <td>
+                @Html.ActionLink(item.Project.Title, "Details", "Projects", new {area = "PMS", id = item.ProjectId}, null)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.WorkType)
+            </td>
+            <td>-
+                @StringExtensions.Truncate(item.TaskSummary)
+            </td>
+            <td>
+                @item.TimeSheet.Date.ToShortDateString()
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Effort)
+            </td>
+            <td>
+                @Html.ActionLink("Details", "Details", new {id = item.Id}) |
+            </td>
+        </tr>
+    }
+</table>
+<div class="container-fluid">
+    <div class="pull-right">
+        <b>Total Effort: @Model.TotalEffort</b>
+    </div>
+</div>
+<br />
+Page @(Model.TimeSheetLineItems.PageCount < Model.TimeSheetLineItems.PageNumber ? 0 : Model.TimeSheetLineItems.PageNumber) of @Model.TimeSheetLineItems.PageCount
+@Html.PagedListPager(Model.TimeSheetLineItems, page => Url.Action("Index", new { page, Model.ProjectId, Model.UserId, Model.State }))
+
+@section Scripts{
+    <script>
+            $("#filterButton").on("click", function (e) {
+                e.preventDefault();
+                $('#searchForm').attr('action', "/TMS/TimeSheetLineItems/Index").submit();
+            });
+
+            $("#downloadButton").on("click", function (e) {
+                e.preventDefault();
+                $('#searchForm').attr('action', "/TMS/TimeSheetLineItems/Download").submit();
+            });
+    </script>
+}
+
+

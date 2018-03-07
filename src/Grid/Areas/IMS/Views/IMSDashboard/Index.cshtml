@@ -1,0 +1,111 @@
+﻿@using Grid.Infrastructure
+
+@if (PermissionChecker.CheckPermission(ViewBag.Permissions as List<int>, 250))
+{
+    <div class="row">
+        <h3 class="text-center">Total Assets - @ViewBag.Total</h3>
+        <h3 class="text-center">Total Value - @ViewBag.TotalValue</h3>
+    </div>
+    <hr/>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-6">
+                <h3>Assets By Department</h3>
+                <div id="assetsByDepartment"></div>
+            </div>
+            <div class="col-lg-6">
+                <h3>Assets By Category</h3>
+                <div id="assetsByCategory"></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6">
+                <h3>Assets By Vendor</h3>
+                <div id="assetsByVendor"></div>
+            </div>
+            <div class="col-lg-6">
+                <h3>Assets By State</h3>
+                <div id="assetsByState"></div>
+            </div>
+        </div>
+    </div>
+    @section Scripts{
+        <script>
+            var assetsByVendor = c3.generate({
+                bindto: '#assetsByVendor',
+                data: {
+                    url: '/IMS/IMSDashboard/AssetsByVendorCSV',
+                    type: 'pie'
+                },
+                legend: {
+                    show: false
+                },
+                pie: {
+                    label: {
+                        format: function (value, ratio, id) {
+                            return value;
+                        }
+                    }
+                }
+            });
+
+            var assetsByState = c3.generate({
+                bindto: '#assetsByState',
+                data: {
+                    url: '/IMS/IMSDashboard/AssetsByStateCSV',
+                    type: 'donut'
+                },
+                legend: {
+                    show: false
+                },
+                donut: {
+                    label: {
+                        format: function (value, ratio, id) {
+                            return value;
+                        }
+                    }
+                }
+            });
+            
+            var assetsByDepartment = c3.generate({
+                bindto: '#assetsByDepartment',
+                data: {
+                    url: '/IMS/IMSDashboard/AssetsByDepartmentCSV',
+                    type: 'pie'
+                },
+                legend: {
+                    show: false
+                },
+                pie: {
+                    label: {
+                        format: function (value, ratio, id) {
+                            return value;
+                        }
+                    }
+                }
+            });
+            
+            var assetsByCategory = c3.generate({
+                bindto: '#assetsByCategory',
+                data: {
+                    url: '/IMS/IMSDashboard/AssetsByCategoryCSV',
+                    type: 'donut'
+                },
+                legend: {
+                    show: false
+                },
+                donut: {
+                    label: {
+                        format: function (value, ratio, id) {
+                            return value;
+                        }
+                    }
+                }
+            });
+        </script>
+
+    }
+}
+
+
+

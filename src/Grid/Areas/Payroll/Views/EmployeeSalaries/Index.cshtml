@@ -1,0 +1,65 @@
+﻿@model IEnumerable<Grid.Features.Payroll.Entities.EmployeeSalary>
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Salary)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Bank)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BankAccountNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PANCard)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PaymentMode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Code)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreatedOn)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Salary)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Bank)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BankAccountNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PANCard)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PaymentMode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Code)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreatedOn)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>

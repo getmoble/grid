@@ -1,0 +1,183 @@
+﻿@using Grid.Features.PMS.Entities.Enums
+@model  Grid.Features.PMS.ViewModels.TimeSheetViewModel
+
+    <div class="btn-group pull-right" role="group">
+        @if (Model.State != TimeSheetState.Approved)
+        {
+            <a href="#" id="needsChangeButton" class="btn btn-primary" data-toggle="modal" data-target="#approveTimeSheet">Approve</a>
+            <a href="#" id="needsCorrectionButton" class="btn btn-primary" data-toggle="modal" data-target="#needsCorrection">Needs Correction</a>
+        }
+        
+        @Html.ActionLink("Delete", "Delete", new { id = Model.Id }, new { @class = "btn btn-primary" })
+    </div>
+
+<div class="clearfix"></div>
+
+<h2>@string.Format("{0} : ", Model.Title)<span class="@Model.StateStyle">@Model.State</span></h2>
+
+<div>
+    <hr />
+
+    <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active"><a href="#info" aria-controls="home" role="tab" data-toggle="tab">Info</a></li>
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="info">
+            <br/>
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.Date)
+                </dt>
+                <dd>
+                    @Model.Date.ToString("D")
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.TotalHours)
+                </dt>
+                <dd>
+                    @string.Format("{0} hrs", Model.TotalHours)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Comments)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Comments)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.CreatedOn)
+                </dt>
+                <dd>
+                    @Model.CreatedOn.ToLocalTime()
+                </dd>
+                @if (Model.UpdatedOn.HasValue)
+                {
+                    <dt>
+                        Last Updated On
+                    </dt>
+                    <dd>
+                        @Model.UpdatedOn.Value.ToLocalTime()
+                    </dd>
+                }
+            </dl>
+            <hr/>
+            <table class="table table-hover">
+                <tr>
+                    <th>
+                        Project
+                    </th>
+                    <th>
+                        Work Type
+                    </th>
+                    <th>
+                        Task
+                    </th>
+                    <th>
+                        Effort
+                    </th>
+                    <th>
+                        Comments
+                    </th>
+                </tr>
+
+                @foreach (var item in Model.LineItems)
+                {
+                    <tr>
+                        <td>
+                            @Html.ActionLink(item.Project.Title, "Details", "Projects", new {id = item.ProjectId, area = "PMS"}, null)
+                        </td>
+                        <td>
+                            @if (item.WorkType == 1)
+                            {
+                                <span>Billable</span>
+                            }
+                            else
+                            {
+                                <span>Non-Billable</span>
+                            }
+                        </td>
+                        <td>
+                            @item.TaskSummary
+                        </td>
+                        <td>
+                            @item.Effort
+                        </td>
+                        <td>
+                            @item.Comments
+                        </td>
+                    </tr>
+                }
+
+            </table>
+            @if (Model.State > TimeSheetState.PendingApproval)
+            {
+                <hr />
+                <dl class="dl-horizontal">
+                    <dt>
+                        Manager Name
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.ApprovedByEmployee.User.Person.Name)
+                    </dd>
+                    <dt>
+                        Manager Comments
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.ApproverComments)
+                    </dd>
+                </dl>
+            }
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="approveTimeSheet" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Approve Timesheet</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <textarea id="approverComments" class="form-control"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-bind="click: approveTimeSheet">Submit</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="needsCorrection" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Needs Correction for Timesheet</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <textarea id="needsCorrectionComments" class="form-control"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-bind="click: needsCorrectionTimeSheet">Submit</button>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <script src="~/App/TimeSheetDetails.js"></script>
+    <script>
+        var vm = new TimeSheetDetailsViewModel();
+        vm.init('@Model.Id');
+        ko.applyBindings(vm);
+    </script>
+}
+
+

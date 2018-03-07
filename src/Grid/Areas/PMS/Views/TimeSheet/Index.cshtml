@@ -1,0 +1,209 @@
+﻿@using Grid.Infrastructure
+@using Grid.Infrastructure.Extensions
+@model Grid.Features.PMS.ViewModels.TimeSheetSearchViewModel
+
+<div class="btn-group pull-right" role="group">
+    @Html.ActionLink("Missed TimeSheets", "Missed", new { }, new { @class = "btn btn-primary" })
+    @if (Model.HasTeam)
+    {
+        @Html.ActionLink("My Team", "MyTeam", "TimeSheet", new {}, new {@class = "btn btn-primary"})
+    }
+</div>
+
+
+    <h2>Manage TimeSheets</h2>
+
+
+    <div class="pull-right well-lg">
+        @using (Html.BeginForm("Index", "TimeSheet", FormMethod.Get, new { @class = "form-inline", role = "form", id = "searchForm" }))
+        {
+            <div class="form-group">
+                @Html.EnumDropDownListFor(model => model.State, htmlAttributes: new { @class = "form-control" }, optionLabel: "-- Select Status --")
+            </div>
+
+            <div class="form-group" style="position: relative">
+                @Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { @class = "form-control", placeholder = "Start Date" } })
+            </div>
+
+            <div class="form-group" style="position: relative">
+                @Html.EditorFor(model => model.EndDate, new { htmlAttributes = new { @class = "form-control", placeholder = "End Date" } })
+            </div>
+
+            @Html.HiddenFor(m => m.IsPostBack)
+
+            <div class="form-group">
+                <div class="btn-group pull-right" role="group">
+                    <input type="button" value="Filter" class="btn btn-default" id="filterButton" />
+                    <input type="button" value="Download" class="btn btn-default" id="downloadButton" />
+                </div>
+            </div>
+        }
+    </div>
+    <table class="table">
+        <tr>
+            <th>
+                Title
+            </th>
+            <th>
+                Date
+            </th>
+            <th>
+                Total Hours
+            </th>
+            <th>
+                Comments
+            </th>
+            <th>
+                Status
+            </th>
+            <th>
+
+            </th>
+        </tr>
+
+        @foreach (var item in Model.TimeSheets)
+        {
+            <tr>
+                <td>
+                    @Html.ActionLink(item.Title, "Details", new { id = item.Id })
+                </td>
+                <td>
+                    @item.Date.ToShortDateString()
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TotalHours)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Comments)
+                </td>
+                <td>
+                    <span class="@item.StateStyle">@item.State</span>
+                </td>
+                <td>
+                    @if (item.OwnSheet)
+                    {
+                        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                    }
+                </td>
+            </tr>
+        }
+
+    </table>
+
+@Html.GridAddButton(EntityType.TimeSheet)
+
+<div class="container-fluid">
+    @*<div class="row">
+        <h4>Office Hours</h4>
+        <p>(45 Hours Weekly)</p>
+        <div class="progress">
+            <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar" aria-valuenow="@ViewBag.WorkingHours" aria-valuemin="0" aria-valuemax="100" style="width: @ViewBag.WorkingHours%">
+                @ViewBag.WorkingHours %
+            </div>
+        </div>
+    </div>*@
+    @*<div class="row">
+        <h4>TimeSheet Hours</h4>
+        <p>(40 Hours Weekly)</p>
+        <div class="progress">
+            <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="@ViewBag.TimeSheetHours" aria-valuemin="0" aria-valuemax="100" style="width: @ViewBag.TimeSheetHours%">
+                @ViewBag.TimeSheetHours %
+            </div>
+        </div>
+    </div>*@
+</div>
+
+@if (Model.TimeSheets.Any())
+{
+    <hr/>
+    <div class="row">
+        <div class="col-lg-6">
+            <h2>Effort by Project</h2>
+            <div id="effortByProject"></div>
+        </div>
+        <div class="col-lg-6">
+            <h2>Effort by Billable</h2>
+            <div id="effortByBillable"></div>
+        </div>
+    </div>
+@section Scripts{
+    <script>
+        var projectUrl =
+            '/PMS/TimeSheet/EffortByProjectCSV?SubmittedUserById=@Model.SubmittedUserById&State=@Model.State&StartDate=@Model.StartDate&EndDate=@Model.EndDate';
+        var effortByProject = c3.generate({
+            bindto: '#effortByProject',
+            data: {
+                url: encodeURI(projectUrl),
+                type: 'pie'
+            },
+            legend: {
+                show: false
+            },
+            pie: {
+                label: {
+                    format: function(value, ratio, id) {
+                        return value;
+                    }
+                }
+            }
+        });
+
+        var billableUrl =
+            '/PMS/TimeSheet/EffortByBillableCSV?SubmittedUserById=@Model.SubmittedUserById&State=@Model.State&StartDate=@Model.StartDate&EndDate=@Model.EndDate';
+        var effortByBillable = c3.generate({
+            bindto: '#effortByBillable',
+            data: {
+                url: encodeURI(billableUrl),
+                type: 'pie'
+            },
+            legend: {
+                show: false
+            },
+            pie: {
+                label: {
+                    format: function(value, ratio, id) {
+                        return value;
+                    }
+                }
+            }
+        });
+
+        $("#filterButton")
+            .on("click",
+                function(e) {
+                    e.preventDefault();
+                    $('#searchForm').attr('action', "/PMS/TimeSheet/Index").submit();
+                });
+
+        $("#downloadButton")
+            .on("click",
+                function(e) {
+                    e.preventDefault();
+                    $('#searchForm').attr('action', "/PMS/TimeSheet/DownloadMine").submit();
+                });
+
+
+    </script>
+}
+}
+else
+{
+    @section Scripts{
+    <script>
+        $("#filterButton")
+         .on("click",
+             function (e) {
+                 e.preventDefault();
+                 $('#searchForm').attr('action', "/PMS/TimeSheet/Index").submit();
+             });
+
+        $("#downloadButton")
+            .on("click",
+                function (e) {
+                    e.preventDefault();
+                    $('#searchForm').attr('action', "/PMS/TimeSheet/DownloadMine").submit();
+                });
+    </script>
+    }
+}
+

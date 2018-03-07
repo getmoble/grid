@@ -1,0 +1,13 @@
+﻿@model Grid.Features.RMS.Entities.RequirementCategory
+
+<h2>Edit Requirement Category</h2>
+
+<requirementcategoryupdate params="Id: @Model.Id"></requirementcategoryupdate>
+
+@section Scripts{
+    <script>
+        $(function () {
+            ko.applyBindings();
+        });
+    </script>
+}

@@ -1,0 +1,167 @@
+﻿@model Grid.Features.PMS.ViewModels.TimeSheetSearchViewModel
+
+
+<h2>Manage TimeSheets</h2>
+<div class="pull-right well-lg">
+    @using (Html.BeginForm("Index", "TimeSheets", FormMethod.Get, new { @class = "form-inline", role = "form", id = "searchForm" }))
+    {
+
+        <div class="form-group">
+            @Html.DropDownList("SubmittedUserById", null, htmlAttributes: new { @class = "form-control" }, optionLabel: "Select Team Member")
+        </div>
+
+        <div class="form-group">
+            @Html.EnumDropDownListFor(model => model.State, htmlAttributes: new { @class = "form-control" }, optionLabel: "-- Select Status --")
+        </div>
+
+        <div class="form-group" style="position: relative">
+            @Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { @class = "form-control", placeholder = "Start Date" } })
+        </div>
+
+        <div class="form-group" style="position: relative">
+            @Html.EditorFor(model => model.EndDate, new { htmlAttributes = new { @class = "form-control", placeholder = "End Date" } })
+        </div>
+
+        @Html.HiddenFor(m => m.IsPostBack)
+
+        <div class="form-group">
+            <div class="btn-group pull-right" role="group">
+                <input type="button" value="Filter" class="btn btn-default" id="filterButton" />
+                <input type="button" value="Download" class="btn btn-default" id="downloadButton" />
+            </div>
+        </div>
+    }
+</div>
+<table class="table">
+    <tr>
+        <th>
+            Title
+        </th>
+        <th>
+            Submitted By
+        </th>
+        <th>
+            Date
+        </th>
+        <th>
+            Total Hours
+        </th>
+        <th>
+            Comments
+        </th>
+        <th>
+            State
+        </th>
+    </tr>
+
+    @foreach (var item in Model.TimeSheets)
+    {
+        <tr>
+            <td>
+                @Html.ActionLink(item.Title, "Details", "TimeSheets", new { id = item.Id, area = "TMS" }, null)
+            </td>
+            <td>
+                @Html.ActionLink(item.CreatedByUser.Person.Name, "Details", "Users", new { area = "HRMS", id = item.CreatedByUserId }, null)
+            </td>
+            <td>
+                @item.Date.ToShortDateString()
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalHours)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Comments)
+            </td>
+            <td>
+                <span class="@item.StateStyle">@item.State</span>
+            </td>
+        </tr>
+    }
+
+</table>
+
+@if (Model.TimeSheets.Any())
+{
+    <hr/>
+    <div class="row">
+        <div class="col-lg-6">
+            <h2>Effort by Project</h2>
+            <div id="effortByProject"></div>
+        </div>
+        <div class="col-lg-6">
+            <h2>Effort by Billable</h2>
+            <div id="effortByBillable"></div>
+        </div>
+    </div>
+@section Scripts{
+    <script>
+        var projectUrl =
+            '/TMS/TimeSheets/EffortByProjectCSV?TeamMode=true&SubmittedUserById=@Model.SubmittedUserById&StartDate=@Model.StartDate&EndDate=@Model.EndDate';
+        var effortByProject = c3.generate({
+            bindto: '#effortByProject',
+            data: {
+                url: encodeURI(projectUrl),
+                type: 'pie'
+            },
+            legend: {
+                show: false
+            },
+            pie: {
+                label: {
+                    format: function(value, ratio, id) {
+                        return value;
+                    }
+                }
+            }
+        });
+
+        var billableUrl =
+            '/TMS/TimeSheets/EffortByBillableCSV?TeamMode=true&SubmittedUserById=@Model.SubmittedUserById&StartDate=@Model.StartDate&EndDate=@Model.EndDate';
+        var effortByBillable = c3.generate({
+            bindto: '#effortByBillable',
+            data: {
+                url: encodeURI(billableUrl),
+                type: 'pie'
+            },
+            legend: {
+                show: false
+            },
+            pie: {
+                label: {
+                    format: function(value, ratio, id) {
+                        return value;
+                    }
+                }
+            }
+        });
+
+        $("#filterButton").on("click", function (e) {
+            e.preventDefault();
+            $('#searchForm').attr('action', "/TMS/TimeSheets/Index").submit();
+        });
+
+        $("#downloadButton").on("click", function (e) {
+            e.preventDefault();
+            $('#searchForm').attr('action', "/TMS/TimeSheets/Download").submit();
+        });
+
+    </script>
+}
+}
+else
+{
+    @section Scripts{
+        <script>
+            $("#filterButton").on("click", function (e) {
+                e.preventDefault();
+                $('#searchForm').attr('action', "/TMS/TimeSheets/Index").submit();
+            });
+
+            $("#downloadButton").on("click", function (e) {
+                e.preventDefault();
+                $('#searchForm').attr('action', "/TMS/TimeSheets/Download").submit();
+            });
+        </script>
+    }
+}
+

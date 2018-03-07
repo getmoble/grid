@@ -1,0 +1,41 @@
+﻿@model Grid.Features.KBS.Entities.ArticleAttachment
+
+<h2>Details ArticleAttachment</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Article.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Article.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FileName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FileName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AttachmentType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AttachmentType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DocumentPath)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DocumentPath)
+        </dd>
+
+    </dl>
+</div>

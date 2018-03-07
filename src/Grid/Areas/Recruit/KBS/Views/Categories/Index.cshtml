@@ -1,0 +1,14 @@
+﻿@using Grid.Infrastructure
+@using Grid.Infrastructure.Extensions
+
+<h2>Manage Categories</h2>
+<categorieslist></categorieslist>
+@Html.GridAddButton(EntityType.ArticleCategory)
+
+@section Scripts{
+    <script>
+        $(function () {
+            ko.applyBindings();
+        });
+    </script>
+}

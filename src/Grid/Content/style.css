@@ -1,0 +1,742 @@
+﻿html,
+body {
+    height: 100%;
+    /* The html and body elements cannot have any padding or margin. */
+}
+img{
+    max-width:100%;
+}
+/* Wrapper for page content to push down footer */
+#wrap {
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    /* Negative indent footer by it's height */
+    margin: 0 auto -70px;
+}
+
+/* Set the fixed height of the footer here */
+#push,
+#footer {
+    height: 65px;
+}
+
+#footer {
+    background-color: #f5f5f5;
+}
+
+#wrap > .container {
+    padding-top: 60px;
+}
+
+.container .credit {
+    margin: 20px 0;
+}
+
+.ctile {
+    opacity: 1 !important;
+}
+
+    .ctile:hover {
+        opacity: 0.75 !important;
+    }
+
+.ctitle {
+    font-size: 32px !important;
+}
+
+.ctitleSelfGuidedTour {
+    font-size: 28px !important;
+}
+
+.star {
+    color: red;
+}
+
+.btn-font{
+    height:15px;
+    width: 20px;   
+}
+
+.cimage {
+    background: url("/static/images/performance.jpg");
+    width: 50%;
+    height: 600px;
+}
+
+.thumbnail.tile.tile-purple {
+    background-color: #7030A0;
+}
+
+.thumbnail.tile.tile-papaya {
+    background-color: #FF9900;
+}
+
+.btn-login {
+    background-color: #7030A0 !important;
+    border-color: #7030A0 !important;
+}
+
+.btn-back {
+    background-color: #FF9900 !important;
+    border-color: #FF9900 !important;
+}
+
+.panel-login {
+    background-color: #FF9900 !important;
+    color: #000000 !important;
+}
+
+.syzen {
+    color: #7030A0;
+    font-weight: bold;
+    font-size: 18px;
+}
+.validationMessage{
+    color:red;
+}
+.analytics {
+    color: #FF9900;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+
+.user-id {
+    position: fixed;
+    right: 40px;
+    top: 40px;
+    display: inline-block;
+    padding: 8px;
+    background-color: transparent;
+    width: auto;
+    color: #ffffff;
+    cursor: default;
+}
+
+.upload-button {
+    padding: 4px;
+    border: 1px solid black;
+    border-radius: 5px;
+    display: block;
+    float: left;
+}
+.user-id-image {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    float: right;
+    margin-left: 10px;
+    color: inherit;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.panelUser {
+    margin-bottom: 20px;
+    background-color: #fff;
+    border-radius: 4px;
+    -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+}
+
+.user-id-image [class*="icon-"] {
+    padding: 10px;
+}
+
+.user-id .user-id-name {
+    float: right;
+    text-align: right;
+    margin: 0;
+    padding: 0;
+}
+
+    .user-id .user-id-name .first-name,
+    .user-id .user-id-name .last-name {
+        display: block;
+        color: inherit;
+        font-family: 'Segoe UI Light_', 'Open Sans Light', Verdana, Arial, Helvetica, sans-serif;
+        line-height: 12pt;
+    }
+
+    .user-id .user-id-name .first-name {
+        font-size: 20pt;
+        line-height: 30pt;
+    }
+
+    .user-id .user-id-name .last-name {
+        font-size: 12pt;
+    }
+
+div#loading {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -50px;
+    margin-left: -50px;
+    width: 100px;
+    height: 100px;
+}
+
+#demoFour, .listWrapper {
+    width: 99%;
+    overflow: hidden;
+}
+
+    #demoFour li {
+        float: left;
+        list-style: none;
+    }
+
+    #demoFour a {
+        display: block;
+        background-color: #2e8bcc;
+        text-align: center;
+        width: 200px;
+        border: 1px solid #2e8bcc;
+        padding: 10px;
+        margin: 14px 10px 10px 0;
+        text-decoration: none;
+        color: white;
+    }
+
+        #demoFour a:hover {
+            opacity: 0.75 !important;
+        }
+
+
+
+.bootbox-body {
+    font-weight: bold;
+    font-family: 'Segoe UI Light_', 'Open Sans Light', Verdana, Arial, Helvetica, sans-serif;
+    color: #2e8bcc;
+}
+
+/* Lastly, apply responsive CSS fixes as necessary */
+@media (max-width: 767px) {
+    #footer {
+        margin-left: -20px;
+        margin-right: -20px;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+}
+
+.timeline.timeline-left .timeline-date {
+    margin-left: -175px !important;
+    font-size: 12px !important;
+}
+
+.projectSelector {
+    margin-top: 15px !important;
+}
+
+
+.modal-xlg {
+    width: 90% !important;
+}
+
+
+.timesheet-pending {
+    color: orange;
+}
+
+.timesheet-needscorrection {
+    color: red;
+}
+
+.timesheet-approved {
+    color: green;
+}
+
+
+.float {
+    position: fixed;
+    width: 60px;
+    height: 60px;
+    bottom: 20px;
+    right: 30px;
+    background-color: #FF4081;
+    color: #FFF;
+    border-radius: 50px;
+    text-align: center;
+    box-shadow: 2px 2px 3px #999;
+}
+
+.fab-button {
+    margin-top: 18px;
+}
+
+.loader {
+    background-image: url(data:image/gif;base64,R0lGODlhEAALAPQAAP///0pISOTk5N3d3e/v705MTEpISGpoaKalpY6MjM3NzWJgYH59fauqqpCPj9DQ0GRjY0xKSoF/f+zs7OPi4vb29nFwcOXl5fX19crKyru6utnY2PLy8gAAAAAAAAAAACH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCwAAACwAAAAAEAALAAAFLSAgjmRpnqSgCuLKAq5AEIM4zDVw03ve27ifDgfkEYe04kDIDC5zrtYKRa2WQgAh+QQJCwAAACwAAAAAEAALAAAFJGBhGAVgnqhpHIeRvsDawqns0qeN5+y967tYLyicBYE7EYkYAgAh+QQJCwAAACwAAAAAEAALAAAFNiAgjothLOOIJAkiGgxjpGKiKMkbz7SN6zIawJcDwIK9W/HISxGBzdHTuBNOmcJVCyoUlk7CEAAh+QQJCwAAACwAAAAAEAALAAAFNSAgjqQIRRFUAo3jNGIkSdHqPI8Tz3V55zuaDacDyIQ+YrBH+hWPzJFzOQQaeavWi7oqnVIhACH5BAkLAAAALAAAAAAQAAsAAAUyICCOZGme1rJY5kRRk7hI0mJSVUXJtF3iOl7tltsBZsNfUegjAY3I5sgFY55KqdX1GgIAIfkECQsAAAAsAAAAABAACwAABTcgII5kaZ4kcV2EqLJipmnZhWGXaOOitm2aXQ4g7P2Ct2ER4AMul00kj5g0Al8tADY2y6C+4FIIACH5BAkLAAAALAAAAAAQAAsAAAUvICCOZGme5ERRk6iy7qpyHCVStA3gNa/7txxwlwv2isSacYUc+l4tADQGQ1mvpBAAIfkECQsAAAAsAAAAABAACwAABS8gII5kaZ7kRFGTqLLuqnIcJVK0DeA1r/u3HHCXC/aKxJpxhRz6Xi0ANAZDWa+kEAA7AAAAAAAAAAAA);
+    height: 11px;
+    width: 16px;
+}
+
+
+/*switch code*/
+.switch {
+    opacity: 0;
+    position: absolute;
+    z-index: 1;
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+}
+
+    .switch + .lable {
+        position: relative;
+        display: inline-block;
+        margin: 0;
+        line-height: 20px;
+        min-height: 18px;
+        min-width: 18px;
+        font-weight: normal;
+        cursor: pointer;
+    }
+
+        .switch + .lable::before {
+            cursor: pointer;
+            font-family: fontAwesome;
+            font-weight: normal;
+            font-size: 12px;
+            color: #32a3ce;
+            content: "\a0";
+            background-color: #FAFAFA;
+            border: 1px solid #c8c8c8;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+            border-radius: 0;
+            display: inline-block;
+            text-align: center;
+            height: 16px;
+            line-height: 14px;
+            min-width: 16px;
+            margin-right: 1px;
+            position: relative;
+            top: -1px;
+        }
+
+    .switch:checked + .lable::before {
+        display: inline-block;
+        content: '\f00c';
+        background-color: #F5F8FC;
+        border-color: #adb8c0;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05), inset 15px 10px -12px rgba(255, 255, 255, 0.1);
+    }
+    /* CSS3 on/off switches */
+    .switch + .lable {
+        margin: 0 4px;
+        min-height: 24px;
+    }
+
+        .switch + .lable::before {
+            font-weight: normal;
+            font-size: 11px;
+            line-height: 17px;
+            height: 20px;
+            overflow: hidden;
+            border-radius: 12px;
+            background-color: #F5F5F5;
+            -webkit-box-shadow: inset 0 1px 1px 0 rgba(0, 0, 0, 0.15);
+            box-shadow: inset 0 1px 1px 0 rgba(0, 0, 0, 0.15);
+            border: 1px solid #CCC;
+            text-align: left;
+            float: left;
+            padding: 0;
+            width: 52px;
+            text-indent: -21px;
+            margin-right: 0;
+            -webkit-transition: text-indent .3s ease;
+            -o-transition: text-indent .3s ease;
+            transition: text-indent .3s ease;
+            top: auto;
+        }
+
+    .switch.switch-bootstrap + .lable::before {
+        /*font-family: FontAwesome;*/
+        content: "\test0";
+        box-shadow: none;
+        border-width: 0;
+        font-size: 16px;
+        background-color: #a9a9a9;
+        color: #F2F2F2;
+        width: 52px;
+        height: 22px;
+        line-height: 21px;
+        text-indent: 21px;
+        -webkit-transition: background 0.1s ease;
+        -o-transition: background 0.1s ease;
+        transition: background 0.1s ease;
+    }
+
+    .switch.switch-bootstrap + .lable::after {
+        content: '';
+        position: absolute;
+        top: 2px;
+        left: 3px;
+        border-radius: 12px;
+        box-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+        width: 18px;
+        height: 18px;
+        text-align: center;
+        background-color: #F2F2F2;
+        border: 4px solid #F2F2F2;
+        -webkit-transition: left 0.2s ease;
+        -o-transition: left 0.2s ease;
+        transition: left 0.2s ease;
+    }
+
+    .switch.switch-bootstrap:checked + .lable::before {
+        content: "\test";
+        text-indent: 6px;
+        color: #FFF;
+        border-color: #b7d3e5;
+    }
+
+.switch-primary > .switch.switch-bootstrap:checked + .lable::before {
+    background-color: #337ab7;
+}
+
+.switch-success > .switch.switch-bootstrap:checked + .lable::before {
+    background-color: #5cb85c;
+}
+
+.switch-danger > .switch.switch-bootstrap:checked + .lable::before {
+    background-color: #d9534f;
+}
+
+.switch-info > .switch.switch-bootstrap:checked + .lable::before {
+    background-color: #5bc0de;
+}
+
+.switch-warning > .switch.switch-bootstrap:checked + .lable::before {
+    background-color: #f0ad4e;
+}
+
+.switch.switch-bootstrap:checked + .lable::after {
+    left: 32px;
+    background-color: #FFF;
+    border: 4px solid #FFF;
+    text-shadow: 0 -1px 0 rgba(0, 200, 0, 0.25);
+}
+.onoffswitch {
+    position: relative; width: 124px;
+    -webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;
+}
+
+.onoffswitch-checkbox {
+    display: none;
+}
+
+.onoffswitch-label {
+    display: block; overflow: hidden; cursor: pointer;
+    border: 2px solid #999999; border-radius: 20px;
+}
+
+.onoffswitch-inner {
+    display: block; width: 200%; margin-left: -100%;
+    -moz-transition: margin 0.3s ease-in 0s; -webkit-transition: margin 0.3s ease-in 0s;
+    -o-transition: margin 0.3s ease-in 0s; transition: margin 0.3s ease-in 0s;
+}
+
+.onoffswitch-inner:before, .onoffswitch-inner:after {
+    display: block; float: left; width: 50%; height: 30px; padding: 0; line-height: 30px;
+    font-size: 12px; color: white; font-weight: bold;
+    -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
+}
+
+.onoffswitch-inner:before {
+    content: "Teammembers";
+    padding-left: 10px;
+    background-color: #2FCCFF; color: #FFFFFF;
+}
+
+.onoffswitch-inner:after {
+    content: "Me";
+    padding-right: 10px;
+    background-color: #EEEEEE; color: #999999;
+    text-align: right;
+}
+
+.onoffswitch-switch {
+    display: block; width: 18px; margin: 6px;
+    background: #FFFFFF;
+    border: 2px solid #999999; border-radius: 20px;
+    position: absolute; top: 0; bottom: 0; right: 90px;
+    -moz-transition: all 0.3s ease-in 0s; -webkit-transition: all 0.3s ease-in 0s;
+    -o-transition: all 0.3s ease-in 0s; transition: all 0.3s ease-in 0s; 
+}
+
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {
+    margin-left: 0;
+}
+
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
+    right: 0px; 
+}
+
+
+
+/* square */
+.switch-square {
+    opacity: 0;
+    position: absolute;
+    z-index: 1;
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+}
+
+    .switch-square + .lable {
+        position: relative;
+        display: inline-block;
+        margin: 0;
+        line-height: 20px;
+        min-height: 18px;
+        min-width: 18px;
+        font-weight: normal;
+        cursor: pointer;
+    }
+
+        .switch-square + .lable::before {
+            cursor: pointer;
+            font-family: fontAwesome;
+            font-weight: normal;
+            font-size: 12px;
+            color: #32a3ce;
+            content: "\a0";
+            background-color: #FAFAFA;
+            border: 1px solid #c8c8c8;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+            border-radius: 0;
+            display: inline-block;
+            text-align: center;
+            height: 16px;
+            line-height: 14px;
+            min-width: 16px;
+            margin-right: 1px;
+            position: relative;
+            top: -1px;
+        }
+
+    .switch-square:checked + .lable::before {
+        display: inline-block;
+        content: '\f00c';
+        background-color: #F5F8FC;
+        border-color: #adb8c0;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05), inset 15px 10px -12px rgba(255, 255, 255, 0.1);
+    }
+    /* CSS3 on/off switches */
+    .switch-square + .lable {
+        margin: 0 4px;
+        min-height: 24px;
+    }
+
+        .switch-square + .lable::before {
+            font-weight: normal;
+            font-size: 11px;
+            line-height: 17px;
+            height: 20px;
+            overflow: hidden;
+            border-radius: 2px;
+            background-color: #F5F5F5;
+            -webkit-box-shadow: inset 0 1px 1px 0 rgba(0, 0, 0, 0.15);
+            box-shadow: inset 0 1px 1px 0 rgba(0, 0, 0, 0.15);
+            border: 1px solid #CCC;
+            text-align: left;
+            float: left;
+            padding: 0;
+            width: 52px;
+            text-indent: -21px;
+            margin-right: 0;
+            -webkit-transition: text-indent .3s ease;
+            -o-transition: text-indent .3s ease;
+            transition: text-indent .3s ease;
+            top: auto;
+        }
+
+    .switch-square.switch-bootstrap + .lable::before {
+        font-family: FontAwesome;
+        content: "\f00d";
+        box-shadow: none;
+        border-width: 0;
+        font-size: 16px;
+        background-color: #a9a9a9;
+        color: #F2F2F2;
+        width: 52px;
+        height: 22px;
+        line-height: 21px;
+        text-indent: 32px;
+        -webkit-transition: background 0.1s ease;
+        -o-transition: background 0.1s ease;
+        transition: background 0.1s ease;
+    }
+
+    .switch-square.switch-bootstrap + .lable::after {
+        content: '';
+        position: absolute;
+        top: 2px;
+        left: 3px;
+        border-radius: 12px;
+        box-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+        width: 18px;
+        height: 18px;
+        text-align: center;
+        background-color: #F2F2F2;
+        border: 4px solid #F2F2F2;
+        -webkit-transition: left 0.2s ease;
+        -o-transition: left 0.2s ease;
+        transition: left 0.2s ease;
+    }
+
+    .switch-square.switch-bootstrap:checked + .lable::before {
+        content: "\f00c";
+        text-indent: 6px;
+        color: #FFF;
+        border-color: #b7d3e5;
+    }
+
+.switch-primary > .switch-square.switch-bootstrap:checked + .lable::before {
+    background-color: #337ab7;
+}
+
+.switch-success > .switch-square.switch-bootstrap:checked + .lable::before {
+    background-color: #5cb85c;
+}
+
+.switch-danger > .switch-square.switch-bootstrap:checked + .lable::before {
+    background-color: #d9534f;
+}
+
+.switch-info > .switch-square.switch-bootstrap:checked + .lable::before {
+    background-color: #5bc0de;
+}
+
+.switch-warning > .switch-square.switch-bootstrap:checked + .lable::before {
+    background-color: #f0ad4e;
+}
+
+.switch-square.switch-bootstrap:checked + .lable::after {
+    left: 32px;
+    background-color: #FFF;
+    border: 4px solid #FFF;
+    text-shadow: 0 -1px 0 rgba(0, 200, 0, 0.25);
+}
+
+.switch-square.switch-bootstrap + .lable::after {
+    border-radius: 2px;
+}
+
+/*tile view*/
+.metr {
+    width: auto;
+    padding: 5px;
+    height: auto;
+    display: inline-block;
+}
+.marT-10{
+    color: white; 
+    font-size: 1.1em; 
+    float: right; 
+    margin-top: 5px;
+     padding-right: 0.2em;
+}
+.marT{
+    color: white; 
+    float: left; 
+    margin-top: 35px; 
+    margin-left: 10px;
+    margin-right:180px;
+    font-size:18px;
+    cursor: pointer;
+}
+.marR-100 {
+    margin-right:130px;
+}
+.marR-180 {
+    margin-right:180px;
+}
+.marR-50 {
+    margin-right:140px;
+}
+.marR-111 {
+    margin-right:111px;
+}
+.marR-130 {
+    margin-right:160px;
+}
+.marR-120 {
+    margin-right:80px;
+}
+.alink{
+    color:white;
+    text-decoration:none;
+}
+.metrostyle {
+    height: 100px;
+    width: 150px;
+    float: left;
+    margin: 0 5px 0 0;
+    padding: 2px;
+    margin-bottom: 5px;
+}
+
+    .metrostyle:hover {
+        background-color: #5190d9;
+    }
+.marT-5{
+    margin-top:15px;
+}
+.metrostylelarge {
+    width: 260px;
+    height: 100px;
+}
+
+.orgmetro {
+    background-color: #603cba;
+}
+
+.ueemetro {
+    background-color: #a200ff;
+}
+
+.reemetro {
+    background-color: #f47835;
+}
+
+.eenmetro {
+    background-color: #d41243;
+}
+
+.boometro {
+    background-color: #8ec127;
+}
+
+.goometro {
+    background-color: #9f00a7;
+}
+
+.yoometro {
+    background-color: #00aba9;
+}
+
+.toometro {
+    background-color: #2d89ef;
+}
+.bg-grey{
+     background-color: #AAAAAA;   
+}
+.bg-maroon{
+    background-color: #F08080	;   
+}
+.bg-fusia{
+   background-color: #DB7093	;
+}
+.modal-backdrop {
+  z-index: -1 !important;
+}
+.marR-0{
+    margin-right: 0px !important;
+}
+
+/*/tile view code*/

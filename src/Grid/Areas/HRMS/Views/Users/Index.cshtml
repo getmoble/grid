@@ -1,0 +1,135 @@
+﻿@using PagedList.Mvc
+@using Grid.Infrastructure.Extensions
+@model Grid.Features.HRMS.ViewModels.UserSearchViewModel
+
+<div class="btn-group pull-right" role="group">
+    @Html.ActionLink("Chart", "Chart", "Users", new { area = "HRMS" }, new { @class = "btn btn-primary" })
+</div>
+
+<h2>Manage Employees - @Model.Total</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<div class="pull-right well-lg">
+    @using (Html.BeginForm("Index", "Users", FormMethod.Get, new { @class = "form-inline", role = "form" }))
+    {
+
+        <div class="form-group">
+            @Html.EditorFor(model => model.Code, new { htmlAttributes = new { @class = "form-control", placeholder = "Employee Code" } })
+        </div>
+        <div class="form-group">
+            @Html.DropDownList("LocationId", null, htmlAttributes: new { @class = "form-control" }, optionLabel: "-- Select Location --")
+        </div>
+        <div class="form-group">
+            @Html.DropDownList("DepartmentId", null, htmlAttributes: new { @class = "form-control" }, optionLabel: "-- Select Department --")
+        </div>
+        <div class="form-group">
+            <div id="desgnDropDown">
+                @Html.DropDownList("DesignationId", null, htmlAttributes: new { @class = "form-control" }, optionLabel: "-- Select Designation --")
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.DropDownList("ShiftId", null, htmlAttributes: new { @class = "form-control" }, optionLabel: "-- Select Shift --")
+        </div>
+        <div class="form-group">
+            @Html.EditorFor(model => model.ShowExEmployees) Show Ex Employees
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Filter" class="btn btn-default" />
+            </div>
+        </div>
+    }
+</div>
+<table class="table">
+    <tr>
+        <th>
+            Name
+        </th>
+        <th>
+            Code
+        </th>
+        <th>
+            Location
+        </th>
+        <th>
+            Department
+        </th>
+        <th>
+            Designation
+        </th>
+        <th>
+            Status
+        </th>
+        <th>
+            TS Required
+        </th>
+        <th>
+            Last Activity On
+        </th>
+    </tr>
+
+    @foreach (var item in Model.Users)
+    {
+        <tr>
+            <td>
+                @Html.ActionLink(item.Person.Name, "Details", "Users", new { area = "HRMS", id = item.Id }, null)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmployeeCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Location.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Department.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Designation.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmployeeStatus)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RequiresTimeSheet)
+            </td>
+            <td>
+                @if (item.AccessRule.LastActivityDate.HasValue)
+                {
+                    @item.AccessRule.LastActivityDate.Value.ToLocalDateTime()
+                }
+                else
+                {
+                    <p>Unknown</p>
+                }
+            </td>
+        </tr>
+    }
+
+</table>
+Page @(Model.Users.PageCount < Model.Users.PageNumber ? 0 : Model.Users.PageNumber) of @Model.Users.PageCount
+@Html.PagedListPager(Model.Users, page => Url.Action("Index", new { page, Model.Code, Model.LocationId, Model.DepartmentId, Model.DesignationId, Model.ShiftId, Model.ShowExEmployees }))
+@section Scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#DepartmentId').change(function () {
+                $.ajax({
+                    type: "post",
+                    url: "/HRMS/Designations/GetDesignationsByDepartment/" + $('#DepartmentId').val(),
+                    datatype: "json",
+                    traditional: true,
+                    success: function (data) {
+                        var district = "<select name='DesignationId' id='DesignationId' class='form-control'>";
+                        district = district + '<option value="">--Select--</option>';
+                        for (var i = 0; i < data.length; i++) {
+                            district = district + '<option value=' + data[i].Id + '>' + data[i].Title + '</option>';
+                        }
+                        district = district + '</select>';
+                        $('#desgnDropDown').html(district);
+                    }
+                });
+            });
+        });
+    </script>
+}

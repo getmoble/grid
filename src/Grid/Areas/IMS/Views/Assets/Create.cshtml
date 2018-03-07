@@ -1,0 +1,42 @@
+﻿@using Grid.Infrastructure
+@using Grid.Infrastructure.Extensions
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-10">
+            <div class="metr">
+                @if (PermissionChecker.CheckPermission(ViewBag.Permissions as List<int>, 250))
+                {
+                    <a href="/IMS/Vendors">
+                        <div class="metrostyle metrostylelarge yoometro">
+                            <span class="marT marR-180"><span class="text-white">Vendors</span></span>
+                        </div>
+                    </a>
+                    <a href="/IMS/AssetCategories">
+                        <div class="metrostyle metrostylelarge eenmetro">
+                            <span class="marT marR-111"><span class="text-white">Asset Categories</span></span>
+                        </div>
+                    </a>
+                    <a href="/IMS/Assets">
+                        <div class="metrostyle metrostylelarge boometro">
+                            <span class="marT marR-50"><span class="text-white">Assets</span></span>
+                        </div>
+                    </a>
+                }
+                <a href="/IMS/Assets/MyAssets">
+                    <div class="metrostyle metrostylelarge reemetro">
+                        <span class="marT marR-111"><span class="text-white">My Assets</span></span>
+                    </div>
+                </a>
+                @if (PermissionChecker.CheckPermission(ViewBag.Permissions as List<int>, 250))
+                {
+                    <a href="/IMS/IMSDashboard">
+                        <div class="metrostyle metrostylelarge bg-fusia">
+                            <span class="marT marR-120"><span class="text-white">Dashboard</span></span>
+                        </div>
+                    </a>
+                }
+            </div>
+        </div>
+    </div>
+</div>

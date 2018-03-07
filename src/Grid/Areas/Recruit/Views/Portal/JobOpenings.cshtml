@@ -1,0 +1,45 @@
+﻿@{
+    Layout = "~/Views/Shared/_RecruitPortalLayout.cshtml";
+}
+
+@model IEnumerable<Grid.Features.Recruit.Entities.JobOpening>
+
+<h2>Job Openings</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            Title
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NoOfVacancies)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OpeningStatus)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreatedOn)
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.ActionLink(item.Title, "OpeningDetails", "Portal", new { area = "Recruit", id = item.Id }, null)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NoOfVacancies)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OpeningStatus)
+            </td>
+            <td>             
+                @Html.DisplayFor(modelItem => item.CreatedOn.ToShortDateString())
+               
+            </td>
+        </tr>
+    }
+
+</table>
+

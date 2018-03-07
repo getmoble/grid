@@ -1,0 +1,200 @@
+﻿@model  Grid.Features.CRM.ViewModels.AccountDetailsViewModel
+
+<div class="btn-group pull-right" role="group">
+    @Html.ActionLink("Edit", "Edit", "CRMAccounts", new { id = Model.Id }, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Delete", "Delete", "CRMAccounts", new { id = Model.Id }, new { @class = "btn btn-primary" })
+</div>
+
+<h2>@Model.Title</h2>
+
+<div>
+    <hr />
+
+    <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active"><a href="#info" aria-controls="home" role="tab" data-toggle="tab">Info</a></li>
+        <li role="presentation"><a href="#permissions" aria-controls="messages" role="tab" data-toggle="tab">Contacts</a></li>
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="info">
+            <br />
+            <dl class="dl-horizontal">
+                <dt>
+                    Assigned To User
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.AssignedToUser.User.Person.Name)
+                </dd>
+                <dt>
+                    Industry
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Industry)
+                </dd>
+                <dt>
+                    Employee Count
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.EmployeeCount)
+                </dd>
+                @if (Model.FoundedOn.HasValue)
+                {
+                    <dt>
+                        @Html.DisplayNameFor(model => model.FoundedOn)
+                    </dt>
+                    <dd>
+                        @Model.FoundedOn.Value.ToShortDateString()
+                    </dd>
+                }
+                <dt>
+                    @Html.DisplayNameFor(model => model.Email)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Email)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.PhoneNo)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.PhoneNo)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.SecondaryEmail)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.SecondaryEmail)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.OfficePhone)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.OfficePhone)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Website)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Website)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Facebook)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Facebook)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Twitter)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Twitter)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.GooglePlus)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.GooglePlus)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.LinkedIn)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.LinkedIn)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.City)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.City)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Country)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Country)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Address)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Address)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.CommunicationAddress)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.CommunicationAddress)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Expertise)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Expertise)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Description)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Description)
+                </dd>
+                <dt>
+                    Parent Account
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Parent.Title)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.CreatedOn)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.CreatedOn)
+                </dd>
+
+            </dl>
+        </div>
+        <div role="tabpanel" class="tab-pane" id="permissions">
+            <table class="table">
+                <tr>
+                    <th>
+                        Name
+                    </th>
+                    <th>
+                        Created On
+                    </th>
+                    <th></th>
+                </tr>
+
+                @foreach (var item in Model.Contacts)
+                {
+                    <tr>
+                        <td>
+                            @Html.ActionLink(item.Person.Name, "Details", "CRMContacts", new { area = "CRM", id = item.Id }, null)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CreatedOn)
+                        </td>
+                        <td></td>
+                    </tr>
+                }
+
+            </table>
+        </div>
+    </div>
+</div>

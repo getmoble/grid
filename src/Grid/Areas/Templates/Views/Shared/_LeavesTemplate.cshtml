@@ -1,0 +1,160 @@
+﻿@using Grid.Areas.Templates.Models
+@*@model IList<UIField>*@
+
+@model Grid.Features.LMS.Entities.Leave
+
+<div class="card" data-bind="template:{name:templateName}"></div>
+<script type="text/html" id="@ViewBag.Name-form-template">
+    <div class="marT-5">
+        <div data-bind="loadingWhen: isBusy">
+            <div class="form-horizontal well" data-bind="with: selectedData">
+                <div class="row">
+                    <div class="clearfix"></div>
+                    <div class="col-sm-offset-1 col-sm-12">
+                        <div class="onoffswitch">
+                            <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked data-bind="checked:appliedBy">
+                            <label class="onoffswitch-label" for="myonoffswitch">
+                                <span class="onoffswitch-inner"></span>
+                                <span class="onoffswitch-switch"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="form-group" data-bind="if: isVisible">
+                    <label class="control-label col-sm-3">Employee</label>
+                    <div class="col-sm-9">
+                        <dropdown-list params="entity: 'team',selectedValue: requestedForUserId,caption: 'Choose Employee'"></dropdown-list>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-3">Leave Type</label>
+                    <div class="col-sm-9">
+                        <dropdown-list params="entity: 'leavetype',selectedValue: leaveTypeId,caption: 'Choose Leave Type'"></dropdown-list>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-3">Duration</label>
+                    <div class="col-sm-9">
+                        <dropdown-list params="entity: 'duration',selectedValue: duration,caption: 'Choose Duration'"></dropdown-list>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-3">Start Date</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" name="date" data-bind="datepicker: start" placeholder="Enter Start Date">
+                    </div>
+                </div>
+                <div class="form-group" data-bind="visible:visibleDate">
+                    <label class="control-label col-sm-3">End Date</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" name="date" data-bind="datepicker: end" placeholder="Enter End Date">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-3">Reason</label>
+                    <div class="col-sm-9">
+                        <textarea name="reason" class="form-control" data-bind="value: reason"></textarea>
+                    </div>
+                </div>
+                <input type="hidden" name="id" data-bind="value: id" />
+                <div class="form-group">
+                    <div class="col-md-offset-3 col-md-9">
+                        <div data-bind="visible:$parent.mode()=='create'">
+                            <button type="button" class="btn btn-primary" data-bind="click:$parent.save,ladda:$parent.isBusy">Save</button>
+                        </div>
+                        <div data-bind="if:$parent.mode()=='edit'">
+                            <button type="button" class="btn btn-primary" data-bind="click:$parent.save,ladda:$parent.isBusy">Update</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+
+<script type="text/html" id="@ViewBag.Name-details-template">
+    <div class="marT-5">
+        <div data-bind="loadingWhen: isBusy">
+            <div class="form-horizontal well" data-bind="with: selectedData">
+                <div class="form-group" data-bind="visible:!isApprove()">
+                    <div class="form-group text-center" data-bind="visible: !isApprovedOrReject()">
+                        <button class="btn btn-default"  data-toggle="collapse" data-bind="click:$parent.delete">Delete</button>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-3">Employee</label>
+                    <div class="col-sm-9">
+                        <label name="name" data-bind="text: name"></label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-3">Leave Type</label>
+                    <div class="col-sm-9">
+                        <label name="leavetype" data-bind="text: leaveType"></label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-3">Duration</label>
+                    <div class="col-sm-9">
+                        <label name="duration" data-bind="text: duration"></label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-3">Leave Period</label>
+                    <div class="col-sm-9">
+                        <label name="period"><span data-bind="dateString:start"></span> - <span data-bind="dateString:end"></span></label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-3">Applied On</label>
+                    <div class="col-sm-9">
+                        <label name="date" data-bind="dateString: date"></label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-3">Status</label>
+                    <div class="col-sm-9">
+                        <label name="status" data-bind="text: status"></label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-3">Acted On</label>
+                    <div class="col-sm-9">
+                        <label name="actedOn" data-bind="dateString: actedOn"></label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-3">Reason</label>
+                    <div class="col-sm-9">
+                        <label name="reason" data-bind="text: reason"></label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-3">Approver Name</label>
+                    <div class="col-sm-9">
+                        <label name="approver" data-bind="text: approver"></label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-3">Approver Comments</label>
+                    <div data-bind="visible:isApprove">
+                        <div class="col-sm-9" data-bind="visible: !isApprovedOrReject()">
+                            <textarea style="margin-right:3px" name="approverComments" data-bind="value:approverComments"></textarea>
+                        </div>
+                    </div>
+                        <div class="col-sm-9" data-bind="visible: isApprovedOrReject">
+                            <label name="approverComments" data-bind="text: approverComments"></label>
+                        </div>                   
+                </div>
+                <div class="form-group" data-bind="visible:isApprove">                  
+                    <div class="form-group text-center" data-bind="visible: !isApprovedOrReject()">
+                        <button class="btn btn-success" data-toggle="collapse" data-bind="click:$parent.approve">Approve</button>
+                        <button class="btn btn-default" data-bind="click:$parent.reject">Reject</button>
+                    </div>
+                </div>
+                <input type="hidden" name="id" data-bind="value: id" />
+            </div>
+        </div>
+    </div>
+</script>

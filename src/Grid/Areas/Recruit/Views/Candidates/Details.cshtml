@@ -1,0 +1,429 @@
+﻿@model  Grid.Features.Recruit.ViewModels.Candidate.CandidateDetailsViewModel
+
+<div class="btn-group pull-right" role="group">
+    @Html.ActionLink("Edit", "Edit", "Candidates", new { id = Model.Id }, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Add Document", "Create", "CandidateDocuments", new { candidateId = Model.Id }, new { @class = "btn btn-primary" })
+    <a href="#" id="addInterviewButton" class="btn btn-primary" data-toggle="modal" data-target="#addInterview">Add Interview</a>
+    <a href="#" id="changeStatus" class="btn btn-primary" data-toggle="modal" data-target="#addNoteModal">Add Note</a>
+    @Html.ActionLink("Delete", "Delete", "Candidates", new { id = Model.Id }, new { @class = "btn btn-primary" })
+</div>
+
+
+<h2>@Html.DisplayFor(model => model.Person.Name)</h2>
+
+<div>
+<hr/>
+
+<ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" class="active"><a href="#info" aria-controls="home" role="tab" data-toggle="tab">Info</a></li>
+    <li role="presentation"><a href="#documents" aria-controls="home" role="tab" data-toggle="tab">Documents</a></li>
+    <li role="presentation"><a href="#notes" aria-controls="home" role="tab" data-toggle="tab">Notes & Activity</a></li>
+    <li role="presentation"><a href="#interviews" aria-controls="home" role="tab" data-toggle="tab">Interviews</a></li>
+</ul>
+
+<!-- Tab panes -->
+<div class="tab-content">
+<div role="tabpanel" class="tab-pane active" id="info">
+<br/>
+<dl class="dl-horizontal">
+<dt>
+    @Html.DisplayNameFor(model => model.RecievedOn)
+</dt>
+
+<dd>
+    @Html.DisplayFor(model => model.RecievedOn)
+</dd>
+<dt>
+    @Html.DisplayNameFor(model => model.Code)
+</dt>
+<dd>
+    @Html.DisplayFor(model => model.Code)
+</dd>
+<dt>
+    @Html.DisplayNameFor(model => model.Status)
+</dt>
+
+<dd>
+    @Html.DisplayFor(model => model.Status)
+</dd>
+
+<dt>
+    @Html.DisplayNameFor(model => model.Source)
+</dt>
+
+<dd>
+    @Html.DisplayFor(model => model.Source)
+</dd>
+
+<dt>
+    @Html.DisplayNameFor(model => model.Person.FirstName)
+</dt>
+
+<dd>
+    @Html.DisplayFor(model => model.Person.FirstName)
+</dd>
+
+<dt>
+    @Html.DisplayNameFor(model => model.Person.LastName)
+</dt>
+
+<dd>
+    @Html.DisplayFor(model => model.Person.LastName)
+</dd>
+
+<dt>
+    @Html.DisplayNameFor(model => model.Person.Gender)
+</dt>
+
+<dd>
+    @Html.DisplayFor(model => model.Person.Gender)
+</dd>
+
+<dt>
+    @Html.DisplayNameFor(model => model.Person.Email)
+</dt>
+
+<dd>
+    @Html.DisplayFor(model => model.Person.Email)
+</dd>
+
+<dt>
+    @Html.DisplayNameFor(model => model.Person.SecondaryEmail)
+</dt>
+
+<dd>
+    @Html.DisplayFor(model => model.Person.SecondaryEmail)
+</dd>
+
+<dt>
+    @Html.DisplayNameFor(model => model.Person.PhoneNo)
+</dt>
+
+<dd>
+    @Html.DisplayFor(model => model.Person.PhoneNo)
+</dd>
+
+<dt>
+    @Html.DisplayNameFor(model => model.Person.OfficePhone)
+</dt>
+
+<dd>
+    @Html.DisplayFor(model => model.Person.OfficePhone)
+</dd>
+
+<dt>
+    @Html.DisplayNameFor(model => model.Person.Skype)
+</dt>
+
+<dd>
+    @Html.DisplayFor(model => model.Person.Skype)
+</dd>
+
+<dt>
+    @Html.DisplayNameFor(model => model.Person.Facebook)
+</dt>
+
+<dd>
+    @Html.DisplayFor(model => model.Person.Facebook)
+</dd>
+
+<dt>
+    @Html.DisplayNameFor(model => model.Person.Twitter)
+</dt>
+
+<dd>
+    @Html.DisplayFor(model => model.Person.Twitter)
+</dd>
+
+<dt>
+    @Html.DisplayNameFor(model => model.Person.GooglePlus)
+</dt>
+
+<dd>
+    @Html.DisplayFor(model => model.Person.GooglePlus)
+</dd>
+
+<dt>
+    @Html.DisplayNameFor(model => model.Person.LinkedIn)
+</dt>
+
+<dd>
+    @Html.DisplayFor(model => model.Person.LinkedIn)
+</dd>
+
+<dt>
+    @Html.DisplayNameFor(model => model.Person.Organization)
+</dt>
+
+<dd>
+    @Html.DisplayFor(model => model.Person.Organization)
+</dd>
+
+<dt>
+    @Html.DisplayNameFor(model => model.Person.Designation)
+</dt>
+
+<dd>
+    @Html.DisplayFor(model => model.Person.Designation)
+</dd>
+<dt>
+    @Html.DisplayNameFor(model => model.Person.Address)
+</dt>
+
+<dd>
+    @Html.DisplayFor(model => model.Person.Address)
+</dd>
+
+<dt>
+    @Html.DisplayNameFor(model => model.Person.CommunicationAddress)
+</dt>
+
+<dd>
+    @Html.DisplayFor(model => model.Person.CommunicationAddress)
+</dd>
+
+<dt>
+    @Html.DisplayNameFor(model => model.Person.DateOfBirth)
+</dt>
+
+<dd>
+    @Html.DisplayFor(model => model.Person.DateOfBirth)
+</dd>
+
+<dt>
+    @Html.DisplayNameFor(model => model.Qualification)
+</dt>
+
+<dd>
+    @Html.DisplayFor(model => model.Qualification)
+</dd>
+
+<dt>
+    @Html.DisplayNameFor(model => model.TotalExperience)
+</dt>
+
+<dd>
+    @Html.DisplayFor(model => model.TotalExperience)
+</dd>
+
+<dt>
+    @Html.DisplayNameFor(model => model.ResumePath)
+</dt>
+
+<dd>
+    @Html.DisplayFor(model => model.ResumePath)
+</dd>
+
+<dt>
+    @Html.DisplayNameFor(model => model.PhotoPath)
+</dt>
+
+<dd>
+    @Html.DisplayFor(model => model.PhotoPath)
+</dd>
+
+<dt>
+    @Html.DisplayNameFor(model => model.CurrentCTC)
+</dt>
+
+<dd>
+    @Html.DisplayFor(model => model.CurrentCTC)
+</dd>
+
+<dt>
+    @Html.DisplayNameFor(model => model.ExpectedCTC)
+</dt>
+
+<dd>
+    @Html.DisplayFor(model => model.ExpectedCTC)
+</dd>
+
+<dt>
+    @Html.DisplayNameFor(model => model.Comments)
+</dt>
+
+<dd>
+    @Html.DisplayFor(model => model.Comments)
+</dd>
+
+</dl>
+</div>
+<div role="tabpanel" class="tab-pane" id="documents">
+    <br/>
+    <table class="table">
+        <tr>
+            <th>
+                Document Type
+            </th>
+            <th>
+                Name
+            </th>
+            <th>
+                Created On
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model.CandidateDocuments)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DocumentType)
+                </td>
+                <td>
+                    <a href="@item.DocumentPath" target="_blank">@item.FileName</a>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreatedOn)
+                </td>
+                <td>
+                    @Html.ActionLink("Delete", "Delete", "CandidateDocuments", new {area = "Recruit", id = item.Id}, null)
+                </td>
+            </tr>
+        }
+    </table>
+
+</div>
+<div role="tabpanel" class="tab-pane" id="notes">
+    <br/>
+    <div class="timeline timeline-left gray-blue" data-bind="foreach: activities">
+        <!-- Main element container -->
+        <div class="timeline-block">
+            <!-- Single block -->
+            <div class="timeline-icon timeline-icon-hide-border">
+                <i class="fa fa-clock-o fa-lg"></i>
+            </div>
+            <div class="timeline-content">
+                <h4 data-bind="text: Title"></h4>
+                <p data-bind="html: Comment"></p>
+                <div class="timeline-date" data-bind="text: CreatedOn"></div> <!-- Date -->
+            </div>
+        </div>
+    </div>
+</div>
+<div role="tabpanel" class="tab-pane" id="interviews">
+    <br/>
+    <table class="table">
+        <tr>
+            <th>
+                Scheduled On
+            </th>
+            <th>
+                Interviewer
+            </th>
+            <th>
+                Round
+            </th>
+            <th>
+                Status
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model.InterviewRounds)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ScheduledOn)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Interviewer.Person.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Round.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+                <td>
+                    @Html.ActionLink("Details", "Details", "InterviewRounds", new {id = item.Id}, null)
+                </td>
+            </tr>
+        }
+    </table>
+
+</div>
+</div>
+</div>
+<style>
+    .btn-delete {
+        width: 25px;
+        height: 25px;
+        padding: 2px 2px;
+        font-size: 13px;
+        line-height: 1.33;
+        border-radius: 25px;
+    }
+</style>
+<!-- Modal -->
+<div class="modal fade" id="addNoteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Add Activity</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <input type="text" id="newNoteTitle" class="form-control" value="Note" />
+                    </div>
+                    <div class="form-group">
+                        <textarea id="newNote" class="form-control htmlEditor"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-bind="click: addNewNote">Submit</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="addInterview" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="addInterviewLabel">Add Interview</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label>Job Opening</label>
+                        @Html.DropDownList("JobOpeningId", null, new {@class = "form-control"})
+                    </div>
+                    <div class="form-group">
+                        <label>Round</label>
+                        @Html.DropDownList("RoundId", null, new {@class = "form-control"})
+                    </div>
+                    <div class="form-group">
+                        <label>Interviewer</label>
+                        @Html.DropDownList("InterviewerIds", (MultiSelectList)ViewBag.InterviewerId, new { @class = "form-control selectit", multiple = "multiple" })
+                    </div>
+                    <div class="form-group" style="position: relative">
+                        <label>Scheduled On</label>
+                        <input type="text" id="ScheduledOn" name="ScheduledOn" class="form-control dateTimePicker" value="Note"/>
+                    </div>
+                    <div class="form-group">
+                        <label>Comments</label>
+                        <textarea id="Comments" name="Comments" class="form-control"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-bind="click: addInterviewRound">Submit</button>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <script src="~/App/CandidateDetailsViewModel.js"></script>
+    <script>
+        var vm = new CandidateDetailsViewModel();
+        vm.init('@Model.Id');
+        ko.applyBindings(vm);
+    </script>
+}
+
+
+

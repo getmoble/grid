@@ -1,0 +1,138 @@
+﻿@model Grid.TenantManagement.ViewModels.TenantDetailsViewModel
+
+<div class="btn-group pull-right" role="group">
+    @Html.ActionLink("New Job", "Create", "TenantScheduledJobs", new { tenantId = Model.Id }, new { @class = "btn btn-primary" })
+</div>
+<h2>@Model.Name Details</h2>
+<ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" class="active"><a href="#info" aria-controls="home" role="tab" data-toggle="tab">Info</a></li>
+    <li role="presentation"><a href="#jobs" aria-controls="home" role="tab" data-toggle="tab">Jobs</a></li>
+</ul>
+<!-- Tab panes -->
+<div class="tab-content">
+    <div role="tabpanel" class="tab-pane active" id="info">
+        <br/>
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Name)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Name)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Address)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Address)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Email)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Email)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.ContactPersonName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ContactPersonName)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.ContactPersonNumber)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ContactPersonNumber)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.ConnectionString)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ConnectionString)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.DomainName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.DomainName)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.SubDomain)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.SubDomain)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Status)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Status)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.CreatedOn)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.CreatedOn)
+            </dd>
+
+        </dl>
+    </div>
+    <div role="tabpanel" class="tab-pane" id="jobs">
+        @if (Model.ScheduledJobs.Any())
+        {
+            <br />
+            <table class="table">
+                <tr>
+                    <th>
+                        Name
+                    </th>
+                    <th>
+                        JobInfo
+                    </th>
+                    <th>
+                        Created On
+                    </th>
+                    <th>
+                        Actions
+                    </th>
+                </tr>
+
+                @foreach (var item in Model.ScheduledJobs)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.JobInfo)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CreatedOn)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Delete", "Delete", "TenantScheduledJobs", new { id = item.Id }, null)
+                        </td>
+                    </tr>
+                }
+            </table>
+        }
+    </div>
+</div>

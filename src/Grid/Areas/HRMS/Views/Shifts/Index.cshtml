@@ -1,0 +1,22 @@
+﻿@using Grid.Infrastructure
+@using Grid.Infrastructure.Extensions
+
+<h2>Manage Shifts</h2>
+<shifts></shifts>
+
+<script type="text/html" id="shifts-template">
+    <div class="col-md-8">
+        <shiftslist params="entity: 'shift', enableFilter:true, manageList:true"></shiftslist>
+    </div>
+    <div class="col-md-4" data-bind="visible:showQuickView">
+        <shiftsupdate params="entity: 'shift'"></shiftsupdate>
+    </div>
+</script>
+
+@section Scripts{
+    <script>
+        $(function () {
+            ko.applyBindings();
+        });
+    </script>
+}

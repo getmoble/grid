@@ -1,0 +1,26 @@
+﻿@model Grid.Features.CRM.Entities.CRMLeadSource
+
+<div class="btn-group pull-right" role="group">
+    @Html.ActionLink("Edit", "Edit", "CRMLeadSources", new { id = Model.Id }, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Delete", "Delete", "CRMLeadSources", new { id = Model.Id }, new { @class = "btn btn-primary" })
+</div>
+
+<h2>@Model.Title</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedOn)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CreatedOn)
+        </dd>
+    </dl>
+</div>

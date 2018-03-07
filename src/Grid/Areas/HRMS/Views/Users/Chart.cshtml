@@ -1,0 +1,36 @@
+﻿@model IEnumerable<Grid.Features.HRMS.Entities.User>
+
+<div id="chart_div"></div>
+@section Scripts{
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        google.charts.load('current', { packages: ["orgchart"] });
+        google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'Name');
+            data.addColumn('string', 'Manager');
+            data.addColumn('string', 'Designation');
+
+            var users = [];
+            @foreach (var user in Model)
+            {
+                 var reportingPerson = user.ReportingPerson != null ? user.ReportingPerson.Person.Name : "";
+                 var designation = user.Designation != null ? user.Designation.Title : "";
+                 @:users.push(['@user.Person.Name', '@reportingPerson', '@designation']);
+            }
+
+            data.addRows(users);
+
+            // Create the chart.
+            var chart = new google.visualization.OrgChart(document.getElementById('chart_div'));
+            // Draw the chart, setting the allowHtml option to true for the tooltips.
+            chart.draw(data, { allowHtml: true });
+        }
+    </script>
+}
+
+
+
+

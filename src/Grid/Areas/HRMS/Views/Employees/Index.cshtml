@@ -1,0 +1,50 @@
+﻿
+<h2>Manage Employees</h2>
+<employees></employees>
+
+<script type="text/html" id="employees-template">
+    <div class="col-md-12">
+        <employeessearch></employeessearch>
+    </div>
+    <br />
+    <div class="col-md-8">
+        <employeeslist params="entity: 'employee', enableFilter:true, manageList:true"></employeeslist>
+    </div>
+    <div class="col-md-4" data-bind="visible:showQuickView">
+            <employeeupdate params="entity: 'employee'"></employeeupdate>
+        </div>
+</script>
+<script type="text/html" id="employeessearch-template">
+    <div class="col-sm-2">
+        <label>Employee Code</label>
+        <input type="text" class="form-control" placeholder="Enter Employee Code" data-bind="value:employeeCode">
+    </div> 
+    <div class="col-sm-2">
+        <label>Department</label>
+        <dropdown-list params="entity: 'department',selectedValue: departmentId, caption: 'Choose Department'"></dropdown-list>
+    </div>
+    <div class="col-sm-2">
+        <label>Location</label>
+        <dropdown-list params="entity: 'location',selectedValue: locationId, caption: 'Choose Location'"></dropdown-list>
+    </div>
+    <div class="col-sm-2">
+        <label>Designation</label>
+        <dropdown-list params="entity: 'designation',selectedValue: designationId, caption: 'Choose Designation'"></dropdown-list>
+    </div>
+    <div class="col-sm-2">
+        <label>Status</label>
+        <dropdown-list params="entity: 'employeestatus',selectedValue: employeeStatus, caption: 'Choose Status'"></dropdown-list>
+    </div>
+    <div class="col-sm-2">
+        <button class="btn btn-primary" style="margin-top:23px;" data-bind="click:filter">Filter</button>
+        <button class="btn btn-default" style="margin-top:23px;" data-bind="click:refresh">Reset</button>
+    </div>
+</script>
+
+@section Scripts{
+    <script>
+        $(function () {
+            ko.applyBindings();
+        });
+    </script>
+}

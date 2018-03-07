@@ -1,0 +1,57 @@
+﻿@model Grid.Areas.Recruit.ViewModels.CandidateSignInViewModel
+@{
+    Layout = "~/Views/Shared/_RecruitPortalLoginLayout.cshtml";
+}
+<link href="~/Content/login.css" rel="stylesheet" />
+<div class="container">
+    <div class="row">
+        <div class="col-md-4 col-md-offset-7">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <span class="glyphicon glyphicon-lock"></span> Login
+                </div>
+                <div class="panel-body">
+                    <form class="form-horizontal" role="form" method="POST" action="@Url.Action("SignIn", "Portal", new { area = "Recruit"})">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Email, new { @class = "col-sm-3 control-label" })
+                            <div class="col-sm-9">
+                                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Password, new { @class = "col-sm-3 control-label" })
+                            <div class="col-sm-9">
+                                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.ValidationSummary(true)
+                            @*<div class="col-sm-offset-3 col-sm-9">
+                                    <div class="checkbox">
+                                        <label>
+                                            @Html.EditorFor(model => model.RememberMe) Remember me
+                                        </label>
+                                    </div>
+                                </div>*@
+                        </div>
+                        <div class="form-group last">
+                            <div class="col-sm-offset-3 col-sm-9">
+                                <button type="submit" class="btn btn-success btn-sm">
+                                    Sign In
+                                </button>
+                                <button id="signinButton" type="button" class="btn btn-danger btn-sm">
+                                    <span class="ladda-label">Sign In with Google</span>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="panel-footer">
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

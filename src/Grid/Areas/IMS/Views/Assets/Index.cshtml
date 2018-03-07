@@ -1,0 +1,75 @@
+﻿@using Grid.Infrastructure
+@using Grid.Infrastructure.Extensions
+
+
+
+<h2>Manage Assets</h2>
+<assets></assets>
+
+<script type="text/html" id="assets-template">
+    <div class="col-md-12">
+        <assetsearch></assetsearch>
+    </div>
+    <br />
+        <div class="col-md-8">
+            <assetslist params="entity: 'asset', enableFilter:true, manageList:true"></assetslist>
+        </div>
+<div class="col-md-4" data-bind="visible:showQuickView">
+        <assetsupdate params="entity: 'asset'"></assetsupdate>
+    </div>
+</script>
+<script type="text/html" id="assetsearch-template">
+    <div class="col-sm-2">
+        <label>Tag Number</label>
+        <input type="text" class="form-control" placeholder="Enter Tag Number" data-bind="value:tagNumber">
+    </div>
+    <div class="col-sm-2">
+        <label>Serial Number</label>
+        <input type="text" class="form-control" placeholder="Enter Serial Number" data-bind="value:serialNumber">
+    </div>
+    <div class="col-sm-2">
+        <label>Model Number</label>
+        <input type="text" class="form-control" placeholder="Enter Model Number" data-bind="value:modelNumber">
+    </div>
+    <div class="col-sm-2">
+        <label>Title</label>
+        <input type="text" class="form-control" placeholder="Enter Title" data-bind="value:title">
+    </div>
+    <div class="col-sm-2">
+        <label>Department</label>
+        <dropdown-list params="entity: 'department',selectedValue: departmentId, caption: 'Choose Department'"></dropdown-list>
+    </div>
+    <div class="col-sm-2">
+        <label>Asset Category</label>
+        <dropdown-list params="entity: 'assetcategory',selectedValue: categoryId, caption: 'Choose Category'"></dropdown-list>
+    </div>
+    <div class="col-sm-2">
+        <label>Vendor</label>
+        <dropdown-list params="entity: 'vendor',selectedValue: vendorId, caption: 'Choose Vendor'"></dropdown-list>
+    </div>
+    <div class="col-sm-2">
+        <label>Asset State</label>
+        <dropdown-list params="entity: 'assetstate',selectedValue: state, caption: 'Choose State'"></dropdown-list>
+    </div>
+    <div class="col-sm-2">
+        <label>User</label>
+        <dropdown-list params="entity: 'employee',selectedValue: userId,caption: 'Choose Employee'"></dropdown-list>
+    </div>
+    <div class="col-sm-3">
+        <button class="btn btn-primary" style="margin-top:23px;margin-bottom:10px;" data-bind="click:filter">Filter</button>
+        <button class="btn btn-default" style="margin-top:23px;margin-bottom:10px;" data-bind="click:refresh">Reset</button>
+        @*<button class="btn btn-success" style="margin-top:23px;margin-bottom:10px;" data-bind="click:exportCsv">Export CSV</button>*@
+
+    </div>
+</script>
+
+
+
+@section Scripts{
+    <script>
+        $(function () {
+            ko.applyBindings();
+        });
+    </script>
+}
+

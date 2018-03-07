@@ -1,0 +1,35 @@
+﻿<ul id="files">
+    <div class="img-list" data-bind="loading:$component.isUploading">
+        <div data-bind="visible:$component.showFileUpload">
+            <div class="file-field m-t-sm">
+                <div class="btn-floating primary-color waves-effect waves-light">
+                    <input type="file" id="fileComponent" data-bind="event: { change: function() { $component.selectAndUpload($element.files) } }" accept=".jpg,.png,.gif">
+                </div>
+            </div>
+        </div>
+        <div data-bind="with:$component.imageData">
+            <div data-bind="ifnot:data()==''">
+                <img data-bind="attr:{id:$component.imageId,src:data}" alt="" />              
+            </div>
+            <div data-bind="if:data()==''">
+                <img data-bind="attr:{src:savedName}" alt="" />
+            </div>
+            <canvas data-bind="attr:{id:$component.canvasId}" style="display: none"></canvas>
+            <span data-bind="visible:$component.showUpload">
+                <div data-bind="ifnot:data()==''">
+                    <button class="btn btn-primary" data-bind="click:$component.uploadData,ladda:$component.isUploading">Upload</button>
+                </div>
+            </span>
+            <div class="input-field">
+                <label data-bind="text:originalName" style="word-break:break-all"></label>
+                <div class="clearfix"></div>
+                <div data-bind="visible:$component.isShowurl">
+                    <input type="text" id="copyurl" data-bind="value:savedName" />
+                </div>
+            </div>
+        </div>
+        <div data-bind="visible:$component.showFileUpload">
+        </div>
+    </div>
+</ul>
+<div class="clearfix"></div>

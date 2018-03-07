@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{43C09A22-FB14-442D-86E3-40A0F11D4849}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Grid.Features.LMS</RootNamespace>
+    <AssemblyName>Grid.Features.LMS</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DAL\HolidayRepository.cs" />
+    <Compile Include="DAL\Interfaces\IHolidayRepository.cs" />
+    <Compile Include="DAL\Interfaces\ILeaveEntitlementRepository.cs" />
+    <Compile Include="DAL\Interfaces\ILeaveEntitlementUpdateRepository.cs" />
+    <Compile Include="DAL\Interfaces\ILeaveRepository.cs" />
+    <Compile Include="DAL\Interfaces\ILeaveTimePeriodRepository.cs" />
+    <Compile Include="DAL\Interfaces\ILeaveTypeRepository.cs" />
+    <Compile Include="DAL\LeaveEntitlementRepository.cs" />
+    <Compile Include="DAL\LeaveEntitlementUpdateRepository.cs" />
+    <Compile Include="DAL\LeaveRepository.cs" />
+    <Compile Include="DAL\LeaveTimePeriodRepository.cs" />
+    <Compile Include="DAL\LeaveTypeRepository.cs" />
+    <Compile Include="Entities\Enums\HolidayType.cs" />
+    <Compile Include="Entities\Enums\LeaveDuration.cs" />
+    <Compile Include="Entities\Enums\LeaveOperation.cs" />
+    <Compile Include="Entities\Enums\LeaveStatus.cs" />
+    <Compile Include="Entities\Enums\TeamType.cs" />
+    <Compile Include="Entities\Holiday.cs" />
+    <Compile Include="Entities\Leave.cs" />
+    <Compile Include="Entities\LeaveEntitlement.cs" />
+    <Compile Include="Entities\LeaveEntitlementUpdate.cs" />
+    <Compile Include="Entities\LeaveTimePeriod.cs" />
+    <Compile Include="Entities\LeaveType.cs" />
+    <Compile Include="ILMSDataContext.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\Interfaces\ILeaveService.cs" />
+    <Compile Include="Services\LeaveService.cs" />
+    <Compile Include="ViewModels\ApproveRejectLeaveViewModel.cs" />
+    <Compile Include="ViewModels\LeaveEntitlementSearchViewModel.cs" />
+    <Compile Include="ViewModels\LeaveSearchViewModel.cs" />
+    <Compile Include="ViewModels\LeaveViewModel.cs" />
+    <Compile Include="ViewModels\UpdateLeaveEntitlementViewModel.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Grid.Features.Common\Grid.Features.Common.csproj">
+      <Project>{3876b303-ae18-4e9e-a359-e1e0f0f2c7cd}</Project>
+      <Name>Grid.Features.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Grid.Features.HRMS\Grid.Features.HRMS.csproj">
+      <Project>{375619dc-6f55-4fc2-bbf2-45a30e89fa73}</Project>
+      <Name>Grid.Features.HRMS</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Grid.Features.Settings\Grid.Features.Settings.csproj">
+      <Project>{a4968df2-50d1-42a1-b53d-db4ea1963e0c}</Project>
+      <Name>Grid.Features.Settings</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Grid.Infrastructure\Grid.Infrastructure.csproj">
+      <Project>{bef9f095-7a92-4577-bfd5-b31c85191d6b}</Project>
+      <Name>Grid.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Grid.Providers.Email\Grid.Providers.Email.csproj">
+      <Project>{7231DAE9-C7A4-48CF-9E74-B98A8866662F}</Project>
+      <Name>Grid.Providers.Email</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

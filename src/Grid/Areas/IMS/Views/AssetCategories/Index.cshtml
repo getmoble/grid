@@ -1,0 +1,24 @@
+﻿@using Grid.Infrastructure
+@using Grid.Infrastructure.Extensions
+
+
+<h2>Manage Asset Categories</h2>
+<assetcategories></assetcategories>
+
+<script type="text/html" id="assetcategories-template">
+    <div class="col-md-8">
+        <assetcategorieslist params="entity: 'assetcategorie', enableFilter:true, manageList:true"></assetcategorieslist>
+    </div>
+    <div class="col-md-4" data-bind="visible:showQuickView">
+        <assetcategoryupdate params="entity: 'assetcategorie'"></assetcategoryupdate>
+    </div>
+</script>
+
+
+@section Scripts{
+    <script>
+        $(function () {
+            ko.applyBindings();
+        });
+    </script>
+}

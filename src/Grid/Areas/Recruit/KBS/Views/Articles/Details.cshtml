@@ -1,0 +1,14 @@
+﻿@model Grid.Features.KBS.Entities.Article
+
+<h4>@Model.Category.Title</h4>
+<h2>@Model.Title <span class="badge">Version @Model.ArticleVersion</span> <span class="badge">Hits @Model.Hits</span></h2>
+<div>
+    @Html.Raw(Model.Content)
+</div>
+<hr />
+@if (Model.UpdatedOn.HasValue)
+{
+    <p>Last Updated By <b>@Model.UpdatedByUser.Person.Name</b> on <b>@Model.UpdatedOn.Value.ToShortDateString()</b></p>
+}
+
+<p>Created By <b>@Model.CreatedByUser.Person.Name</b> on <b>@Model.CreatedOn.ToShortDateString()</b></p>

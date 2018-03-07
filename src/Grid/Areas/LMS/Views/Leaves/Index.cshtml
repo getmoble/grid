@@ -1,0 +1,62 @@
+﻿@using Grid.Infrastructure
+@using Grid.Infrastructure.Extensions
+
+<div class="">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10">
+                <div class="metr">
+
+                    <a href="/LMS/Holiday">
+                        <div class="metrostyle metrostylelarge yoometro">
+                            <span class="marT marR-180"><span class="text-white">Holidays</span></span>
+                        </div>
+                    </a>
+                    @if (PermissionChecker.CheckPermission(ViewBag.Permissions as List<int>, 215))
+                    {
+                        <a href="/LMS/LeavePeriods">
+                            <div class="metrostyle metrostylelarge eenmetro">
+                                <span class="marT marR-100"><span class="text-white">Leave Periods</span></span>
+                            </div>
+                        </a>
+                        <a href="/LMS/LeaveTypes">
+                            <div class="metrostyle metrostylelarge boometro">
+                                <span class="marT marR-50"><span class="text-white">Leave Types</span></span>
+                            </div>
+                        </a>
+                    }
+                    <a href="/LMS/Leaves/Manage">
+                        <div class="metrostyle metrostylelarge reemetro">
+                            <span class="marT marR-180"><span class="text-white">Leaves</span></span>
+                        </div>
+                    </a>
+                    @if (PermissionChecker.CheckPermission(ViewBag.Permissions as List<int>, 215))
+                    {
+                        <a href="/LMS/Leaves/EmployeesLeaveBalance">
+                            <div class="metrostyle metrostylelarge bg-maroon">
+                                <span class="marT marR-0"><span class="text-white">Employees Leave Balance</span></span>
+                            </div>
+                        </a>
+                    }
+                    else
+                    {
+
+                        <a href="/LMS/Leaves/MyLeaveBalance">
+                            <div class="metrostyle metrostylelarge yoometro">
+                                <span class="marT marR-120"><span class="text-white">My Leave Balance</span></span>
+                            </div>
+                        </a>
+                    }
+                    @if (PermissionChecker.CheckPermission(ViewBag.Permissions as List<int>, 215))
+                    {
+                        <a href="/LMS/LeaveEntitlements">
+                            <div class="metrostyle metrostylelarge bg-grey">
+                                <span class="marT marR-120"><span class="text-white">Leave Entitlements</span></span>
+                            </div>
+                        </a>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

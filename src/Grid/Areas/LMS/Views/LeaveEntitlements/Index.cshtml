@@ -1,0 +1,144 @@
+﻿
+<h2>Manage Leave Entitlements</h2>
+<leaveentitlements></leaveentitlements>
+
+<script type="text/html" id="leaveentitlements-template">
+    <div class="col-md-12">
+        <leaveentitlementsearch></leaveentitlementsearch>
+    </div>
+    <br />
+    <div class="col-md-8">
+        <leaveentitlementlist params="entity: 'leaveentitlement', enableFilter:true, manageList:true"></leaveentitlementlist>
+    </div>
+    <div class="col-md-4" data-bind="visible:showQuickView">
+        <leaveentitlementupdate params="entity: 'leaveentitlement'"></leaveentitlementupdate>
+    </div>
+</script>
+
+<script type="text/html" id="leaveentitlementsearch-template">
+    <div class="col-sm-2">
+        <label>Employee</label>
+        <dropdown-list params="entity: 'employee',selectedValue: employeeId, caption: 'Choose Employee'"></dropdown-list>
+    </div>
+    <div class="col-sm-2">
+        <label>Leave Type</label>
+        <dropdown-list params="entity: 'leavetype',selectedValue: leaveTypeId, caption: 'Choose Leave Type'"></dropdown-list>
+    </div>
+    <div class="col-sm-2">
+        <label>Time Period</label>
+        <dropdown-list params="entity: 'leavetimeperiod',selectedValue: leaveTimePeriodId, caption: 'Choose Time Period'"></dropdown-list>
+    </div>
+    <div class="col-sm-2">
+        <label>Operation</label>
+        <dropdown-list params="entity: 'leaveoperation',selectedValue: operation, caption: 'Choose Operation'"></dropdown-list>
+    </div>
+    <div class="col-sm-2">
+        <label>Created By</label>
+        <dropdown-list params="entity: 'employeeuser',selectedValue: allocatedBy, caption: 'Choose Employee'"></dropdown-list>
+    </div>
+    <div class="col-sm-2">
+        <button class="btn btn-primary" style="margin-top:23px;" data-bind="click:filter">Filter</button>
+        <button class="btn btn-default" style="margin-top:23px;" data-bind="click:refresh">Reset</button>
+    </div>
+</script>
+
+@section Scripts{
+    <script>
+        $(function () {
+            ko.applyBindings();
+        });
+    </script>
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@*@model Grid.Features.LMS.ViewModels.LeaveEntitlementSearchViewModel
+
+<h2>Manage Leave Entitlements</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<div class="pull-right well-lg">
+    @using (Html.BeginForm("Index", "LeaveEntitlements", FormMethod.Get, new { @class = "form-inline", role = "form" }))
+    {
+        <div class="form-group">
+            @Html.DropDownList("AllocatedUserId", null, htmlAttributes: new { @class = "form-control" }, optionLabel: "-- Select Employee--")
+        </div>
+
+    <div class="form-group">
+        @Html.DropDownList("LeaveTypeId", null, htmlAttributes: new { @class = "form-control" }, optionLabel:  "-- Select Leave Type--")
+    </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Filter" class="btn btn-default" />
+            </div>
+        </div>
+    }
+</div>
+<table class="table">
+    <tr>
+        <th>
+            Employee
+        </th>
+        <th>
+            Time Period
+        </th>
+        <th>
+            Leave Type
+        </th>
+        <th>
+            Allocation
+        </th>
+        <th>
+            Allocated By
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model.LeaveEntitlements) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.AllocatedUser.Person.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LeaveTimePeriod.Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LeaveType.Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Allocation)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreatedByUser.Person.Name)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>*@

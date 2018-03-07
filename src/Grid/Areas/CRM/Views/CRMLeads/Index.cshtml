@@ -1,0 +1,142 @@
+﻿@model Grid.Features.CRM.ViewModels.CRMLead.CRMLeadSearchViewModel
+@using Grid.Infrastructure
+@using Grid.Infrastructure.Extensions
+@using PagedList.Mvc;
+@using StringExtensions = Grid.Infrastructure.Extensions.StringExtensions
+
+<h2>Manage Leads</h2>
+
+<div class="pull-right well-lg">
+    @using (Html.BeginForm("Index", "CRMLeads", FormMethod.Get, new { @class = "form-inline", role = "form" }))
+    {
+        <div class="form-group">
+            @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control", placeholder = "Firstname" } })
+        </div>
+        <div class="form-group">
+            @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control", placeholder = "LastName" } })
+        </div>
+        <div class="form-group">
+            @Html.EditorFor(model => model.Designation, new { htmlAttributes = new { @class = "form-control", placeholder = "Designation" } })
+        </div>
+        <div class="form-group">
+            @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "form-control", placeholder = "City" } })
+        </div>
+        <div class="form-group">
+            @Html.DropDownList("LeadSourceId", null, htmlAttributes: new { @class = "form-control" }, optionLabel: "-- Select Source --")
+        </div>
+        <div class="form-group">
+            @Html.DropDownList("CategoryId", null, htmlAttributes: new { @class = "form-control" }, optionLabel: "-- Select Category --")
+        </div>
+
+        if(ViewBag.HasCRMManageAccess)
+        {
+            <div class="form-group">
+                @Html.DropDownList("AssignedToUserId", null, htmlAttributes: new { @class = "form-control" }, optionLabel: "-- Select Assigned To User --")
+            </div>
+        }
+
+        <div class="form-group">
+            @Html.DropDownList("LeadStatusId", null, htmlAttributes: new { @class = "form-control" }, optionLabel: "-- Select Status --")
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Filter" class="btn btn-default" />
+            </div>
+        </div>
+    }
+</div>
+<table class="table table-hover">
+    <tr>
+        <th>
+            Name
+        </th>
+        <th>
+            Organization
+        </th>
+        <th>
+            Designation
+        </th>
+        <th>
+            Email
+        </th>
+        <th>
+            Phone
+        </th>
+        <th>
+            Category
+        </th>
+        <th>
+            Recieved On
+        </th>
+        @if (ViewBag.HasCRMManageAccess)
+        {
+            <th>
+                Assigned To
+            </th>
+        }
+        <th>
+            Status
+        </th>
+    </tr>
+
+    @foreach (var item in Model.Leads)
+    {
+        <tr>
+            <td>
+                @{
+                    var popoverContent = "<p><b> Organization: </b>" + item.Person.Organization + "</p><p>" + "<b> Designation: </b>" + item.Person.Designation + "</p>";
+                }
+                @Html.ActionLink(item.Person.Name, "Details", "CRMLeads", new { area = "CRM", id = item.Id }, new { data_content = popoverContent, data_toggle = "popover", data_trigger = "hover", data_html = true })
+            </td>
+            <td>
+                @StringExtensions.Truncate(item.Person.Organization, 20)
+            </td>
+            <td>
+                @StringExtensions.Truncate(item.Person.Designation, 20)
+            </td>
+            <td>
+                @item.Person.Email
+            </td>
+            <td>
+                @item.Person.PhoneNo
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Category.Title)
+            </td>
+            <td>
+                @if (item.RecievedOn.HasValue)
+                {
+                    @item.RecievedOn.Value.ToShortDateString()
+                }
+            </td>
+            @if (ViewBag.HasCRMManageAccess)
+            {
+                <td>
+                    @Html.DisplayFor(modelItem => item.AssignedToUser.Person.Name)
+                </td>
+            }
+            <td>
+                @Html.DisplayFor(modelItem => item.LeadStatus.Name)
+            </td>
+        </tr>
+                    }
+</table>
+@Html.GridAddButton(EntityType.Lead)
+Page @(Model.Leads.PageCount < Model.Leads.PageNumber ? 0 : Model.Leads.PageNumber) of @Model.Leads.PageCount
+@Html.PagedListPager(Model.Leads, page => Url.Action("Index", new { page, Model.FirstName, Model.LastName, Model.Designation, Model.LeadSourceId, Model.CategoryId, Model.LeadStatusId }))
+<style type="text/css">
+    .popover {
+        max-width: 600px;
+    }
+</style>
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $('[data-toggle="popover"]').popover(
+                {
+                    container: 'body'
+                }
+            );
+        });
+    </script>
+}

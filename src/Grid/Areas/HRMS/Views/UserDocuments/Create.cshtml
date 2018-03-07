@@ -1,0 +1,35 @@
+﻿@model Grid.Features.HRMS.ViewModels.UserDocumentViewModel
+
+<h2>Create User Document</h2>
+
+@using (Html.BeginForm("Create", "UserDocuments", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(m => m.UserId)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DocumentType, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EnumDropDownListFor(model => model.DocumentType, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.DocumentType, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Document, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input type="file" name="Document" id="Document" />  
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}

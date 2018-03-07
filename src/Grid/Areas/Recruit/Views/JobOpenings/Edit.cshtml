@@ -1,0 +1,13 @@
+﻿@model Grid.Features.Recruit.ViewModels.JobOpeningViewModel
+
+<h2>Edit Job Opening</h2>
+
+<jobopeningupdate params="Id: @Model.Id"></jobopeningupdate>
+
+@section Scripts{
+    <script>
+        $(function () {
+            ko.applyBindings();
+        });
+    </script>
+}

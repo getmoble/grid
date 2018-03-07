@@ -1,0 +1,181 @@
+﻿@model Grid.Features.KBS.ViewModels.EditArticleViewModel
+
+<div class="btn-group pull-right" role="group">
+    @Html.ActionLink("Add Attachment", "Create", "ArticleAttachments", new { articleId = Model.Id }, new { @class = "btn btn-primary" })
+</div>
+
+<h2>Edit Article</h2>
+<hr />
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active"><a href="#primary" aria-controls="home" role="tab" data-toggle="tab">Primary</a></li>
+        <li role="presentation"><a href="#attachments" aria-controls="profile" role="tab" data-toggle="tab">Attachments</a></li>
+        <li role="presentation"><a href="#versions" aria-controls="profile" role="tab" data-toggle="tab">Versions</a></li>
+    </ul>
+
+    <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="primary">
+            <br />
+            <div class="form-horizontal">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.HiddenFor(model => model.Id)
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CategoryId, "Category", new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownList("CategoryId", null, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.CategoryId, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.IsPublic, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <div class="checkbox">
+                            @Html.EditorFor(model => model.IsPublic)
+                            @Html.ValidationMessageFor(model => model.IsPublic, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Title, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Summary, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Summary, new { htmlAttributes = new { @class = "form-control htmlEditor" } })
+                        @Html.ValidationMessageFor(model => model.Summary, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Content, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Content, new { htmlAttributes = new { @class = "form-control htmlEditor" } })
+                        @Html.ValidationMessageFor(model => model.Content, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ArticleVersion, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.ArticleVersion, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.ArticleVersion, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.KeyWords, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.KeyWords, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.KeyWords, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.IsFeatured, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <div class="checkbox">
+                            @Html.EditorFor(model => model.IsFeatured)
+                            @Html.ValidationMessageFor(model => model.IsFeatured, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.State, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EnumDropDownListFor(model => model.State, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.State, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Update" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div role="tabpanel" class="tab-pane" id="attachments">
+            <br />
+            @if (Model.Attachments.Any())
+            {
+                <table class="table">
+                    <tr>
+                        <th>
+                            Document Type
+                        </th>
+                        <th>
+                            Name
+                        </th>
+                        <th>
+                            Url
+                        </th>
+                        <th>
+                            Created On
+                        </th>
+                        <th></th>
+                    </tr>
+
+                    @foreach (var item in Model.Attachments)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.AttachmentType)
+                            </td>
+                            <td>
+                                @item.FileName
+                            </td>
+                            <td>
+                                <a href="@item.DocumentPath" target="_blank">@item.DocumentPath</a>
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CreatedOn)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Delete", "Delete", "ArticleAttachments", new { area = "KBS", id = item.Id }, null)
+                            </td>
+                        </tr>
+                    }
+                </table>
+            }
+        </div>
+        <div role="tabpanel" class="tab-pane" id="versions">
+            <br />
+            @if (Model.Versions.Any())
+            {
+                <table class="table">
+                    <tr>
+                        <th>
+                            Version
+                        </th>
+                        <th>
+                            Created On
+                        </th>
+                    </tr>
+
+                    @foreach (var item in Model.Versions)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Version)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CreatedOn)
+                            </td>
+                        </tr>
+                    }
+                </table>
+            }
+        </div>
+    </div>
+}

@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Grid</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="~/Content/bootstrap.theme.min.css" rel="stylesheet" />
+    <link href="~/Content/style.css" rel="stylesheet" />
+    <script>
+        function start() {
+            gapi.load('auth2', function () {
+                auth2 = gapi.auth2.init({
+                    client_id: '13142863500-dbpcpbjf6r846ojaoo2qjpo0u12hb3fe.apps.googleusercontent.com'
+                });
+            });
+        }
+    </script>
+</head>
+<body>
+    <div id="wrap">
+        <div class="container">
+            @RenderBody()
+        </div>
+    </div>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <script src="https://apis.google.com/js/client:platform.js?onload=start" async defer></script>
+    <script>
+        $('#signinButton')
+            .click(function () {
+                // signInCallback defined in step 6.
+                auth2.grantOfflineAccess({ 'redirect_uri': 'postmessage' }).then(signInCallback);
+            });
+    </script>
+    <script>
+        function signInCallback(authResult) {
+            if (authResult['code']) {
+
+                // Hide the sign-in button now that the user is authorized, for example:
+                $('#signinButton').attr('disabled', true);
+
+                var payload = {
+                    code: authResult['code']
+                };
+
+                // Send the code to the server
+                $.ajax({
+                    type: 'POST',
+                    url: '/Account/SignInWithGoogle',
+                    success: function (result) {
+                        if (result) {
+                            window.location.href = "/Home/Index";
+                        } else {
+                            alert("Login with Gmail failed");
+                            $('#signinButton').attr('disabled', false);
+                        }
+                    },
+                    data: payload
+                });
+            } else {
+                alert("Some Error Occured");
+                $('#signinButton').attr('disabled', false);
+            }
+        }
+    </script>
+</body>
+</html>

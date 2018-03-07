@@ -1,0 +1,13 @@
+﻿@model  Grid.Features.PMS.ViewModels.Project.EditProjectViewModel
+
+<h2>Edit Project</h2>
+
+<projectupdate params="Id: @Model.Id"></projectupdate>
+
+@section Scripts{
+    <script>
+        $(function () {
+            ko.applyBindings();
+        });
+    </script>
+}

@@ -1,0 +1,24 @@
+﻿
+@using Grid.Infrastructure
+@using Grid.Infrastructure.Extensions
+
+<h2>Manage Potential Categories</h2>
+<potentialcategories></potentialcategories>
+
+<script type="text/html" id="potentialcategories-template">
+    <div class="col-md-8">
+        <potentialcategories-list params="entity: 'crmpotentialcategorie', enableFilter:true, manageList:true"></potentialcategories-list>
+    </div>
+    <div class="col-md-4" data-bind="visible:showQuickView">
+        <potentialcategoriesupdate params="entity: 'crmpotentialcategorie'"></potentialcategoriesupdate>
+    </div>
+</script>
+
+
+@section Scripts{
+    <script>
+        $(function () {
+            ko.applyBindings();
+        });
+    </script>
+}

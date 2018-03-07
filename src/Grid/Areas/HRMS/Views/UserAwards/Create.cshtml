@@ -1,0 +1,36 @@
+﻿@model Grid.Features.HRMS.Entities.UserAward
+
+<h2>Create UserAward</h2>
+
+@using (Html.BeginForm("Create", "UserAwards", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(u => u.UserId)
+        
+        <div class="form-group">
+            @Html.LabelFor(model => model.AwardId, "Award", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("AwardId", null, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.AwardId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Comments, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Comments, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Comments, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}

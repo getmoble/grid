@@ -1,0 +1,68 @@
+﻿@model IEnumerable<Grid.Features.LMS.Entities.LeaveEntitlementUpdate>
+
+<h2>My Leave Entitlements History</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            Leave Cycle
+        </th>
+        <th>
+            Leave Type
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Operation)
+        </th>
+        <th>
+            Leave Count
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PreviousBalance)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NewBalance)
+        </th>
+        <th>
+           Comments
+        </th>
+        <th>
+            Created By
+        </th>
+        <th>
+            Created On
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        
+        <td>
+            @Html.DisplayFor(modelItem => item.LeaveTimePeriod.Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LeaveType.Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Operation)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LeaveCount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PreviousBalance)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NewBalance)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Comments)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreatedByUser.Person.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreatedOn)
+        </td>
+    </tr>
+}
+</table>

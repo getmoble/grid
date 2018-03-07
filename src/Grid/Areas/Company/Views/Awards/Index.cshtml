@@ -1,0 +1,22 @@
+﻿@using Grid.Infrastructure
+@using Grid.Infrastructure.Extensions
+
+<h2>Manage Awards</h2>
+<awards></awards>
+
+<script type="text/html" id="awards-template">  
+    <div class="col-md-8">
+        <awardslist params="entity: 'award', enableFilter:true, manageList:true"></awardslist>
+    </div>
+    <div class="col-md-4" data-bind="visible:showQuickView">
+        <awardupdate params="entity: 'award'"></awardupdate>
+    </div>
+</script>
+
+@section Scripts{
+    <script>
+        $(function () {
+            ko.applyBindings();
+        });
+    </script>
+}

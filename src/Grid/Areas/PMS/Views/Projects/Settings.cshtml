@@ -1,0 +1,58 @@
+﻿@model  Grid.Features.Common.ProjectSettings
+
+
+    @using (Html.BeginForm())
+    {
+        <div class="btn-group pull-right" role="group">
+            <div class="form-group">
+                <div class="col-md-10">
+                    <input type="submit" value="Update" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+
+        <h2>Edit Project Settings</h2>
+
+        <hr/>
+
+        @Html.AntiForgeryToken()
+
+       
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.NeedCalendar, new {htmlAttributes = new {}})
+                        Need Calendar
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.NeedBilling, new {htmlAttributes = new {}})
+                        Need Billing
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.NeedMileStones, new {htmlAttributes = new {}})
+                        Need MileStones
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.NeedDocuments, new {htmlAttributes = new {}})
+                        Need Documents
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.NeedTasks, new {htmlAttributes = new {}})
+                        Need Tasks
+                    </div>
+                </div>
+            </div>
+           
+        </div>
+    }
+
+

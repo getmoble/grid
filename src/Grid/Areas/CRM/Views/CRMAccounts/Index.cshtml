@@ -1,0 +1,40 @@
+﻿@*@using Grid.Infrastructure
+@using Grid.Infrastructure.Extensions
+
+<h2>Manage Accounts</h2>
+<crmaccountslist></crmaccountslist>
+@Html.GridAddButton(EntityType.Account)
+
+@section Scripts{
+    <script>
+        $(function () {
+            ko.applyBindings();
+        });
+    </script>
+}*@
+
+
+
+@using Grid.Infrastructure
+@using Grid.Infrastructure.Extensions
+
+<h2>Manage Accounts</h2>
+<crmaccounts></crmaccounts>
+
+<script type="text/html" id="crmaccounts-template">
+    <div class="col-md-8">
+        <crmaccounts-list params="entity: 'crmaccount', enableFilter:true, manageList:true"></crmaccounts-list>
+    </div>
+    <div class="col-md-4" data-bind="visible:showQuickView">
+        <crmaccountsupdate params="entity: 'crmaccount'"></crmaccountsupdate>
+    </div>
+</script>
+
+
+@section Scripts{
+    <script>
+        $(function () {
+            ko.applyBindings();
+        });
+    </script>
+}

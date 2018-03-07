@@ -1,0 +1,44 @@
+﻿@model Grid.Features.Recruit.Entities.JobOpening
+
+<div class="btn-group pull-right" role="group">
+    @Html.ActionLink("Edit", "Edit", "JobOpenings", new { id = Model.Id }, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Delete", "Delete", "JobOpenings", new { id = Model.Id }, new { @class = "btn btn-primary" })
+</div>
+<h2>@Model.Title</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NoOfVacancies)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.NoOfVacancies)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.OpeningStatus)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.OpeningStatus)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedOn)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CreatedOn)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd>         
+           @Html.Raw(Model.Description)
+        </dd>
+        <dt>
+            Job Description File
+        </dt>
+        <dd>
+            <a href="@Model.JobDescriptionPath" target="_blank">Download</a>
+        </dd>
+        
+    </dl>
+</div>

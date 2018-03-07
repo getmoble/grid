@@ -1,0 +1,27 @@
+﻿@model IEnumerable<Grid.Features.PMS.Entities.MissedTimeSheet>
+
+<h2>Missed TimeSheets for Team</h2>
+<table class="table">
+    <tr>
+        <th>
+            Name
+        </th>
+        <th>
+            Title
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @item.User.Person.Name
+            </td>
+            <td>
+                Timesheet for @item.Date.ToShortDateString()
+            </td>
+        </tr>
+    }
+
+</table>
+

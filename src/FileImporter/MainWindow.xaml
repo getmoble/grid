@@ -1,0 +1,12 @@
+﻿<Window x:Class="FileImporter.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="350" Width="525">
+    <Grid>
+        <Button Content="Import Reject List" HorizontalAlignment="Left" Margin="35,28,0,0" VerticalAlignment="Top" Width="134" Click="Button_Click"/>
+        <Button Content="Update Asset Tags" HorizontalAlignment="Left" Margin="35,86,0,0" VerticalAlignment="Top" Width="134" Click="Button_Click_1"/>
+        <Button Content="Clean Up Emails" HorizontalAlignment="Left" Margin="35,138,0,0" VerticalAlignment="Top" Width="134" Click="Button_Click_2"/>
+        <Button Content="Update Candidate Ids" HorizontalAlignment="Left" Margin="35,177,0,0" VerticalAlignment="Top" Width="134" Click="Button_Click_3"/>
+
+    </Grid>
+</Window>

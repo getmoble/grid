@@ -1,0 +1,119 @@
+﻿@model Grid.Features.Recruit.ViewModels.CandidateSearchViewModel
+
+<div class="container-fluid">
+    <div class="pull-right well-lg">
+        @using (Html.BeginForm("Index", "CandidatesDashboard", FormMethod.Get, new { @class = "form-inline", role = "form" }))
+        {
+            <div class="form-group">
+                @Html.EnumDropDownListFor(model => model.Source, htmlAttributes: new { @class = "form-control" }, optionLabel: "-- Select Source --")
+            </div>
+
+            <div class="form-group">
+                @Html.EnumDropDownListFor(model => model.Status, htmlAttributes: new { @class = "form-control" }, optionLabel: "-- Select Status --")
+            </div>
+
+            <div class="form-group">
+                @Html.EditorFor(model => model.Organization, new { htmlAttributes = new { @class = "form-control", placeholder = "Organization" } })
+            </div>
+
+            <div class="form-group" style="position: relative">
+                @Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+
+            <div class="form-group" style="position: relative">
+                @Html.EditorFor(model => model.EndDate, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+            
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Filter" class="btn btn-default" />
+                </div>
+            </div>
+        }
+    </div>
+    <div class=clearfix></div>
+    <div class="row">
+        <div id="chart"></div>
+    </div>
+    <div class="text-center">
+        <h3>Total - @Model.Total</h3>
+    </div>
+    <hr />
+    <div class="row">
+        <div class="col-lg-6">
+            <h4>Candidates by Designation</h4>
+            <div id="candidatesByDesignation"></div>
+        </div>
+        <div class="col-lg-6">
+            <h4>Candidates by Source</h4>
+            <div id="candidatesByStatus"></div>
+        </div>
+    </div>
+    @section Scripts{
+        <script>
+    var designationUrl = '/Recruit/CandidatesDashboard/CandidatesByDesignationCSV?Source=@Model.Source&Status=@Model.Status&FirstName=@Model.FirstName&LastName=@Model.LastName&Gender=@Model.Gender&LastName=@Model.LastName&Organization=@Model.Organization&Designation=@Model.Designation&Email=@Model.Email&Phone=@Model.Phone';
+    var candidatesByDesignation = c3.generate({
+        bindto: '#candidatesByDesignation',
+        data: {
+            url: encodeURI(designationUrl),
+            type: 'pie'
+        },
+        legend: {
+            show: false
+        },
+        pie: {
+            label: {
+                format: function (value, ratio, id) {
+                    return value;
+                }
+            }
+        }
+    });
+
+    var statusUrl = '/Recruit/CandidatesDashboard/CandidatesBySourceCSV?Source=@Model.Source&Status=@Model.Status&FirstName=@Model.FirstName&LastName=@Model.LastName&Gender=@Model.Gender&LastName=@Model.LastName&Organization=@Model.Organization&Designation=@Model.Designation&Email=@Model.Email&Phone=@Model.Phone';
+    var candidatesByStatus = c3.generate({
+        bindto: '#candidatesByStatus',
+        data: {
+            url: encodeURI(statusUrl),
+            type: 'pie'
+        },
+        legend: {
+            show: false
+        },
+        pie: {
+            label: {
+                format: function (value, ratio, id) {
+                    return value;
+                }
+            }
+        }
+    });
+
+    var chart = c3.generate({
+        bindto: '#chart',
+        data: {
+            x: 'x',
+            xFormat: '%m/%d/%Y',
+            columns: [
+                  @Html.Raw(Json.Encode(ViewBag.Dates)),
+                  @Html.Raw(Json.Encode(ViewBag.Posts))
+            ],
+            type: 'bar'
+        },
+        axis: {
+            x: {
+                type: 'timeseries',
+                tick: {
+                    format: '%m/%d/%Y'
+                }
+            }
+        }
+    });
+        </script>
+    }
+</div>
+
+
+
+
+

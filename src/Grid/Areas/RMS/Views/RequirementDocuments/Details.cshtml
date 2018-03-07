@@ -1,0 +1,37 @@
+﻿@model Grid.Features.RMS.Entities.RequirementDocument
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details RequirementDocument</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Requirement.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Requirement.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DocumentType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DocumentType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DocumentPath)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DocumentPath)
+        </dd>
+
+    </dl>
+</div>

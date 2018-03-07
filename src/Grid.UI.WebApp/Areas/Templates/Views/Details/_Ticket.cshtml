@@ -1,0 +1,143 @@
+﻿<div class="btn-group pull-right" role="group">
+    <a href="#" class="btn btn-primary" data-bind="click:edit">Edit</a>
+    <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#addNoteModal">Add Activity</a>
+    <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#addNoteModal">Change Status</a>
+</div>
+<h2 data-bind="text: selected.Title"></h2>
+<div>
+    <hr />
+
+    <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active"><a href="#info" aria-controls="home" role="tab" data-toggle="tab">Info</a></li>
+        <li role="presentation"><a href="#notes" aria-controls="home" role="tab" data-toggle="tab">Notes & Activity</a></li>
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="info">
+            <br />
+            <div class="row" data-bind="with: selected">
+                <div class="col-lg-6">
+                    <dl class="dl-horizontal">
+                        <dt>
+                            Created By User
+                        </dt>
+
+                        <dd>
+                            <span data-bind="text: CreatedByUser"></span>
+                        </dd>
+
+                        <dt>
+                            Ticket Category
+                        </dt>
+
+                        <dd>
+                            <span data-bind="text: TicketCategory"></span>
+                        </dd>
+
+                        <dt>
+                            Ticket Sub Category
+                        </dt>
+
+                        <dd>
+                            <span data-bind="text: TicketSubCategory"></span>
+                        </dd>
+
+
+                        <dt>
+                            Title
+                        </dt>
+
+                        <dd>
+                            <span data-bind="text: Title"></span>
+                        </dd>
+
+                        <dt>
+                            Description
+                        </dt>
+
+                        <dd>
+                            <span data-bind="text: Description"></span>
+                        </dd>
+
+                        <dt>
+                            Status
+                        </dt>
+
+                        <dd>
+                            <span data-bind="text: Status"></span>
+                        </dd>
+                        <dt>
+                            Due Date
+                        </dt>
+
+                        <dd>
+                            <span data-bind="text: DueDate"></span>
+                        </dd>
+                        <dt>
+                            Updated On 
+                        </dt>
+
+                        <dd>
+                            <span data-bind="text: UpdatedOn"></span>
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+        <div role="tabpanel" class="tab-pane" id="notes">
+            <br />
+            <div class="timeline timeline-left gray-blue" data-bind="foreach: activities">
+                <!-- Main element container -->
+                <div class="timeline-block">
+                    <!-- Single block -->
+                    <div class="timeline-icon timeline-icon-hide-border">
+                        <i class="fa fa-clock-o fa-lg"></i>
+                    </div>
+                    <div class="timeline-content">
+                        <button type="button" class="btn btn-primary btn-delete pull-right" data-bind="click: $parent.removeActivity">
+                            <i class="fa fa-remove" title="Delete"></i>
+                        </button>
+                        <h3 data-bind="text: Title"></h3>
+                        <p data-bind="html: Comment"></p>
+                        <div class="timeline-date" data-bind="text: CreatedOn"></div> <!-- Date -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    .btn-delete {
+        width: 25px;
+        height: 25px;
+        padding: 2px 2px;
+        font-size: 13px;
+        line-height: 1.33;
+        border-radius: 25px;
+    }
+</style>
+<!-- Modal -->
+<div class="modal fade" id="addNoteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Add Activity</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <input type="text" id="newNoteTitle" class="form-control" value="Note" />
+                    </div>
+                    <div class="form-group">
+                        <textarea id="newNote" class="form-control htmlEditor"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-bind="click: addNewNote">Submit</button>
+            </div>
+        </div>
+    </div>
+</div>

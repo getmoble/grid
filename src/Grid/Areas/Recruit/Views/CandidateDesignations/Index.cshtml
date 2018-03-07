@@ -1,0 +1,14 @@
+﻿@using Grid.Infrastructure
+@using Grid.Infrastructure.Extensions
+
+<h2>Manage Candidate Designations</h2>
+<jobopeningslist></jobopeningslist>
+@Html.GridAddButton(EntityType.CandidateDesignation)
+
+@section Scripts{
+    <script>
+        $(function () {
+            ko.applyBindings();
+        });
+    </script>
+}

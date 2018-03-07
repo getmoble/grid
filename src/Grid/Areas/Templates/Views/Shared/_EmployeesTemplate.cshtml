@@ -1,0 +1,713 @@
+﻿@using Grid.Areas.Templates.Models
+@model IList<UIField>
+
+<div class="card" data-bind="template:{name:templateName}"></div>
+<script type="text/html" id="@ViewBag.Name-form-template">
+    <div class="marT-5 well">
+        <div data-bind="loadingWhen: isBusy">
+            <div class="form-group">
+                <label class="control-label col-sm-4">Image</label>
+                <div>
+                    <singleimage params="datas: $component.imageData,entity:'employee'"></singleimage>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+            <div class="form-horizontal " data-bind="with: selectedData">
+                <div class="row">
+                    <div class="clearfix"></div>
+                </div>
+                <br />
+                <div class="form-group">
+                    <span class="star">*</span>
+                    <label class="control-label col-sm-4">Department</label>
+                    <div class="col-sm-8">
+                        <dropdown-list params="entity: 'department',selectedValue: departmentId,caption: 'Choose Department'"></dropdown-list>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <span class="star">*</span>
+                    <label class="control-label col-sm-4 ">Employee Code</label>
+                    <div class="col-sm-8">
+
+                        <input type="text" class="form-control " name="employeeCode" data-bind="value: employeeCode">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <span class="star">*</span>
+                    <label class="control-label col-sm-4">Username</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" name="username" data-bind="value: username">
+                    </div>
+                </div>
+                <div class="form-group" data-bind="visible:$parent.mode()=='create'">
+                    <span class="star">*</span>
+                    <label class="control-label col-sm-4">Password</label>
+                    <div class="col-sm-8">
+                        <input type="password" class="form-control" name="password" data-bind="value: password">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <span class="star">*</span>
+                    <label class="control-label col-sm-4">First Name</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" name="firstName" data-bind="value: firstName">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4">Middle Name</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" name="middleName" data-bind="value: middleName">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4">Last Name</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" name="lastName" data-bind="value: lastName">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4">Gender</label>
+                    <div class="col-sm-8">
+                        <dropdown-list params="entity: 'gender',selectedValue: gender, caption: 'Choose Gender'"></dropdown-list>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <span class="star">*</span>
+                    <label class="control-label col-sm-4">Email</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" name="email" data-bind="value: email">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4">Secondary Email</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" name="secondaryEmail" data-bind="value: secondaryEmail">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4">Phone No</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" name="phoneNo" data-bind="value: phoneNo">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4">Address</label>
+                    <div class="col-sm-8">
+                        <textarea name="address" class="form-control" data-bind="value: address"></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4">Communication Address</label>
+                    <div class="col-sm-8">
+                        <textarea name="communicationAddress" class="form-control" data-bind="value: communicationAddress"></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4">Passport No</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" name="passportNo" data-bind="value: passportNo">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4">Date Of Birth</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" name="date" data-bind="datepicker: dateOfBirth">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4">Blood Group</label>
+                    <div class="col-sm-8">
+                        <dropdown-list params="entity: 'bloodgroup',selectedValue: bloodGroup,caption: 'Choose Blood Group'"></dropdown-list>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4">Marital Status</label>
+                    <div class="col-sm-8">
+                        <dropdown-list params="entity: 'maritalstatus',selectedValue: maritalStatus,caption: 'Choose Marital Status'"></dropdown-list>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4">Employee Status</label>
+                    <div class="col-sm-8">
+                        <dropdown-list params="entity: 'employeestatus',selectedValue: employeeStatus,caption: 'Choose Employee Status'"></dropdown-list>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4">Marriage Anniversary</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" name="date" data-bind="datepicker: marriageAnniversary">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <span class="star">*</span>
+                    <label class="control-label col-sm-4">Designation</label>
+                    <div class="col-sm-8">
+                        <dropdown-list params="entity: 'designation',selectedValue: designationId,caption: 'Choose Designation'"></dropdown-list>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4">Shift</label>
+                    <div class="col-sm-8">
+                        <dropdown-list params="entity: 'shift',selectedValue: shiftId,caption: 'Choose Shift'"></dropdown-list>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4">Location</label>
+                    <div class="col-sm-8">
+                        <dropdown-list params="entity: 'location',selectedValue: locationId,caption: 'Choose Location'"></dropdown-list>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4">Reporting Person</label>
+                    <div class="col-sm-8">
+                        <dropdown-list params="entity: 'employee',selectedValue: reportingPersonId,caption: 'Choose Reporting Person'"></dropdown-list>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4">Manager</label>
+                    <div class="col-sm-8">
+                        <dropdown-list params="entity: 'employee',selectedValue: managerId,caption: 'Choose Manager'"></dropdown-list>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4">Experience</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" name="experience" data-bind="value: experience">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4">Date Of Joining</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" name="date" data-bind="datepicker: dateOfJoin">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4">Date Of Confirmation</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" name="date" data-bind="datepicker: confirmationDate">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4">Date Of Resignation</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" name="date" data-bind="datepicker: dateOfResignation">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4">Last Date</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" name="date" data-bind="datepicker: lastDate">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4">Official Email</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" name="email" data-bind="value: officialEmail">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4">Official Phone</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" name="phone" data-bind="value: officialPhone">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4">Slack</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" name="slack" data-bind="value: officialMessengerId">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4">Requires TimeSheet</label>
+                    <div class="col-md-8">
+                        <input type="checkbox" name="timesheet" id="checkbox" data-bind="checked: requiresTimeSheet">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4">Salary</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" name="salary" data-bind="value: salary">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4">Bank</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" name="bank" data-bind="value: bank">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4">Bank Account Number</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" name="accountnumber" data-bind="value: bankAccountNumber">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4">PAN Card</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" name="pancard" data-bind="value: panCard">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4">Payment Mode</label>
+                    <div class="col-sm-8">
+                        <dropdown-list params="entity: 'paymentmode',selectedValue: paymentMode,caption: 'Choose Payment Mode'"></dropdown-list>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4">Technologies</label>
+                    <div class="col-sm-8">
+                        <multiselectdropdown-list params="entity: 'technology',selectedValues: technologyIds,caption: 'Choose Technologies'"></multiselectdropdown-list>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4">Roles</label>
+                    <div class="col-sm-8">
+                        <multiselectdropdown-list params="entity: 'role',selectedValues: roleIds,caption: 'Choose Roles'"></multiselectdropdown-list>
+                    </div>
+                </div>
+                <input type="hidden" name="id" data-bind="value: id" />
+
+                <div class="form-group">
+                    <div class="col-md-offset-4 col-md-8">
+                        <div data-bind="visible:$parent.mode()=='create'">
+                            <button type="button" class="btn btn-primary" data-bind="click:$parent.save,ladda:$parent.isBusy">Save</button>
+                        </div>
+                        <div data-bind="if:$parent.mode()=='edit'">
+                            <button type="button" class="btn btn-primary" data-bind="click:$parent.save,ladda:$parent.isBusy">Update</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+<script type="text/html" id="@ViewBag.Name-details-template">
+    <div class="marT-5 well">
+        <div data-bind="loadingWhen: isBusy">
+            <div>
+                <singleimage params="datas: $component.imageData,entity:'employee'"></singleimage>
+                <div class="clearfix"></div>
+            </div>
+
+            <div class="form-horizontal " data-bind="with: selectedData">
+                <div class="form-group">
+                    <label class="control-label col-sm-4">Department</label>
+                    <div class="col-sm-8">
+                        <label name="department" data-bind="text: department"></label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4">Employee Code</label>
+                    <div class="col-sm-8">
+                        <label name="employeeCode" data-bind="text: employeeCode"></label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4">Username</label>
+                    <div class="col-sm-8">
+                        <label name="username" data-bind="text: username"></label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4">First Name</label>
+                    <div class="col-sm-8">
+                        <label name="firstName" data-bind="text: firstName"></label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4">Middle Name</label>
+                    <div class="col-sm-8">
+                        <label name="middleName" data-bind="text: middleName"></label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4">Last Name</label>
+                    <div class="col-sm-8">
+                        <label name="lastName" data-bind="text: lastName"></label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4">Gender</label>
+                    <div class="col-sm-8">
+                        <label name="gender" data-bind="text: genderType"></label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4">Email</label>
+                    <div class="col-sm-8">
+                        <label name="email" data-bind="text: email"></label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4">Secondary Email</label>
+                    <div class="col-sm-8">
+                        <label name="secondaryEmail" data-bind="text: secondaryEmail"></label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4">Phone No</label>
+                    <div class="col-sm-8">
+                        <label name="phoneNo" data-bind="text: phoneNo"></label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4">Address</label>
+                    <div class="col-sm-8">
+                        <label name="address" data-bind="text: address"></label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4">Communication Address</label>
+                    <div class="col-sm-8">
+                        <label name="communicationAddress" data-bind="text: communicationAddress"></label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4">Passport No</label>
+                    <div class="col-sm-8">
+                        <label name="passportNo" data-bind="text: passportNo"></label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4">Date Of Birth</label>
+                    <div class="col-sm-8">
+                        <label name="date" data-bind="dateString: dateOfBirth"></label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4">Blood Group</label>
+                    <div class="col-sm-8">
+                        <label name="bloodgroup" data-bind="text: bloodGroupType"></label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4">Marital Status</label>
+                    <div class="col-sm-8">
+                        <label name="maritalstatus" data-bind="text: maritalStatusType"></label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4">Employee Status</label>
+                    <div class="col-sm-8">
+                        <label name="employeestatus" data-bind="text: status"></label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4">Marriage Anniversary</label>
+                    <div class="col-sm-8">
+                        <label name="date" data-bind="dateString: marriageAnniversary"></label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4">Designation</label>
+                    <div class="col-sm-8">
+                        <label name="designation" data-bind="text: designation"></label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4">Shift</label>
+                    <div class="col-sm-8">
+                        <label name="shift" data-bind="text: shift"></label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4">Location</label>
+                    <div class="col-sm-8">
+                        <label name="location" data-bind="text: location"></label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4">Reporting Person</label>
+                    <div class="col-sm-8">
+                        <label name="employee" data-bind="text: reportingPerson"></label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4">Manager</label>
+                    <div class="col-sm-8">
+                        <label name="employee" data-bind="text: manager"></label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4">Experience</label>
+                    <div class="col-sm-8">
+                        <label name="experience" data-bind="text: experience"></label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4">Date Of Joining</label>
+                    <div class="col-sm-8">
+                        <label name="date" data-bind="dateString: dateOfJoin"></label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4">Date Of Confirmation</label>
+                    <div class="col-sm-8">
+                        <label name="date" data-bind="dateString: confirmationDate"></label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4">Date Of Resignation</label>
+                    <div class="col-sm-8">
+                        <label name="date" data-bind="dateString: dateOfResignation"></label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4">Last Date</label>
+                    <div class="col-sm-8">
+                        <label name="date" data-bind="dateString: lastDate"></label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4">Official Email</label>
+                    <div class="col-sm-8">
+                        <label name="email" data-bind="text: officialEmail"></label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4">Official Phone</label>
+                    <div class="col-sm-8">
+                        <label name="phone" data-bind="text: officialPhone"></label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4">Slack</label>
+                    <div class="col-sm-8">
+                        <label name="slack" data-bind="text: officialMessengerId"></label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4">Requires TimeSheet</label>
+                    <div class="col-md-8">
+                        <input type="checkbox" name="timesheet" id="checkbox" data-bind="checked: requiresTimeSheet" disabled>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4">Salary</label>
+                    <div class="col-sm-8">
+                        <label name="salary" data-bind="text: salary"></label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4">Bank</label>
+                    <div class="col-sm-8">
+                        <label name="bank" data-bind="text: bank"></label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4">Bank Account Number</label>
+                    <div class="col-sm-8">
+                        <label name="accountnumber" data-bind="text: bankAccountNumber"></label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4">PAN Card</label>
+                    <div class="col-sm-8">
+                        <label name="pancard" data-bind="text: panCard"></label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4">Payment Mode</label>
+                    <div class="col-sm-8">
+                        <label name="paymentmode" data-bind="text: paymentType"></label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4">Technologies</label>
+                    <div class="col-sm-8" data-bind="foreach: technologyNames">
+                        <label class="label label-primary" name="technology" data-bind="text: $data"></label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4">Roles</label>
+                    <div class="col-sm-8" data-bind="foreach: roleNames">
+                        <label class="label label-primary" name="role" data-bind="text: $data"></label>
+                    </div>
+                </div>
+
+                <button class="btn-primary " data-bind="click: toggle1">Leave Entitlements</button>
+                @*<button class="btn-primary" data-toggle="collapse" data-target="#entitlementhistory">Leave Entitlement Histories</button>*@
+                <button class="btn-primary " style="margin-top:10px;" data-bind="click: toggle2">Dependents</button>
+                <button class="btn-primary" style="margin-top:10px;" data-bind="click: toggle3">Emergency Contacts</button>
+
+
+                <div class="form-group" data-bind="visible: button1Visible">
+                    <leaveentitlementslog params="employeeId:id"></leaveentitlementslog>
+                </div>
+
+                @*<div id="entitlementhistory" class="collapse form-group">
+                    <entitlementhistory params="employeeId:id"></entitlementhistory>
+                </div>*@
+                <div class="form-group" data-bind="visible: button2Visible">
+                    <dependents params="employeeId:id"></dependents>
+                </div>
+                <div class="form-group" data-bind="visible: button3Visible">
+                    <emergencycontacts params="employeeId:id"></emergencycontacts>
+                </div>
+                <input type="hidden" name="id" data-bind="value: id" />
+            </div>
+        </div>
+    </div>
+</script>
+<script type="text/html" id="@ViewBag.Name-employeedetails-template">
+    <div class="marT-5 well">
+        <div data-bind="loadingWhen: isBusy">
+            <div>
+                <singleimage params="datas: $component.imageData,entity:'employee'"></singleimage>
+                <div class="clearfix"></div>
+            </div>
+
+            <div class="form-horizontal " data-bind="with: selectedData">
+                <div class="form-group">
+                    <label class="control-label col-sm-4">Employee Code</label>
+                    <div class="col-sm-8">
+                        <label name="employeeCode" data-bind="text: employeeCode"></label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4">First Name</label>
+                    <div class="col-sm-8">
+                        <label name="firstName" data-bind="text: firstName"></label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4">Gender</label>
+                    <div class="col-sm-8">
+                        <label name="gender" data-bind="text: genderType"></label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4">Date Of Birth</label>
+                    <div class="col-sm-8">
+                        <label name="date" data-bind="dateString: dateOfBirth"></label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4">Blood Group</label>
+                    <div class="col-sm-8">
+                        <label name="bloodgroup" data-bind="text: bloodGroupType"></label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4">Department</label>
+                    <div class="col-sm-8">
+                        <label name="department" data-bind="text: department"></label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4">Designation</label>
+                    <div class="col-sm-8">
+                        <label name="designation" data-bind="text: designation"></label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4">Shift</label>
+                    <div class="col-sm-8">
+                        <label name="shift" data-bind="text: shift"></label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4">Location</label>
+                    <div class="col-sm-8">
+                        <label name="location" data-bind="text: location"></label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4">Reporting Person</label>
+                    <div class="col-sm-8">
+                        <label name="employee" data-bind="text: reportingPerson"></label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4">Official Email</label>
+                    <div class="col-sm-8">
+                        <label name="email" data-bind="text: officialEmail"></label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4">Official Phone</label>
+                    <div class="col-sm-8">
+                        <label name="phone" data-bind="text: officialPhone"></label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4">Technologies</label>
+                    <div class="col-sm-8" data-bind="foreach: technologyNames">
+                        <label class="label label-primary" name="technology" data-bind="text: $data"></label>
+                    </div>
+                </div>
+                <input type="hidden" name="id" data-bind="value: id" />
+            </div>
+        </div>
+    </div>
+</script>
+
+<script type="text/html" id="resetpassword-template">
+    <div class="marT-5">
+        <div>
+            <div data-bind="loadingWhen: isBusy">
+                <div class="form-horizontal well" data-bind="with: selectedData">
+                    <div class="row">
+                        <div class="clearfix"></div>
+                    </div>
+                    <br />
+                    <div class="form-group">
+                        <span class="star">*</span>
+                        <label class="control-label col-sm-3">New Password</label>
+                        <div class="col-sm-9">
+                            <input type="password" class="form-control" name="new" data-bind="value: newPassword">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <span class="star">*</span>
+                        <label class="control-label col-sm-3">Confirm New Password</label>
+                        <div class="col-sm-9">
+                            <input type="password" class="form-control" name="confirmnewPassword" data-bind="value: confirmNewPassword">
+                        </div>
+                    </div>
+                    <input type="hidden" name="id" data-bind="value: id" />
+                    <div class="form-group">
+                        <div class="col-md-offset-3 col-md-9">
+                            <button type="button" class="btn btn-primary" data-bind="click:$parent.changePassword,ladda:$parent.isBusy">Update</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+
+<script type="text/html" id="dependents-template">
+    <h5><b>Dependents</b></h5>
+    <div class="col-md-12">
+        <dependentlist params="entity: 'employeedependent', enableFilter:true, manageList:true,employeeId:employee"></dependentlist>
+    </div>
+    <div class="col-md-12" data-bind="visible:showQuickView">
+        <dependentupdate params="entity: 'employeedependent',employeeId:employee"></dependentupdate>
+    </div>
+</script>
+
+<script type="text/html" id="emergencycontacts-template">
+    <h5><b>Emergency Contacts</b></h5>
+    <div class="col-md-12">
+        <emergencycontactlist params="entity: 'emergencycontact', enableFilter:true, manageList:true,employeeId:employee"></emergencycontactlist>
+    </div>
+    <div class="col-md-12" data-bind="visible:showQuickView">
+        <emergencycontactupdate params="entity: 'emergencycontact',employeeId:employee"></emergencycontactupdate>
+    </div>
+</script>
+
+<script type="text/html" id="leaveentitlementslog-template">
+    <h5><b>Leave Entitlements</b></h5>
+    <div class="col-md-12">
+        <leaveentitlementupdatelist params="entity: 'entitlement', enableFilter:true, manageList:false,employeeId:employee"></leaveentitlementupdatelist>
+    </div>
+</script>
+
+@section Scripts{
+    <script>
+        $(function () {
+            ko.applyBindings();
+        });
+    </script>
+}

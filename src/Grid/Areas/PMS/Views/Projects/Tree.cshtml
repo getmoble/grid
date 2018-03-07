@@ -1,0 +1,51 @@
+﻿@model  Grid.Features.PMS.ViewModels.ProjectSearchViewModel
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css" />
+
+<h2>Projects</h2>
+<div id="jsTree">
+</div>
+
+@section Scripts{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
+    <script>
+        $(function () {
+            var projects = [];
+            @foreach(var node in Model.TreeNodes)
+            {
+                @: projects.push({ "id" : "@node.id", "parent" : "@node.parent", "text" : "@node.text" });
+            }
+
+            var projectTree = $('#jsTree').jstree({
+                "plugins" : [ "contextmenu" ],
+                'contextmenu' : {
+                    'items' : customMenu
+                },
+                'core': {
+                    'data': projects
+                }
+            });
+            
+            function customMenu(node) {
+                // The default set of all items
+                var items = {
+                    renameItem: { // The "rename" menu item
+                        label: "Rename",
+                        action: function() {
+                            alert("Rename");
+                        }
+                    },
+                    deleteItem: { // The "delete" menu item
+                        label: "Delete",
+                        action: function() {
+                            alert("Delete");
+                        }
+                    }
+                };
+
+                return items;
+            }
+        });
+    </script>
+}
+

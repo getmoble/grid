@@ -1,0 +1,24 @@
+﻿
+@using Grid.Infrastructure
+@using Grid.Infrastructure.Extensions
+
+<h2>Manage Sale Stages</h2>
+<salesstages></salesstages>
+
+<script type="text/html" id="salesstages-template">
+    <div class="col-md-8">
+        <salesstages-list params="entity: 'crmsalesstage', enableFilter:true, manageList:true"></salesstages-list>
+    </div>
+    <div class="col-md-4" data-bind="visible:showQuickView">
+        <salesstagesupdate params="entity: 'crmsalesstage'"></salesstagesupdate>
+    </div>
+</script>
+
+
+@section Scripts{
+    <script>
+        $(function () {
+            ko.applyBindings();
+        });
+    </script>
+}

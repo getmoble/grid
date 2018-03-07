@@ -1,0 +1,357 @@
+﻿@model  Grid.Features.IMS.ViewModels.AssetDetailsViewModel
+
+<div class="btn-group pull-right" role="group">
+    @Html.ActionLink("Edit", "Edit", "Assets", new { id = Model.Id }, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Add Document", "Create", "AssetDocuments", new { area = "IMS", assetId = Model.Id }, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Delete", "Delete", new { id = Model.Id }, new { @class = "btn btn-primary" })
+</div>
+
+<h2>@Model.Title</h2>
+
+<div>
+    <hr />
+
+    <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active"><a href="#info" aria-controls="home" role="tab" data-toggle="tab">Info</a></li>
+        @if (Model.HasHardwareInfo)
+        {
+            <li role="presentation"><a href="#hardwareInfo" aria-controls="messages" role="tab" data-toggle="tab">Hardware</a></li>
+        }
+        @if (Model.HasSoftwareInfo)
+        {
+            <li role="presentation"><a href="#softwares" aria-controls="messages" role="tab" data-toggle="tab">Softwares</a></li>
+        }
+        <li role="presentation"><a href="#history" aria-controls="messages" role="tab" data-toggle="tab">History</a></li>
+        <li role="presentation"><a href="#documents" aria-controls="messages" role="tab" data-toggle="tab">Documents</a></li>
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="info">
+            <br />
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.SerialNumber)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.SerialNumber)
+                </dd>
+
+                <dt>
+                    Tag
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.TagNumber)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.State)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.State)
+                </dd>
+                <dt>
+                    Allocated To
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.AllocatedUser.Person.Name)
+                </dd>
+
+                <dt>
+                    Asset Category
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.AssetCategory.Title)
+                </dd>
+
+                <dt>
+                    Department
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Department.Title)
+                </dd>
+
+                <dt>
+                    Vendor
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Vendor.Title)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Description)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Description)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Specifications)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Specifications)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Brand)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Brand)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.ModelNumber)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.ModelNumber)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.IsBrandNew)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.IsBrandNew)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.State)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.State)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.PurchaseDate)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.PurchaseDate)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.WarrantyExpiryDate)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.WarrantyExpiryDate)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.CreatedOn)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.CreatedOn)
+                </dd>
+
+            </dl>
+        </div>
+        <div role="tabpanel" class="tab-pane" id="history">
+            @if (Model.AssetAllocations.Any())
+            {
+                <br />
+                <table class="table">
+                    <tr>
+                        <th>
+                            Allocated To User
+                        </th>
+                        <th>
+                            State
+                        </th>
+                        <th>
+                            Changed By
+                        </th>
+                        <th>
+                            Changed On
+                        </th>
+                        <th></th>
+                    </tr>
+
+                    @foreach (var item in Model.AssetAllocations)
+                {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.AllocatedUser.Person.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.State)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.AllocatedByUser.Person.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.AllocatedOn)
+                            </td>
+                            <td></td>
+                        </tr>
+                    }
+
+                </table>
+            }
+        </div>
+        <div role="tabpanel" class="tab-pane" id="hardwareInfo">
+            <br />
+            <table class="table table-condensed">
+                <thead>
+                    <tr>
+                        <th>
+                            Username
+                        </th>
+                        <td>
+                            @Html.DisplayFor(modelItem => Model.Hardware.Username)
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            User Domain Name
+                        </th>
+                        <td>
+                            @Html.DisplayFor(modelItem => Model.Hardware.UserDomainName)
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            Hard Disk Size
+                        </th>
+                        <td>
+                            @Html.DisplayFor(modelItem => Model.Hardware.HardDiskSize) GB
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            Language
+                        </th>
+                        <td>
+                            @Html.DisplayFor(modelItem => Model.Hardware.Language)
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            Processor
+                        </th>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => Model.Hardware.Processor)
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            Processor Count
+                        </th>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => Model.Hardware.ProcessorCount)
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            RAM Memory
+                        </th>
+                        <td>
+                            @Html.DisplayFor(modelItem => Model.Hardware.RamMemory) GB
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            System Directory
+                        </th>
+                        <td>
+                            @Html.DisplayFor(modelItem => Model.Hardware.SystemDirectory)
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            System OS
+                        </th>
+                        <td>
+                            @Html.DisplayFor(modelItem => Model.Hardware.SystemOS)
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            System Page Size
+                        </th>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => Model.Hardware.SystemPageSize)
+                        </td>
+                    </tr>
+                </thead>
+            </table>
+
+        </div>
+        <div role="tabpanel" class="tab-pane" id="softwares">
+            <br />
+            <table class="table table-hover table-condensed" id="myTable">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Version</th>
+                        <th>Publisher</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Softwares)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                    <td>@Html.DisplayFor(modelItem => item.DisplayVersion)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Publisher)</td>
+                </tr>
+            }
+                </tbody>
+            </table>
+        </div>
+        <div role="tabpanel" class="tab-pane" id="documents">
+            @if (Model.AssetDocuments.Any())
+            {
+                <br />
+                <table class="table">
+                    <tr>
+                        <th>
+                            Document Type
+                        </th>
+                        <th>
+                            Name
+                        </th>
+                        <th>
+                            Created On
+                        </th>
+                        <th></th>
+                    </tr>
+
+                    @foreach (var item in Model.AssetDocuments)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.DocumentType)
+                            </td>
+                            <td>
+                                <a href="@item.DocumentPath" target="_blank">@item.FileName</a>
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CreatedOn)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Delete", "Delete", "AssetDocuments", new { area = "IMS", id = item.Id }, null)
+                            </td>
+                        </tr>
+                    }
+
+                </table>
+            }
+        </div>
+    </div>
+</div>
+

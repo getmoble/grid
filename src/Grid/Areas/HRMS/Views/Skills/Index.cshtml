@@ -1,0 +1,23 @@
+﻿@using Grid.Infrastructure
+@using Grid.Infrastructure.Extensions
+@model IEnumerable<Grid.Features.HRMS.Entities.Skill>
+
+<h2>Manage Skills</h2>
+<skills></skills>
+
+<script type="text/html" id="skills-template">   
+    <div class="col-md-8">
+        <skillslist params="entity: 'skill', enableFilter:true, manageList:true"></skillslist>
+    </div>
+    <div class="col-md-4" data-bind="visible:showQuickView">
+        <skillsupdate params="entity: 'skill'"></skillsupdate>
+    </div>
+</script>
+
+@section Scripts{
+    <script>
+        $(function () {
+            ko.applyBindings();
+        });
+    </script>
+}

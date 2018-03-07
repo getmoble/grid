@@ -1,0 +1,45 @@
+﻿@model Grid.Features.Recruit.Entities.CandidateDocument
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details CandidateDocument</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Candidate.EmployeeCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Candidate.EmployeeCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FileName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FileName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DocumentType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DocumentType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DocumentPath)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DocumentPath)
+        </dd>
+
+    </dl>
+</div>

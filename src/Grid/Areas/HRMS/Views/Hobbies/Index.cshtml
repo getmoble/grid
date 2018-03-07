@@ -1,0 +1,23 @@
+﻿@using Grid.Infrastructure
+@using Grid.Infrastructure.Extensions
+
+<h2>Manage Hobbies</h2>
+<hobbies></hobbies>
+
+<script type="text/html" id="hobbies-template">
+    <div class="col-md-8">
+        <hobbieslist params="entity: 'hobbie', enableFilter:true, manageList:true"></hobbieslist>
+    </div>
+    <div class="col-md-4" data-bind="visible:showQuickView">
+        <hobbiesupdate params="entity: 'hobbie'"></hobbiesupdate>
+    </div>
+</script>
+
+
+@section Scripts{
+    <script>
+        $(function () {
+            ko.applyBindings();
+        });
+    </script>
+}

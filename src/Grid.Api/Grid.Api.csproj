@@ -1,0 +1,312 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{12177F99-C094-4D73-A7A3-EF70636B65B9}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Grid.Api</RootNamespace>
+    <AssemblyName>Grid.Api</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Azure.KeyVault.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Azure.KeyVault.Core.1.0.0\lib\net40\Microsoft.Azure.KeyVault.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Data.Edm, Version=5.7.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Data.Edm.5.7.0\lib\net40\Microsoft.Data.Edm.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Data.OData, Version=5.7.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Data.OData.5.7.0\lib\net40\Microsoft.Data.OData.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Data.Services.Client, Version=5.7.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Data.Services.Client.5.7.0\lib\net40\Microsoft.Data.Services.Client.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAzure.Storage, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\WindowsAzure.Storage.8.0.0\lib\net45\Microsoft.WindowsAzure.Storage.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Spatial, Version=5.7.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Spatial.5.7.0\lib\net40\System.Spatial.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ApiAreaRegistration.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ArticlesController.cs" />
+    <Compile Include="Controllers\AssetsController.cs" />
+    <Compile Include="Controllers\CalendarController.cs" />
+    <Compile Include="Controllers\CandidatesController.cs" />
+    <Compile Include="Controllers\CategoriesController.cs" />
+    <Compile Include="Controllers\ContactsController.cs" />
+    <Compile Include="Controllers\CRMAccountsController.cs" />
+    <Compile Include="Controllers\ArticleCategoriesController.cs" />
+    <Compile Include="Controllers\ArticleController.cs" />
+    <Compile Include="Controllers\AssetCategoriesController.cs" />
+    <Compile Include="Controllers\AwardsController.cs" />
+    <Compile Include="Controllers\CandidateController.cs" />
+    <Compile Include="Controllers\CandidateDesignationsController.cs" />
+    <Compile Include="Controllers\CertificationsController.cs" />
+    <Compile Include="Controllers\DepartmentsController.cs" />
+    <Compile Include="Controllers\DesignationsController.cs" />
+    <Compile Include="Controllers\EmailTemplatesController.cs" />
+    <Compile Include="Controllers\EmergencyContactsController.cs" />
+    <Compile Include="Controllers\EmployeeController.cs" />
+    <Compile Include="Controllers\EmployeeDependentsController.cs" />
+    <Compile Include="Controllers\EmployeesController.cs" />
+    <Compile Include="Controllers\GraphController.cs" />
+    <Compile Include="Controllers\HobbiesController.cs" />
+    <Compile Include="Controllers\HolidayController.cs" />
+    <Compile Include="Controllers\InterviewsController.cs" />
+    <Compile Include="Controllers\JobOpeningController.cs" />
+    <Compile Include="Controllers\JobOpeningsController.cs" />
+    <Compile Include="Controllers\LeadCategoriesController.cs" />
+    <Compile Include="Controllers\LeadsController.cs" />
+    <Compile Include="Controllers\LeadSourcesController.cs" />
+    <Compile Include="Controllers\LeadStatusController.cs" />
+    <Compile Include="Controllers\LeaveEntitlementsController.cs" />
+    <Compile Include="Controllers\LeavePeriodsController.cs" />
+    <Compile Include="Controllers\LeavesController.cs" />
+    <Compile Include="Controllers\LeaveTypesController.cs" />
+    <Compile Include="Controllers\LocationsController.cs" />
+    <Compile Include="Controllers\OffersController.cs" />
+    <Compile Include="Controllers\PermissionsController.cs" />
+    <Compile Include="Controllers\PotentialCategoriesController.cs" />
+    <Compile Include="Controllers\PotentialsController.cs" />
+    <Compile Include="Controllers\PresenceController.cs" />
+    <Compile Include="Controllers\ProjectController.cs" />
+    <Compile Include="Controllers\ProjectMemberController.cs" />
+    <Compile Include="Controllers\ProjectsController.cs" />
+    <Compile Include="Controllers\ReferalsController.cs" />
+    <Compile Include="Controllers\RequirementCategoriesController.cs" />
+    <Compile Include="Controllers\RequirementsController.cs" />
+    <Compile Include="Controllers\RolesController.cs" />
+    <Compile Include="Controllers\RoundsController.cs" />
+    <Compile Include="Controllers\SalesStagesController.cs" />
+    <Compile Include="Controllers\ShiftsController.cs" />
+    <Compile Include="Controllers\SkillsController.cs" />
+    <Compile Include="Controllers\SoftwareCategoriesController.cs" />
+    <Compile Include="Controllers\SoftwaresController.cs" />
+    <Compile Include="Controllers\SyncController.cs" />
+    <Compile Include="Controllers\TaskController.cs" />
+    <Compile Include="Controllers\TasksController.cs" />
+    <Compile Include="Controllers\TechnologiesController.cs" />
+    <Compile Include="Controllers\TicketCategoriesController.cs" />
+    <Compile Include="Controllers\TicketsController.cs" />
+    <Compile Include="Controllers\TicketSubCategoriesController.cs" />
+    <Compile Include="Controllers\TimeController.cs" />
+    <Compile Include="Controllers\TimeSheetsController.cs" />
+    <Compile Include="Controllers\UsersController.cs" />
+    <Compile Include="Controllers\VendorsController.cs" />
+    <Compile Include="Filters\PermissionFilterModel.cs" />
+    <Compile Include="Filters\RoleFilterModel.cs" />
+    <Compile Include="Filters\TicketSubCategoryFilterModel.cs" />
+    <Compile Include="GridApiBaseController.cs" />
+    <Compile Include="Models\ApiModelBase.cs" />
+    <Compile Include="Models\ApiResult.cs" />
+    <Compile Include="Models\ApiTimesheetLineItemModel.cs" />
+    <Compile Include="Models\AuthResult.cs" />
+    <Compile Include="Models\CandidateModel.cs" />
+    <Compile Include="Models\Company\RoleModel.cs" />
+    <Compile Include="Models\CRM\CRMAccountModel.cs" />
+    <Compile Include="Models\CRM\CRMContactModel.cs" />
+    <Compile Include="Models\HRMS\EmergencyContactModel.cs" />
+    <Compile Include="Models\HRMS\EmployeeDependentmodel.cs" />
+    <Compile Include="Models\HRMS\EmployeeModel.cs" />
+    <Compile Include="Models\EmployeeInfo.cs" />
+    <Compile Include="Models\HRMS\DesignationModel.cs" />
+    <Compile Include="Models\HRMS\ImageViewModel.cs" />
+    <Compile Include="Models\HRMS\UserModel.cs" />
+    <Compile Include="Models\IMS\AssetModel.cs" />
+    <Compile Include="Models\IT\SoftwareModel.cs" />
+    <Compile Include="Models\LeadCategory.cs" />
+    <Compile Include="Models\LeadModel.cs" />
+    <Compile Include="Models\LMS\HolidayModel.cs" />
+    <Compile Include="Models\LMS\LeaveBalanceModel.cs" />
+    <Compile Include="Models\LMS\LeaveEntitlementModel.cs" />
+    <Compile Include="Models\LMS\LeaveEntitlementUpdateModel.cs" />
+    <Compile Include="Models\LMS\LeaveModel.cs" />
+    <Compile Include="Models\LMS\LeaveUpdateModel.cs" />
+    <Compile Include="Models\LocationModel.cs" />
+    <Compile Include="Models\PMS\ProjectModel.cs" />
+    <Compile Include="Models\PMS\TaskModel.cs" />
+    <Compile Include="Models\Recruit\ApiCandidateModel.cs" />
+    <Compile Include="Models\Recruit\JobOpeningModel.cs" />
+    <Compile Include="Models\Recruit\UpdateCandidateModel.cs" />
+    <Compile Include="Models\RMS\RequirementModel.cs" />
+    <Compile Include="Models\RMS\RequirementUpdateModel.cs" />
+    <Compile Include="Models\TicketDesk\TicketModel.cs" />
+    <Compile Include="Models\TicketDesk\TicketSubCategoryModel.cs" />
+    <Compile Include="Models\TMS\TimeSheetLineItemModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Grid.AccessLogs\Grid.AccessLogs.csproj">
+      <Project>{EAA48B99-5A78-4477-AB33-E5C1D6D626F5}</Project>
+      <Name>Grid.AccessLogs</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Grid.Clients.ITSync\Grid.Clients.ITSync.csproj">
+      <Project>{2C8BDC7A-58A2-409E-BE0A-929556398AB1}</Project>
+      <Name>Grid.Clients.ITSync</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Grid.Data\Grid.Data.csproj">
+      <Project>{0CBD413E-F3FF-4AA8-8755-C4A25C05804D}</Project>
+      <Name>Grid.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Grid.Features.Attendance\Grid.Features.Attendance.csproj">
+      <Project>{AAD8B7ED-2E25-44AF-8AB6-72051131C49F}</Project>
+      <Name>Grid.Features.Attendance</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Grid.Features.Auth\Grid.Features.Auth.csproj">
+      <Project>{CCAF882A-A8E0-4B5F-8C7F-D5ADC11823B7}</Project>
+      <Name>Grid.Features.Auth</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Grid.Features.Common\Grid.Features.Common.csproj">
+      <Project>{3876b303-ae18-4e9e-a359-e1e0f0f2c7cd}</Project>
+      <Name>Grid.Features.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Grid.Features.CRM\Grid.Features.CRM.csproj">
+      <Project>{9CCC5E8C-603D-4D0A-B3D2-C7097241CB1E}</Project>
+      <Name>Grid.Features.CRM</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Grid.Features.EmailService\Grid.Features.EmailService.csproj">
+      <Project>{E7A84A59-D016-43AE-AEC3-D3186EB189DC}</Project>
+      <Name>Grid.Features.EmailService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Grid.Features.HRMS\Grid.Features.HRMS.csproj">
+      <Project>{375619dc-6f55-4fc2-bbf2-45a30e89fa73}</Project>
+      <Name>Grid.Features.HRMS</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Grid.Features.IMS\Grid.Features.IMS.csproj">
+      <Project>{B80468CF-5AB2-468B-ADE5-AD790790724A}</Project>
+      <Name>Grid.Features.IMS</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Grid.Features.IT\Grid.Features.IT.csproj">
+      <Project>{611269A9-D4B8-4B02-8699-977CEFF9A1F1}</Project>
+      <Name>Grid.Features.IT</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Grid.Features.KBS\Grid.Features.KBS.csproj">
+      <Project>{4C56F8C3-9E06-482D-823F-B1FB7D910C47}</Project>
+      <Name>Grid.Features.KBS</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Grid.Features.LMS\Grid.Features.LMS.csproj">
+      <Project>{43c09a22-fb14-442d-86e3-40a0f11d4849}</Project>
+      <Name>Grid.Features.LMS</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Grid.Features.PMS\Grid.Features.PMS.csproj">
+      <Project>{EB9D0C9C-7123-4AF8-AF31-C8CA07CEED11}</Project>
+      <Name>Grid.Features.PMS</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Grid.Features.Recruit\Grid.Features.Recruit.csproj">
+      <Project>{41851AD7-83A8-41CB-8241-7C31CAD17EA5}</Project>
+      <Name>Grid.Features.Recruit</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Grid.Features.RMS\Grid.Features.RMS.csproj">
+      <Project>{67ED02F2-0982-4110-91E6-D69E1A6F73A9}</Project>
+      <Name>Grid.Features.RMS</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Grid.Features.Settings\Grid.Features.Settings.csproj">
+      <Project>{a4968df2-50d1-42a1-b53d-db4ea1963e0c}</Project>
+      <Name>Grid.Features.Settings</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Grid.Features.TicketDesk\Grid.Features.TicketDesk.csproj">
+      <Project>{D0F63BC4-7518-40A1-9607-AF5A9E4DA883}</Project>
+      <Name>Grid.Features.TicketDesk</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Grid.Infrastructure\Grid.Infrastructure.csproj">
+      <Project>{bef9f095-7a92-4577-bfd5-b31c85191d6b}</Project>
+      <Name>Grid.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Grid.Providers.Blob\Grid.Providers.Blob.csproj">
+      <Project>{c1aea0ba-c8ee-4cfd-9ba4-377c58ae2154}</Project>
+      <Name>Grid.Providers.Blob</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,27 @@
+﻿@model Grid.Data.MultiTenancy.Entities.Tenant
+
+@{
+    ViewBag.Title = "Seed";
+}
+
+<h2>Seed</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Tenant</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(m => m.Id)
+        Are you sure, you want to seed @Model.Name
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Seed" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+

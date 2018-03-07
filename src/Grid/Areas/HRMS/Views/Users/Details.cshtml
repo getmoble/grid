@@ -1,0 +1,1043 @@
+﻿@using Grid.Infrastructure.Extensions
+@model  Grid.Features.HRMS.ViewModels.UserViewModel
+
+<div class="btn-group pull-right" role="group">
+    @Html.ActionLink("Edit", "Edit", "Users", new { id = Model.Id }, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Edit Image", "EditImage", "Users", new { id = Model.Id }, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Add Document", "Create", "UserDocuments", new { area = "HRMS", userId = Model.Id }, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Add Emergency Contact", "Create", "EmergencyContacts", new { area = "HRMS", userId = Model.Id }, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Add Dependent", "Create", "EmployeeDependents", new { area = "HRMS", userId = Model.Id }, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Add Award", "Create", "UserAwards", new { area = "HRMS", userId = Model.Id }, new { @class = "btn btn-primary" })
+    <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#updateEntitlement">Update Leave Entitlements</a>
+    @Html.ActionLink("Reset Password", "ResetPassword", "Users", new { id = Model.Id }, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Delete", "Delete", "Users", new { id = Model.Id }, new { @class = "btn btn-primary" })
+</div>
+<h2>@Model.Person.Name</h2>
+
+<div>
+    <hr />
+    <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active"><a href="#info" aria-controls="home" role="tab" data-toggle="tab">Info</a></li>
+        <li role="presentation"><a href="#roles" aria-controls="profile" role="tab" data-toggle="tab">Roles</a></li>
+        <li role="presentation"><a href="#documents" aria-controls="profile" role="tab" data-toggle="tab">Documents</a></li>
+        @if (Model.Reportees.Any())
+        {
+            <li role="presentation"><a href="#reportees" aria-controls="home" role="tab" data-toggle="tab">Reportees</a></li>
+        }
+        <li role="presentation"><a href="#linkedDevices" aria-controls="profile" role="tab" data-toggle="tab">Linked Devices</a></li>
+        <li role="presentation"><a href="#projects" aria-controls="profile" role="tab" data-toggle="tab">Projects</a></li>
+        <li role="presentation"><a href="#assets" aria-controls="profile" role="tab" data-toggle="tab">Assets</a></li>
+        <li role="presentation"><a href="#leaveEntitlement" aria-controls="profile" role="tab" data-toggle="tab">Leave Entitlements</a></li>
+        <li role="presentation"><a href="#emergencyContact" aria-controls="profile" role="tab" data-toggle="tab">Emergency Contacts</a></li>
+        <li role="presentation"><a href="#dependants" aria-controls="profile" role="tab" data-toggle="tab">Dependents</a></li>
+        <li role="presentation"><a href="#awards" aria-controls="profile" role="tab" data-toggle="tab">Awards</a></li>
+    </ul>
+    <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="info">
+            <br />
+            <div class="row">
+                <div class="col-lg-6">
+                    <dl class="dl-horizontal">
+                        <dt>
+                            @Html.DisplayNameFor(model => model.EmployeeStatus)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.EmployeeStatus)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.EmployeeCode)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.EmployeeCode)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Username)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Username)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Person.FirstName)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Person.FirstName)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Person.LastName)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Person.LastName)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Person.Gender)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Person.Gender)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Person.Email)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Person.Email)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Person.PhoneNo)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Person.PhoneNo)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Person.OfficePhone)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Person.OfficePhone)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Person.SecondaryEmail)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Person.SecondaryEmail)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Person.Skype)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Person.Skype)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Person.Facebook)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Person.Facebook)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Person.Twitter)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Person.Twitter)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Person.GooglePlus)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Person.GooglePlus)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Person.LinkedIn)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Person.LinkedIn)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Person.Address)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Person.Address)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Person.CommunicationAddress)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Person.CommunicationAddress)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Person.PassportNo)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Person.PassportNo)
+                        </dd>
+                        @if (Model.Person.DateOfBirth.HasValue)
+                {
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Person.DateOfBirth)
+                    </dt>
+                    <dd>
+                        @Model.Person.DateOfBirth.Value.ToShortDateString()
+                    </dd>
+                }
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Person.BloodGroup)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Person.BloodGroup)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Person.MaritalStatus)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Person.MaritalStatus)
+                        </dd>
+                        @if (Model.Person.MaritalStatus.HasValue && Model.Person.MarriageAnniversary.HasValue)
+                {
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Person.MarriageAnniversary)
+                    </dt>
+
+                    <dd>
+                        @Model.Person.MarriageAnniversary.Value.ToShortDateString()
+                    </dd>
+                }
+                        <dt>
+                            Location
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Location.Title)
+                        </dd>
+                        <dt>
+                            Seat No
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.SeatNo)
+                        </dd>
+                        <dt>
+                            Department
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Department.Title)
+                        </dd>
+                        <dt>
+                            Designation
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Designation.Title)
+                        </dd>
+                        <dt>
+                            Shift
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Shift.Title)
+                        </dd>
+                        <dt>
+                            Reporting Person
+                        </dt>
+                    <dd>
+                        @if (Model.ReportingPerson != null)
+                        {
+                            @Html.ActionLink(Model.ReportingPerson.Person.Name, "Details", "Users", new {area = "HRMS", id = @Model.ReportingPersonId}, null)
+                        }
+                    </dd>
+                        <dt>
+                            Manager
+                        </dt>
+                        <dd>
+                            @if (Model.Manager != null)
+                            {
+                                @Html.ActionLink(Model.Manager.Person.Name, "Details", "Users", new { area = "HRMS", id = @Model.ManagerId }, null)
+                            }
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Experience)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Experience)
+                        </dd>
+                        @if (Model.DateOfJoin.HasValue)
+                {
+                    <dt>
+                        @Html.DisplayNameFor(model => model.DateOfJoin)
+                    </dt>
+
+                    <dd>
+                        @Model.DateOfJoin.Value.ToShortDateString()
+                    </dd>
+                }
+                        @if (Model.ConfirmationDate.HasValue)
+                {
+                    <dt>
+                        @Html.DisplayNameFor(model => model.ConfirmationDate)
+                    </dt>
+
+                    <dd>
+                        @Model.ConfirmationDate.Value.ToShortDateString()
+                    </dd>
+                }
+                        <dt>
+                            Official Email
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.OfficialEmail)
+                        </dd>
+                        <dt>
+                            Official PhoneNo
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.OfficialPhoneNo)
+                        </dd>
+                        <dt>
+                            Requires TimeSheet
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.RequiresTimeSheet)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Salary)
+                        </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Salary)
+                    </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Bank)
+                        </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Bank)
+                    </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.BankAccountNumber)
+                        </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.BankAccountNumber)
+                    </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.PANCard)
+                        </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.PANCard)
+                    </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.PaymentMode)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.PaymentMode)
+                        </dd>
+                    </dl>
+                </div>
+                <div class="col-lg-6">
+                    <div class="col-lg-3">
+                        <userimage params='UserId: @Model.Id'></userimage>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <h4>Awards</h4>
+                            @foreach (var award in Model.GroupedAwards)
+                            {
+                                if (award.Value > 1)
+                                {
+                                    <span class="label label-success">@award.Key -@award.Value times</span>
+                                }
+                                else
+                                {
+                                    <span class="label label-success">@award.Key</span>
+                                }
+                            }
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <h4>Skills</h4>
+                            @foreach (var skill in Model.UserSkills)
+                            {
+                            <span class="label label-primary">@skill.Skill.Title</span>
+                            }
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <h4>Technologies</h4>
+                            @foreach (var technology in Model.Technologies)
+                            {
+                            <span class="label label-primary">@technology.Title</span>
+                            }
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <h4>Certifications</h4>
+                            @foreach (var certification in Model.UserCertifications)
+                            {
+                                <span class="label label-primary">@certification.Certification.Title</span>
+                            }
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <h4>Hobbies</h4>
+                            @foreach (var hobby in Model.UserHobbies)
+                            {
+                                <span class="label label-primary">@hobby.Hobby.Title</span>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr/>
+            <div class="row">
+                <div class="col-lg-12">
+                    <dl class="dl-horizontal">
+                        @if (Model.AccessRule.LastLoginDate.HasValue)
+                        {
+                            <dt>
+                                Last Login
+                            </dt>
+                            <dd>
+                                @Model.AccessRule.LastLoginDate.Value.ToLocalDateTime()
+                            </dd>
+                        }
+                        @if (Model.AccessRule.LastActivityDate.HasValue)
+                        {
+                            <dt>
+                                Last Activity
+                            </dt>
+                            <dd>
+                                @Model.AccessRule.LastActivityDate.Value.ToLocalDateTime()
+                            </dd>
+                        }
+                    </dl>
+                </div>
+            </div>
+        </div>
+        <div role="tabpanel" class="tab-pane" id="roles">
+        @if (Model.RoleMembers.Any())
+        {
+            <br />
+            <table class="table">
+                <tr>
+                    <th>
+                        Title
+                    </th>
+                    <th>
+                        Assigned On
+                    </th>
+                    <th></th>
+                </tr>
+
+                @foreach (var item in Model.RoleMembers)
+                {
+                    <tr>
+                        <td>
+                            @Html.ActionLink(item.Role.Name, "Details", "Roles", new { area = "Company", id = item.RoleId }, null)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CreatedOn)
+                        </td>
+                        <td></td>
+                    </tr>
+                }
+            </table>
+        }
+        </div>
+        <div role="tabpanel" class="tab-pane" id="documents">
+            @if (Model.UserDocuments.Any())
+            {
+                <br />
+                <table class="table">
+                    <tr>
+                        <th>
+                            Document Type
+                        </th>
+                        <th>
+                            Name
+                        </th>
+                        <th>
+                            Created On
+                        </th>
+                        <th></th>
+                    </tr>
+
+                    @foreach (var item in Model.UserDocuments)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.DocumentType)
+                            </td>
+                            <td>
+                                <a href="@item.DocumentPath" target="_blank">@item.FileName</a>
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CreatedOn)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Delete", "Delete", "UserDocuments", new { area = "HRMS", id = item.Id }, null)
+                            </td>
+                        </tr>
+                    }
+                </table>
+            }
+        </div>
+        @if (Model.Reportees.Any())
+        {
+            <div role="tabpanel" class="tab-pane" id="reportees">
+                <br />
+                <table class="table">
+                    <tr>
+                        <th>
+                            Name
+                        </th>
+                        <th>
+                            Email
+                        </th>
+                        <th>
+                            Designation
+                        </th>
+                        <th>
+                            Last Activity
+                        </th>
+                        <th></th>
+                    </tr>
+
+                    @foreach (var item in Model.Reportees)
+                {
+                        <tr>
+                            <td>
+                                @Html.ActionLink(item.Person.Name, "Details", "Users", new { area = "HRMS", id = item.Id }, null)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.OfficialEmail)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Designation.Title)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.AccessRule.LastActivityDate)
+                            </td>
+                            <td></td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        }
+        @*<div role="tabpanel" class="tab-pane" id="linkedDevices">
+            <br/>
+            <div class="btn-group pull-right" role="group">
+                @Html.ActionLink("Create", "Create", "UserTokens", new { area = "HRMS", userId = Model.Id }, new { @class = "btn btn-primary" })
+            </div>
+            @if (Model.Tokens.Any())
+            {
+                <table class="table">
+                    <tr>
+                        <th>
+                            Token
+                        </th>
+                        <th>
+                            Expires On
+                        </th>
+                        <th>
+                            Device Type
+                        </th>
+                        <th>
+                            Created On
+                        </th>
+                        <th></th>
+                    </tr>
+
+                    @foreach (var item in Model.Tokens)
+                {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Key)
+                            </td>
+                            <td>
+                                @item.ExpiresOn.ToLocalTime()
+                            </td>
+                            <td>
+                                @item.DeviceType
+                            </td>
+                            <td>
+                                @item.CreatedOn.ToLocalTime()
+                            </td>
+                            <td>
+                                @Html.ActionLink("Delete", "Delete", "UserTokens", new { area = "HRMS", id = item.Id }, null)
+                            </td>
+                        </tr>
+                    }
+                </table>
+            }
+        </div>
+        <div role="tabpanel" class="tab-pane" id="projects">
+            @if (Model.Projects.Any())
+            {
+                <br />
+                <table class="table">
+                    <tr>
+                        <th>
+                            Title
+                        </th>
+                        <th>
+                            Role
+                        </th>
+                        <th>
+                            Added On
+                        </th>
+                        <th></th>
+                    </tr>
+
+                    @foreach (var item in Model.Projects)
+                {
+                        <tr>
+                            <td>
+                                @Html.ActionLink(item.Project.Title, "Details", "Projects", new { area = "PMS", id = item.ProjectId }, null)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Role)
+                            </td>
+                            <td>
+                                @item.CreatedOn.ToLocalTime()
+                            </td>
+                            <td></td>
+                        </tr>
+                    }
+                </table>
+            }
+        </div>
+        <div role="tabpanel" class="tab-pane" id="assets">
+        @if (Model.Assets.Any())
+        {
+            <br />
+            <table class="table">
+                <tr>
+                    <th>
+                        Title
+                    </th>
+                    <th>
+                        Tag
+                    </th>
+                    <th>
+                        Serial Number
+                    </th>
+                    <th>
+                        Category
+                    </th>
+                    <th>
+                        Specifications
+                    </th>
+                    <th>
+                        State
+                    </th>
+                    <th>
+                        Assigned On
+                    </th>
+                    <th></th>
+                </tr>
+
+                @foreach (var item in Model.Assets)
+                {
+                    <tr>
+                        <td>
+                            @Html.ActionLink(item.Title, "Details", "Assets", new { area = "IMS", id = item.Id }, null)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TagNumber)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SerialNumber)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.AssetCategory.Title)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SpecificationsTrimmed)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.State)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CreatedOn)
+                        </td>
+                        <td></td>
+                    </tr>
+                }
+            </table>
+            if (Model.HasHardwareInfo)
+            {
+                <hr />
+                <h3>Hardware</h3>
+                <table class="table table-condensed">
+                    <thead>
+                        <tr>
+                            <th>
+                                Username
+                            </th>
+                            <td>
+                                @Html.DisplayFor(modelItem => Model.Hardware.Username)
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                User Domain Name
+                            </th>
+                            <td>
+                                @Html.DisplayFor(modelItem => Model.Hardware.UserDomainName)
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                Hard Disk Size
+                            </th>
+                            <td>
+                                @Html.DisplayFor(modelItem => Model.Hardware.HardDiskSize) GB
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                Language
+                            </th>
+                            <td>
+                                @Html.DisplayFor(modelItem => Model.Hardware.Language)
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                Processor
+                            </th>
+
+                            <td>
+                                @Html.DisplayFor(modelItem => Model.Hardware.Processor)
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                Processor Count
+                            </th>
+
+                            <td>
+                                @Html.DisplayFor(modelItem => Model.Hardware.ProcessorCount)
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                RAM Memory
+                            </th>
+                            <td>
+                                @Html.DisplayFor(modelItem => Model.Hardware.RamMemory) GB
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                System Directory
+                            </th>
+                            <td>
+                                @Html.DisplayFor(modelItem => Model.Hardware.SystemDirectory)
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                System OS
+                            </th>
+                            <td>
+                                @Html.DisplayFor(modelItem => Model.Hardware.SystemOS)
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                System Page Size
+                            </th>
+
+                            <td>
+                                @Html.DisplayFor(modelItem => Model.Hardware.SystemPageSize)
+                            </td>
+                        </tr>
+                    </thead>
+                </table>
+            }
+            if (Model.HasSoftwareInfo)
+            {
+                <hr />
+                <h3>Softwares Installed</h3>
+                <div role="tabpanel" class="tab-pane" id="softwares">
+                    <br />
+                    <table class="table table-hover table-condensed" id="myTable">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Version</th>
+                                <th>Publisher</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.Softwares)
+                            {
+                                <tr>
+                                    <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.DisplayVersion)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Publisher)</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+        }
+        </div>
+        <div role="tabpanel" class="tab-pane" id="leaveEntitlement">
+            @if (Model.LeaveEntitlements.Any())
+            {
+                <br />
+                <div class="btn-group pull-right" role="group">
+                    @Html.ActionLink("Leave Entitlements Log", "History", "Leaves", new { area = "LMS", userId = Model.Id }, new { @class = "btn btn-primary" })
+                </div>
+                <table class="table">
+                    <tr>
+                        <th>
+                            Type
+                        </th>
+                        <th>
+                            Balance
+                        </th>
+                        <th>
+                            Last Updated On
+                        </th>
+                        <th></th>
+                    </tr>
+
+                    @foreach (var item in Model.LeaveEntitlements)
+                {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.LeaveType.Title)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Allocation)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.UpdatedOn)
+                            </td>
+                            <td></td>
+                        </tr>
+                    }
+                </table>
+            }
+        </div>*@
+        <div role="tabpanel" class="tab-pane" id="emergencyContact">
+            @if (Model.EmergencyContacts.Any())
+            {
+                <br />
+                <table class="table">
+                    <tr>
+                        <th>
+                            Relationship
+                        </th>
+                        <th>
+                            Name
+                        </th>
+                        <th>
+                            Phone
+                        </th>
+                        <th>
+                            Mobile
+                        </th>
+                        <th>
+                            Work Phone
+                        </th>
+                        <th>
+                            Email
+                        </th>
+                        <th>
+                            Actions
+                        </th>
+                    </tr>
+
+                    @foreach (var item in Model.EmergencyContacts)
+                {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Relationship)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Phone)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Mobile)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.WorkPhone)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Email)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Delete", "Delete", "EmergencyContacts", new { area = "HRMS", id = item.Id }, null)
+                            </td>
+                        </tr>
+                    }
+                </table>
+            }
+        </div>
+        <div role="tabpanel" class="tab-pane" id="dependants">
+            @if (Model.EmployeeDependents.Any())
+            {
+                <br />
+                <table class="table">
+                    <tr>
+                        <th>
+                            Dependent Type
+                        </th>
+                        <th>
+                            Name
+                        </th>
+                        <th>
+                            Birthday
+                        </th>
+                        <th>
+                            Gender
+                        </th>
+                        <th>
+                            Actions
+                        </th>
+                    </tr>
+
+                    @foreach (var item in Model.EmployeeDependents)
+                {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.DependentType)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Birthday)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Gender)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Delete", "Delete", "EmployeeDependents", new { area = "HRMS", id = item.Id }, null)
+                            </td>
+                        </tr>
+                    }
+                </table>
+            }
+        </div>
+        <div role="tabpanel" class="tab-pane" id="awards">
+            @if (Model.UserAwards.Any())
+            {
+                <br />
+                <table class="table">
+                    <tr>
+                        <th>
+                            Title
+                        </th>
+                        <th>
+                            Comments
+                        </th>
+                        <th>
+                            Created On
+                        </th>
+                        <th>
+                            Actions
+                        </th>
+                    </tr>
+
+                    @foreach (var award in Model.UserAwards)
+                {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => award.Award.Title)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => award.Comments)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => award.CreatedOn)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Delete", "Delete", "UserAwards", new { area = "HRMS", id = award.Id }, null)
+                            </td>
+                        </tr>
+                    }
+                </table>
+            }
+        </div>
+    </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="updateEntitlement" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Update Entitlement</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            @Html.DropDownList("LeaveTimePeriodId", null, htmlAttributes: new { @class = "form-control" }, optionLabel: "-- Select LeaveTime Period --")
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            @Html.DropDownList("LeaveTypeId", null, htmlAttributes: new { @class = "form-control" }, optionLabel: "-- Select Leave Type --")
+                        </div>
+                    </div>
+                    @*<div class="form-group">
+                        <div class="col-md-12">
+                            @Html.EnumDropDownListFor(model => model.LeaveOperation, new { @class = "form-control" })
+                        </div>
+                    </div>*@
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            @Html.EditorFor(model => model.Count, new { htmlAttributes = new { @class = "form-control" } })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            @Html.EditorFor(model => model.Comments, new { htmlAttributes = new { @class = "form-control" } })
+                        </div>
+                    </div>
+                    <br />
+                    <br />
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary ladda-button" data-bind="ladda: isBusy, click: $root.updateEntitlements" data-color="green" data-style="expand-left">Submit</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="addSkillModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Add Skill</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            @Html.DropDownList("SkillId", null, htmlAttributes: new { @class = "form-control" }, optionLabel: "-- Select Skill --")
+                        </div>
+                    </div>
+                    <br />
+                    <br />
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-bind="click: addSkill">Submit</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="addCertificationModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Add Certification</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <div class="col-md-12">
+                        @Html.DropDownList("CertificationId", null, htmlAttributes: new { @class = "form-control" }, optionLabel: "-- Select Skill --")
+                    </div>
+                </div>
+                <br />
+                <br />
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-bind="click: addCertification">Submit</button>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <script src="~/App/UserDetailsViewModel.js"></script>
+    <script>
+        var vm = new UserDetailsViewModel();
+        vm.init('@Model.Id');
+        ko.applyBindings(vm);
+    </script>
+}

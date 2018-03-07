@@ -1,0 +1,39 @@
+﻿
+@using Grid.Areas.Templates.Models
+@model IList<UIField>
+
+<div class="card" data-bind="template:{name:templateName}"></div>
+<script type="text/html" id="@ViewBag.Name-form-template">
+    <div class="marT-5 well">
+        
+    </div>
+</script>
+<script type="text/html" id="@ViewBag.Name-details-template">
+    <div class="marT-5 well">
+        <div data-bind="loadingWhen: isBusy">
+            <div class="form-horizontal " data-bind="with: selectedData">
+                <div class="form-group">
+                    <leaveentitlementslog params="employeeId:id"></leaveentitlementslog>
+                </div>
+                <input type="hidden" name="id" data-bind="value: id" />
+            </div>
+        </div>
+    </div>
+</script>
+
+
+
+<script type="text/html" id="leaveentitlementslog-template">
+    <div class="col-md-12">
+        <leaveentitlementupdatelist params="entity: 'entitlement', enableFilter:true, manageList:false,employeeId:employee"></leaveentitlementupdatelist>
+    </div>
+</script>
+
+
+@section Scripts{
+    <script>
+        $(function () {
+            ko.applyBindings();
+        });
+    </script>
+}
