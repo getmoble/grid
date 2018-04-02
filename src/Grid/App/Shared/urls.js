@@ -55,6 +55,7 @@
     self.salesstages = {};
     self.crmaccounts = {};
     self.crmcontacts = {};
+    self.memberRoles = {};
 
     //General
     self.generic.list = "/generic/GenericList/";
@@ -222,7 +223,13 @@
 
     //CRMContacts
     self.crmcontacts.update = "/Api/Contacts/update";
-    self.crmcontacts.get = "/Api/Contacts/Get/"
+    self.crmcontacts.get = "/Api/Contacts/Get/";
+
+    //Member Roles
+    self.memberRoles.update = "/Api/ProjectMemberRoles/update";
+    self.memberRoles.get = "/Api/ProjectMemberRoles/Get/";
+
+    
     
     
 };

@@ -56,6 +56,7 @@ namespace Grid.Data
         public DbSet<CRMAccount> CRMAccounts { get; set; }
         public DbSet<CRMContact> CRMContacts { get; set; }
         public DbSet<ProjectBilling> ProjectBillings { get; set; }
+        public DbSet<ProjectBillingCorrection> ProjectBillingCorrections { get; set; }
         public DbSet<Project> Projects { get; set; }
         public DbSet<ProjectActivity> ProjectActivities { get; set; }
         public DbSet<ProjectDocument> ProjectDocuments { get; set; }
@@ -72,6 +73,7 @@ namespace Grid.Data
         public DbSet<CRMPotentialActivity> CRMPotentialActivities { get; set; }
         public DbSet<CRMPotentialTechnologyMap> PotentialTechnologyMaps { get; set; }
         public DbSet<Department> Departments { get; set; }
+        public DbSet<ProjectMemberRole> ProjectMemberRoles { get; set; }
         public DbSet<Designation> Designations { get; set; }
         public DbSet<Location> Locations { get; set; }
         public DbSet<Shift> Shifts { get; set; }

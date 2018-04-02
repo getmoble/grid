@@ -20,19 +20,22 @@ namespace Grid.Api.Models.PMS
         public ProjectType? ProjectType { get; set; }
         public string ProjecttypeType { get; set; }
         public string MemberStatusType { get; set; }
-        public string Role { get; set; }
+        //public string Role { get; set; }
         public Billing Billing { get; set; }       
         public decimal ExpectedBillingAmount { get; set; }
         public double Rate { get; set; }
         public int? ParentId { get; set; }       
         public string ParentProject { get; set; }
-        public string RoleAndStatus { get; set; }
+        //public string RoleAndStatus { get; set; }
         public bool IsPublic { get; set; }
         public bool InheritMembers { get; set; }
         public bool IsClosed { get; set; }
         // This stores the serialized settings for the Project.
         public string Setting { get; set; }
         public List<int> TechnologyIds { get; set; }
+
+        public int? ProjectMemberRoleId { get; set; }
+        public string ProjectMemberRole { get; set; }
 
         public ProjectModel()
         {
@@ -76,10 +79,16 @@ namespace Grid.Api.Models.PMS
                 MemberEmployee = projectMember.MemberEmployee.User.Person.Name;
             }
 
-            Role = GetEnumDescription(projectMember.Role);
+            ProjectMemberRoleId = projectMember.ProjectMemberRoleId;
+
+            if (projectMember.ProjectMemberRole != null)
+            {
+                ProjectMemberRole = projectMember.ProjectMemberRole.Title;
+            }
+            //Role = GetEnumDescription(projectMember.Role);
             CreatedOn = projectMember.CreatedOn;
             MemberStatusType = GetEnumDescription(projectMember.MemberStatus);
-            RoleAndStatus = GetEnumDescription(projectMember.Role) + " "+"-" +" " +GetEnumDescription(projectMember.MemberStatus);
+            //RoleAndStatus = GetEnumDescription(projectMember.Role) + " "+"-" +" " +GetEnumDescription(projectMember.MemberStatus);
         }
     }
 }

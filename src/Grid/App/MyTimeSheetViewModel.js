@@ -38,14 +38,18 @@ function MyTimeSheetViewModel() {
     self.Comments = ko.observable();
 
     self.Projects = ko.observableArray([]);
-    self.WorkTypes = ko.observableArray([{ Id: 1, Title: "Billable" }, { Id: 2, Title: "Non-Billable" }]);
+    self.WorkTypes = ko.observableArray([{ Id: 1, Title: "Billable" }, { Id: 2, Title: "Non-Billable" }, { Id: 3, Title: "Investment" }]);
 
     self.Rows = ko.observableArray([]);
 
     self.autoCompleteTasks = '/PMS/Tasks/AutoCompleteTasks?query=%QUERY';
 
-    
+    self.isNonbillable = ko.observable(false);
 
+    
+    self.closeModal = function () {
+        $('body').css('overflow', 'auto');
+    };
 
     self.addRow = function () {
         self.Rows.push(new TimeSheetRow({}));
@@ -62,16 +66,20 @@ function MyTimeSheetViewModel() {
         });
         return total;
     });
-
+   
     self.showAddModal = function () {
         $("#addTimeSheetModal").modal({
             backdrop: 'static',
             keyboard: false
         });
+        $('body').css('overflow', 'hidden');
+
     };
 
     self.showEditModal = function () {
         $("#editTimeSheetModal").modal();
+        $('body').css('overflow', 'hidden');
+
     };
 
     self.addTimeSheet = function (dateTime) {
@@ -107,6 +115,11 @@ function MyTimeSheetViewModel() {
            
 
             $.each(self.Rows(), function (k, v) {
+                if (v.WorkType() == 2) {
+                    if (v.Comments() == "" || v.Comments() == null) {
+                        self.isNonbillable(true);
+                    }
+                }
                 payload.Rows.push({
                     ProjectId: v.ProjectId(),
                     TaskId: v.TaskId(),
@@ -116,45 +129,62 @@ function MyTimeSheetViewModel() {
                     Comments: v.Comments()
                 });
             });
-            // Update or new
-            if (self.id() > 1) {
 
-                $.ajax({
-                    type: "POST",
-                    data: payload,
-                    url: '/TimeSheet/UpdateSheet/',
-                    success: function (status) {
-                        self.isBusy(false);
-                        if (!status) {
-                            bootbox.alert("Seems duplicate TimeSheet");
-                        } else {
-                            $('#editTimeSheetModal').modal('hide');
-                            location.reload();
-                        }
-                    },
-                });
+            if (self.isNonbillable() == false) {
+                $('body').css('overflow', 'auto');
 
-            } else {
+                // Update or new
+                if (self.id() > 1) {
 
-                $.ajax({
-                    type: "POST",
-                    data: payload,
-                    url: '/TimeSheet/CreateSheet/',
-                    success: function (status) {
-                        self.isBusy(false);
-                        if (!status) {
-                            bootbox.alert("Seems duplicate TimeSheet");
-                        } else {
-                            $('#addTimeSheetModal').modal('hide');
-                            location.reload();
-                        }
-                    },
-                });
+                    $.ajax({
+                        type: "POST",
+                        data: payload,
+                        url: '/TimeSheet/UpdateSheet/',
+                        success: function (status) {
+                            self.isBusy(false);
+                            if (!status) {
+                                bootbox.alert("Seems duplicate TimeSheet");
+                            } else {
+                                $('#editTimeSheetModal').modal('hide');
+                                location.reload();
+                            }
+                        },
+                    });
+
+                } else {
+
+                    $.ajax({
+                        type: "POST",
+                        data: payload,
+                        url: '/TimeSheet/CreateSheet/',
+                        success: function (status) {
+                            self.isBusy(false);
+                            if (!status) {
+                                bootbox.alert("Seems duplicate TimeSheet");
+                            } else {
+                                $('#addTimeSheetModal').modal('hide');
+                                location.reload();
+                            }
+                        },
+                    });
+                }
             }
-        } else {
+            else {
+                self.isBusy(false);
+                self.isNonbillable(false);
+                bootbox.alert("Please enter comments for Non-Billable tasks");
+                $('body').css('overflow', 'hidden');
+                $('#addTimeSheetModal').css('overflow-y', 'scroll');
+
+
+
+            }
+          
+        }
+        else {
+            self.isBusy(false);
             bootbox.alert("You need to have atleast some hours in your Timesheet");
         }
-
     };
 
     $.getJSON('/PMS/TimeSheet/GetAllProjectsForTimeSheet/', function (data) {

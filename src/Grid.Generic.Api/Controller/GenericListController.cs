@@ -118,9 +118,24 @@ namespace Grid.Generic.Api.Controller
                             var projectId = Convert.ToInt32(projectmember);
                             if (projectId != 0)
                             {
-                                var projectmembers = _dataContext.ProjectMembers.Include("MemberEmployee.User.Person").Include("Project").Where(i => i.ProjectId == projectId);
+                                var projectmembers = _dataContext.ProjectMembers.Include("MemberEmployee.User.Person").Include("Project").Include("ProjectMemberRole").Where(i => i.ProjectId == projectId);
                                
-                                var projects = projectmembers.OrderBy(i => i.MemberStatus).ToList().Select(h => new ProjectModel(h)).ToList();
+                                var projects = projectmembers.Where(u=> u.MemberStatus == MemberStatus.Active).OrderBy(i => i.MemberStatus).ToList().Select(h => new ProjectModel(h)).ToList();
+                                data = projects.Select(h => new GridObject(h)).ToList();
+                            }
+                        }
+                        break;
+                    case "inactiveprojectmember":
+                        var inactiveProjectmember = HttpContext.Current.Request.QueryString["projectId"];
+
+                        if (!string.IsNullOrEmpty(inactiveProjectmember))
+                        {
+                            var projectId = Convert.ToInt32(inactiveProjectmember);
+                            if (projectId != 0)
+                            {
+                                var projectmembers = _dataContext.ProjectMembers.Include("MemberEmployee.User.Person").Include("Project").Include("ProjectMemberRole").Where(i => i.ProjectId == projectId);
+
+                                var projects = projectmembers.Where(u => u.MemberStatus == MemberStatus.InActive).OrderBy(i => i.MemberStatus).ToList().Select(h => new ProjectModel(h)).ToList();
                                 data = projects.Select(h => new GridObject(h)).ToList();
                             }
                         }
@@ -678,7 +693,11 @@ namespace Grid.Generic.Api.Controller
                         var contactData = crmContactQuery.OrderByDescending(i => i.CreatedOn).ToList().Select(h => new CRMContactModel(h)).ToList();
                         data = contactData.Select(h => new GridObject(h)).ToList();
                         break;
-                        
+                    case "projectmemberrole":
+                        var memberrole = _dataContext.ProjectMemberRoles.Include("Department").OrderByDescending(i => i.CreatedOn).ToList().Select(h => new ProjectMemberRoleModel(h)).ToList();
+                        data = memberrole.Select(h => new GridObject(h)).ToList();
+                        break;
+
                 }
 
                 skip = !string.IsNullOrEmpty(HttpContext.Current.Request.QueryString["skip"]) ? Convert.ToInt32(HttpContext.Current.Request.QueryString["skip"]) : 0;

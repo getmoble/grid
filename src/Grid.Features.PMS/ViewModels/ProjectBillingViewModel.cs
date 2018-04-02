@@ -22,5 +22,6 @@ namespace Grid.Features.PMS.ViewModels
         public string Comments { get; set; }
         public string DocumentPath { get; set; }
         public HttpPostedFileBase Document { get; set; }
+        public decimal BillingHours { get; set; }
     }
 }

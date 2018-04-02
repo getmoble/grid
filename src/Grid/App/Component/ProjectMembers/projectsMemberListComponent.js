@@ -2,7 +2,7 @@
     viewModel: function (params) {
         var self = ListViewModelBase(this);
         self.setValues(params);
-     
+
         if (params.projectId() != 0) {
             var args = [{ key: "projectId", value: params.projectId() }];
             self.fillData(args);
@@ -47,12 +47,24 @@
                             if (params.projectId() != 0) {
                                 var args = [{ key: "projectId", value: params.projectId() }];
                                 self.fillData(args);
+                                rapid.eventManager.publish("inactiveprojectmember" + "Search", args);
                             }
                         }
                     });
                 };
             });
         }
+
+        //self.GetAllInactiveUsers = function () {
+        //    $.get('/PMS/ProjectMembers/GetInactiveUsers?projectId=' + params.projectId(), function (data) {
+        //        if (data) {
+        //            $('#inactiveUsers').html(data);
+        //        }
+        //        else {
+        //            bootbox.alert("Something happened unexpectedly..");
+        //        }
+        //    });
+        //}
 
 
     },

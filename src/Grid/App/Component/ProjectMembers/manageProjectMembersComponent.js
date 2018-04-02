@@ -4,6 +4,8 @@
         self.init("projectmember");
         self.project = params.projectId;
       
+
+      
     },
     template: { element: "manageprojectmember-template" }
 });

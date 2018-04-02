@@ -16,18 +16,21 @@ namespace Grid.Areas.PMS.Controllers
     {
         private readonly IProjectMemberRepository _projectMemberRepository;
         private readonly IProjectBillingRepository _projectBillingRepository;
+        private readonly IProjectBillingCorrectionRepository _projectBillingCorrectionRepository;
         private readonly IProjectRepository _projectRepository;
         private readonly IEmployeeRepository _employeeRepository;
         private readonly IUnitOfWork _unitOfWork;
 
         public ProjectBillingsController(IProjectMemberRepository projectMemberRepository,
                                          IProjectBillingRepository projectBillingRepository,
+                                         IProjectBillingCorrectionRepository projectBillingCorrectionRepository,
                                          IProjectRepository projectRepository,
                                          IEmployeeRepository employeeRepository,
         IUnitOfWork unitOfWork)
         {
             _projectMemberRepository = projectMemberRepository;
             _projectBillingRepository = projectBillingRepository;
+            _projectBillingCorrectionRepository = projectBillingCorrectionRepository;
             _projectRepository = projectRepository;
             _employeeRepository = employeeRepository;
             _unitOfWork = unitOfWork;
@@ -37,7 +40,7 @@ namespace Grid.Areas.PMS.Controllers
         {
             // Check whether i have access to this Project as Sales
             var employee = _employeeRepository.GetBy(u => u.UserId == WebUser.Id, "User,User.Person,ReportingPerson.User.Person,Manager.User.Person,Location,Department,Designation,Shift");
-            var isMember = _projectMemberRepository.Any(m => m.EmployeeId == employee.Id && m.ProjectId == projectId && m.Role == MemberRole.Sales) || WebUser.IsAdmin;
+            var isMember = _projectMemberRepository.Any(m => m.EmployeeId == employee.Id && m.ProjectId == projectId && m.ProjectMemberRole.Role == MemberRole.Sales) || WebUser.IsAdmin;
             return isMember;
         }
 
@@ -73,6 +76,7 @@ namespace Grid.Areas.PMS.Controllers
                     ProjectId = projectBilling.ProjectId,
                     BillingDate = projectBilling.BillingDate,
                     Amount = projectBilling.Amount,
+                    BillingHours = projectBilling.BillingHours,
                     Comments = projectBilling.Comments
                 };
 
@@ -102,6 +106,51 @@ namespace Grid.Areas.PMS.Controllers
 
             ViewBag.ProjectId = new SelectList(_projectRepository.GetAll(), "Id", "Title", projectBilling.ProjectId);
             return View(projectBilling);
+        }
+
+        public ActionResult CreateBillingCorrection(int projectId)
+        {
+            if (!DoIHaveAccessToProject(projectId))
+            {
+                return RedirectToAction("NotAuthorized", "Error", new { area = "" });
+            }
+
+            var vm = new ProjectBillingViewModel
+            {
+                ProjectId = projectId,
+            };
+
+            return View(vm);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateBillingCorrection(ProjectBillingViewModel projectBillingCorrection)
+        {
+            if (ModelState.IsValid)
+            {
+                if (!DoIHaveAccessToProject(projectBillingCorrection.ProjectId))
+                {
+                    return RedirectToAction("NotAuthorized", "Error", new { area = "" });
+                }
+
+                var newBilling = new ProjectBillingCorrection
+                {
+                    ProjectId = projectBillingCorrection.ProjectId,
+                    BillingHours = projectBillingCorrection.BillingHours,
+                    Comments = projectBillingCorrection.Comments
+                };
+
+                newBilling.CreatedByUserId = WebUser.Id;
+
+                _projectBillingCorrectionRepository.Create(newBilling);
+                _unitOfWork.Commit();
+
+                return RedirectToAction("Details", "Projects", new { Id = projectBillingCorrection.ProjectId });
+            }
+
+            ViewBag.ProjectId = new SelectList(_projectRepository.GetAll(), "Id", "Title", projectBillingCorrection.ProjectId);
+            return View(projectBillingCorrection);
         }
 
         public ActionResult Edit(int id)
@@ -140,6 +189,7 @@ namespace Grid.Areas.PMS.Controllers
                     {
                         selectedBilling.ProjectId = projectBilling.ProjectId;
                         selectedBilling.Amount = projectBilling.Amount;
+                        selectedBilling.BillingHours = projectBilling.BillingHours;
                         selectedBilling.BillingDate = projectBilling.BillingDate;
                         selectedBilling.Comments = projectBilling.Comments;
 
@@ -174,7 +224,7 @@ namespace Grid.Areas.PMS.Controllers
 
         public ActionResult Delete(int id)
         {
-            var projectBilling = _projectBillingRepository.Get(id);
+            var projectBilling = _projectBillingRepository.Get(id,"Project");
             if (projectBilling == null)
             {
                 return HttpNotFound();
@@ -200,6 +250,38 @@ namespace Grid.Areas.PMS.Controllers
             }
 
             _projectBillingRepository.Delete(projectBilling);
+            _unitOfWork.Commit();
+            return RedirectToAction("Details", "Projects", new { Id = projectBilling.ProjectId });
+        }
+
+        public ActionResult DeleteBillingCorrection(int id)
+        {
+            var projectBilling = _projectBillingCorrectionRepository.Get(id,"Project");
+            if (projectBilling == null)
+            {
+                return HttpNotFound();
+            }
+
+            if (!DoIHaveAccessToProject(projectBilling.ProjectId))
+            {
+                return RedirectToAction("NotAuthorized", "Error", new { area = "" });
+            }
+
+            return View(projectBilling);
+        }
+
+        [HttpPost, ActionName("DeleteBillingCorrection")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteBillingCorrectionConfirmed(int id)
+        {
+            var projectBilling = _projectBillingCorrectionRepository.Get(id);
+
+            if (!DoIHaveAccessToProject(projectBilling.ProjectId))
+            {
+                return RedirectToAction("NotAuthorized", "Error", new { area = "" });
+            }
+
+            _projectBillingCorrectionRepository.Delete(projectBilling);
             _unitOfWork.Commit();
             return RedirectToAction("Details", "Projects", new { Id = projectBilling.ProjectId });
         }

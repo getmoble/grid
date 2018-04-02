@@ -41,7 +41,6 @@ namespace Grid.Features.PMS.ViewModels
 
         [DisplayName("Expected Billing Amount")]
         public decimal ExpectedBillingAmount { get; set; }
-
         public decimal ActualBillingAmount
         {
             get
@@ -50,11 +49,27 @@ namespace Grid.Features.PMS.ViewModels
             }
         }
 
+        public decimal BillingHoursOfCorrection
+        {
+            get
+            {
+                return ProjectBillingCorrections.Sum(b => b.BillingHours);
+            }
+        }
+        public decimal BillingHours
+        {
+            get
+            {
+                return ProjectBillings.Sum(b => b.BillingHours);
+            }
+        }
+
         public long? ParentId { get; set; }
         [DisplayName("Sub Project Of")]
         public Entities.Project ParentProject { get; set; }
 
         public List<ProjectBilling> ProjectBillings { get; set; }
+        public List<ProjectBillingCorrection> ProjectBillingCorrections { get; set; }
         public List<ProjectMember> ProjectMembers { get; set; }
         public List<ProjectMileStone> ProjectMileStonesStones { get; set; }
         public List<Task> Tasks { get; set; }
@@ -74,6 +89,7 @@ namespace Grid.Features.PMS.ViewModels
             ProjectDocuments = new List<ProjectDocument>();
             Contributions = new List<ProjectContribution>();
             Technologies = new List<Technology>();
+            ProjectBillingCorrections = new List<ProjectBillingCorrection>();
         }
     }
 }

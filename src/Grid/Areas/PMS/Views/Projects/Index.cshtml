@@ -15,6 +15,14 @@
                         <span class="marT marR-120"><span class="text-white">Tasks</span></span>
                     </div>
                 </a>
+                @if (PermissionChecker.CheckPermission(ViewBag.Permissions as List<int>, 550))
+                {
+                    <a href="/PMS/ProjectMemberRoles">
+                    <div class="metrostyle metrostylelarge reemetro">
+                        <span class="marT marR-120"><span class="text-white">Member Roles</span></span>
+                    </div>
+                </a>
+                }
             </div>
         </div>
     </div>

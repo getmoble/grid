@@ -366,6 +366,13 @@
     <Content Include="App\Component\Locations\locationsListComponent.js" />
     <Content Include="App\Component\Locations\locationsModel.js" />
     <Content Include="App\Component\Locations\manageLocationsComponent.js" />
+    <Content Include="App\Component\ProjectMemberRoles\manageMemberRolesComponent.js" />
+    <Content Include="App\Component\ProjectMemberRoles\memberRoleFormComponent.js" />
+    <Content Include="App\Component\ProjectMemberRoles\memberRoleListComponent.js" />
+    <Content Include="App\Component\ProjectMemberRoles\memberRoleModel.js" />
+    <Content Include="App\Component\ProjectMembers\inactiveProjectsMemberListComponent.js" />
+    <Content Include="App\Component\ProjectMembers\inativeProjectMemberFormComponent.js" />
+    <Content Include="App\Component\ProjectMembers\manageInactiveProjectMembersComponent.js" />
     <Content Include="App\Component\ProjectMembers\manageProjectMembersComponent.js" />
     <Content Include="App\Component\ProjectMembers\projectMemberFormComponent.js" />
     <Content Include="App\Component\ProjectMembers\projectMemberModel.js" />
@@ -746,6 +753,11 @@
     <Content Include="Areas\Templates\Views\List\_HolidayListTemplate.cshtml" />
     <Content Include="Areas\Templates\Views\List\_LeaveEntitlementsHistoryListTemplate.cshtml" />
     <Content Include="Areas\Templates\Views\Form\_LeaveBalanceDetailsTemplate.cshtml" />
+    <Content Include="Areas\PMS\Views\ProjectMembers\InactiveUsers.cshtml" />
+    <Content Include="Areas\Templates\Views\List\_InactiveProjectMembersListTemplate.cshtml" />
+    <Content Include="Areas\PMS\Views\ProjectBillings\CreateBillingCorrection.cshtml" />
+    <Content Include="Areas\PMS\Views\ProjectBillings\DeleteBillingCorrection.cshtml" />
+    <Content Include="Areas\PMS\Views\ProjectMemberRoles\Index.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -1095,6 +1107,7 @@
     <Compile Include="Areas\IT\Controllers\SoftwareCategoriesController.cs" />
     <Compile Include="Areas\IT\Controllers\SoftwaresController.cs" />
     <Compile Include="Areas\IT\ITAreaRegistration.cs" />
+    <Compile Include="Areas\PMS\Controllers\ProjectMemberRolesController.cs" />
     <Compile Include="Areas\Recruit\KBS\Controllers\ArticleAttachmentsController.cs" />
     <Compile Include="Areas\Recruit\KBS\Controllers\ArticlesController.cs" />
     <Compile Include="Areas\Recruit\KBS\Controllers\CategoriesController.cs" />

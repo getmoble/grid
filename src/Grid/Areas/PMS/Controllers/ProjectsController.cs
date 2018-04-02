@@ -34,6 +34,7 @@ namespace Grid.Areas.PMS.Controllers
         private readonly IProjectTechnologyMapRepository _projectTechnologyMapRepository;
         private readonly IProjectMileStoneRepository _projectMileStoneRepository;
         private readonly IProjectBillingRepository _projectBillingRepository;
+        private readonly IProjectBillingCorrectionRepository _projectBillingCorrectionRepository;
         private readonly IProjectDocumentRepository _projectDocumentRepository;
         private readonly ITaskRepository _taskRepository;
         private readonly ITaskEffortRepository _taskEffortRepository;
@@ -52,6 +53,7 @@ namespace Grid.Areas.PMS.Controllers
                                   IProjectActivityRepository projectActivityRepository,
                                   IProjectMemberRepository projectMemberRepository,
                                   IProjectBillingRepository projectBillingRepository,
+                                  IProjectBillingCorrectionRepository projectBillingCorrectionRepository,
                                   ITaskRepository taskRepository,
                                   ITaskEffortRepository taskEffortRepository,
                                   IProjectTechnologyMapRepository projectTechnologyMapRepository,
@@ -73,6 +75,7 @@ namespace Grid.Areas.PMS.Controllers
             _projectActivityRepository = projectActivityRepository;
             _projectBillingRepository = projectBillingRepository;
             _projectMemberRepository = projectMemberRepository;
+            _projectBillingCorrectionRepository = projectBillingCorrectionRepository;
             _taskRepository = taskRepository;
             _taskEffortRepository = taskEffortRepository;
             _projectTechnologyMapRepository = projectTechnologyMapRepository;
@@ -283,7 +286,7 @@ namespace Grid.Areas.PMS.Controllers
         {
             // Check whether i have access to this Project as a Manager
             var employee = _employeeRepository.GetBy(u => u.UserId == WebUser.Id, "User,User.Person,ReportingPerson.User.Person,Manager.User.Person,Location,Department,Designation,Shift");
-            var isMember = _projectMemberRepository.Any(m => m.EmployeeId == employee.Id && m.ProjectId == projectId && m.Role == MemberRole.ProjectManager) || WebUser.IsAdmin;
+            var isMember = _projectMemberRepository.Any(m => m.EmployeeId == employee.Id && m.ProjectId == projectId && m.ProjectMemberRole.Role == MemberRole.ProjectManager) || WebUser.IsAdmin;
             return isMember;
         }
 
@@ -457,15 +460,15 @@ namespace Grid.Areas.PMS.Controllers
             ViewBag.MyProjectsId = new SelectList(projectsList, "Id", "Title", project.Id);
 
             // Set Billing Access
-            var hasBillingAccess = _projectMemberRepository.Any(m => m.EmployeeId == employee.Id && m.ProjectId == project.Id && m.Role == MemberRole.Sales) || WebUser.IsAdmin;
+            var hasBillingAccess = _projectMemberRepository.Any(m => m.EmployeeId == employee.Id && m.ProjectId == project.Id && m.ProjectMemberRole.Role == MemberRole.Sales) || WebUser.IsAdmin;
             ViewBag.HasBillingAccess = hasBillingAccess;
 
             // Set PM Access
-            var hasPMAccess = _projectMemberRepository.Any(m => m.EmployeeId == employee.Id && m.ProjectId == project.Id && m.Role == MemberRole.ProjectManager) || WebUser.IsAdmin;
+            var hasPMAccess = _projectMemberRepository.Any(m => m.EmployeeId == employee.Id && m.ProjectId == project.Id && m.ProjectMemberRole.Role == MemberRole.ProjectManager) || WebUser.IsAdmin;
             ViewBag.HasPMAccess = hasPMAccess;
 
             // Set Lead Access
-            var hasLeadAccess = _projectMemberRepository.Any(m => m.EmployeeId == employee.Id && m.ProjectId == project.Id && m.Role == MemberRole.Lead) || WebUser.IsAdmin;
+            var hasLeadAccess = _projectMemberRepository.Any(m => m.EmployeeId == employee.Id && m.ProjectId == project.Id && m.ProjectMemberRole.Role == MemberRole.Lead) || WebUser.IsAdmin;
             ViewBag.HasLeadAccess = hasLeadAccess;
 
 
@@ -473,6 +476,7 @@ namespace Grid.Areas.PMS.Controllers
             var projectMembers = _projectMemberRepository.GetAllBy(m => m.ProjectId == project.Id, "MemberEmployee.User.Person");
             var projectMileStones = _projectMileStoneRepository.GetAllBy(m => m.ProjectId == project.Id);
             var projectDocuments = _projectDocumentRepository.GetAllBy(p => p.ProjectId == project.Id);
+            var projectBillingCorrections = _projectBillingCorrectionRepository.GetAllBy(b => b.ProjectId == project.Id);
 
             List<Task> tasks;
             if (WebUser.IsAdmin || hasPMAccess || hasLeadAccess)
@@ -519,6 +523,7 @@ namespace Grid.Areas.PMS.Controllers
                 Billing = project.Billing,
                 ExpectedBillingAmount = project.ExpectedBillingAmount,
                 ProjectBillings = projectBillings.ToList(),
+                ProjectBillingCorrections = projectBillingCorrections.ToList(),
                 ProjectMembers = projectMembers.ToList(),
                 ProjectMileStonesStones = projectMileStones.ToList(),
                 Tasks = tasks,
@@ -583,7 +588,7 @@ namespace Grid.Areas.PMS.Controllers
                     ProjectId = newProject.Id,
                     EmployeeId = employee.Id,
                     // EmployeeId = WebUser.Id,
-                    Role = MemberRole.ProjectManager,
+                    //ProjectMemberRoleId = projectMember.ProjectMemberRoleId,
                     Billing = Billing.NonBillable,
                     Rate = 0,
                     CreatedByUserId = WebUser.Id
@@ -603,7 +608,7 @@ namespace Grid.Areas.PMS.Controllers
                         {
                             ProjectId = newProject.Id,
                             EmployeeId = employee.Id,
-                            Role = member.Role,
+                            ProjectMemberRoleId = member.ProjectMemberRoleId,
                             Billing = member.Billing,
                             CreatedByUserId = WebUser.Id
                         };

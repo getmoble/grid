@@ -22,5 +22,6 @@ namespace Grid.Features.PMS.Entities
         [AllowHtml]
         public string Comments { get; set; }
         public string DocumentPath { get; set; }
+        public decimal BillingHours { get; set; }
     }
 }

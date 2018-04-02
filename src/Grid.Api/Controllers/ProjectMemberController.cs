@@ -63,7 +63,7 @@ namespace Grid.Api.Controllers
                         var project = _projectMemberRepository.Get(vm.Id);
                         project.EmployeeId = vm.EmployeeId;
                         project.Rate = vm.Rate;
-                        project.Role = vm.Role;
+                        project.ProjectMemberRoleId = vm.ProjectMemberRoleId;
                         project.ProjectId = vm.ProjectId;
                         project.Billing = vm.Billing;
                         project.UpdatedByUserId = WebUser.Id;
@@ -83,7 +83,7 @@ namespace Grid.Api.Controllers
                         {
                             EmployeeId = vm.EmployeeId,
                             Rate = vm.Rate,
-                            Role = vm.Role,
+                            ProjectMemberRoleId = vm.ProjectMemberRoleId,
                             ProjectId = vm.ProjectId,
                             Billing = vm.Billing,
                             MemberStatus = vm.MemberStatus,

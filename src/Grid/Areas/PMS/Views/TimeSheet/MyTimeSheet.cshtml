@@ -3,9 +3,9 @@
 <link href="~/Content/timesheet.css" rel="stylesheet" />
 <div class="modal fade higherWider" id="addTimeSheetModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog modal-xlg" role="document">
-        <div class="modal-content">
+        <div class="modal-content" id="popupModal">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <button type="button" data-bind="click: closeModal"  class="close" data-dismiss="modal"  aria-label="Close" ><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title" id="myModalLabel" data-bind="text: title"></h4>
             </div>
             <div class="modal-body">

@@ -14,14 +14,14 @@ namespace Grid.Areas.Templates.Controllers
         private readonly IEmployeeRepository _employeeRepository;
         private readonly IProjectMemberRepository _projectMemberRepository;
         private readonly IUnitOfWork _unitOfWork;
-        public ListController(IProjectMemberRepository projectMemberRepository,                               
+        public ListController(IProjectMemberRepository projectMemberRepository,
                               IEmployeeRepository employeeRepository,
                               IUnitOfWork unitOfWork)
         {
 
-            
+
             _projectMemberRepository = projectMemberRepository;
-            _employeeRepository = employeeRepository;          
+            _employeeRepository = employeeRepository;
             _unitOfWork = unitOfWork;
         }
 
@@ -66,7 +66,7 @@ namespace Grid.Areas.Templates.Controllers
                         UIField.GetField("Employee", "Employee"),
                         UIField.GetField("LeaveType", "Leave Type"),
                         UIField.GetField("Duration"),
-                        UIField.GetField("Period", "Period"),                      
+                        UIField.GetField("Period", "Period"),
                         UIField.GetField("CreatedOn", "Applied On", UIFieldTypes.TimeAgo),
                         UIField.GetField("Status", "Status"),
                         UIField.GetField("Approver", "Approver"),
@@ -77,7 +77,7 @@ namespace Grid.Areas.Templates.Controllers
                 case "locations":
                     fields = new List<UIField>
                     {
-                        UIField.GetField("Title"),                        
+                        UIField.GetField("Title"),
                         UIField.GetField("Phone"),
                         UIField.GetField("CreatedOn", "Created On", UIFieldTypes.DateTime)
                     };
@@ -224,8 +224,8 @@ namespace Grid.Areas.Templates.Controllers
                     fields = new List<UIField>
                     {
                         UIField.GetField("Type","Type"),
-                        UIField.GetField("Title"),                        
-                        UIField.GetField("Date", "Date", UIFieldTypes.DateTime)                      
+                        UIField.GetField("Title"),
+                        UIField.GetField("Date", "Date", UIFieldTypes.DateTime)
                     };
                     ViewBag.Mode = mode == "Manage" ? "Manage" : "ReadOnly";
                     return PartialView("_HolidayListTemplate", fields);
@@ -245,7 +245,7 @@ namespace Grid.Areas.Templates.Controllers
                     {
                         UIField.GetField("Title"),
                         UIField.GetField("Start", "Start Date", UIFieldTypes.DateTime),
-                        UIField.GetField("End", "End Date", UIFieldTypes.DateTime)                      
+                        UIField.GetField("End", "End Date", UIFieldTypes.DateTime)
                     };
                     ViewBag.Mode = mode == "Manage" ? "Manage" : "ReadOnly";
                     return PartialView("_ListTemplate", fields);
@@ -262,11 +262,11 @@ namespace Grid.Areas.Templates.Controllers
                     fields = new List<UIField>
                     {
                         UIField.GetField("Title","Title"),
-                        UIField.GetField("TagNumber","Tag"),                       
+                        UIField.GetField("TagNumber","Tag"),
                         UIField.GetField("ModelNumber","Model"),
                         UIField.GetField("Department","Department"),
                         UIField.GetField("AllocatedEmployee","Allocated To"),
-                    }; 
+                    };
                     ViewBag.Mode = mode == "Manage" ? "Manage" : "ReadOnly";
                     return PartialView("_AssetListTemplate", fields);
                 case "employeeassets":
@@ -311,6 +311,16 @@ namespace Grid.Areas.Templates.Controllers
                         UIField.GetField("Title"),
                         UIField.GetField("Version"),
                         UIField.GetField("StatusName","Status"),
+                    };
+                    ViewBag.Mode = mode == "Manage" ? "Manage" : "ReadOnly";
+                    return PartialView("_ListTemplate", fields);
+                case "projectmemberroles":
+                    fields = new List<UIField>
+                    {
+                        UIField.GetField("Title","Name"),
+                        UIField.GetField("Department","Department"),
+                        UIField.GetField("RoleType","Role"),
+                        UIField.GetField("CreatedOn", "Created On", UIFieldTypes.DateTime)
                     };
                     ViewBag.Mode = mode == "Manage" ? "Manage" : "ReadOnly";
                     return PartialView("_ListTemplate", fields);
@@ -377,29 +387,29 @@ namespace Grid.Areas.Templates.Controllers
                         UIField.GetField("Version"),
                         UIField.GetField("State"),
                         UIField.GetField("CreatedOn", "Created On", UIFieldTypes.DateTime)
-                    }; 
+                    };
                     break;
-                case "employees":            
+                case "employees":
                     fields = new List<UIField>
                     {
                         UIField.GetField("User","Name"),
-                        UIField.GetField("EmployeeCode","Code"),                        
+                        UIField.GetField("EmployeeCode","Code"),
                         UIField.GetField("Department","Department"),
-                        UIField.GetField("Designation","Designation"),                                                         
+                        UIField.GetField("Designation","Designation"),
                     };
                     return PartialView("_EmployeeListTemplate", fields);
                 case "dependents":
                     fields = new List<UIField>
-                    {                      
+                    {
                         UIField.GetField("Dependent", "Dependent Type"),
-                        UIField.GetField("Name"),                       
+                        UIField.GetField("Name"),
 
                     };
                     ViewBag.Mode = mode == "Manage" ? "Manage" : "ReadOnly";
                     return PartialView("_ListTemplate", fields);
                 case "emergencycontacts":
                     fields = new List<UIField>
-                    {                       
+                    {
                         UIField.GetField("Name"),
                         UIField.GetField("RelationshipType", "Relationship")
 
@@ -436,9 +446,9 @@ namespace Grid.Areas.Templates.Controllers
                     fields = new List<UIField>
                     {
                         UIField.GetField("LeaveTimePeriod", "Leave Cycle"),
-                        UIField.GetField("LeaveType", "Leave Type"),                                              
+                        UIField.GetField("LeaveType", "Leave Type"),
                         UIField.GetField("Allocation", "Leave Balance"),
-                    }; 
+                    };
                     return PartialView("_LeaveEntitlementsListTemplate", fields);
                 case "leavebalance":
                     fields = new List<UIField>
@@ -447,14 +457,14 @@ namespace Grid.Areas.Templates.Controllers
                         UIField.GetField("EmployeeCode","Code"),
                         UIField.GetField("Department","Department"),
                         UIField.GetField("Designation","Designation"),
-                    }; 
+                    };
                     return PartialView("_HolidayListTemplate", fields);
                 case "projects":
                     ViewBag.UserId = WebUser.IsAdmin;
                     bool isMember;
                     var employee = _employeeRepository.GetBy(u => u.UserId == WebUser.Id, "User,User.Person");
-                    isMember = _projectMemberRepository.Any(m => m.EmployeeId == employee.Id && m.Role == MemberRole.ProjectManager) || WebUser.IsAdmin;
-                    ViewBag.Role = isMember;                 
+                    isMember = _projectMemberRepository.Any(m => m.EmployeeId == employee.Id && m.ProjectMemberRole.Role == MemberRole.ProjectManager) || WebUser.IsAdmin;
+                    ViewBag.Role = isMember;
                     fields = new List<UIField>
                     {
                         UIField.GetField("Title"),
@@ -468,20 +478,33 @@ namespace Grid.Areas.Templates.Controllers
                     ViewBag.UserId = WebUser.IsAdmin;
                     bool isProjectLead;
                     var user = _employeeRepository.GetBy(u => u.UserId == WebUser.Id, "User,User.Person,Location,Department,Designation,Shift");
-                    isProjectLead = _projectMemberRepository.Any(m => m.EmployeeId == user.Id && m.Role == MemberRole.ProjectManager) || WebUser.IsAdmin;
+                    isProjectLead = _projectMemberRepository.Any(m => m.EmployeeId == user.Id && m.ProjectMemberRole.Role == MemberRole.ProjectManager) || WebUser.IsAdmin;
                     ViewBag.Role = isProjectLead;
                     fields = new List<UIField>
                     {
                         UIField.GetField("MemberEmployee", "Employee"),
-                        UIField.GetField("RoleAndStatus", "Role & Status"),                        
+                        UIField.GetField("ProjectMemberRole", "Role"),
                     };
                     ViewBag.Mode = mode == "Manage" ? "Manage" : "ReadOnly";
                     return PartialView("_ProjectMembersListTemplate", fields);
+                case "inactiveprojectmembers":
+                    ViewBag.UserId = WebUser.IsAdmin;
+                    bool isLead;
+                    var userEmployee = _employeeRepository.GetBy(u => u.UserId == WebUser.Id, "User,User.Person,Location,Department,Designation,Shift");
+                    isLead = _projectMemberRepository.Any(m => m.EmployeeId == userEmployee.Id && m.ProjectMemberRole.Role == MemberRole.ProjectManager) || WebUser.IsAdmin;
+                    ViewBag.Role = isLead;
+                    fields = new List<UIField>
+                    {
+                        UIField.GetField("MemberEmployee", "Employee"),
+                        UIField.GetField("ProjectMemberRole", "Role"),
+                    };
+                    ViewBag.Mode = mode == "Manage" ? "Manage" : "ReadOnly";
+                    return PartialView("_InactiveProjectMembersListTemplate", fields);
                 case "tasks":
                     ViewBag.UserId = WebUser.IsAdmin;
                     bool isVisible;
                     var loginUser = _employeeRepository.GetBy(u => u.UserId == WebUser.Id, "User,User.Person");
-                    isVisible = _projectMemberRepository.Any(m => m.EmployeeId == loginUser.Id && (m.Role == MemberRole.ProjectManager || m.Role == MemberRole.Lead) ) || WebUser.IsAdmin;
+                    isVisible = _projectMemberRepository.Any(m => m.EmployeeId == loginUser.Id && (m.ProjectMemberRole.Role == MemberRole.ProjectManager || m.ProjectMemberRole.Role == MemberRole.Lead)) || WebUser.IsAdmin;
                     ViewBag.IsVisible = isVisible;
                     fields = new List<UIField>
                     {
