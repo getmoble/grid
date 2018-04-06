@@ -2,6 +2,7 @@
 {
     using System;
 
+    //CardModel
     public class CardModel
     {
         public string Title { get; set; }
@@ -12,6 +13,6 @@
 
         public DateTime CreatedOn { get; set; }
 
-        //public string Description { get; set; }
+        //public striscription { get; set; }
     }
 }
