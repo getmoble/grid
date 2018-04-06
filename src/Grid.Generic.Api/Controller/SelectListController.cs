@@ -303,7 +303,15 @@ namespace Grid.Generic.Api.Controller
                             Name = i.Title
                         }).OrderBy(i => i.Name).ToList();
                         break;
-                        
+                    case "projectmemberroles":
+                        var memberroles = _dataContext.ProjectMemberRoles.ToList();
+                        data = memberroles.Select(i => new SelectItem
+                        {
+                            Id = i.Id,
+                            Name = i.Title
+                        }).OrderBy(i => i.Name).ToList();
+                        break;
+
                 }
                 return data;
             });

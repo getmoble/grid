@@ -84,9 +84,11 @@
     <Compile Include="DAL\Interfaces\IEstimateRepository.cs" />
     <Compile Include="DAL\Interfaces\IMissedTimeSheetRepository.cs" />
     <Compile Include="DAL\Interfaces\IProjectActivityRepository.cs" />
+    <Compile Include="DAL\Interfaces\IProjectBillingCorrectionRepository.cs" />
     <Compile Include="DAL\Interfaces\IProjectBillingRepository.cs" />
     <Compile Include="DAL\Interfaces\IProjectDocumentRepository.cs" />
     <Compile Include="DAL\Interfaces\IProjectMemberRepository.cs" />
+    <Compile Include="DAL\Interfaces\IProjectMemberRoleRepository.cs" />
     <Compile Include="DAL\Interfaces\IProjectMileStoneRepository.cs" />
     <Compile Include="DAL\Interfaces\IProjectRepository.cs" />
     <Compile Include="DAL\Interfaces\IProjectTechnologyMapRepository.cs" />
@@ -98,9 +100,11 @@
     <Compile Include="DAL\Interfaces\ITimeSheetRepository.cs" />
     <Compile Include="DAL\MissedTimeSheetRepository.cs" />
     <Compile Include="DAL\ProjectActivityRepository.cs" />
+    <Compile Include="DAL\ProjectBillingCorrectionRepository.cs" />
     <Compile Include="DAL\ProjectBillingRepository.cs" />
     <Compile Include="DAL\ProjectDocumentRepository.cs" />
     <Compile Include="DAL\ProjectMemberRepository.cs" />
+    <Compile Include="DAL\ProjectMemberRoleRepository.cs" />
     <Compile Include="DAL\ProjectMileStoneRepository.cs" />
     <Compile Include="DAL\ProjectRepository.cs" />
     <Compile Include="DAL\ProjectTechnologyMapRepository.cs" />
@@ -123,10 +127,12 @@
     <Compile Include="Entities\Enums\TimeSheetState.cs" />
     <Compile Include="Entities\Estimate.cs" />
     <Compile Include="Entities\EstimateLineItem.cs" />
+    <Compile Include="Entities\ProjectMemberRole.cs" />
     <Compile Include="Entities\MissedTimeSheet.cs" />
     <Compile Include="Entities\Project.cs" />
     <Compile Include="Entities\ProjectActivity.cs" />
     <Compile Include="Entities\ProjectBilling.cs" />
+    <Compile Include="Entities\ProjectBillingCorrection.cs" />
     <Compile Include="Entities\ProjectDocument.cs" />
     <Compile Include="Entities\ProjectMember.cs" />
     <Compile Include="Entities\ProjectMileStone.cs" />

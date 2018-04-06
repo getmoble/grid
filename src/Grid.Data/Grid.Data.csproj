@@ -48,10 +48,27 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataSeeder.cs" />
     <Compile Include="GridDataContext.cs" />
     <Compile Include="Migrations\201710091425387_initial.cs" />
     <Compile Include="Migrations\201710091425387_initial.Designer.cs">
       <DependentUpon>201710091425387_initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803260656591_AddedProjectBillingCorrection.cs" />
+    <Compile Include="Migrations\201803260656591_AddedProjectBillingCorrection.Designer.cs">
+      <DependentUpon>201803260656591_AddedProjectBillingCorrection.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803261117000_AddedProjectMemberRoleTable.cs" />
+    <Compile Include="Migrations\201803261117000_AddedProjectMemberRoleTable.Designer.cs">
+      <DependentUpon>201803261117000_AddedProjectMemberRoleTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803270432280_AddedMemberRoleInProjectMemberRoleTable.cs" />
+    <Compile Include="Migrations\201803270432280_AddedMemberRoleInProjectMemberRoleTable.Designer.cs">
+      <DependentUpon>201803270432280_AddedMemberRoleInProjectMemberRoleTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803270533296_AddedMemberRoleIdInProjectMemberRoleId.cs" />
+    <Compile Include="Migrations\201803270533296_AddedMemberRoleIdInProjectMemberRoleId.Designer.cs">
+      <DependentUpon>201803270533296_AddedMemberRoleIdInProjectMemberRoleId.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -133,6 +150,18 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201710091425387_initial.resx">
       <DependentUpon>201710091425387_initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803260656591_AddedProjectBillingCorrection.resx">
+      <DependentUpon>201803260656591_AddedProjectBillingCorrection.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803261117000_AddedProjectMemberRoleTable.resx">
+      <DependentUpon>201803261117000_AddedProjectMemberRoleTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803270432280_AddedMemberRoleInProjectMemberRoleTable.resx">
+      <DependentUpon>201803270432280_AddedMemberRoleInProjectMemberRoleTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803270533296_AddedMemberRoleIdInProjectMemberRoleId.resx">
+      <DependentUpon>201803270533296_AddedMemberRoleIdInProjectMemberRoleId.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -547,6 +547,16 @@ namespace Grid.Areas.Templates.Controllers
                         UIField.GetField("description", "Description", UIFieldTypes.TextArea),
                     };
                     break;
+                case "ProjectMemberRole":
+                    ViewBag.Name = "projectmemberrole";
+                    fields = new List<UIField>
+                    {
+                        UIField.GetField("title","Name"),
+                        UIField.GetField("department","Department","department" ,"departmentId","Select Department", UIFieldTypes.DropDown),
+                        UIField.GetField("memberrole","Role","roleType" ,"role","Select Role", UIFieldTypes.DropDown),
+                        UIField.GetField("description", "Description", UIFieldTypes.TextArea),
+                    };
+                    break; 
                 case "SoftwareCategory":
                     ViewBag.Name = "softwarecategorie";
                     fields = new List<UIField>
@@ -670,7 +680,19 @@ namespace Grid.Areas.Templates.Controllers
                     fields = new List<UIField>
                     {
                         UIField.GetField("employee","Employee","memberEmployee" ,"employeeId","Select Employee" ,UIFieldTypes.DropDown),
-                        UIField.GetField("memberrole","Role","roleType" ,"role","Select Role", UIFieldTypes.DropDown),
+                        UIField.GetField("projectmemberroles","Role","projectmemberrole" ,"projectmemberroleId","Select Role", UIFieldTypes.DropDown),
+                        UIField.GetField("billing","Billing","billingType" ,"billing","Select Billing", UIFieldTypes.DropDown),
+                        UIField.GetField("memberstatus","Status","memberStatusType" ,"memberStatus","Select Status", UIFieldTypes.DropDown),
+                        UIField.GetField("rate", "Rate",UIFieldTypes.Text),
+                    };
+                    return PartialView("_ProjectMemberTemplate", fields);
+                case "InActiveProjectMember":
+                    ViewBag.Name = "inactiveprojectmember";
+                    ViewBag.UserId = WebUser.Id;
+                    fields = new List<UIField>
+                    {
+                        UIField.GetField("employee","Employee","memberEmployee" ,"employeeId","Select Employee" ,UIFieldTypes.DropDown),
+                        UIField.GetField("projectmemberroles","Role","projectmemberrole" ,"projectmemberroleId","Select Role", UIFieldTypes.DropDown),
                         UIField.GetField("billing","Billing","billingType" ,"billing","Select Billing", UIFieldTypes.DropDown),
                         UIField.GetField("memberstatus","Status","memberStatusType" ,"memberStatus","Select Status", UIFieldTypes.DropDown),
                         UIField.GetField("rate", "Rate",UIFieldTypes.Text),

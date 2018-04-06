@@ -9,6 +9,7 @@ using Grid.Features.PMS.Entities.Enums;
 using Grid.Filters;
 using Grid.Infrastructure.Filters;
 using Grid.Api.Models;
+using Grid.Api.Models.PMS;
 
 namespace Grid.Areas.PMS.Controllers
 {
@@ -37,7 +38,7 @@ namespace Grid.Areas.PMS.Controllers
         {
             // Check whether i have access to this Project as Manager
             var employee = _employeeRepository.GetBy(u => u.UserId == WebUser.Id, "User,User.Person,ReportingPerson.User.Person,Manager.User.Person,Location,Department,Designation,Shift");
-            var isMember = _projectMemberRepository.Any(m => m.EmployeeId == employee.Id && m.ProjectId == projectId && m.Role == MemberRole.ProjectManager) || WebUser.IsAdmin;
+            var isMember = _projectMemberRepository.Any(m => m.EmployeeId == employee.Id && m.ProjectId == projectId && m.ProjectMemberRole.Role == MemberRole.ProjectManager) || WebUser.IsAdmin;
             return isMember;
         }
 
@@ -82,6 +83,19 @@ namespace Grid.Areas.PMS.Controllers
             return Json(apiResult, JsonRequestBehavior.AllowGet);
         }
 
+        //[HttpGet]
+        //public ActionResult GetInactiveUsers(int projectId)
+        //{
+        //    ViewBag.UserId = WebUser.IsAdmin;
+        //    bool isProjectLead;
+        //    var user = _employeeRepository.GetBy(u => u.UserId == WebUser.Id, "User,User.Person,Location,Department,Designation,Shift");
+        //    isProjectLead = _projectMemberRepository.Any(m => m.EmployeeId == user.Id && m.Role == MemberRole.ProjectManager) || WebUser.IsAdmin;
+        //    ViewBag.Role = isProjectLead;
+        //    var apiResult = _projectMemberRepository.GetAllBy(i => i.ProjectId == projectId, "MemberEmployee.User.Person,Project").ToList();
+        //    var inactiveUsers = apiResult.Where(u => u.MemberStatus == MemberStatus.InActive).OrderBy(i => i.MemberStatus).ToList().Select(h => new ProjectModel(h)).ToList();
+        //    return PartialView("InactiveUsers", inactiveUsers);
+        //}
+
         [HttpPost]
         public ActionResult CreateProjectMember(ProjectMember projectMember)
         {
@@ -91,7 +105,7 @@ namespace Grid.Areas.PMS.Controllers
 
                 if (selectedProjectMember != null)
                 {
-                    selectedProjectMember.Role = projectMember.Role;
+                    selectedProjectMember.ProjectMemberRoleId = projectMember.ProjectMemberRoleId;
                     selectedProjectMember.Billing = projectMember.Billing;
                     selectedProjectMember.Rate = projectMember.Rate;
                     selectedProjectMember.EmployeeId = projectMember.EmployeeId;
@@ -147,7 +161,7 @@ namespace Grid.Areas.PMS.Controllers
                 }
                 selectedMember.UpdatedByUserId = WebUser.Id;
 
-                _projectMemberRepository.Update(selectedMember);                
+                _projectMemberRepository.Update(selectedMember);
                 _unitOfWork.Commit();
 
             }
@@ -187,11 +201,11 @@ namespace Grid.Areas.PMS.Controllers
                     return RedirectToAction("NotAuthorized", "Error", new { area = "" });
                 }
 
-                var selectedProjectMember = _projectMemberRepository.Get(projectMember.Id);
+                var selectedProjectMember = _projectMemberRepository.Get(projectMember.Id, "ProjectMemberRole");
 
                 if (selectedProjectMember != null)
                 {
-                    selectedProjectMember.Role = projectMember.Role;
+                    selectedProjectMember.ProjectMemberRoleId = projectMember.ProjectMemberRoleId;
                     selectedProjectMember.Billing = projectMember.Billing;
                     selectedProjectMember.Rate = projectMember.Rate;
                     selectedProjectMember.UpdatedByUserId = WebUser.Id;

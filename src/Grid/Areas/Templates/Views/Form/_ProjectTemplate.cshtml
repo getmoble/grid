@@ -94,7 +94,17 @@
 <script type="text/html" id="addmember-template">
     <div class="col-md-12 well" style="padding:0px !important;" data-bind="if:showAddMember">
         <manageprojectmember params="projectId:projectId"></manageprojectmember>
+        <div class="text-right" style="margin-right:5px;margin-bottom: 10px;">
+            <button class="btn btn-primary btn-sm" data-toggle="collapse" data-target="#inactiveUsers">InActive Members</button>
+        </div>
+        
+        <div id="inactiveUsers" class="collapse">
+            <manageinactiveprojectmember params="projectId:projectId"></manageinactiveprojectmember>
+
+        </div>
+
     </div>
+    
 </script>
 <script type="text/html" id="manageprojectmember-template">
     <div class="col-md-12 well" style="padding:0px !important;">
@@ -102,6 +112,15 @@
     </div>
     <div class="col-md-12 well" style="padding:0px !important;" data-bind="visible:showQuickView">
         <projectmembers params="entity: 'projectmember',projectId:project"></projectmembers>
+    </div>
+</script>
+
+<script type="text/html" id="manageinactiveprojectmember-template">
+    <div class="col-md-12 well" style="padding:0px !important;">
+        <inactiveprojectmemberslist params="entity: 'inactiveprojectmember', enableFilter:true, manageList:true,projectId:project"></inactiveprojectmemberslist>
+    </div>
+    <div class="col-md-12 well" style="padding:0px !important;" data-bind="visible:showQuickView">
+        <inactiveprojectmembers params="entity: 'inactiveprojectmember',projectId:project"></inactiveprojectmembers>
     </div>
 </script>
 

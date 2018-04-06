@@ -1,0 +1,22 @@
+﻿@using Grid.Infrastructure
+@using Grid.Infrastructure.Extensions
+
+<h2>Manage Project Member Roles</h2>
+<projectmemberroles></projectmemberroles>
+
+<script type="text/html" id="projectmemberrole-template">
+    <div class="col-md-8">
+        <projectmemberrolelist params="entity: 'projectmemberrole', enableFilter:true, manageList:true"></projectmemberrolelist>
+    </div>
+    <div class="col-md-4" data-bind="visible:showQuickView">
+        <projectmemberroleupdate params="entity: 'projectmemberrole'"></projectmemberroleupdate>
+    </div>
+</script>
+
+@section Scripts{
+    <script>
+        $(function () {
+            ko.applyBindings();
+        });
+    </script>
+}

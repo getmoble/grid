@@ -30,7 +30,10 @@
         {
             @Html.ActionLink("Add Billing", "Create", "ProjectBillings", new { area = "PMS", projectId = Model.Id }, new { @class = "btn btn-primary" })
         }
-
+        @if (Model.Settings.NeedBilling && ViewBag.HasBillingAccess)
+        {
+            @Html.ActionLink("Billing Correction", "CreateBillingCorrection", "ProjectBillings", new { area = "PMS", projectId = Model.Id }, new { @class = "btn btn-primary" })
+        }
         @if (Model.Settings.NeedMileStones && ViewBag.HasPMAccess)
         {
             @Html.ActionLink("Add MileStone", "Create", "ProjectMileStones", new { area = "PMS", projectId = Model.Id }, new { @class = "btn btn-primary" })
@@ -91,6 +94,10 @@
             {
                 <li role="presentation"><a href="#billing" aria-controls="home" role="tab" data-toggle="tab">Billing</a></li>
             }
+            @if (Model.Settings.NeedBilling && ViewBag.HasBillingAccess)
+            {
+                <li role="presentation"><a href="#billingcorrection" aria-controls="home" role="tab" data-toggle="tab">Billing Correction</a></li>
+            }
 
             <li role="presentation"><a href="#effort" aria-controls="home" role="tab" data-toggle="tab">Effort</a></li>
 
@@ -104,7 +111,7 @@
                 <li role="presentation"><a href="#documents" aria-controls="profile" role="tab" data-toggle="tab">Documents</a></li>
             }
 
-            <li role="presentation"><a href="#members" aria-controls="profile" role="tab" data-toggle="tab">Members</a></li>
+            @*<li role="presentation"><a href="#members" aria-controls="profile" role="tab" data-toggle="tab">Members</a></li>*@
 
             @if (Model.Settings.NeedTasks)
             {
@@ -353,6 +360,13 @@
                         <dd>
                             @Html.DisplayFor(model => model.ActualBillingAmount)
                         </dd>
+                        <dt>
+                            Total Billing Hours
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.BillingHours)
+                        </dd>
                     </dl>
                     <table class="table">
                         <tr>
@@ -361,6 +375,9 @@
                             </th>
                             <th>
                                 Amount
+                            </th>
+                            <th>
+                                Billing Hours
                             </th>
                             <th>
                                 Charged On
@@ -378,11 +395,52 @@
                                     @Html.DisplayFor(modelItem => item.Amount)
                                 </td>
                                 <td>
+                                    @Html.DisplayFor(modelItem => item.BillingHours)
+                                </td>
+                                <td>
                                     @Html.DisplayFor(modelItem => item.CreatedOn)
                                 </td>
                                 <td>
-                                    @Html.ActionLink("Details", "Details", "ProjectBillings", new { id = item.Id, area = "PMS" }, null) |
                                     @Html.ActionLink("Delete", "Delete", "ProjectBillings", new { id = item.Id, area = "PMS" }, null)
+                                </td>
+                            </tr>
+                        }
+
+                    </table>
+                </div>
+            }
+
+            @if (Model.Settings.NeedBilling && ViewBag.HasBillingAccess)
+            {
+                <div role="tabpanel" class="tab-pane" id="billingcorrection">
+                    <br />
+                    <dl class="dl-horizontal">
+                        <dt>
+                            Total Billing Hours
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.BillingHoursOfCorrection)
+                        </dd>
+                    </dl>
+                    <table class="table">
+                        <tr>
+                            <th>
+                                BillingHours
+                            </th>
+                        </tr>
+
+                        @foreach (var item in Model.ProjectBillingCorrections)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.BillingHours)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.CreatedOn)
+                                </td>
+                                <td>
+                                    @Html.ActionLink("Delete", "DeleteBillingCorrection", "ProjectBillings", new { id = item.Id, area = "PMS" }, null)
                                 </td>
                             </tr>
                         }
@@ -484,52 +542,7 @@
                 </div>
             }
 
-            <div role="tabpanel" class="tab-pane" id="members">
-                @if (Model.ProjectMembers.Any())
-                {
-                    <table class="table">
-                        <tr>
-                            <th>
-                                Name
-                            </th>
-                            <th>
-                                Role
-                            </th>
-                            <th>
-                                Added On
-                            </th>
-                            @*@if (ViewBag.HasPMAccess)
-                                {
-                                    <th></th>
-                                }*@
-                        </tr>
-                        @foreach (var item in Model.ProjectMembers)
-                        {
-                            <tr>
-                                <td>
-                                    @*@Html.ActionLink(item.MemberEmployee.User.Person.Name, "UserProfile", "EmployeeDirectory", new { area = "HRMS", id = item.MemberEmployee.Id }, null)*@
-                                    @Html.DisplayFor(modelItem => item.MemberEmployee.User.Person.Name)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Role)
-                                </td>
-                                <td>
-                                    @item.CreatedOn.ToShortDateString()
-                                </td>
-                                @*@if (ViewBag.HasPMAccess)
-                                    {
-                                        <td>
-                                            @Html.ActionLink("Edit", "Edit", "ProjectMembers", new {id = item.Id, area = "PMS"}, null) |
-                                            @Html.ActionLink("Delete", "Delete", "ProjectMembers", new {id = item.Id, area = "PMS"}, null)
-                                        </td>
-                                    }*@
-
-                            </tr>
-                        }
-
-                    </table>
-                }
-            </div>
+          
             @if (Model.Settings.NeedTasks)
             {
                 <div role="tabpanel" class="tab-pane" id="tasks">

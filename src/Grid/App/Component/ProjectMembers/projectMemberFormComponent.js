@@ -19,12 +19,14 @@
                        
                             var args = [{ key: "projectId", value: params.projectId() }];
                             rapid.eventManager.publish(self.entity + "Search", args);
+                            rapid.eventManager.publish("inactiveprojectmember" + "Search", args);
                             rapid.notificationManager.showSuccess("Member added succesfully");
                             rapid.eventManager.publish(self.entity + "Cancel");
                         }
                         else {
                             var args = [{ key: "projectId", value: params.projectId() }];
                             rapid.eventManager.publish(self.entity + "Search", args);
+                            rapid.eventManager.publish("inactiveprojectmember" + "Search", args);
                             rapid.notificationManager.showSuccess("Member updated succesfully");
                         }
                   

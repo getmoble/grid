@@ -1,0 +1,51 @@
+﻿@model IList<Grid.Api.Models.PMS.ProjectModel>
+
+<div id="list-template">
+    <table class="table table-responsive table-hover" data-bind="loadingWhen: isBusy">
+        <thead>
+            <tr>
+                <th>Employee</th>
+                <th>Role & Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var data in Model)
+            {
+                <tr>
+                    <td>@data.MemberEmployee</td>
+                    @*<td>@data.RoleAndStatus</td>*@
+                    <td>
+                        <input type="hidden" name="Id" data-bind="value: Id" />
+                        @if (ViewBag.UserId == true || ViewBag.Role == true)
+                        {
+                            <a class="btn-sm btn-primary" href="#" aria-label="Details" data-bind="click:$parent.details"><i class="fa fa-info" aria-hidden="true"></i></a>
+                            <a class="btn-sm btn-primary" href="#" aria-label="Edit" data-bind="click:$parent.edit"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                            <a class="btn-sm btn-primary" href="#" aria-label="ChangeStatus" data-bind="click:$parent.changeStatus"><i class="fa fa-check-square-o" aria-hidden="true"></i></a>
+                            <a class="btn-sm btn-danger" href="#" aria-label="Delete" data-bind="click:$parent.delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

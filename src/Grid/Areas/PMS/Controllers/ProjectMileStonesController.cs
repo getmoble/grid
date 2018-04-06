@@ -38,7 +38,7 @@ namespace Grid.Areas.PMS.Controllers
         {
             // Check whether i have access to this Project as Manager
             var employee = _employeeRepository.GetBy(u => u.UserId == WebUser.Id, "User,User.Person,ReportingPerson.User.Person,Manager.User.Person,Location,Department,Designation,Shift");
-            var isMember = _projectMemberRepository.Any(m => m.EmployeeId == employee.Id && m.ProjectId == projectId && m.Role == MemberRole.ProjectManager) || WebUser.IsAdmin;
+            var isMember = _projectMemberRepository.Any(m => m.EmployeeId == employee.Id && m.ProjectId == projectId && m.ProjectMemberRole.Role == MemberRole.ProjectManager) || WebUser.IsAdmin;
             return isMember;
         }
 

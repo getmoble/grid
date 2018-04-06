@@ -12,17 +12,18 @@ namespace Grid.Features.PMS.Entities
         [DisplayName("Project")]
         [ForeignKey("ProjectId")]
         public Project Project { get; set; }
-
         public int? EmployeeId { get; set; }        
         [ForeignKey("EmployeeId")]
         public Employee MemberEmployee { get; set; }
-        
-        public MemberRole Role { get; set; }
         public MemberStatus MemberStatus { get; set; }
 
         [DisplayName("Billing")]
         public Billing Billing { get; set; }
-
         public double Rate { get; set; }
+
+        public int? ProjectMemberRoleId { get; set; }
+        [ForeignKey("ProjectMemberRoleId")]
+        public ProjectMemberRole ProjectMemberRole { get; set; }
+
     }
 }

@@ -171,6 +171,7 @@ namespace Grid
 
             //PMS 
             builder.RegisterType<ProjectBillingRepository>().As<IProjectBillingRepository>().InstancePerRequest();
+            builder.RegisterType<ProjectBillingCorrectionRepository>().As<IProjectBillingCorrectionRepository>().InstancePerRequest();
             builder.RegisterType<ProjectDocumentRepository>().As<IProjectDocumentRepository>().InstancePerRequest();
             builder.RegisterType<ProjectMemberRepository>().As<IProjectMemberRepository>().InstancePerRequest();
             builder.RegisterType<ProjectMileStoneRepository>().As<IProjectMileStoneRepository>().InstancePerRequest();
@@ -185,7 +186,9 @@ namespace Grid
             builder.RegisterType<EstimateLineItemRepository>().As<IEstimateLineItemRepository>().InstancePerRequest();
             builder.RegisterType<TimeSheetActivityRepository>().As<ITimeSheetActivityRepository>().InstancePerRequest();
             builder.RegisterType<TaskActivityRepository>().As<ITaskActivityRepository>().InstancePerRequest();
+            builder.RegisterType<ProjectMemberRoleRepository>().As<IProjectMemberRoleRepository>().InstancePerRequest();
 
+            
             //Recruit
             builder.RegisterType<CandidateActivityRepository>().As<ICandidateActivityRepository>().InstancePerRequest();
             builder.RegisterType<CandidateDesignationRepository>().As<ICandidateDesignationRepository>().InstancePerRequest();
