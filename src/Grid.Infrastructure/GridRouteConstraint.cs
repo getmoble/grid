@@ -9,6 +9,7 @@ namespace Grid.Infrastructure
         public bool Match(HttpContextBase httpContext, Route route, string parameterName, RouteValueDictionary values, RouteDirection routeDirection)
         {
             var key = "";
+           
             var subdomain = SubDomainSplitter.GetSubDomain(httpContext.Request.Url);
             var tenants = HttpCacheWrapper.GetFromSession<List<string>>(key);
             if (tenants != null && tenants.Contains(subdomain))

@@ -622,6 +622,7 @@
     <Content Include="Areas\TMS\Views\TimeSheetLineItems\Index.cshtml" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </Content>
     <Content Include="Areas\HRMS\Views\UserTokens\Create.cshtml" />
     <Content Include="Areas\HRMS\Views\UserTokens\Delete.cshtml" />
