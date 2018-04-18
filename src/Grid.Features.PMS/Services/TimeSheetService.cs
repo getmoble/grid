@@ -174,57 +174,67 @@ namespace Grid.Features.PMS.Services
 
             if (selectedEmployee != null)
             {
-                var reportCard = new StringBuilder();
-                reportCard.AppendLine("<table width='900px' bgcolor='#999999'>");
-
-
-                foreach (var timesheetMiss in timeSheetMisses)
+                if (selectedEmployee.OfficialEmail != null && selectedEmployee.OfficialEmail != "" && selectedEmployee.Person.Name != null && selectedEmployee.Person.Name != "")
                 {
-                    reportCard.AppendLine("<tr bgcolor='#ffffff'>");
-                    reportCard.AppendLine($"<td>{timesheetMiss.Date.DayOfWeek}- {timesheetMiss.Date.ToShortDateString()} - No TimeSheet</td>");
-                    reportCard.AppendLine("</tr>");
-                }
+                    var reportCard = new StringBuilder();
+                    reportCard.AppendLine("<table width='900px' bgcolor='#999999'>");
 
-                foreach (var pendingTimesheet in pendingCorrectionTimeSheets)
-                {
-                    reportCard.AppendLine("<tr bgcolor='#ffffff'>");
-                    reportCard.AppendLine($"<td>{pendingTimesheet.Date.DayOfWeek}- {pendingTimesheet.Date.ToShortDateString()} - Needs Correction</td>");
-                    reportCard.AppendLine("</tr>");
-                }
 
-                reportCard.AppendLine("</table>");
+                    foreach (var timesheetMiss in timeSheetMisses)
+                    {
+                        reportCard.AppendLine("<tr bgcolor='#ffffff'>");
+                        reportCard.AppendLine($"<td>{timesheetMiss.Date.DayOfWeek}- {timesheetMiss.Date.ToShortDateString()} - No TimeSheet</td>");
+                        reportCard.AppendLine("</tr>");
+                    }
 
-                emailContext.PlaceHolders = new List<PlaceHolder>
+                    foreach (var pendingTimesheet in pendingCorrectionTimeSheets)
+                    {
+                        reportCard.AppendLine("<tr bgcolor='#ffffff'>");
+                        reportCard.AppendLine($"<td>{pendingTimesheet.Date.DayOfWeek}- {pendingTimesheet.Date.ToShortDateString()} - Needs Correction</td>");
+                        reportCard.AppendLine("</tr>");
+                    }
+
+                    reportCard.AppendLine("</table>");
+
+                    emailContext.PlaceHolders = new List<PlaceHolder>
                 {
                     new PlaceHolder("[Name]", selectedEmployee.Person.Name),
                     new PlaceHolder("[Report]", reportCard.ToString())
                 };
 
-                emailContext.Subject = "Timesheet Missed !";
+                    emailContext.Subject = "Timesheet Missed !";
 
-                emailContext.ToAddress.Add(new MailAddress(selectedEmployee.OfficialEmail, selectedEmployee.Person.Name));
-                if (selectedEmployee.ReportingPerson != null)
-                {
-                    emailContext.CcAddress.Add(new MailAddress(selectedEmployee.ReportingPerson.OfficialEmail, selectedEmployee.ReportingPerson.Person.Name));
-                }
-
-                if (selectedEmployee.Manager != null)
-                {
-                    emailContext.CcAddress.Add(new MailAddress(selectedEmployee.Manager.OfficialEmail, selectedEmployee.Manager.Person.Name));
-                }
-
-                if (settings.POCSettings != null)
-                {
-                    var selectedPOC = _userRepository.Get(settings.POCSettings.HRDepartmentLevel1, "Person");
-                    if (selectedPOC != null)
+                    emailContext.ToAddress.Add(new MailAddress(selectedEmployee.OfficialEmail, selectedEmployee.Person.Name));
+                    if (selectedEmployee.ReportingPerson != null)
                     {
-                        var pocAddress = new MailAddress(selectedPOC.OfficialEmail, selectedPOC.Person.Name);
-                        emailContext.CcAddress.Add(pocAddress);
+                        if (selectedEmployee.ReportingPerson.OfficialEmail != null && selectedEmployee.ReportingPerson.OfficialEmail != "" && selectedEmployee.ReportingPerson.Person.Name != null && selectedEmployee.ReportingPerson.Person.Name != "")
+                        {
+                            emailContext.CcAddress.Add(new MailAddress(selectedEmployee.ReportingPerson.OfficialEmail, selectedEmployee.ReportingPerson.Person.Name));
+                        }
+                    }
+                    if (selectedEmployee.Manager != null)
+                    {
+                        if (selectedEmployee.Manager.OfficialEmail != null && selectedEmployee.Manager.OfficialEmail != "" && selectedEmployee.Manager.Person.Name != null && selectedEmployee.Manager.Person.Name != "")
+                        {
+                            emailContext.CcAddress.Add(new MailAddress(selectedEmployee.Manager.OfficialEmail, selectedEmployee.Manager.Person.Name));
+                        }
+                    }
+                    if (settings.POCSettings != null)
+                    {
+                        var selectedPOC = _userRepository.Get(settings.POCSettings.HRDepartmentLevel1, "Person");
+                        if (selectedPOC != null)
+                        {
+                            if (selectedPOC.OfficialEmail != null && selectedPOC.OfficialEmail != "" && selectedPOC.Person.Name != null && selectedPOC.Person.Name != "")
+                            {
+                                var pocAddress = new MailAddress(selectedPOC.OfficialEmail, selectedPOC.Person.Name);
+                                emailContext.CcAddress.Add(pocAddress);
+                            }
+                        }
                     }
                 }
-            }
 
-            return emailContext;
+            }
+                return emailContext;
         }
 
         public EmailContext ComposeEmailContextForTimesheetApprovalReminder(int approverId)
@@ -251,27 +261,35 @@ namespace Grid.Features.PMS.Services
 
             if (pendingSheets.Any())
             {
-                var reportCard = new StringBuilder();
-                reportCard.AppendLine("<table width='900px' bgcolor='#999999'>");
-
-                foreach (var pendingSheet in pendingSheets)
+                if (selectedUser.OfficialEmail != null && selectedUser.OfficialEmail != "" && selectedUser.Person.Name != null && selectedUser.Person.Name != "")
                 {
-                    reportCard.AppendLine("<tr bgcolor='#ffffff'>");
-                    reportCard.AppendLine($"<td>{pendingSheet.Title}</td><td>{pendingSheet.CreatedByUser.Person.Name}</td><td>{pendingSheet.Date.ToShortDateString()}</td>");
-                    reportCard.AppendLine("</tr>");
-                }
+                    var reportCard = new StringBuilder();
+                    reportCard.AppendLine("<table width='900px' bgcolor='#999999'>");
 
-                reportCard.AppendLine("</table>");
+                    foreach (var pendingSheet in pendingSheets)
+                    {
+                        reportCard.AppendLine("<tr bgcolor='#ffffff'>");
+                        reportCard.AppendLine($"<td>{pendingSheet.Title}</td><td>{pendingSheet.CreatedByUser.Person.Name}</td><td>{pendingSheet.Date.ToShortDateString()}</td>");
+                        reportCard.AppendLine("</tr>");
+                    }
 
-                emailContext.PlaceHolders = new List<PlaceHolder>
+                    reportCard.AppendLine("</table>");
+
+                    emailContext.PlaceHolders = new List<PlaceHolder>
                 {
                     new PlaceHolder("[Name]", selectedUser.Person.Name),
                     new PlaceHolder("[Report]", reportCard.ToString())
                 };
 
-                emailContext.Subject = "Pending Timesheets to be Approved.";
+                    emailContext.Subject = "Pending Timesheets to be Approved.";
 
-                emailContext.ToAddress.Add(new MailAddress(selectedUser.OfficialEmail, selectedUser.Person.Name));
+                    emailContext.ToAddress.Add(new MailAddress(selectedUser.OfficialEmail, selectedUser.Person.Name));
+                }
+                else
+                {
+                    emailContext.DropEmail = true;
+                }
+               
             }
             else
             {

@@ -17,6 +17,7 @@ namespace Grid.Providers.Email
             return new SmtpClient
             {
                 Port = emailSettings.Port,
+                EnableSsl = true,
                 DeliveryMethod = SmtpDeliveryMethod.Network,
                 UseDefaultCredentials = false,
                 Credentials = new System.Net.NetworkCredential(emailSettings.Username, emailSettings.Password),

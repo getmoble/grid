@@ -155,7 +155,7 @@ namespace Grid.Areas.Scheduler.Controllers
                     var pendingTimeSheetApprovers = _timeSheetRepository.GetAllBy(t => t.State == TimeSheetState.PendingApproval && t.CreatedByUser.ReportingPersonId.HasValue, "CreatedByUser").Select(t => t.CreatedByUser.ReportingPersonId).ToList().Distinct();
                     foreach (var pendingTimeSheetApprover in pendingTimeSheetApprovers)
                     {
-                        #if !DEBUG
+                       #if !DEBUG
                             _emailComposerService.SendApprovalReminderEmail(pendingTimeSheetApprover.GetValueOrDefault());
                         #endif
                     }

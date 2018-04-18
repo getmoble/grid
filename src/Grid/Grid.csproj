@@ -728,7 +728,9 @@
     <Content Include="Areas\Templates\Views\Shared\_LeavesTemplate.cshtml" />
     <Content Include="Areas\LMS\Views\Leaves\Index.cshtml" />
     <Content Include="Areas\Templates\Views\List\_ListTemplate.cshtml" />
-    <Content Include="App.config" />
+    <Content Include="App.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Areas\HRMS\Views\Employees\Index.cshtml" />
     <Content Include="Areas\Templates\Views\Shared\_EmployeesTemplate.cshtml" />
     <Content Include="Areas\Templates\Views\List\_EmployeeListTemplate.cshtml" />
@@ -759,6 +761,8 @@
     <Content Include="Areas\PMS\Views\ProjectBillings\CreateBillingCorrection.cshtml" />
     <Content Include="Areas\PMS\Views\ProjectBillings\DeleteBillingCorrection.cshtml" />
     <Content Include="Areas\PMS\Views\ProjectMemberRoles\Index.cshtml" />
+    <None Include="Properties\PublishProfiles\gridapp - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\gridapp - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
