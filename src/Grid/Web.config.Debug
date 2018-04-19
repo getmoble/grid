@@ -133,7 +133,7 @@
 		</modules>
 	</system.webServer>
 	<elmah>
-		<errorLog type="Elmah.SqlErrorLog, Elmah" connectionStringName="Grid" />
-		<security allowRemoteAccess="yes" />
-	</elmah>
+    <errorLog type="Elmah.SqlErrorLog, Elmah" connectionStringName="Grid" />
+    <security allowRemoteAccess="yes" />
+  </elmah>
 </configuration>

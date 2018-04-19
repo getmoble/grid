@@ -10,7 +10,7 @@ namespace Grid.AccessLogs
         private static readonly string account = "";
         private static readonly string key = "";
 
-      
+
         public static CloudStorageAccount GetConnectionString()
         {
             var connectionString = $"DefaultEndpointsProtocol=https;AccountName={account};AccountKey={key}";
